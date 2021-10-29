@@ -1,12 +1,21 @@
 <script lang="ts">
   import ObjectInput from "./ObjectInput.svelte";
   import LangSaveButton from "./LangSaveButton.svelte";
-
-  export let lang: string
+  import {onMount} from "svelte";
 
   // todo make configurable
   let config: string = "en"
   let configSet: Record<string, any>
+
+  onMount(async () => {
+    fetch(`/i18n/${config}.json`)
+      .then(res => res.json())
+      .then(data => {
+        configSet = data
+      })
+  })
+
+  export let lang: string
 
   let dict: Record<string, any>
   $: if (lang) load(lang)
@@ -20,7 +29,7 @@
   <h5>Currently editing: {lang}</h5>
 
   <br>
-  {#if dict != undefined}
+  {#if dict != undefined && configSet != undefined}
     <table class="table">
       <thead>
       <tr>
@@ -30,7 +39,7 @@
       </tr>
       </thead>
       <tbody>
-      <ObjectInput dict={dict}/>
+      <ObjectInput dict={dict} configSet={configSet}/>
       </tbody>
     </table>
 
@@ -39,7 +48,7 @@
     <br>
     <h3>RAW output:</h3>
     <pre>
-      {JSON.stringify(dict, null, 4)}
+      {JSON.stringify(  dict, null, 4)}
     </pre>
   {/if}
 

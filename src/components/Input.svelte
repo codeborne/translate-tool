@@ -2,12 +2,13 @@
 
   export let title: string
   export let value: string
+  export let original: string
 
 </script>
 <tr>
   <td>{title}</td>
   <td><input value={value} placeholder={value}/></td>
-  <td>placeholder</td>
+  <td>{original}</td>
 </tr>
 
 <style>

@@ -1,4 +1,6 @@
 <script lang="ts">
+  import ObjectInput from "./ObjectInput.svelte";
+
   export let lang: string
 
   let dict: Record<string, any>
@@ -17,20 +19,6 @@
   {JSON.stringify(dict)}
   <br>
 
-  {#if dict != undefined}
-    {#each Object.keys(dict) as value, i}
-      {#if typeof dict[value] === 'object' && dict[value] != null}
-      <label>{value}
-        <input value="this is an object"/>
-      </label>
-      {:else}
-        <label>{value}
-          <input value={dict[value]}/>
-        </label>
-        {/if}
-
-      <br>
-    {/each}
-  {/if}
+  <ObjectInput dict={dict}/>
 
 </div>

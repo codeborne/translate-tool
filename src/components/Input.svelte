@@ -12,6 +12,8 @@
 
 <style>
 
-
+input {
+  width: 90%;
+}
 
 </style>

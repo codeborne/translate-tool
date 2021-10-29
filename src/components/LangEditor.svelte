@@ -15,7 +15,6 @@
 </script>
 
 <div>
-  <h3>Currently editing: {lang}</h3>
 
   <br>
   {#if dict != undefined}

@@ -7,7 +7,7 @@
 
 <div>
 
-  --LangReader--
+  --LangEditor--<br/>
 
   {lang}
 

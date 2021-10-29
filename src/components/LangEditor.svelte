@@ -4,8 +4,9 @@
 
   export let lang: string
 
-  // const default: string = "en"
-  // const template: Record<string, any>
+  // todo make configurable
+  let config: string = "en"
+  let configSet: Record<string, any>
 
   let dict: Record<string, any>
   $: if (lang) load(lang)
@@ -24,8 +25,8 @@
       <thead>
       <tr>
         <th scope="col">Name</th>
-        <th scope="col">Selected ({lang})</th>
-        <th scope="col">Template</th>
+        <th scope="col">Selected ( {lang} )</th>
+        <th scope="col">Default ( {config} )</th>
       </tr>
       </thead>
       <tbody>

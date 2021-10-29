@@ -5,7 +5,7 @@
   let lang: string
 </script>
 
-<div class="container text-center">
+<div class="container">
   <h1>Translation Tool</h1>
   <br>
 

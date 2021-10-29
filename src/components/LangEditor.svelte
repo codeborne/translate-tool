@@ -39,8 +39,18 @@
     <br>
     <h3>RAW output:</h3>
     <pre>
-      {JSON.stringify(dict)}
+      {JSON.stringify(dict, null, 4)}
     </pre>
   {/if}
 
 </div>
+
+<style>
+  pre {
+    text-align: left;
+    box-sizing: border-box;
+    padding: 10px;
+    background-color: ghostwhite;
+    border: 1px solid lightgray;
+  }
+</style>

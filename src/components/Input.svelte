@@ -11,14 +11,6 @@
 
 <style>
 
-  input {
-    width: 100%;
-  }
 
-  label {
-    display: block;
-    text-align: left;
-    color: black
-  }
 
 </style>

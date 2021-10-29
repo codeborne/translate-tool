@@ -4,10 +4,11 @@
   export let value: string
 
 </script>
-
-<label>{title}
-  <input value={value} placeholder={value}/>
-</label>
+<tr>
+  <td>{title}</td>
+  <td><input value={value} placeholder={value}/></td>
+  <td>placeholder</td>
+</tr>
 
 <style>
 

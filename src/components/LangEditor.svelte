@@ -4,7 +4,8 @@
 
   export let lang: string
 
-  let template: Record<string, any>
+  // const default: string = "en"
+  // const template: Record<string, any>
 
   let dict: Record<string, any>
   $: if (lang) load(lang)
@@ -14,11 +15,24 @@
   }
 </script>
 
-<div>
+<div class="mt-3">
+  <h5>Currently editing: {lang}</h5>
 
   <br>
   {#if dict != undefined}
-    <ObjectInput dict={dict}/>
+    <table class="table">
+      <thead>
+      <tr>
+        <th scope="col">Name</th>
+        <th scope="col">Selected ({lang})</th>
+        <th scope="col">Template</th>
+      </tr>
+      </thead>
+      <tbody>
+      <ObjectInput dict={dict}/>
+      </tbody>
+    </table>
+
     <LangSaveButton/>
 
     <br>

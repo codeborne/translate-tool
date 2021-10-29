@@ -5,9 +5,6 @@
 </script>
 
 <div class="container">
-  <h2>Selected {lang}</h2>
-
-  <h3>Available langs {langs}</h3>
 
   <select bind:value={lang}>
     {#each langs as lang}

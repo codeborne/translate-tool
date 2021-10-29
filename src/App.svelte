@@ -6,7 +6,7 @@
 </script>
 
 <div class="container text-center">
-  Hello from Translate tool
+  <h1>Translation Tool</h1>
   <br>
 
   <LangSwitcher bind:lang/>

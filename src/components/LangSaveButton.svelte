@@ -2,4 +2,4 @@
 
 </script>
 
-<button class="button">Save Changes</button>
+<button class="btn btn-primary mt-3 mb-5 ">Save Changes</button>

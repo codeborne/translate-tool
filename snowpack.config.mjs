@@ -3,6 +3,7 @@ export default {
   mount: {
     public: {url: '/', static: true},
     src: {url: '/dist'},
+    i18n: {url: '/i18n'}
   },
   plugins: [
     '@snowpack/plugin-svelte',
@@ -27,9 +28,9 @@ export default {
     /* ... */
   },
   devOptions: {
-    /* ... */
+    open: 'none'
   },
   buildOptions: {
     /* ... */
   },
-};
+}

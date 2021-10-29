@@ -6,5 +6,19 @@
 </script>
 
 <label>{title}
-  <input value={value}/>
+  <input value={value} placeholder={value}/>
 </label>
+
+<style>
+
+  input {
+    width: 100%;
+  }
+
+  label {
+    display: block;
+    text-align: left;
+    color: black
+  }
+
+</style>

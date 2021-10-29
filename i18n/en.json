@@ -1,6 +1,13 @@
 {
   "app": {
-    "name": "Mega App"
+    "name": "Mega App",
+    "other_name": "Mega Other App",
+    "notes": {
+      "note_of_note": {
+        "warning": "do not touch this note of my note",
+        "i_noticed_you": "..noticing my note"
+      }
+    }
   },
   "hello": "Hello",
   "world": "World"

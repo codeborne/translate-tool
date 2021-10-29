@@ -6,7 +6,7 @@
 </script>
 
 
-{#if dict != undefined}
+<div class="indent">
   {#each Object.keys(dict) as value, i}
     {#if typeof dict[value] === 'object' && dict[value] != null}
       <label>{value}
@@ -18,4 +18,25 @@
 
     <br>
   {/each}
-{/if}
+</div>
+
+<style>
+
+  .indent {
+    box-sizing: border-box;
+    padding-left: 5%;
+  }
+
+  input {
+    width: 100%;
+  }
+
+  label {
+    border-top: 1px dashed lightgray;
+    display: block;
+    text-align: left;
+    color: blue;
+    padding: 10px 0;
+  }
+
+</style>

@@ -11,7 +11,5 @@
 
   <LangSwitcher bind:lang/>
 
-  XX:{lang}
-
   <LangEditor {lang}/>
 </div>

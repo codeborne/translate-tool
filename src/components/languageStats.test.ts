@@ -6,6 +6,7 @@ describe('getTotalDictAmount', () => {
     const dict = getTotalDictCount({
       "1": 1, "2": 2, "obj1": {"3": 3, "4": 4, "obj2": {"5": 5, "6": 6}}})
     expect(dict).to.deep.equal(6)
+    expect(getTotalDictCount({})).to.deep.equal(0)
   })
 })
 

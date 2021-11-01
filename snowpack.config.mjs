@@ -1,3 +1,5 @@
+const isTest = process.env.NODE_ENV === 'test'
+
 /** @type {import("snowpack").SnowpackUserConfig } */
 export default {
   mount: {
@@ -28,7 +30,8 @@ export default {
     /* ... */
   },
   devOptions: {
-    open: 'none'
+    open: 'none',
+    port: isTest ? 8985 : 8080
   },
   buildOptions: {
     /* ... */

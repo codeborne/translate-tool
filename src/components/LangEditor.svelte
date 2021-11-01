@@ -3,6 +3,7 @@
   import {onMount} from 'svelte';
 
   // todo make configurable
+  let indent = 2
   let defaultLang: string = 'en'
   export let lang: string
 
@@ -17,12 +18,15 @@
     dict = await load(lang)
   })()
 
-  function save() {
-    console.log('saved', dict)
-  }
-
   function load(lang: string) {
     return fetch(`/i18n/${lang}.json`).then(r => r.json())
+  }
+
+  let textarea: HTMLTextAreaElement
+  function copy() {
+    textarea.focus()
+    textarea.select()
+    document.execCommand('copy')
   }
 </script>
 
@@ -38,27 +42,14 @@
         <th scope="col">Default ( {defaultLang} )</th>
       </tr>
       </thead>
-      <tbody>
+      <tbody on:input={() => dict = dict}>
         <KeyValueTableRow {dict} {defaultDict}/>
       </tbody>
     </table>
 
-    <button on:click={save} class="btn btn-primary mt-3 mb-5 ">Save Changes</button>
+    <button on:click={copy} class="btn btn-primary mt-3 mb-5 ">Copy to clipboard</button>
 
     <h3>RAW output:</h3>
-    <pre>
-      {JSON.stringify(dict, null, 4)}
-    </pre>
+    <textarea bind:this={textarea} style="width: 100%" rows="20">{JSON.stringify(dict, null, indent)}</textarea>
   {/if}
-
 </div>
-
-<style>
-  pre {
-    text-align: left;
-    box-sizing: border-box;
-    padding: 10px;
-    background-color: ghostwhite;
-    border: 1px solid lightgray;
-  }
-</style>

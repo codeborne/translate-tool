@@ -7,7 +7,7 @@
   let config: string = "en"
   let configSet: Record<string, any>
 
-  onMount(async () => {
+  onMount(() => {
     fetch(`/i18n/${config}.json`)
       .then(res => res.json())
       .then(data => {

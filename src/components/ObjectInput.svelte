@@ -1,28 +1,22 @@
 <script lang="ts">
-  import Input from "./Input.svelte";
-
   export let dict: Record<string, any>
   export let configSet: Record<any, string>
-
 </script>
 
-
-  {#each Object.keys(dict) as value}
-    {#if typeof dict[value] === 'object' && dict[value] != null}
-        <svelte:self dict={dict[value]} configSet={configSet[value]}/>
-    {:else}
-      {#if dict[value] != configSet[value]}
-        <Input title={value} value={dict[value]} original={configSet[value]}/> // wip
-      {:else}
-        <Input title={value} value={dict[value]} original={configSet[value]}/>
-      {/if}
-    {/if}
-  {/each}
+{#each Object.keys(configSet) as key}
+  {#if typeof configSet[key] === 'object' && configSet[key] != null}
+    <svelte:self dict={dict[key] ??= {}} configSet={configSet[key]}/>
+  {:else}
+    <tr>
+      <td>{key}</td>
+      <td><input bind:value={dict[key]} placeholder={dict[key]}></td>
+      <td>{configSet[key]}</td>
+    </tr>
+  {/if}
+{/each}
 
 <style>
-
   input {
     width: 100%;
   }
-
 </style>

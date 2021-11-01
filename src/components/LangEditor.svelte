@@ -2,6 +2,7 @@
   import KeyValueTableRow from './KeyValueTableRow.svelte'
   import {onMount} from 'svelte'
   import {cleanEmptyKeys} from './cleanEmptyKeys'
+  import {getTotalDictAmount, getFilledDictAmount} from './languageStats'
 
   // todo make configurable
   let indent = 2
@@ -10,9 +11,14 @@
 
   let defaultDict: Record<string, any>
   let dict: Record<string, any>
+  let totalDict: number
+  let filledDict: number
+
+  let stats: Record<string, any> = {'total': 0, 'empty': 0}
 
   onMount(async () => {
     defaultDict = await load(defaultLang)
+    totalDict = getTotalDictAmount(defaultDict)
   })
 
   $: if (lang) (async function() {
@@ -23,7 +29,10 @@
     return fetch(`/i18n/${lang}.json`).then(r => r.json())
   }
 
-  $: if (dict) dict = cleanEmptyKeys(dict)
+  $: if (dict) {
+    dict = cleanEmptyKeys(dict)
+    filledDict = getFilledDictAmount(dict)
+  }
 
   let textarea: HTMLTextAreaElement
   function copy() {
@@ -35,6 +44,18 @@
 
 <div class="mt-3">
   <h5>Currently editing: {lang}</h5>
+  <h6>Total text: {totalDict}</h6>
+
+  {#if filledDict === totalDict}
+    <h6 style="color: green">All {filledDict} fields are filled!</h6>
+    {:else if (filledDict > 0)}
+    <h6 style="color: green">Filled text: {filledDict}</h6>
+  {/if}
+
+  {#if (totalDict - filledDict) > 0}
+    <h6 style="color: darkred">Empty text: {totalDict - filledDict}</h6>
+  {/if}
+
 
   {#if dict && defaultDict}
     <table class="table">

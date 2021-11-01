@@ -12,7 +12,7 @@
   {:else}
     <tr>
       <td>{fullKey(key)}</td>
-      <td><input bind:value={dict[key]} placeholder={dict[key]}></td>
+      <td><input bind:value={dict[key] } placeholder={dict[key]}></td>
       <td>{defaultDict[key]}</td>
     </tr>
   {/if}

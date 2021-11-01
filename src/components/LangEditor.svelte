@@ -1,6 +1,7 @@
 <script lang="ts">
-  import KeyValueTableRow from './KeyValueTableRow.svelte';
-  import {onMount} from 'svelte';
+  import KeyValueTableRow from './KeyValueTableRow.svelte'
+  import {onMount} from 'svelte'
+  import {cleanEmptyKeys} from './cleanEmptyKeys'
 
   // todo make configurable
   let indent = 2
@@ -21,6 +22,8 @@
   function load(lang: string) {
     return fetch(`/i18n/${lang}.json`).then(r => r.json())
   }
+
+  $: if (dict) dict = cleanEmptyKeys(dict)
 
   let textarea: HTMLTextAreaElement
   function copy() {

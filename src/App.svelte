@@ -1,6 +1,6 @@
 <script lang="ts">
-  import LangSwitcher from "./components/LangSwitcher.svelte";
-  import LangEditor from "./components/LangEditor.svelte";
+  import LangSwitcher from './components/LangSwitcher.svelte'
+  import LangEditor from './components/LangEditor.svelte'
 
   let lang: string
 </script>

@@ -2,7 +2,7 @@
   import KeyValueTableRow from './KeyValueTableRow.svelte'
   import {onMount} from 'svelte'
   import {cleanEmptyKeys} from './cleanEmptyKeys'
-  import {getTotalDictAmount, getFilledDictAmount} from './languageStats'
+  import {getTotalDictCount, getFilledDictCount} from './languageStats'
 
   // todo make configurable
   let indent = 2
@@ -18,7 +18,7 @@
 
   onMount(async () => {
     defaultDict = await load(defaultLang)
-    totalDict = getTotalDictAmount(defaultDict)
+    totalDict = getTotalDictCount(defaultDict)
   })
 
   $: if (lang) (async function() {
@@ -31,7 +31,7 @@
 
   $: if (dict) {
     dict = cleanEmptyKeys(dict)
-    filledDict = getFilledDictAmount(dict)
+    filledDict = getFilledDictCount(dict)
   }
 
   let textarea: HTMLTextAreaElement

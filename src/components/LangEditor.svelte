@@ -1,11 +1,11 @@
 <script lang="ts">
-  import ObjectInput from "./ObjectInput.svelte";
-  import LangSaveButton from "./LangSaveButton.svelte";
-  import {onMount} from "svelte";
+  import KeyValueTableRow from './KeyValueTableRow.svelte';
+  import {onMount} from 'svelte';
 
   // todo make configurable
-  let config: string = "en"
+  let config: string = 'en'
   let configSet: Record<string, any>
+  let changedSet: Record<string, any>
 
   onMount(() => {
     fetch(`/i18n/${config}.json`)
@@ -14,6 +14,10 @@
         configSet = data
       })
   })
+
+  function save() {
+    console.log('saved')
+  }
 
   export let lang: string
 
@@ -39,11 +43,11 @@
       </tr>
       </thead>
       <tbody>
-      <ObjectInput dict={dict} configSet={configSet}/>
+      <KeyValueTableRow dict={dict} configSet={configSet}/>
       </tbody>
     </table>
 
-    <LangSaveButton/>
+    <button on:click={save} class="btn btn-primary mt-3 mb-5 ">Save Changes</button>
 
     <br>
     <h3>RAW output:</h3>

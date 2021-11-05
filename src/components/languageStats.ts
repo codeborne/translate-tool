@@ -11,10 +11,10 @@ export function getFilledDictCount(dict: Record<string, any>) {
 export function getTotalDictCount(dict: Record<string, any>) {
   let total = 0;
   for (let [key, value] of Object.entries(dict)) {
-    total++
+    // total++
     const isObject = typeof value === 'object'
-    if (isObject) value = getTotalDictCount(value)
-    if (value || !isObject && isEmpty(value)) total++
+    if (isObject) total += getTotalDictCount(value)
+    if (value && !isObject) total++
   }
   return total
 }

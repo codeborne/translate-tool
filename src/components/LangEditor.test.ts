@@ -12,9 +12,9 @@ describe('<LangEditor>', () => {
     expect(document.body.contains(e))
   })
 
-  it('renders fetched dictionary correctly', async () => {
+  it('renders fetched dictionary data correctly', async () => {
     stub(window, 'fetch').resolves({json: () => Promise.resolve(dict)} as Response)
-    const {container} = render(LangEditor, {lang: 'et'})
+    const {getByText, container} = render(LangEditor, {lang: 'et'})
     expect(fetch).calledWith('/i18n/en.json')
     expect(fetch).calledWith('/i18n/et.json')
     await act(fetch)
@@ -24,5 +24,7 @@ describe('<LangEditor>', () => {
     expect(container.querySelector('#rawOutput'))
       .property('value')
       .contains(JSON.stringify(dict, null, 2), 'correct raw output')
+    expect(container.querySelector('h5')!.textContent).to.contain('Currently editing: et')
+    expect(container.querySelector('h6')!.textContent).to.contain('Total text: 2')
   })
 })

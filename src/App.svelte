@@ -6,7 +6,7 @@
   import Navbar from "./components/Navbar.svelte";
 
   let displayLangImporter: boolean = true;
-  let url: string
+  let url = ''
 
   let lang: string
 </script>

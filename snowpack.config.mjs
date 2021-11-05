@@ -34,6 +34,6 @@ export default {
     port: isTest ? 8985 : 8080
   },
   buildOptions: {
-    /* ... */
+    sourcemap: true
   },
 }

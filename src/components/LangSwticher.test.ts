@@ -1,7 +1,5 @@
-import {act, render} from '@testing-library/svelte'
+import {render} from '@testing-library/svelte'
 import {expect} from 'chai'
-import LangEditor from './LangEditor.svelte'
-import {stub} from 'sinon'
 import LangSwitcher from './LangSwitcher.svelte'
 
 describe('<LangSwitcher>', () => {

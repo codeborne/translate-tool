@@ -6,6 +6,7 @@
   import Navbar from "./components/Navbar.svelte";
 
   let displayLangImporter: boolean = true;
+  let url: string
 
   let lang: string
 </script>
@@ -14,9 +15,8 @@
 <div class="container">
   {#if !displayLangImporter}
     <LangSwitcher {langs} bind:lang/>
-
     <LangEditor {lang}/>
   {:else}
-    <LangImporter bind:isOpen={displayLangImporter}/>
+    <LangImporter bind:url bind:isOpen={displayLangImporter}/>
   {/if}
 </div>

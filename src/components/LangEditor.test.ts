@@ -12,13 +12,17 @@ describe('<LangEditor>', () => {
     expect(document.body.contains(e))
   })
 
-  it('retrieves default dictionary on render', async () => {
+  it('renders fetched dictionary correctly', async () => {
     stub(window, 'fetch').resolves({json: () => Promise.resolve(dict)} as Response)
     const {container} = render(LangEditor, {lang: 'et'})
     expect(fetch).calledWith('/i18n/en.json')
     expect(fetch).calledWith('/i18n/et.json')
     await act(fetch)
     await act(fetch)
-    expect(container.querySelectorAll('tbody tr')).to.have.length(2)
+    expect(container.querySelectorAll('tbody tr'))
+      .to.have.length(2, 'correct amount of table rows')
+    expect(container.querySelector('#rawOutput'))
+      .property('value')
+      .contains(JSON.stringify(dict, null, 2), 'correct raw output')
   })
 })

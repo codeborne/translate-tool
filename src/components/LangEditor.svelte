@@ -74,6 +74,6 @@
     <button on:click={copy} class="btn btn-primary mt-3 mb-5 ">Copy to clipboard</button>
 
     <h3>RAW output:</h3>
-    <textarea bind:this={textarea} style="width: 100%" rows="20">{JSON.stringify(dict, null, indent)}</textarea>
+    <textarea id="rawOutput" bind:this={textarea} style="width: 100%" rows="20">{JSON.stringify(dict, null, indent)}</textarea>
   {/if}
 </div>

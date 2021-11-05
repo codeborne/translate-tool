@@ -1,22 +1,18 @@
 <script lang="ts">
   import LangSwitcher from './components/LangSwitcher.svelte'
   import LangEditor from './components/LangEditor.svelte'
-  import LangImporter from './LangImporter.svelte'
+  import LangImporter from './components/LangImporter.svelte'
   import langs from '../i18n/langs.json'
+  import Navbar from "./components/Navbar.svelte";
 
   let displayLangImporter: boolean = true;
 
   let lang: string
 </script>
 
+<Navbar bind:showConfigButton={displayLangImporter}/>
 <div class="container">
-  <h1>Translation Tool</h1>
-  <br>
   {#if !displayLangImporter}
-    <button type="button" class="btn btn-primary" on:click={() => (displayLangImporter = true)}>
-      Import config
-    </button>
-
     <LangSwitcher {langs} bind:lang/>
 
     <LangEditor {lang}/>

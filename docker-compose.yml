@@ -1,0 +1,17 @@
+version: '3.1'
+
+services:
+  translate:
+    build: .
+    restart: always
+    environment:
+      # If you need basic auth by HAProxy
+      - PROXY_AUTH_USER=megauser
+      - PROXY_AUTH_PASSWORD=megapassword
+      # todo delete the above?
+    networks:
+      - proxy
+
+networks:
+  proxy:
+    external: true

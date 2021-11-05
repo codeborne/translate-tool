@@ -8,6 +8,7 @@
   let indent = 2
   let defaultLang: string = 'en'
   export let lang: string
+  export let rootUrl: string
 
   let defaultDict: Record<string, any>
   let dict: Record<string, any>
@@ -26,7 +27,7 @@
   })()
 
   function load(lang: string) {
-    return fetch(`/i18n/${lang}.json`).then(r => r.json())
+    return fetch(`${rootUrl}/${lang}.json`).then(r => r.json())
   }
 
   $: if (dict) {

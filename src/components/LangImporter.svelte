@@ -1,6 +1,7 @@
 <script lang="ts">
   export let isOpen: boolean
   export let url: string
+  export let langs: Record<string, any>
   let warning = ''
 
   async function submit() {
@@ -8,6 +9,7 @@
     if (url) {
       let dict = await fetchUrl(url)
       if (validate(dict)) {
+        langs = dict
         isOpen = false
         warning = ''
       }

@@ -5,10 +5,7 @@ services:
     build: .
     restart: always
     environment:
-      # If you need basic auth by HAProxy
-      - PROXY_AUTH_USER=megauser
-      - PROXY_AUTH_PASSWORD=megapassword
-      # todo delete the above?
+      - TZ=Europe/Tallinn
     networks:
       - proxy
 

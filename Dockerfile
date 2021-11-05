@@ -1,9 +1,14 @@
-FROM httpd:2.4-alpine as build
-COPY src /usr/local/apache2/htdocs/
+FROM node:16-alpine as build
 
-# If you want to use non-UTC timezone
-RUN apk add tzdata
-ENV TZ=Europe/Tallinn
+WORKDIR /app
 
-# This line is not needed if parent image already exposes a port, but add this to custom images
-EXPOSE 80
+COPY package.json package-lock.json /app/
+RUN npm ci
+
+COPY . ./
+RUN npm run build
+RUN ls -la build
+
+FROM nginx:alpine
+WORKDIR /usr/share/nginx/html/
+COPY --from=build /app/build ./

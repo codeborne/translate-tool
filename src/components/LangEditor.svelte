@@ -18,7 +18,6 @@
   let originalDict: Record<string, any>
   let totalDict: number
   let filledDict: number
-
   let stats: Record<string, any> = {'total': 0, 'empty': 0}
 
   $: if (lang) loadChangedLang()
@@ -58,8 +57,6 @@
     initOriginalDict()
     console.log(originalDict)
   }
-
-  setInterval(() => console.log(originalDict), 3000)
 </script>
 
 <div class="mt-3">

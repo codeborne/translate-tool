@@ -10,12 +10,23 @@
       let dict = await fetchUrl(url)
       if (validate(dict)) {
         langs = dict
+        saveToLocalStorage()
         isOpen = false
         warning = ''
       }
     } else {
       warning = 'Input must not be empty'
     }
+  }
+
+  function saveToLocalStorage() {
+    localStorage.clear()
+
+    let data = {
+      url,
+      langs,
+    }
+    localStorage.setItem('data', JSON.stringify(data))
   }
 
   const fetchUrl = (link) => fetch(link).then(r => r.json()).catch((e) => warning = e)

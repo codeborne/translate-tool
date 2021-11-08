@@ -6,7 +6,20 @@
 
   function selectLang() {
     lang = selected
+    toggleButtons()
   }
+
+  function toggleButtons() {
+    const buttons = document.querySelectorAll('.select-lang') as HTMLButtonElement[]
+    if (selected == lang) {
+      buttons.forEach(btn => btn.disabled = true)
+    } else {
+      buttons.forEach(btn => btn.disabled = false)
+    }
+  }
+
+  $: if (selected) toggleButtons()
+
 </script>
 
 <div class="container">
@@ -16,9 +29,9 @@
     {/each}
   </select>
   {#if saved}
-    <button on:click={selectLang} class="btn btn-primary">Change Language</button>
+    <button disabled on:click={selectLang} class="btn btn-primary select-lang">Change Language</button>
   {:else}
-    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#confirmModal">
+    <button disabled type="button" class="btn btn-primary select-lang" data-bs-toggle="modal" data-bs-target="#confirmModal">
       Change Language
     </button>
   {/if}

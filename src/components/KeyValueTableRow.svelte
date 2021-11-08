@@ -15,7 +15,7 @@
       <td>{fullKey(key)}</td>
       <td>
         <input bind:value={dict[key]} class="form-control"
-               class:changed={dict[key] != originalDict[key]}>
+               class:changed={dict[key] !==  originalDict[key]}>
       </td>
       <td>{defaultDict[key]}</td>
     </tr>

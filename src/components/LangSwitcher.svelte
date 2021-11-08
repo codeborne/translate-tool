@@ -21,23 +21,24 @@
   $: if (selected) toggleButtons()
 
 </script>
-
-<div class="container">
-  <select bind:value={selected} class="form-select mb-3">
-    {#each langs as lang}
-      <option value={lang}>{lang.toUpperCase()}</option>
-    {/each}
-  </select>
-  {#if saved}
-    <button disabled on:click={selectLang} class="btn btn-primary select-lang">Change Language</button>
-  {:else}
-    <button disabled type="button" class="btn btn-primary select-lang" data-bs-toggle="modal" data-bs-target="#confirmModal">
-      Change Language
-    </button>
-  {/if}
+<div class="outline p-3 w-50">
+  <h5 class="mb-4">Language Selection</h5>
+  <div class="d-flex flex-column">
+    <select bind:value={selected} class="form-select mb-3">
+      {#each langs as lang}
+        <option value={lang}>{lang.toUpperCase()}</option>
+      {/each}
+    </select>
+    {#if saved}
+      <button disabled on:click={selectLang} class="btn btn-primary select-lang">Change Language <i class="fas fa-globe"></i></button>
+    {:else}
+      <button disabled type="button" class="btn btn-primary select-lang" data-bs-toggle="modal" data-bs-target="#confirmModal">
+        Change Language <i class="fas fa-globe"></i>
+      </button>
+    {/if}
+  </div>
 </div>
 
-<!-- Modal -->
 <div class="modal fade" id="confirmModal" tabindex="-1" aria-labelledby="confirmModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered">
     <div class="modal-content">
@@ -56,3 +57,14 @@
     </div>
   </div>
 </div>
+
+<style>
+  .outline {
+    border: 1px solid lightgray;
+    border-radius: 5px;
+    background-color: white;
+  }
+  h1, h2, h3, h4, h5, h6 {
+    color: #404142;
+  }
+</style>

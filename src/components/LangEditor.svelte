@@ -5,8 +5,8 @@
   import {getTotalDictCount, getFilledDictCount} from './languageStats'
 
   // todo make configurable
-  let indent = 2
-  let defaultLang: string = 'en'
+  export let indent = 2
+  export let defaultLang: string = 'en'
   export let lang: string
   export let rootUrl: string
 
@@ -16,8 +16,8 @@
   let defaultDict: Record<string, any>
   let dict: Record<string, any>
   let originalDict: Record<string, any>
-  let totalDict: number
-  let filledDict: number
+  export let totalDict: number
+  export let filledDict: number
   let stats: Record<string, any> = {'total': 0, 'empty': 0}
 
   $: if (lang) loadChangedLang()
@@ -59,21 +59,7 @@
   }
 </script>
 
-<div class="mt-3">
-  <h5>Currently editing: {lang}</h5>
-  <h6>Total text: {totalDict}</h6>
-
-  {#if filledDict === totalDict}
-    <h6 style="color: green">All {filledDict} fields are filled!</h6>
-    {:else if (filledDict > 0)}
-    <h6 style="color: green">Filled text: {filledDict}</h6>
-  {/if}
-
-  {#if (totalDict - filledDict) > 0}
-    <h6 style="color: darkred">Empty text: {totalDict - filledDict}</h6>
-  {/if}
-
-
+<div class="mt-3 outline p-3 d-flex flex-column justify-content-center align-items-center">
   {#if dict && defaultDict && originalDict}
     <table class="table table-striped">
       <thead>
@@ -88,9 +74,21 @@
       </tbody>
     </table>
 
-    <button on:click={copy} class="btn btn-primary mt-3 mb-5 ">Copy to clipboard</button>
-
-    <h3>RAW output:</h3>
-    <textarea id="rawOutput" bind:this={textarea} class="form-control mb-3" style="width: 100%" rows="20">{JSON.stringify(dict, null, indent)}</textarea>
+    <button on:click={copy} class="btn btn-primary mt-3 mb-5 w-auto">Copy to clipboard <i class="fas fa-copy"></i></button>
   {/if}
 </div>
+<div class="mt-3 outline p-3">
+  <h3>RAW output:</h3>
+  <textarea id="rawOutput" bind:this={textarea}
+            class="form-control mb-3"
+            style={{width: '100%'}}
+            rows="20">{JSON.stringify(dict, null, indent)}</textarea>
+</div>
+
+<style>
+  .outline {
+    border: 1px solid lightgray;
+    border-radius: 5px;
+    background-color: white;
+  }
+</style>

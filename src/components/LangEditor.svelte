@@ -10,6 +10,9 @@
   export let lang: string
   export let rootUrl: string
 
+  let saved: boolean = true
+  export let isLoading: boolean = true
+
   let defaultDict: Record<string, any>
   let dict: Record<string, any>
   let totalDict: number
@@ -17,14 +20,12 @@
 
   let stats: Record<string, any> = {'total': 0, 'empty': 0}
 
-  onMount(async () => {
-    defaultDict = await load(defaultLang)
-    totalDict = getTotalDictCount(defaultDict)
-  })
-
   $: if (lang) (async function() {
     dict = await load(lang)
+    saved = true
   })()
+
+  $: if (saved) console.log(saved.toString())
 
   function load(lang: string) {
     return fetch(`${rootUrl}/${lang}.json`).then(r => r.json())
@@ -33,17 +34,31 @@
   $: if (dict) {
     dict = cleanEmptyKeys(dict)
     filledDict = getFilledDictCount(dict)
+    saved = false
+    if (isLoading) [saved, isLoading] = [true, false]
   }
+
+  $: if (lang) isLoading = true
+
+  onMount(async () => {
+    defaultDict = await load(defaultLang)
+    totalDict = await getTotalDictCount(defaultDict)
+    saved = true
+  })
 
   let textarea: HTMLTextAreaElement
   function copy() {
     textarea.focus()
     textarea.select()
     document.execCommand('copy')
+    saved = true
   }
 </script>
 
 <div class="mt-3">
+  {#if !saved}
+    <p style={{color: 'red'}}>There are unsaved (uncopied) changes present</p>
+  {/if}
   <h5>Currently editing: {lang}</h5>
   <h6>Total text: {totalDict}</h6>
 

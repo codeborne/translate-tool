@@ -30,7 +30,6 @@
   async function loadChangedLang() {
     dict = await load(lang)
     initOriginalDict()
-    saved = true
   }
 
   function load(lang: string) {
@@ -40,8 +39,8 @@
   $: if (dict) {
     dict = cleanEmptyKeys(dict)
     filledDict = getFilledDictCount(dict)
-    saved = false
-    if (isLoading) [saved, isLoading] = [true, false]
+    if (isLoading) isLoading = false
+    document.querySelector('.changed') ? saved = false : saved = true
   }
 
   $: if (lang) isLoading = true
@@ -49,7 +48,6 @@
   onMount(async () => {
     defaultDict = await load(defaultLang)
     totalDict = getTotalDictCount(defaultDict)
-    saved = true
   })
 
   let textarea: HTMLTextAreaElement
@@ -59,7 +57,6 @@
     document.execCommand('copy')
     initOriginalDict()
     console.log(originalDict)
-    saved = true
   }
 
   setInterval(() => console.log(originalDict), 3000)

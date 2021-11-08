@@ -26,8 +26,8 @@
   input {
     width: 100%;
   }
-
   .changed {
     background-color: aliceblue;
+    border-color: lightblue;
   }
 </style>

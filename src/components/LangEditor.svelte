@@ -15,15 +15,23 @@
 
   let defaultDict: Record<string, any>
   let dict: Record<string, any>
+  let originalDict: Record<string, any>
   let totalDict: number
   let filledDict: number
 
   let stats: Record<string, any> = {'total': 0, 'empty': 0}
 
-  $: if (lang) (async function() {
+  $: if (lang) loadChangedLang()
+
+  function initOriginalDict() {
+    originalDict = JSON.parse(JSON.stringify(dict))
+  }
+
+  async function loadChangedLang() {
     dict = await load(lang)
+    initOriginalDict()
     saved = true
-  })()
+  }
 
   function load(lang: string) {
     return fetch(`${rootUrl}/${lang}.json`).then(r => r.json())
@@ -40,7 +48,7 @@
 
   onMount(async () => {
     defaultDict = await load(defaultLang)
-    totalDict = await getTotalDictCount(defaultDict)
+    totalDict = getTotalDictCount(defaultDict)
     saved = true
   })
 
@@ -49,8 +57,12 @@
     textarea.focus()
     textarea.select()
     document.execCommand('copy')
+    initOriginalDict()
+    console.log(originalDict)
     saved = true
   }
+
+  setInterval(() => console.log(originalDict), 3000)
 </script>
 
 <div class="mt-3">
@@ -68,7 +80,7 @@
   {/if}
 
 
-  {#if dict && defaultDict}
+  {#if dict && defaultDict && originalDict}
     <table class="table table-striped">
       <thead>
       <tr>
@@ -78,13 +90,13 @@
       </tr>
       </thead>
       <tbody on:input={() => dict = dict}>
-        <KeyValueTableRow {dict} {defaultDict}/>
+        <KeyValueTableRow {dict} {defaultDict} {originalDict}/>
       </tbody>
     </table>
 
     <button on:click={copy} class="btn btn-primary mt-3 mb-5 ">Copy to clipboard</button>
 
     <h3>RAW output:</h3>
-    <textarea id="rawOutput" bind:this={textarea} style="width: 100%" rows="20">{JSON.stringify(dict, null, indent)}</textarea>
+    <textarea id="rawOutput" bind:this={textarea} class="form-control mb-3" style="width: 100%" rows="20">{JSON.stringify(dict, null, indent)}</textarea>
   {/if}
 </div>

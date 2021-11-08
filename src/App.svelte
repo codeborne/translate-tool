@@ -5,13 +5,21 @@
   import Navbar from "./components/Navbar.svelte";
 
   let displayLangImporter: boolean = true;
-  let url = ''
+  let url:string = ''
   let langs: Record<string, any> = {}
   let lang: string
 
   function getRootUrl(url) {
     const lastIndex: number = url.lastIndexOf('/')
     return url.substring(0, lastIndex)
+  }
+
+  // localStorage check
+  if (localStorage.getItem('data')) {
+    let data: Record<string, any> = JSON.parse(<string>localStorage.getItem('data'))
+    langs = data.langs
+    url = data.url
+    displayLangImporter = false
   }
 </script>
 

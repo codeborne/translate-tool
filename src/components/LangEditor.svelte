@@ -10,8 +10,8 @@
   export let lang: string
   export let rootUrl: string
 
-  let saved: boolean = true
-  export let isLoading: boolean = true
+  export let saved: boolean = true
+  let isLoading: boolean = true
 
   let defaultDict: Record<string, any>
   let dict: Record<string, any>
@@ -24,8 +24,6 @@
     dict = await load(lang)
     saved = true
   })()
-
-  $: if (saved) console.log(saved.toString())
 
   function load(lang: string) {
     return fetch(`${rootUrl}/${lang}.json`).then(r => r.json())
@@ -56,9 +54,6 @@
 </script>
 
 <div class="mt-3">
-  {#if !saved}
-    <p style={{color: 'red'}}>There are unsaved (uncopied) changes present</p>
-  {/if}
   <h5>Currently editing: {lang}</h5>
   <h6>Total text: {totalDict}</h6>
 

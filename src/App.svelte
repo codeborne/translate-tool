@@ -8,6 +8,7 @@
   let url:string = ''
   let langs: Record<string, any> = {}
   let lang: string
+  let saved:boolean = true
 
   function getRootUrl(url) {
     const lastIndex: number = url.lastIndexOf('/')
@@ -26,8 +27,8 @@
 <Navbar bind:showConfigButton={displayLangImporter}/>
 <div class="container">
   {#if !displayLangImporter}
-    <LangSwitcher {langs} bind:lang/>
-    <LangEditor rootUrl={getRootUrl(url)} {lang}/>
+    <LangSwitcher bind:saved {langs} bind:lang/>
+    <LangEditor bind:saved rootUrl={getRootUrl(url)} {lang}/>
   {:else}
     <LangImporter bind:url bind:langs bind:isOpen={displayLangImporter}/>
   {/if}

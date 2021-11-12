@@ -64,10 +64,11 @@
 
 <div class="mt-3 outline p-3 d-flex flex-column justify-content-center align-items-center">
   {#if dict && defaultDict && originalDict}
+    <KeyFilter bind:filter/>
     <table class="table table-striped">
       <thead>
       <tr>
-        <th scope="col" class="d-flex gap-3"><span>Key</span> <KeyFilter bind:filter/></th>
+        <th scope="col">Key</th>
         <th scope="col">Selected ( {lang} )</th>
         <th scope="col">Default ( {defaultLang} )</th>
       </tr>
@@ -83,7 +84,7 @@
 <div class="mt-3 outline p-3">
   <h3>RAW output:</h3>
   <textarea id="rawOutput" bind:this={textarea}
-            class="form-control mb-3"
+            class="form-control mb-3 bg-light"
             style={{width: '100%'}}
             rows="20">{JSON.stringify(dict, null, indent)}</textarea>
 </div>

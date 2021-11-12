@@ -17,6 +17,7 @@
   {#if typeof defaultDict[key] === 'object' && defaultDict[key]}
     <svelte:self keyPrefix={fullKey(key)} dict={dict[key] ??= {}} defaultDict={defaultDict[key]} originalDict={originalDict[key] ??= {}} {filter}/>
   {:else}
+    {#if fullKey(key).includes(filter) || filter.length === 0}
     <tr>
       <td>{fullKey(key)}</td>
       <td>
@@ -25,6 +26,7 @@
       </td>
       <td>{defaultDict[key]}</td>
     </tr>
+    {/if}
   {/if}
 {/each}
 

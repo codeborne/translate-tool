@@ -33,6 +33,7 @@
   }
 
   function load(lang: string) {
+    console.log('rootUrl....', rootUrl)
     return fetch(`${rootUrl}/${lang}.json`).then(r => r.json())
   }
 

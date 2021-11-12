@@ -1,9 +1,9 @@
 <script lang="ts">
-  export let totalDict
-  export let filledDict
-  export let indent
-  export let defaultLang
-  export let totalLangs
+  export let totalDict: number
+  export let filledDict: number
+  export let indent: number
+  export let defaultLang: string
+  export let totalLangs: number
 
 </script>
 

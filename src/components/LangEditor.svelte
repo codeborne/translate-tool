@@ -44,10 +44,7 @@
 
   function checkForChanges() {
     saved = areObjectsEqual(cleanEmptyKeys(dict), cleanEmptyKeys(originalDict))
-    console.log(saved)
   }
-
-  // $: if (lang) isLoading = true
 
   onMount(async () => {
     defaultDict = await load(defaultLang)

@@ -8,7 +8,7 @@ describe('<LangEditor>', () => {
 
   it('renders', () => {
     const {getByText} = render(LangEditor, {lang: 'en'})
-    const e = getByText(/Currently editing/i)
+    const e = getByText(/RAW output/i)
     expect(document.body.contains(e))
   })
 

@@ -13,6 +13,7 @@
   export let rootUrl: string
 
   export let saved: boolean = true
+  let filter: string = ''
 
   let defaultDict: Record<string, any>
   let dict: Record<string, any>
@@ -34,7 +35,6 @@
   }
 
   function load(lang: string) {
-    console.log('rootUrl....', rootUrl)
     return fetch(`${rootUrl}/${lang}.json`).then(r => r.json())
   }
 
@@ -67,13 +67,13 @@
     <table class="table table-striped">
       <thead>
       <tr>
-        <th scope="col" class="d-flex gap-3"><span>Key</span> <KeyFilter/></th>
+        <th scope="col" class="d-flex gap-3"><span>Key</span> <KeyFilter bind:filter/></th>
         <th scope="col">Selected ( {lang} )</th>
         <th scope="col">Default ( {defaultLang} )</th>
       </tr>
       </thead>
       <tbody on:input={() => dict = dict}>
-        <KeyValueTableRow {dict} {defaultDict} {originalDict} />
+        <KeyValueTableRow {dict} {defaultDict} {originalDict} {filter}/>
       </tbody>
     </table>
 

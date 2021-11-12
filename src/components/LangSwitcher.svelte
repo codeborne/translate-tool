@@ -2,7 +2,7 @@
   export let langs: string[]
   export let lang = langs[0]
   let selected:string = lang
-  export let saved:boolean
+  export let changed:boolean
 
   function selectLang() {
     lang = selected
@@ -29,7 +29,7 @@
         <option value={lang}>{lang.toUpperCase()}</option>
       {/each}
     </select>
-    {#if saved}
+    {#if changed}
       <button disabled on:click={selectLang} class="btn btn-primary select-lang">Change Language <i class="fas fa-globe"></i></button>
     {:else}
       <button disabled type="button" class="btn btn-primary select-lang" data-bs-toggle="modal" data-bs-target="#confirmModal">

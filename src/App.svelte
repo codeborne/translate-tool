@@ -35,7 +35,7 @@
   <div class="container outline p-3 bg-light">
     {#if !displayLangImporter}
       <div class="d-flex justify-content-around gap-3">
-        <LangSwitcher bind:saved {langs} bind:lang />
+        <LangSwitcher bind:changed={saved} {langs} bind:lang />
         <Stats {totalDict} {filledDict} {indent} {defaultLang} totalLangs={langs.length} />
       </div>
       <LangEditor bind:indent bind:defaultLang bind:totalDict bind:filledDict bind:saved rootUrl={getRootUrl(url)} {lang}/>

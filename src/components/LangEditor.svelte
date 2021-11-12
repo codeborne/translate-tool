@@ -3,6 +3,7 @@
   import {onMount} from 'svelte'
   import {cleanEmptyKeys} from './cleanEmptyKeys'
   import {getTotalDictCount, getFilledDictCount} from './languageStats'
+  import {areObjectsEqual} from '../utils'
 
   // todo make configurable
   export let indent = 2
@@ -11,7 +12,6 @@
   export let rootUrl: string
 
   export let saved: boolean = true
-  let isLoading: boolean = true
 
   let defaultDict: Record<string, any>
   let dict: Record<string, any>
@@ -23,7 +23,8 @@
   $: if (lang) loadChangedLang()
 
   function initOriginalDict() {
-    originalDict = JSON.parse(JSON.stringify(dict))
+    originalDict = cleanEmptyKeys(JSON.parse(JSON.stringify(dict)))
+    saved = true
   }
 
   async function loadChangedLang() {
@@ -38,18 +39,15 @@
   $: if (dict) {
     dict = cleanEmptyKeys(dict)
     filledDict = getFilledDictCount(dict)
-    if (isLoading) isLoading = false
     checkForChanges()
   }
 
   function checkForChanges() {
-    saved = (dict == originalDict)
-    console.log(originalDict)
-    console.log(dict)
+    saved = areObjectsEqual(cleanEmptyKeys(dict), cleanEmptyKeys(originalDict))
     console.log(saved)
   }
 
-  $: if (lang) isLoading = true
+  // $: if (lang) isLoading = true
 
   onMount(async () => {
     defaultDict = await load(defaultLang)
@@ -76,7 +74,7 @@
       </tr>
       </thead>
       <tbody on:input={() => dict = dict}>
-        <KeyValueTableRow {dict} {defaultDict} {originalDict} on:change={saved = false} />
+        <KeyValueTableRow {dict} {defaultDict} {originalDict} />
       </tbody>
     </table>
 

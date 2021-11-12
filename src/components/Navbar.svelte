@@ -2,7 +2,7 @@
   export let showConfigButton
 </script>
 
-<nav class="navbar navbar-expand-lg navbar-light bg-light outline">
+<nav class="navbar navbar-expand-lg navbar-light bg-white outline">
   <div class="container-fluid">
     <a class="navbar-brand text-dark" href="#"><h3>Translation Tool <i class="fas fa-globe"></i></h3></a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
@@ -11,7 +11,7 @@
     <div class="collapse navbar-collapse" id="navbarText">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0"></ul>
       {#if !showConfigButton}
-        <button type="button" class="btn btn-outline-secondary bg-white text-dark" on:click={() => (showConfigButton = true)}>
+        <button type="button" class="btn btn-outline-secondary bg-light text-dark" on:click={() => (showConfigButton = true)}>
           Project Settings <i class="fas fa-wrench"></i>
         </button>
       {/if}

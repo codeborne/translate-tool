@@ -31,8 +31,7 @@
 </script>
 
 <Navbar bind:showConfigButton={displayLangImporter}/>
-<main class="mt-5 mb-5">
-  <div class="container outline p-3 bg-light">
+<main class="mt-5 mb-5 container">
     {#if !displayLangImporter}
       <div class="d-flex justify-content-around gap-3">
         <LangSwitcher bind:changed={saved} {langs} bind:lang />
@@ -42,7 +41,6 @@
     {:else}
       <LangImporter bind:url bind:langs bind:isOpen={displayLangImporter}/>
     {/if}
-  </div>
 </main>
 
 <style>

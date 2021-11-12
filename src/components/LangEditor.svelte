@@ -4,6 +4,7 @@
   import {cleanEmptyKeys} from './cleanEmptyKeys'
   import {getTotalDictCount, getFilledDictCount} from './languageStats'
   import {areObjectsEqual} from '../utils'
+  import KeyFilter from "./KeyFilter.svelte";
 
   // todo make configurable
   export let indent = 2
@@ -66,7 +67,7 @@
     <table class="table table-striped">
       <thead>
       <tr>
-        <th scope="col">Name</th>
+        <th scope="col" class="d-flex gap-3"><span>Key</span> <KeyFilter/></th>
         <th scope="col">Selected ( {lang} )</th>
         <th scope="col">Default ( {defaultLang} )</th>
       </tr>

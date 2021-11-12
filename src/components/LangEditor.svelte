@@ -16,8 +16,8 @@
   let defaultDict: Record<string, any>
   let dict: Record<string, any>
   let originalDict: Record<string, any>
-  export let totalDict: number
-  export let filledDict: number
+  export let totalDict: number = 0
+  export let filledDict: number = 0
   let stats: Record<string, any> = {'total': 0, 'empty': 0}
 
   $: if (lang) loadChangedLang()
@@ -39,7 +39,12 @@
     dict = cleanEmptyKeys(dict)
     filledDict = getFilledDictCount(dict)
     if (isLoading) isLoading = false
-    document.querySelector('.changed') ? saved = false : saved = true
+    checkForChanges()
+  }
+
+  function checkForChanges() {
+    saved = dict == originalDict
+    console.log(saved.toString())
   }
 
   $: if (lang) isLoading = true
@@ -70,7 +75,7 @@
       </tr>
       </thead>
       <tbody on:input={() => dict = dict}>
-        <KeyValueTableRow {dict} {defaultDict} {originalDict}/>
+        <KeyValueTableRow {dict} {defaultDict} {originalDict} on:change={saved = false} />
       </tbody>
     </table>
 

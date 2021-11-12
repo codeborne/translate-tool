@@ -3,6 +3,11 @@
   export let defaultDict: Record<any, string>
   export let originalDict: Record<string, any>
   export let keyPrefix = ''
+  export let isChanged = false
+
+  function checkForChanges(input, original) {
+    isChanged =  input === original // if match, unchanged, if not, changed
+  }
 
   const fullKey = (key: string) => (keyPrefix ? keyPrefix + '.' : '') + key
 </script>
@@ -14,7 +19,7 @@
     <tr>
       <td>{fullKey(key)}</td>
       <td>
-        <input bind:value={dict[key]} class="form-control"
+        <input bind:value={dict[key]} on:change={() => checkForChanges(dict[key], originalDict[key])} class="form-control"
                class:changed={dict[key] !==  originalDict[key]}>
       </td>
       <td>{defaultDict[key]}</td>

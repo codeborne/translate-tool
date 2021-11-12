@@ -15,10 +15,11 @@ const dict: Record<string, any> = {
 }
 const originalDict: Record<string, any> = dict
 const defaultDict: Record<string, any> = dict
+const filter = ''
 
 describe('<KeyValueTableRow>', () => {
   it('renders all inputs', () => {
-    const {container} = render(KeyValueTableRow, {dict, defaultDict, originalDict})
+    const {container} = render(KeyValueTableRow, {dict, defaultDict, originalDict, filter})
     expect(container.querySelectorAll('input')).to.have.length(5)
     const rows = container.querySelectorAll('tr')
     const firstRow = rows[0].querySelectorAll('td')

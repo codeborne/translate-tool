@@ -4,6 +4,7 @@
   export let originalDict: Record<string, any>
   export let keyPrefix = ''
   export let isChanged = false
+  export let filter: string
 
   function checkForChanges(input, original) {
     isChanged =  input === original // if match, unchanged, if not, changed
@@ -14,7 +15,7 @@
 
 {#each Object.keys(defaultDict) as key}
   {#if typeof defaultDict[key] === 'object' && defaultDict[key]}
-    <svelte:self keyPrefix={fullKey(key)} dict={dict[key] ??= {}} defaultDict={defaultDict[key]} originalDict={originalDict[key] ??= {}}/>
+    <svelte:self keyPrefix={fullKey(key)} dict={dict[key] ??= {}} defaultDict={defaultDict[key]} originalDict={originalDict[key] ??= {}} {filter}/>
   {:else}
     <tr>
       <td>{fullKey(key)}</td>

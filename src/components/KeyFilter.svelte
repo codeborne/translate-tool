@@ -1,9 +1,9 @@
 <script lang="ts">
-  let search: string = ''
+  export let filter: string = ''
 
 </script>
 
 <span>
-  <input class="form-control form-control-sm" bind:value={search} placeholder="filter...">
-  {search}
+  <input class="form-control form-control-sm" bind:value={filter} placeholder="filter...">
+  {filter}
 </span>

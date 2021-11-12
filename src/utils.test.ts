@@ -22,5 +22,11 @@ describe('areObjectsEqual', () => {
     let obj9 = {}
     let obj10 = {}
     expect(areObjectsEqual(obj9, obj10)).to.equal(true)
+
+    let obj11 = {name: 'a', nested: {}}
+    let obj12 = {name: 'a', nested: {}}
+    let obj13 = {name: 'a', nested: {test:'test'}}
+    expect(areObjectsEqual(obj11, obj12)).to.equal(true)
+    expect(areObjectsEqual(obj11, obj13)).to.equal(false)
   })
 })

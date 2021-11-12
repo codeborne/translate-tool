@@ -11,8 +11,8 @@
     <div class="collapse navbar-collapse" id="navbarText">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0"></ul>
       {#if !showConfigButton}
-        <button type="button" class="btn btn-outline-secondary text-dark" on:click={() => (showConfigButton = true)}>
-          Import config <i class="fas fa-wrench"></i>
+        <button type="button" class="btn btn-outline-secondary bg-white text-dark" on:click={() => (showConfigButton = true)}>
+          Project Settings <i class="fas fa-wrench"></i>
         </button>
       {/if}
     </div>

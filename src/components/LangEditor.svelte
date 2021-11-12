@@ -43,8 +43,10 @@
   }
 
   function checkForChanges() {
-    saved = dict == originalDict
-    console.log(saved.toString())
+    saved = (dict == originalDict)
+    console.log(originalDict)
+    console.log(dict)
+    console.log(saved)
   }
 
   $: if (lang) isLoading = true
@@ -60,7 +62,6 @@
     textarea.select()
     document.execCommand('copy')
     initOriginalDict()
-    console.log(originalDict)
   }
 </script>
 

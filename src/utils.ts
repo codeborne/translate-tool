@@ -18,3 +18,8 @@ export function areObjectsEqual(a: Record<string, any>, b: Record<string, any>):
   return true;
 }
 
+export function getRootUrl(url: string) {
+  const lastIndex: number = url.lastIndexOf('/')
+  return url.substring(0, lastIndex)
+}
+

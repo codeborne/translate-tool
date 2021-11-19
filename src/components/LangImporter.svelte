@@ -1,6 +1,6 @@
 <script lang="ts">
   export let isOpen: boolean
-  let url: string
+  let url: string = ''
   export let token: string = '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'
   export let langs: Record<string, any>
   let warning = ''

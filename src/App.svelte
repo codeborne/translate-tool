@@ -19,7 +19,6 @@
   if (localStorage.getItem('data')) {
     let data: Record<string, any> = JSON.parse(<string>localStorage.getItem('data'))
     langs = data.langs
-    url = data.url
     displayLangImporter = false
   }
 </script>
@@ -33,7 +32,7 @@
       </div>
       <LangEditor bind:indent bind:defaultLang bind:totalDict bind:filledDict bind:saved {lang}/>
     {:else}
-      <LangImporter bind:url bind:langs bind:isOpen={displayLangImporter}/>
+      <LangImporter bind:langs bind:isOpen={displayLangImporter}/>
     {/if}
 </main>
 

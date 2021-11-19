@@ -110,18 +110,17 @@
 </div>
 {/if}
 
-<div class="outline p-3 mb-3">
+<div class="outline p-3 mb-3 d-flex flex-column justify-content-center align-items-center">
   <h5 class="mb-4">Import a public dictionary</h5>
   <div class="mb-3" >
     <label for="url" class="form-label">Public configuration link</label>
     <input type="text" placeholder="url link" bind:value={url} class="form-control" aria-describedby="url">
-    <div id="url" class="form-text">You can change it at any time.</div>
-    <div>Example link: '../../i18n/langs.json'</div>
-    <button on:click={submitPublic} type="button" class="btn btn-primary">Import</button>
+    <div id="url" class="form-text mb-4">You can change it at any time. Example link: <i>../../i18n/langs.json</i></div>
     </div>
+  <button on:click={submitPublic} type="button" class="btn btn-primary w-auto">Import</button>
 </div>
 
-<div class="outline p-3 mb-3">
+<div class="outline p-3 mb-3 d-flex flex-column justify-content-center align-items-center">
   <h5 class="mb-4">Import a private dictionary via GitHub</h5>
   <div class="mb-3" >
     <label for="url" class="form-label">Repository owner's username</label>
@@ -141,7 +140,7 @@
     <input type="text" placeholder="auth token" bind:value={token} class="form-control" aria-describedby="url">
     <div class="form-text mb-4">This token will be used to access the private repository</div>
   </div>
-  <button on:click={submitGithub} type="button" class="btn btn-primary">Import</button>
+  <button on:click={submitGithub} type="button" class="btn btn-primary w-auto">Import</button>
 </div>
 
 <style>
@@ -154,7 +153,7 @@
   .warning {
     border: 1px solid lightgray;
     border-radius: 5px;
-    background-color: #FAD6D6;
+    background-color: #F9D8D8;
     text-align: center;
   }
 

@@ -1,6 +1,6 @@
 <script lang="ts">
   export let isOpen: boolean
-  export let url: string
+  let url: string
   export let token: string = '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'
   export let langs: Record<string, any>
   let warning = ''
@@ -26,15 +26,16 @@
   async function submitGithub() {
     warning = ''
     if (isGithubFormValid()) {
-      console.log('all valid')
       let dictUrl = `https://api.github.com/repos/${username}/${repo}/contents${structure}/langs.json`
       let dict = await fetchGithubUrl(dictUrl, token)
-      dict = JSON.parse(atob(dict.content)) // content is base64 encoded and required decoding
-      if (validate(dict)) {
-        langs = dict
-        saveToLocalStorage(dictUrl, false)
-        isOpen = false
-        warning = ''
+      if (dict) {
+        dict = JSON.parse(atob(dict.content)) // content is base64 encoded and required decoding
+        if (validate(dict)) {
+          langs = dict
+          saveToLocalStorage(dictUrl, false)
+          isOpen = false
+          warning = ''
+        }
       }
     }
   }
@@ -81,8 +82,12 @@
         if (response.ok) {
           return response.json()
         } else {
-          throw new Error(response.text() as string)}})
-      .catch((err) => warning = err)
+          return response.text().then(text => {
+            throw (JSON.parse(text))
+          })}})
+      .catch((err) => {
+        warning = err.message
+      })
   }
 
   function validate(arr: any) {
@@ -99,6 +104,11 @@
   }
 </script>
 
+{#if warning}
+<div class="container warning p-3 mb-3">
+  {warning}
+</div>
+{/if}
 
 <div class="container outline p-3 mb-3">
   <h5 class="mb-4">Import a public dictionary</h5>
@@ -108,7 +118,6 @@
     <div id="url" class="form-text">You can change it at any time.</div>
     <div>Example link: '../../i18n/langs.json'</div>
     <button on:click={submitPublic} type="button" class="btn btn-primary">Import</button>
-  {warning}
     </div>
 </div>
 
@@ -133,7 +142,6 @@
     <div class="form-text mb-4">This token will be used to access the private repository</div>
   </div>
   <button on:click={submitGithub} type="button" class="btn btn-primary">Import</button>
-  {warning}
 </div>
 
 <style>
@@ -142,6 +150,14 @@
     border-radius: 5px;
     background-color: white;
   }
+
+  .warning {
+    border: 1px solid lightgray;
+    border-radius: 5px;
+    background-color: #FAD6D6;
+    text-align: center;
+  }
+
   h1, h2, h3, h4, h5, h6 {
     color: #404142;
   }

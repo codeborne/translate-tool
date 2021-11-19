@@ -12,14 +12,8 @@
   let saved:boolean = true
   let totalDict: number
   let filledDict: number
-
   let defaultLang: string
   let indent: number
-
-  function getRootUrl(url) {
-    const lastIndex: number = url.lastIndexOf('/')
-    return url.substring(0, lastIndex)
-  }
 
   // localStorage check
   if (localStorage.getItem('data')) {
@@ -37,7 +31,7 @@
         <LangSwitcher bind:changed={saved} {langs} bind:lang />
         <Stats {totalDict} {filledDict} {indent} {defaultLang} totalLangs={langs.length} />
       </div>
-      <LangEditor bind:indent bind:defaultLang bind:totalDict bind:filledDict bind:saved rootUrl={getRootUrl(url)} {lang}/>
+      <LangEditor bind:indent bind:defaultLang bind:totalDict bind:filledDict bind:saved {lang}/>
     {:else}
       <LangImporter bind:url bind:langs bind:isOpen={displayLangImporter}/>
     {/if}

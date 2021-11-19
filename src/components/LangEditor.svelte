@@ -5,12 +5,12 @@
   import {getTotalDictCount, getFilledDictCount} from './languageStats'
   import {areObjectsEqual} from '../utils'
   import KeyFilter from "./KeyFilter.svelte";
+  import {getRootUrl} from '../utils'
 
   // todo make configurable
   export let indent = 2
   export let defaultLang: string = 'en'
   export let lang: string
-  export let rootUrl: string
 
   export let saved: boolean = true
   let filter: string = ''
@@ -34,8 +34,26 @@
     initOriginalDict()
   }
 
-  function load(lang: string) {
-    return fetch(`${rootUrl}/${lang}.json`).then(r => r.json())
+  async function load(lang: string) {
+    const localData: Record<string, any> = JSON.parse(localStorage.getItem('data') as string)
+    const isPublic:boolean = localData.isPublic
+    const rootUrl = getRootUrl(localData.url)
+    const link = `${rootUrl}/${lang}.json`
+    if (isPublic) {
+      return fetch(link).then(r => r.json())
+    } else {
+      const token = localData.token
+      const headers = new Headers({'Authorization': `token ${token}`});
+      let data = await fetch(link, {method: 'GET', headers})
+        .then(response => {
+          if (response.ok) {
+            return response.json()
+          } else {
+            throw new Error(response.text() as string)
+          }})
+        .catch((err) => console.log(err))
+      return JSON.parse(atob(data.content))
+    }
   }
 
   $: if (dict) {

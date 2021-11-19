@@ -11,10 +11,10 @@
   async function submitPublic() {
     warning = ''
     if (url) {
-      let dict = fetchUrl(url)
+      let dict = await fetchUrl(url)
       if (validate(dict)) {
         langs = dict
-        saveToLocalStorage(url, true)
+        await saveToLocalStorage(url, true)
         isOpen = false
         warning = ''
       }
@@ -66,7 +66,8 @@
     let data = {
       url: link,
       langs,
-      isPublic
+      isPublic,
+      token
     }
     localStorage.setItem('data', JSON.stringify(data))
   }
@@ -74,18 +75,14 @@
   const fetchUrl = (link) => fetch(link).then(r => r.json()).catch((e) => warning = e)
 
   function fetchGithubUrl(link, token) {
-    const headers = new Headers({
-      'Authorization': `token ${token}`,
-    });
-    return fetch(link, {
-      method: 'GET',
-      headers,
-    }).then(response => {
-      if (response.ok) {
-        return response.json()
-      } else {
-        throw new Error(response.text() as string)
-      }}).catch((err) => warning = err)
+    const headers = new Headers({'Authorization': `token ${token}`});
+    return fetch(link, { method: 'GET', headers})
+      .then(response => {
+        if (response.ok) {
+          return response.json()
+        } else {
+          throw new Error(response.text() as string)}})
+      .catch((err) => warning = err)
   }
 
   function validate(arr: any) {

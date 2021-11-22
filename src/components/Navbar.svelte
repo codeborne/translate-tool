@@ -1,4 +1,6 @@
 <script lang="ts">
+  import NavbarProjectTab from "./NavbarProjectTab.svelte";
+
   export let showConfigButton
 </script>
 
@@ -9,12 +11,25 @@
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarText">
-      <ul class="navbar-nav me-auto mb-2 mb-lg-0"></ul>
-      {#if !showConfigButton}
-        <button type="button" class="btn btn-outline-secondary bg-light text-dark" on:click={() => (showConfigButton = true)}>
-          Project Settings <i class="fas fa-wrench"></i>
-        </button>
-      {/if}
+<!--      <ul class="navbar-nav me-auto mb-2 mb-lg-0"></ul>-->
+      <div class="collapse navbar-collapse">
+        <NavbarProjectTab title="Example1" />
+        <NavbarProjectTab title="Example1" />
+        <NavbarProjectTab title="Example1" />
+        <NavbarProjectTab title="Example1" />
+        <NavbarProjectTab title="Example1" />
+        <NavbarProjectTab title="Example1" />
+        <NavbarProjectTab title="Example1" />
+        <NavbarProjectTab title="Example1" />
+      </div>
+
+      </div>
+      <div>
+        {#if !showConfigButton}
+          <button type="button" class="btn btn-outline-secondary bg-light text-dark" on:click={() => (showConfigButton = true)}>
+            Project Settings <i class="fas fa-wrench"></i>
+          </button>
+        {/if}
     </div>
   </div>
 </nav>

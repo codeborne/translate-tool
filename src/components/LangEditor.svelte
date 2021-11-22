@@ -3,9 +3,8 @@
   import {onMount} from 'svelte'
   import {cleanEmptyKeys} from './cleanEmptyKeys'
   import {getTotalDictCount, getFilledDictCount} from './languageStats'
-  import {areObjectsEqual} from '../utils'
+  import {areObjectsEqual, getRootUrl, b64DecodeUnicode} from '../utils'
   import KeyFilter from "./KeyFilter.svelte";
-  import {getRootUrl} from '../utils'
 
   // todo make configurable
   export let indent = 2
@@ -52,7 +51,7 @@
             throw new Error(response.text() as string)
           }})
         .catch((err) => console.log(err))
-      return JSON.parse(atob(data.content))
+      return JSON.parse(b64DecodeUnicode(data.content))
     }
   }
 

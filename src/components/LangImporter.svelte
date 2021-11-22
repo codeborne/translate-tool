@@ -1,12 +1,13 @@
 <script lang="ts">
+  import {b64DecodeUnicode} from '../utils'
   export let isOpen: boolean
   let url: string = ''
-  export let token: string = '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'
+  export let token: string = ''
   export let langs: Record<string, any>
   let warning = ''
-  let username: string = 'Uptaker'
-  let repo: string = 'access-token-test'
-  let structure: string = '/i18n'
+  let username: string = 'paywerk'
+  let repo: string = 'paywerk'
+  let structure: string = '/i18n/common'
 
   async function submitPublic() {
     warning = ''
@@ -28,8 +29,9 @@
     if (isGithubFormValid()) {
       let dictUrl = `https://api.github.com/repos/${username}/${repo}/contents${structure}/langs.json`
       let dict = await fetchGithubUrl(dictUrl, token)
+      console.log(b64DecodeUnicode(dict.content))
       if (dict) {
-        dict = JSON.parse(atob(dict.content)) // content is base64 encoded and required decoding
+        dict = JSON.parse(b64DecodeUnicode(dict.content)) // content is base64 encoded and required decoding
         if (validate(dict)) {
           langs = dict
           saveToLocalStorage(dictUrl, false)

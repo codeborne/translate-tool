@@ -1,6 +1,5 @@
 <script lang="ts">
-  export let totalDict: number
-  export let filledDict: number
+  export let stats: Record<string, number>
   export let indent: number
   export let defaultLang: string
   export let totalLangs: number
@@ -14,15 +13,15 @@
       <tbody>
       <tr>
         <td>Total Fields</td>
-        <td>{totalDict}</td>
+        <td>{stats.total}</td>
       </tr>
       <tr>
         <td>Filled fields</td>
-        <td>{filledDict}</td>
+        <td>{stats.filled}</td>
       </tr>
       <tr>
         <td>Empty Fields</td>
-        <td>{totalDict - filledDict}</td>
+        <td>{stats.total - stats.filled}</td>
       </tr>
       </tbody>
     </table>

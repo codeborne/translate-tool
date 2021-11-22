@@ -1,25 +1,22 @@
 <script lang="ts">
   import KeyValueTableRow from './KeyValueTableRow.svelte'
-  import {onMount} from 'svelte'
   import {cleanEmptyKeys} from './cleanEmptyKeys'
   import {getTotalDictCount, getFilledDictCount} from './languageStats'
   import {areObjectsEqual, getRootUrl, b64DecodeUnicode} from '../utils'
   import KeyFilter from "./KeyFilter.svelte";
+  import Stats from "./Stats.svelte";
+  import LangSwitcher from "./LangSwitcher.svelte";
 
-  // todo make configurable
-  export let indent = 2
-  export let defaultLang: string = 'en'
-  export let lang: string
-
+  export let project: Record<string, any>
+  export let selected: string
   export let saved: boolean = true
+  let lang: string = project.langs[0]
+  let stats: Record<string, number> = {'total': 0, 'filled': 0}
   let filter: string = ''
 
-  let defaultDict: Record<string, any>
-  let dict: Record<string, any>
-  let originalDict: Record<string, any>
-  export let totalDict: number = 0
-  export let filledDict: number = 0
-  let stats: Record<string, any> = {'total': 0, 'empty': 0}
+  let defaultDict: Record<string, any> // the dictionary being referenced as template
+  let dict: Record<string, any> // dictionary being edited
+  let originalDict: Record<string, any> // original unchanged dictionary
 
   $: if (lang) loadChangedLang()
 
@@ -33,8 +30,20 @@
     initOriginalDict()
   }
 
+  $: if(selected) {
+    updateProjectInEditor()
+  }
+
+  async function updateProjectInEditor() {
+    loadChangedLang() // sets dict and originalDict
+    defaultDict = await load(project.defaultLang)
+    stats.total = getTotalDictCount(dict)
+    stats.filled = getFilledDictCount(dict)
+    saved = true
+  }
+
   async function load(lang: string) {
-    const localData: Record<string, any> = JSON.parse(localStorage.getItem('data') as string)
+    const localData: Record<string, any> = project
     const isPublic:boolean = localData.isPublic
     const rootUrl = getRootUrl(localData.url)
     const link = `${rootUrl}/${lang}.json`
@@ -57,18 +66,13 @@
 
   $: if (dict) {
     dict = cleanEmptyKeys(dict)
-    filledDict = getFilledDictCount(dict)
+    stats.filled = getFilledDictCount(dict)
     checkForChanges()
   }
 
   function checkForChanges() {
     saved = areObjectsEqual(cleanEmptyKeys(dict), cleanEmptyKeys(originalDict))
   }
-
-  onMount(async () => {
-    defaultDict = await load(defaultLang)
-    totalDict = getTotalDictCount(defaultDict)
-  })
 
   let textarea: HTMLTextAreaElement
   function copy() {
@@ -79,6 +83,19 @@
   }
 </script>
 
+<div class="d-flex justify-content-around gap-3">
+  <LangSwitcher
+    bind:changed={saved}
+    bind:project
+    bind:lang />
+  <Stats
+    {stats}
+    bind:indent={project.indent}
+    defaultLang={project.defaultLang}
+    totalLangs={project.langs.length} />
+</div>
+
+
 <div class="mt-3 outline p-3 d-flex flex-column justify-content-center align-items-center">
   {#if dict && defaultDict && originalDict}
     <KeyFilter bind:filter/>
@@ -87,7 +104,7 @@
       <tr>
         <th scope="col">Key</th>
         <th scope="col">Selected ( {lang} )</th>
-        <th scope="col">Default ( {defaultLang} )</th>
+        <th scope="col">Default ( {project.defaultLang} )</th>
       </tr>
       </thead>
       <tbody on:input={() => dict = dict}>
@@ -103,7 +120,7 @@
   <textarea id="rawOutput" bind:this={textarea}
             class="form-control mb-3 bg-light"
             style={{width: '100%'}}
-            rows="20">{JSON.stringify(dict, null, indent)}</textarea>
+            rows="20">{JSON.stringify(dict, null, project.indent)}</textarea>
 </div>
 
 <style>

@@ -1,7 +1,11 @@
 <script lang="ts">
   import NavbarProjectTab from "./NavbarProjectTab.svelte";
+  import {onMount} from 'svelte'
 
-  export let showConfigButton
+  export let storage: any[]
+  export let selected: string = ''
+  export let showConfigButton: boolean
+
 </script>
 
 <nav class="navbar navbar-expand-lg navbar-light bg-white outline">
@@ -12,22 +16,24 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarText">
 <!--      <ul class="navbar-nav me-auto mb-2 mb-lg-0"></ul>-->
+      {#if storage}
       <div class="collapse navbar-collapse">
-        <NavbarProjectTab title="Example1" />
-        <NavbarProjectTab title="Example1" />
-        <NavbarProjectTab title="Example1" />
-        <NavbarProjectTab title="Example1" />
-        <NavbarProjectTab title="Example1" />
-        <NavbarProjectTab title="Example1" />
-        <NavbarProjectTab title="Example1" />
-        <NavbarProjectTab title="Example1" />
+        {#each storage as obj}
+        <NavbarProjectTab title={obj.title} bind:selected bind:isImporterOpen={showConfigButton} />
+        {/each}
       </div>
+      {/if}
 
       </div>
       <div>
         {#if !showConfigButton}
           <button type="button" class="btn btn-outline-secondary bg-light text-dark" on:click={() => (showConfigButton = true)}>
             Project Settings <i class="fas fa-wrench"></i>
+          </button>
+        {/if}
+        {#if showConfigButton && storage.length > 0}
+          <button type="button" class="btn btn-outline-secondary bg-light text-dark" on:click={() => (showConfigButton = false)}>
+            Back to Editor <i class="fas fa-arrow-circle-right"></i>
           </button>
         {/if}
     </div>

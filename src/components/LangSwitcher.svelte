@@ -1,32 +1,35 @@
 <script lang="ts">
-  export let langs: string[]
-  export let lang = langs[0]
-  let selected:string = lang
+
+  export let project: Record<string, any>
+  export let lang;
+  let selectedLangInList:string;
   export let changed:boolean
 
   function selectLang() {
-    lang = selected
+    lang = selectedLangInList
     toggleButtons()
   }
 
   function toggleButtons() {
     const buttons = document.querySelectorAll('.select-lang') as HTMLButtonElement[]
-    if (selected == lang) {
+    if (selectedLangInList == lang) {
       buttons.forEach(btn => btn.disabled = true)
     } else {
       buttons.forEach(btn => btn.disabled = false)
     }
   }
 
-  $: if (selected) toggleButtons()
+  $: if (selectedLangInList) toggleButtons()
 
 </script>
+
+{#if lang}
 <div class="outline p-3 w-50">
   <h5 class="mb-4">Language Selection</h5>
   <div class="d-flex flex-column">
-    <select bind:value={selected} class="form-select mb-3">
-      {#each langs as lang}
-        <option value={lang}>{lang.toUpperCase()}</option>
+    <select bind:value={selectedLangInList} class="form-select mb-3">
+      {#each project.langs as l}
+        <option value={l}>{l.toUpperCase()}</option>
       {/each}
     </select>
     {#if changed}
@@ -38,6 +41,7 @@
     {/if}
   </div>
 </div>
+{/if}
 
 <div class="modal fade" id="confirmModal" tabindex="-1" aria-labelledby="confirmModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered">

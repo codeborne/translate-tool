@@ -4,7 +4,6 @@
   import Navbar from "./components/Navbar.svelte";
 
   let displayLangImporter: boolean = true;
-  let saved:boolean = true
   let projects: any[] = []
   let selectedProject: string
   let project: Record<string, any>
@@ -44,7 +43,6 @@
       <h4 class="text-center mb-3">{project.title}</h4>
       <LangEditor
         bind:project
-        bind:saved
         bind:selectedProject />
     {:else}
       <LangImporter bind:projects bind:selectedProject bind:isOpen={displayLangImporter}/>

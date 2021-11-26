@@ -2,10 +2,10 @@
   import ProjectSettings from "./ProjectSettings.svelte";
   import AddProjectPublic from "./AddProjectPublic.svelte";
   import AddProjectFromRepository from "./AddProjectFromRepository.svelte";
+
   export let isOpen: boolean
   export let projects: any[]
   export let selectedProject: string
-
 
 </script>
 {#if projects.length > 0}

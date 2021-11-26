@@ -1,5 +1,6 @@
 <script lang="ts">
   export let projects: any[]
+
   let showEditor: boolean = false
   let select: string
   let title: string

@@ -15,6 +15,10 @@
     if (projects.length == 0) {
       displayLangImporter = false
     }
+    if (!localStorage.getItem('selectedProject') && projects.length > 0) {
+      localStorage.setItem('selectedProject', projects[0].title)
+      selectedProject = projects[0]
+    }
   }
 
   // localStorage check current/last selectedProject project

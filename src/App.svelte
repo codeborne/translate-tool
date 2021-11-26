@@ -1,38 +1,47 @@
 <script lang="ts">
-  import LangSwitcher from './components/LangSwitcher.svelte'
   import LangEditor from './components/LangEditor.svelte'
   import LangImporter from './components/LangImporter.svelte'
   import Navbar from "./components/Navbar.svelte";
-  import Stats from "./components/Stats.svelte";
 
   let displayLangImporter: boolean = true;
-  let url:string = ''
-  let langs: Record<string, any> = {}
-  let lang: string
   let saved:boolean = true
-  let totalDict: number
-  let filledDict: number
-  let defaultLang: string
-  let indent: number
+  let storage: any[] = []
+  let selected: string
+  let project: Record<string, any>
 
-  // localStorage check
-  if (localStorage.getItem('data')) {
-    let data: Record<string, any> = JSON.parse(<string>localStorage.getItem('data'))
-    langs = data.langs
+  // localStorage check data
+  if (localStorage.getItem('config')) {
+    storage = JSON.parse(localStorage.getItem('config') as string)
+    if (storage.length == 0) {
+      displayLangImporter = false
+    }
+  }
+
+  // localStorage check current/last selected project
+  if (localStorage.getItem('selected') && storage) {
+    selected = localStorage.getItem('selected') as string
+    project = storage.find(o => { return o.title === selected })
     displayLangImporter = false
   }
+
+  $: if (selected) {
+    project = storage.find(o => { return o.title === selected })
+    localStorage.setItem('selected', selected)
+  }
+
+
 </script>
 
-<Navbar bind:showConfigButton={displayLangImporter}/>
+<Navbar bind:selected bind:storage bind:showConfigButton={displayLangImporter}/>
 <main class="mt-5 mb-5 container">
     {#if !displayLangImporter}
-      <div class="d-flex justify-content-around gap-3">
-        <LangSwitcher bind:changed={saved} {langs} bind:lang />
-        <Stats {totalDict} {filledDict} {indent} {defaultLang} totalLangs={langs.length} />
-      </div>
-      <LangEditor bind:indent bind:defaultLang bind:totalDict bind:filledDict bind:saved {lang}/>
+      <h4 class="text-center mb-3">{project.title}</h4>
+      <LangEditor
+        bind:project
+        bind:saved
+        bind:selected />
     {:else}
-      <LangImporter bind:langs bind:isOpen={displayLangImporter}/>
+      <LangImporter bind:storage bind:selected bind:isOpen={displayLangImporter}/>
     {/if}
 </main>
 

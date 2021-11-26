@@ -2,7 +2,7 @@ import {getByText, render} from '@testing-library/svelte'
 import {expect} from 'chai'
 import KeyValueTableRow from './KeyValueTableRow.svelte'
 
-const dict: Record<string, any> = {
+const selectedDict: Record<string, any> = {
   world: 'hello',
   hello: 'world',
   nested: {
@@ -13,13 +13,14 @@ const dict: Record<string, any> = {
     }
   }
 }
-const originalDict: Record<string, any> = dict
-const defaultDict: Record<string, any> = dict
+
+const uneditedDict: Record<string, any> = selectedDict
+const defaultDict: Record<string, any> = selectedDict
 let filter: string = ''
 
 describe('<KeyValueTableRow>', () => {
   it('renders all inputs', () => {
-    const {container} = render(KeyValueTableRow, {dict, defaultDict, originalDict, filter})
+    const {container} = render(KeyValueTableRow, {selectedDict, defaultDict, uneditedDict, filter})
     expect(container.querySelectorAll('input')).to.have.length(5)
     const rows = container.querySelectorAll('tr')
     const firstRow = rows[0].querySelectorAll('td')
@@ -40,7 +41,7 @@ describe('<KeyValueTableRow>', () => {
 
   it('shows only filtered inputs', () => {
     filter = 'nested'
-    const {container, getByText} = render(KeyValueTableRow, {dict, defaultDict, originalDict, filter})
+    const {container, getByText} = render(KeyValueTableRow, {selectedDict, defaultDict, uneditedDict, filter})
     const inputs = container.querySelectorAll('input')
     expect(inputs).to.have.length(3)
     expect(inputs[0].value).to.contain('worlddd')

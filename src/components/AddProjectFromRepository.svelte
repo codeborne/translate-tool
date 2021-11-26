@@ -4,15 +4,15 @@
   let url: string = ''
   export let token: string = ''
   let langs: Record<string, any>
-  let warning = ''
+  let warning: string|boolean
   let username: string = 'paywerk'
   let repo: string = 'paywerk'
   let structure: string = '/i18n/common'
   let title: string = 'Paywerk Common'
   let indent: number = 2
   let defaultLang: string = 'en'
-  export let storage: any[]
-  export let selected: string
+  export let projects: any[]
+  export let selectedProject: string
 
   async function submitPublic() {
     warning = ''
@@ -69,11 +69,11 @@
 
 
   function saveToLocalStorage(link: string, isPublic: boolean) {
-    if (!localStorage.getItem('config')) {
+    if (!localStorage.getItem('projects')) {
       localStorage.clear()
-      localStorage.setItem('config', JSON.stringify([]))
+      localStorage.setItem('projects', JSON.stringify([]))
     }
-    if (!localStorage.getItem('selected')) localStorage.setItem('selected', title)
+    if (!localStorage.getItem('selectedProject')) localStorage.setItem('selectedProject', title)
     let data = {
       title,
       url: link,
@@ -84,11 +84,11 @@
       defaultLang
     }
 
-    let arr: any[] = JSON.parse(localStorage.getItem('config') as string)
+    let arr: any[] = JSON.parse(localStorage.getItem('projects') as string)
     arr.push(data)
-    localStorage.setItem('config', JSON.stringify(arr))
-    selected = title
-    storage = arr
+    localStorage.setItem('projects', JSON.stringify(arr))
+    selectedProject = title
+    projects = arr
     isOpen = false
   }
 
@@ -109,17 +109,21 @@
       })
   }
 
+
+
   function validate(arr: any) {
-    if (arr) {
-      if (!Array.isArray(arr)) {
-        warning = 'Language list file must be an array'
-        return false
-      }
-      return true
-    } else {
-      warning = 'Invalid file'
-      return false
-    }
+    return !arr ? 'invalid file' : !Array.isArray(arr) ? 'lalallala' : false
+
+    // if (arr) {
+    //   if (!Array.isArray(arr)) {
+    //     warning = 'Language list file must be an array'
+    //     return false
+    //   }
+    //   return true
+    // } else {
+    //   warning = 'Invalid file'
+    //   return false
+    // }
   }
 </script>
 

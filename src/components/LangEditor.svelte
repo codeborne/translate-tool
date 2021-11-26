@@ -8,7 +8,7 @@
   import LangSwitcher from "./LangSwitcher.svelte";
 
   export let project: Record<string, any>
-  export let selected: string
+  export let selectedProject: string
   export let saved: boolean = true
   let lang: string = project.langs[0]
   let stats: Record<string, number> = {'total': 0, 'filled': 0}
@@ -44,7 +44,7 @@
 
   async function load(lang: string) {
     const localData: Record<string, any> = project
-    const isPublic:boolean = localData.isPublic
+    const isPublic: boolean = localData.isPublic
     const rootUrl = getRootUrl(localData.url)
     const link = `${rootUrl}/${lang}.json`
     if (isPublic) {
@@ -87,7 +87,7 @@
   <LangSwitcher
     bind:changed={saved}
     bind:project
-    bind:selected
+    bind:selectedProject
     bind:lang />
   <Stats
     bind:stats

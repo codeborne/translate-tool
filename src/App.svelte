@@ -5,43 +5,43 @@
 
   let displayLangImporter: boolean = true;
   let saved:boolean = true
-  let storage: any[] = []
-  let selected: string
+  let projects: any[] = []
+  let selectedProject: string
   let project: Record<string, any>
 
   // localStorage check data
-  if (localStorage.getItem('config')) {
-    storage = JSON.parse(localStorage.getItem('config') as string)
-    if (storage.length == 0) {
+  if (localStorage.getItem('projects')) {
+    projects = JSON.parse(localStorage.getItem('projects') as string)
+    if (projects.length == 0) {
       displayLangImporter = false
     }
   }
 
-  // localStorage check current/last selected project
-  if (localStorage.getItem('selected') && storage) {
-    selected = localStorage.getItem('selected') as string
-    project = storage.find(o => { return o.title === selected })
+  // localStorage check current/last selectedProject project
+  if (localStorage.getItem('selectedProject') && projects) {
+    selectedProject = localStorage.getItem('selectedProject') as string
+    project = projects.find(o => { return o.title === selectedProject })
     displayLangImporter = false
   }
 
-  $: if (selected) {
-    project = storage.find(o => { return o.title === selected })
-    localStorage.setItem('selected', selected)
+  $: if (selectedProject) {
+    project = projects.find(o => { return o.title === selectedProject })
+    localStorage.setItem('selectedProject', selectedProject)
   }
 
 
 </script>
 
-<Navbar bind:selected bind:storage bind:showConfigButton={displayLangImporter}/>
+<Navbar bind:selectedProject bind:projects bind:showConfigButton={displayLangImporter}/>
 <main class="mt-5 mb-5 container">
     {#if !displayLangImporter}
       <h4 class="text-center mb-3">{project.title}</h4>
       <LangEditor
         bind:project
         bind:saved
-        bind:selected />
+        bind:selectedProject />
     {:else}
-      <LangImporter bind:storage bind:selected bind:isOpen={displayLangImporter}/>
+      <LangImporter bind:projects bind:selectedProject bind:isOpen={displayLangImporter}/>
     {/if}
 </main>
 

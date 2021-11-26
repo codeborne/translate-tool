@@ -1,5 +1,5 @@
 <script lang="ts">
-  export let storage: any[]
+  export let projects: any[]
   let showEditor: boolean = false
   let select: string
   let title: string
@@ -7,8 +7,8 @@
   let defaultLang: string
 
   function deleteFromStorage() {
-    storage = storage.filter(obj => obj.title !== select)
-    localStorage.setItem('config', JSON.stringify(storage))
+    projects = projects.filter(obj => obj.title !== select)
+    localStorage.setItem('projects', JSON.stringify(projects))
   }
 
   function toggleForm() {
@@ -16,19 +16,19 @@
   }
 
   function saveChangesToProject() {
-    let project: Record<string, any> = storage.find(obj => obj.title === select)
-    let filteredStorage: any[] = storage.filter(obj => obj.title !== select)
+    let project: Record<string, any> = projects.find(obj => obj.title === select)
+    let filteredStorage: any[] = projects.filter(obj => obj.title !== select)
     project.title = title
     project.indent = indent as number
     project.defaultLang = defaultLang
     filteredStorage.push(project)
-    localStorage.setItem('config', JSON.stringify(filteredStorage))
-    storage = filteredStorage
+    localStorage.setItem('projects', JSON.stringify(filteredStorage))
+    projects = filteredStorage
     toggleForm()
   }
 
   function setFormInputs() {
-    let project = storage.find(obj => obj.title === select)
+    let project = projects.find(obj => obj.title === select)
     title = project.title
     indent = project.indent
     defaultLang = project.defaultLang
@@ -42,7 +42,7 @@
   <h5 class="mb-4">Manage Projects</h5>
   <div class="mb-3" >
       <select bind:value={select} class="form-select" aria-label="Select project">
-        {#each storage as obj }
+        {#each projects as obj }
           <option value="{obj.title}">{obj.title}</option>
         {/each}
       </select>

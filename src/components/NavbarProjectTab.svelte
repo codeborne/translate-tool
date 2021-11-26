@@ -1,11 +1,11 @@
 <script lang="ts">
 
   export let title: string
-  export let selected: string
+  export let selectedProject: string
   export let isImporterOpen: boolean
 
   function setProject() {
-    selected = title
+    selectedProject = title
     isImporterOpen = false
   }
 

@@ -1,17 +1,17 @@
 <script lang="ts">
-  import {b64DecodeUnicode} from '../utils'
 
   export let isOpen: boolean
+  export let token: string = '' //TODO remove
+  export let projects: any[]
+  export let selectedProject: string
+
   let url: string = ''
-  export let token: string = ''
   let langs: Record<string, any>
-  let warning = ''
   let title: string = 'Example Public'
   let indent: number = 2
   let defaultLang: string = 'en'
-  export let storage: any[]
-  export let selected: string
 
+  let warning = ''
   async function submitPublic() {
     warning = ''
     if (url) {
@@ -29,11 +29,11 @@
 
 
   function saveToLocalStorage(link: string, isPublic: boolean) {
-    if (!localStorage.getItem('config')) {
+    if (!localStorage.getItem('projects')) {
       localStorage.clear()
-      localStorage.setItem('config', JSON.stringify([]))
+      localStorage.setItem('projects', JSON.stringify([]))
     }
-    if (!localStorage.getItem('selected')) localStorage.setItem('selected', title)
+    if (!localStorage.getItem('selectedProject')) localStorage.setItem('selectedProject', title)
     let data = {
       title,
       url: link,
@@ -43,11 +43,11 @@
       indent,
       defaultLang
     }
-    let arr: any[] = JSON.parse(localStorage.getItem('config') as string)
+    let arr: any[] = JSON.parse(localStorage.getItem('projects') as string)
     arr.push(data)
-    localStorage.setItem('config', JSON.stringify(arr))
-    selected = title
-    storage = arr
+    localStorage.setItem('projects', JSON.stringify(arr))
+    selectedProject = title
+    projects = arr
     isOpen = false
   }
 

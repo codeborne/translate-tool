@@ -3,16 +3,16 @@
   import AddProjectPublic from "./AddProjectPublic.svelte";
   import AddProjectFromRepository from "./AddProjectFromRepository.svelte";
   export let isOpen: boolean
-  export let storage: any[]
-  export let selected: string
+  export let projects: any[]
+  export let selectedProject: string
 
 
 </script>
-{#if storage.length > 0}
-  <ProjectSettings bind:storage />
+{#if projects.length > 0}
+  <ProjectSettings bind:projects />
 {/if}
-<AddProjectPublic bind:storage bind:isOpen bind:selected />
-<AddProjectFromRepository bind:storage bind:isOpen bind:selected />
+<AddProjectPublic bind:projects bind:isOpen bind:selectedProject />
+<AddProjectFromRepository bind:projects bind:isOpen bind:selectedProject />
 
 <style>
   .outline {

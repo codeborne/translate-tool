@@ -11,22 +11,22 @@
   export let selectedProject: string
   export let copied: boolean = true
   let lang: string = project.langs[0]
-  let stats: Record<string, number> = {'total': 0, 'filled': 0}
+  let dictKeyStats: Record<string, number> = {'total': 0, 'filled': 0}
   let filter: string = ''
 
   let defaultDict: Record<string, any> // the dictionary being referenced as template
-  let dict: Record<string, any> // dictionary being edited
-  let originalDict: Record<string, any> // original unchanged dictionary
+  let selectedDict: Record<string, any> // dictionary being edited
+  let uneditedDict: Record<string, any> // original unchanged dictionary
 
   $: if (lang) loadChangedLang()
 
   function initOriginalDict() {
-    originalDict = cleanEmptyKeys(JSON.parse(JSON.stringify(dict)))
+    uneditedDict = cleanEmptyKeys(JSON.parse(JSON.stringify(selectedDict)))
     copied = true
   }
 
   async function loadChangedLang() {
-    dict = await load(lang)
+    selectedDict = await load(lang)
     initOriginalDict()
   }
 
@@ -35,10 +35,10 @@
   }
 
   async function updateProjectInEditor() {
-    loadChangedLang() // sets dict and originalDict
+    loadChangedLang() // sets selectedDict and uneditedDict
     defaultDict = await load(project.defaultLang)
-    stats.total = getTotalDictCount(defaultDict)
-    stats.filled = getFilledDictCount(dict)
+    dictKeyStats.total = getTotalDictCount(defaultDict)
+    dictKeyStats.filled = getFilledDictCount(selectedDict)
     copied = true
   }
 
@@ -64,14 +64,14 @@
     }
   }
 
-  $: if (dict) {
-    dict = cleanEmptyKeys(dict)
-    stats.filled = getFilledDictCount(dict)
+  $: if (selectedDict) {
+    selectedDict = cleanEmptyKeys(selectedDict)
+    dictKeyStats.filled = getFilledDictCount(selectedDict)
     checkForChanges()
   }
 
   function checkForChanges() {
-    copied = areObjectsEqual(cleanEmptyKeys(dict), cleanEmptyKeys(originalDict))
+    copied = areObjectsEqual(cleanEmptyKeys(selectedDict), cleanEmptyKeys(uneditedDict))
   }
 
   let textarea: HTMLTextAreaElement
@@ -90,7 +90,7 @@
     bind:selectedProject
     bind:lang />
   <Stats
-    bind:stats
+    bind:stats={dictKeyStats}
     bind:indent={project.indent}
     defaultLang={project.defaultLang}
     totalLangs={project.langs.length} />
@@ -98,7 +98,7 @@
 
 
 <div class="mt-3 outline p-3 d-flex flex-column align-items-center">
-  {#if dict && defaultDict && originalDict}
+  {#if selectedDict && defaultDict && uneditedDict}
 
     <div class="d-flex flex-row justify-content-between w-100">
       <KeyFilter bind:filter/>
@@ -115,8 +115,8 @@
         <th scope="col">Default ( {project.defaultLang} )</th>
       </tr>
       </thead>
-      <tbody on:input={() => dict = dict}>
-        <KeyValueTableRow {dict} {defaultDict} {originalDict} {filter}/>
+      <tbody on:input={() => selectedDict = selectedDict}>
+        <KeyValueTableRow {selectedDict} {defaultDict} {uneditedDict} {filter}/>
       </tbody>
     </table>
 
@@ -132,7 +132,7 @@
   <textarea id="rawOutput" bind:this={textarea}
             class="form-control mb-3 bg-light"
             style={{width: '100%'}}
-            rows="20">{JSON.stringify(dict, null, project.indent)}</textarea>
+            rows="20">{JSON.stringify(selectedDict, null, project.indent)}</textarea>
 </div>
 
 <style>

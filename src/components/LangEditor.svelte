@@ -13,6 +13,7 @@
   let lang: string = project.langs[0]
   let dictKeyStats: Record<string, number> = {'total': 0, 'filled': 0}
   let filter: string = ''
+  let rawOutput: HTMLTextAreaElement
 
   let defaultDict: Record<string, any> // the dictionary being referenced as template
   let selectedDict: Record<string, any> // dictionary being edited
@@ -72,10 +73,9 @@
     copied = areObjectsEqual(cleanEmptyKeys(selectedDict), cleanEmptyKeys(uneditedDict))
   }
 
-  let textarea: HTMLTextAreaElement
   function copy() {
-    textarea.focus()
-    textarea.select()
+    rawOutput.focus()
+    rawOutput.select()
     document.execCommand('copy')
     initOriginalDict()
   }
@@ -127,7 +127,7 @@
     <a class="btn btn-primary" href="#top">Jump to top</a>
   </div>
 
-  <textarea id="rawOutput" bind:this={textarea}
+  <textarea id="rawOutput" bind:this={rawOutput}
             class="form-control mb-3 bg-light"
             style={{width: '100%'}}
             rows="20">{JSON.stringify(selectedDict, null, project.indent)}</textarea>

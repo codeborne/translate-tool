@@ -12,13 +12,13 @@
   let defaultLang: string = 'en'
 
   let warning = ''
-  async function submitPublic() {
+  async function submit() {
     warning = ''
     if (url) {
       let dict = await fetchDict(url)
       if (validate(dict)) {
         langs = dict
-        await saveToLocalStorage(url, true)
+        await save(url, true)
         isOpen = false
         warning = ''
       }
@@ -28,7 +28,7 @@
   }
 
 
-  function saveToLocalStorage(dictUrl: string, isPublic: boolean) {
+  function save(dictUrl: string, isPublic: boolean) {
     if (!localStorage.getItem('projects')) {
       localStorage.clear()
       localStorage.setItem('projects', JSON.stringify([]))
@@ -78,7 +78,7 @@
     <input type="text" placeholder="url link" bind:value={url} class="form-control" aria-describedby="url">
     <div id="url" class="form-text mb-4">You can change it at any time. Example link: <i>../../i18n/langs.json</i></div>
   </div>
-  <button on:click={submitPublic} type="button" class="btn btn-primary w-auto">Import</button>
+  <button on:click={submit} type="button" class="btn btn-primary w-auto">Import</button>
   {#if warning}
     <div class="warning p-3 mb-3 mt-3">
       {warning}

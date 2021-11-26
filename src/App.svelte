@@ -7,6 +7,7 @@
   let projects: any[] = []
   let selectedProject: string
   let project: Record<string, any>
+  let projectNames: string[] = []
 
   // localStorage check data
   if (localStorage.getItem('projects')) {
@@ -24,20 +25,20 @@
   }
 
   function getProjectTitles() {
-    let projectNames: string[] = []
+    projectNames = []
     for (let p of projects) projectNames.push(p.title)
-    return projectNames
   }
 
   $: if (selectedProject) {
     project = projects.find(o => { return o.title === selectedProject })
     localStorage.setItem('selectedProject', selectedProject)
+    getProjectTitles()
   }
 
 
 </script>
 
-<Navbar bind:selectedProject projectNames={getProjectTitles()} bind:showConfigButton={displayLangImporter}/>
+<Navbar bind:selectedProject bind:projectNames bind:showConfigButton={displayLangImporter}/>
 <main class="mt-5 mb-5 container">
     {#if !displayLangImporter}
       <h4 class="text-center mb-3">{project.title}</h4>

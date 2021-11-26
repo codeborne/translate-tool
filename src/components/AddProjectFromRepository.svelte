@@ -8,7 +8,7 @@
 
   let url: string = ''
   let langs: Record<string, any>
-  let warning: string|boolean
+  let warning: string
   let username: string = 'paywerk'
   let repo: string = 'paywerk'
   let structure: string = '/i18n/common'
@@ -16,16 +16,17 @@
   let indent: number = 2
   let defaultLang: string = 'en'
 
-  async function submitGithub() {
+  async function submit() {
     warning = ''
-    if (isGithubFormValid()) {
+    if (areInputsValid()) {
       let dictUrl = `https://api.github.com/repos/${username}/${repo}/contents${structure}/langs.json`
-      let dict = await fetchGithubUrl(dictUrl, token)
+      let dict = await fetchDict(dictUrl, token)
       if (dict) {
         dict = JSON.parse(b64DecodeUnicode(dict.content)) // content is base64 encoded and required decoding
-        if (validate(dict)) {
+        validate(dict)
+        if (warning == '') {
           langs = dict
-          saveToLocalStorage(dictUrl, false)
+          save(dictUrl, false)
           isOpen = false
           warning = ''
         }
@@ -33,7 +34,7 @@
     }
   }
 
-  function isGithubFormValid() {
+  function areInputsValid() {
     if (username) {
       if (token) {
         if (structure) {
@@ -55,7 +56,7 @@
   }
 
 
-  function saveToLocalStorage(langsUrl: string, isPublic: boolean) {
+  function save(langsUrl: string, isPublic: boolean) {
     if (!localStorage.getItem('projects')) {
       localStorage.clear() // clears everything from localStorage, including selectedProject key.
       localStorage.setItem('projects', JSON.stringify([]))
@@ -79,9 +80,7 @@
     isOpen = false
   }
 
-  const fetchDict = (fetchUrl) => fetch(fetchUrl).then(r => r.json()).catch((e) => warning = e)
-
-  function fetchGithubUrl(dictUrl, token) {
+  function fetchDict(dictUrl, token) {
     const headers = new Headers({'Authorization': `token ${token}`});
     return fetch(dictUrl, { method: 'GET', headers})
       .then(response => {
@@ -99,18 +98,7 @@
 
 
   function validate(arr: any) {
-    return !arr ? 'invalid file' : !Array.isArray(arr) ? 'lalallala' : false
-
-    // if (arr) {
-    //   if (!Array.isArray(arr)) {
-    //     warning = 'Language list file must be an array'
-    //     return false
-    //   }
-    //   return true
-    // } else {
-    //   warning = 'Invalid file'
-    //   return false
-    // }
+    return !arr ? warning = 'Invalid file' : !Array.isArray(arr) ? warning = 'Must be an array' : warning = ''
   }
 </script>
 
@@ -138,7 +126,7 @@
     <input type="text" placeholder="auth token" bind:value={token} class="form-control" aria-describedby="url">
     <div class="form-text mb-4">This token will be used to access the private repository</div>
   </div>
-  <button on:click={submitGithub} type="button" class="btn btn-primary w-auto">Import</button>
+  <button on:click={submit} type="button" class="btn btn-primary w-auto">Import</button>
   {#if warning}
     <div class="warning p-3 mb-3 mt-3">
       {warning}

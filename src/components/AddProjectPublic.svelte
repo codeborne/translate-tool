@@ -15,7 +15,7 @@
   async function submitPublic() {
     warning = ''
     if (url) {
-      let dict = await fetchUrl(url)
+      let dict = await fetchDict(url)
       if (validate(dict)) {
         langs = dict
         await saveToLocalStorage(url, true)
@@ -28,30 +28,30 @@
   }
 
 
-  function saveToLocalStorage(link: string, isPublic: boolean) {
+  function saveToLocalStorage(dictUrl: string, isPublic: boolean) {
     if (!localStorage.getItem('projects')) {
       localStorage.clear()
       localStorage.setItem('projects', JSON.stringify([]))
     }
     if (!localStorage.getItem('selectedProject')) localStorage.setItem('selectedProject', title)
-    let data = {
+    let newProject = {
       title,
-      url: link,
+      url: dictUrl,
       langs,
       isPublic,
       token,
       indent,
       defaultLang
     }
-    let arr: any[] = JSON.parse(localStorage.getItem('projects') as string)
-    arr.push(data)
-    localStorage.setItem('projects', JSON.stringify(arr))
+    let newProjects: any[] = JSON.parse(localStorage.getItem('projects') as string)
+    newProjects.push(newProject)
+    localStorage.setItem('projects', JSON.stringify(newProjects))
     selectedProject = title
-    projects = arr
+    projects = newProjects
     isOpen = false
   }
 
-  const fetchUrl = (link) => fetch(link).then(r => r.json()).catch((e) => warning = e)
+  const fetchDict = (dictUrl) => fetch(dictUrl).then(r => r.json()).catch((e) => warning = e)
 
   function validate(arr: any) {
     if (arr) {

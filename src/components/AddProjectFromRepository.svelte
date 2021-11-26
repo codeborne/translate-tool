@@ -1,8 +1,12 @@
 <script lang="ts">
   import {b64DecodeUnicode} from '../utils'
+
   export let isOpen: boolean
-  let url: string = ''
   export let token: string = ''
+  export let projects: any[]
+  export let selectedProject: string
+
+  let url: string = ''
   let langs: Record<string, any>
   let warning: string|boolean
   let username: string = 'paywerk'
@@ -11,23 +15,6 @@
   let title: string = 'Paywerk Common'
   let indent: number = 2
   let defaultLang: string = 'en'
-  export let projects: any[]
-  export let selectedProject: string
-
-  async function submitPublic() {
-    warning = ''
-    if (url) {
-      let dict = await fetchUrl(url)
-      if (validate(dict)) {
-        langs = dict
-        await saveToLocalStorage(url, true)
-        isOpen = false
-        warning = ''
-      }
-    } else {
-      warning = 'Input must not be empty'
-    }
-  }
 
   async function submitGithub() {
     warning = ''
@@ -62,21 +49,21 @@
         warning = 'Token must not be empty'
       }
     } else {
-      warning = 'Link must not be empty'
+      warning = 'Url must not be empty'
     }
     return false
   }
 
 
-  function saveToLocalStorage(link: string, isPublic: boolean) {
+  function saveToLocalStorage(langsUrl: string, isPublic: boolean) {
     if (!localStorage.getItem('projects')) {
-      localStorage.clear()
+      localStorage.clear() // clears everything from localStorage, including selectedProject key.
       localStorage.setItem('projects', JSON.stringify([]))
     }
     if (!localStorage.getItem('selectedProject')) localStorage.setItem('selectedProject', title)
-    let data = {
+    let newProject = {
       title,
-      url: link,
+      url: langsUrl,
       langs,
       isPublic,
       token,
@@ -84,19 +71,19 @@
       defaultLang
     }
 
-    let arr: any[] = JSON.parse(localStorage.getItem('projects') as string)
-    arr.push(data)
-    localStorage.setItem('projects', JSON.stringify(arr))
+    let newProjects: any[] = JSON.parse(localStorage.getItem('projects') as string)
+    newProjects.push(newProject)
+    localStorage.setItem('projects', JSON.stringify(newProjects))
     selectedProject = title
-    projects = arr
+    projects = newProjects
     isOpen = false
   }
 
-  const fetchUrl = (link) => fetch(link).then(r => r.json()).catch((e) => warning = e)
+  const fetchDict = (fetchUrl) => fetch(fetchUrl).then(r => r.json()).catch((e) => warning = e)
 
-  function fetchGithubUrl(link, token) {
+  function fetchGithubUrl(dictUrl, token) {
     const headers = new Headers({'Authorization': `token ${token}`});
-    return fetch(link, { method: 'GET', headers})
+    return fetch(dictUrl, { method: 'GET', headers})
       .then(response => {
         if (response.ok) {
           return response.json()

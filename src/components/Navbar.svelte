@@ -1,7 +1,7 @@
 <script lang="ts">
   import NavbarProjectTab from "./NavbarProjectTab.svelte";
 
-  export let projects: any[]
+  export let projectNames: string[]
   export let selectedProject: string = ''
   export let showConfigButton: boolean
 
@@ -15,10 +15,10 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarText">
 <!--      <ul class="navbar-nav me-auto mb-2 mb-lg-0"></ul>-->
-      {#if projects}
+      {#if projectNames}
       <div class="collapse navbar-collapse">
-        {#each projects as p}
-        <NavbarProjectTab title={p.title} bind:selectedProject bind:isImporterOpen={showConfigButton} />
+        {#each projectNames as name}
+        <NavbarProjectTab title={name} bind:selectedProject bind:isImporterOpen={showConfigButton} />
         {/each}
       </div>
       {/if}
@@ -30,7 +30,7 @@
             Project Settings <i class="fas fa-wrench"></i>
           </button>
         {/if}
-        {#if showConfigButton && projects.length > 0}
+        {#if showConfigButton && projectNames.length > 0}
           <button type="button" class="btn btn-outline-secondary bg-light text-dark" on:click={() => (showConfigButton = false)}>
             Back to Editor <i class="fas fa-arrow-circle-right"></i>
           </button>

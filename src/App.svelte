@@ -24,6 +24,12 @@
     displayLangImporter = false
   }
 
+  function getProjectTitles() {
+    let projectNames: string[] = []
+    for (let p of projects) projectNames.push(p.title)
+    return projectNames
+  }
+
   $: if (selectedProject) {
     project = projects.find(o => { return o.title === selectedProject })
     localStorage.setItem('selectedProject', selectedProject)
@@ -32,7 +38,7 @@
 
 </script>
 
-<Navbar bind:selectedProject bind:projects bind:showConfigButton={displayLangImporter}/>
+<Navbar bind:selectedProject projectNames={getProjectTitles()} bind:showConfigButton={displayLangImporter}/>
 <main class="mt-5 mb-5 container">
     {#if !displayLangImporter}
       <h4 class="text-center mb-3">{project.title}</h4>

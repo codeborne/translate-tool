@@ -26,8 +26,6 @@
     copied = true
   }
 
-  $: if (selectedDict) console.log(copied)
-
   async function loadChangedLang() {
     selectedDict = await load(lang)
     initOriginalDict()
@@ -38,6 +36,7 @@
   }
 
   async function updateProjectInEditor() {
+    lang = project.defaultLang
     await loadChangedLang()
     defaultDict = await load(project.defaultLang)
     dictKeyStats.total = getTotalKeys(defaultDict)
@@ -110,9 +109,9 @@
     <table class="table table-striped">
       <thead>
       <tr>
-        <th scope="col">Key</th>
-        <th scope="col">Selected ( {lang} )</th>
-        <th scope="col">Default ( {project.defaultLang} )</th>
+        <th class="fit" scope="col">Key</th>
+        <th class="fit" scope="col">Selected ( {lang} )</th>
+        <th class="fit" scope="col">Default ( {project.defaultLang} )</th>
       </tr>
       </thead>
       <tbody on:input={() => selectedDict = selectedDict}>
@@ -140,5 +139,10 @@
     border: 1px solid lightgray;
     border-radius: 5px;
     background-color: white;
+  }
+
+  .fit {
+    white-space: nowrap;
+    width: 33%;
   }
 </style>

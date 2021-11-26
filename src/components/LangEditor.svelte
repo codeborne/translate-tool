@@ -2,7 +2,7 @@
   import KeyValueTableRow from './KeyValueTableRow.svelte'
   import {cleanEmptyKeys} from './cleanEmptyKeys'
   import {getTotalKeys, getTotalFilledKeys} from './languageStats'
-  import {areObjectsEqual, getRootUrl, b64DecodeUnicode} from '../utils'
+  import {areObjectsEqual, getPathUrl, b64DecodeUnicode} from '../utils'
   import KeyFilter from "./KeyFilter.svelte";
   import Stats from "./Stats.svelte";
   import LangSwitcher from "./LangSwitcher.svelte";
@@ -43,16 +43,14 @@
   }
 
   async function load(lang: string) {
-    const localData: Record<string, any> = project
-    const isPublic: boolean = localData.isPublic
-    const rootUrl = getRootUrl(localData.url)
-    const link = `${rootUrl}/${lang}.json`
+    const isPublic: boolean = project.isPublic
+    const dictUrl = `${getPathUrl(project.url)}/${lang}.json`
     if (isPublic) {
-      return fetch(link).then(r => r.json())
+      return fetch(dictUrl).then(r => r.json())
     } else {
-      const token = localData.token
+      const token = project.token
       const headers = new Headers({'Authorization': `token ${token}`});
-      let data = await fetch(link, {method: 'GET', headers})
+      let newDict = await fetch(dictUrl, {method: 'GET', headers})
         .then(response => {
           if (response.ok) {
             return response.json()
@@ -60,7 +58,7 @@
             throw new Error(response.text() as string)
           }})
         .catch((err) => console.log(err))
-      return JSON.parse(b64DecodeUnicode(data.content))
+      return JSON.parse(b64DecodeUnicode(newDict.content))
     }
   }
 

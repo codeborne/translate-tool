@@ -37,8 +37,8 @@
   <h5 class="mb-4">Language Selection</h5>
   <div class="d-flex flex-column">
     <select bind:value={selectedLang} class="form-select mb-3">
-      {#each project.langs as l}
-        <option value={l}>{l.toUpperCase()}</option>
+      {#each project.langs as language}
+        <option value={language}>{language.toUpperCase()}</option>
       {/each}
     </select>
     {#if changed}

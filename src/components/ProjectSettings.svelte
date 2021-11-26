@@ -43,8 +43,8 @@
   <h5 class="mb-4">Manage Projects</h5>
   <div class="mb-3" >
       <select bind:value={select} class="form-select" aria-label="Select project">
-        {#each projects as obj }
-          <option value="{obj.title}">{obj.title}</option>
+        {#each projects as p }
+          <option value="{p.title}">{p.title}</option>
         {/each}
       </select>
   </div>

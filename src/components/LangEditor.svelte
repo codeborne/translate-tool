@@ -9,7 +9,7 @@
 
   export let project: Record<string, any>
   export let selectedProject: string
-  export let saved: boolean = true
+  export let copied: boolean = true
   let lang: string = project.langs[0]
   let stats: Record<string, number> = {'total': 0, 'filled': 0}
   let filter: string = ''
@@ -22,7 +22,7 @@
 
   function initOriginalDict() {
     originalDict = cleanEmptyKeys(JSON.parse(JSON.stringify(dict)))
-    saved = true
+    copied = true
   }
 
   async function loadChangedLang() {
@@ -39,7 +39,7 @@
     defaultDict = await load(project.defaultLang)
     stats.total = getTotalDictCount(defaultDict)
     stats.filled = getFilledDictCount(dict)
-    saved = true
+    copied = true
   }
 
   async function load(lang: string) {
@@ -71,7 +71,7 @@
   }
 
   function checkForChanges() {
-    saved = areObjectsEqual(cleanEmptyKeys(dict), cleanEmptyKeys(originalDict))
+    copied = areObjectsEqual(cleanEmptyKeys(dict), cleanEmptyKeys(originalDict))
   }
 
   let textarea: HTMLTextAreaElement
@@ -85,7 +85,7 @@
 
 <div class="d-flex justify-content-around gap-3">
   <LangSwitcher
-    bind:changed={saved}
+    bind:changed={copied}
     bind:project
     bind:selectedProject
     bind:lang />

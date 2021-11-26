@@ -3,8 +3,9 @@
   export let project: Record<string, any>
   export let selectedProject
   export let lang;
-  let selectedLang:string;
   export let changed:boolean
+
+  let selectedLang:string;
 
   function selectLang() {
     lang = selectedLang

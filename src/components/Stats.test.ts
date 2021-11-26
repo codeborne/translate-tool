@@ -6,14 +6,13 @@ import {stub} from 'sinon'
 describe('<Stats>', () => {
   const dict = {hello: 'world', nested: {hello: 'Another World'}}
 
-  const totalDict: number = 9
-  const filledDict: number = 4
   const indent: number = 2
   const defaultLang: string = 'et'
   const totalLangs: number = 8
+  const stats = {total: 9, filled: 4}
 
   it('renders', () => {
-    const {getByText, container} = render(Stats, {totalDict, filledDict, indent, defaultLang, totalLangs})
+    const {getByText, container} = render(Stats, {stats, indent, defaultLang, totalLangs})
     const e = getByText(/Stats/i)
     expect(document.body.contains(e))
     expect(container.querySelectorAll('tbody tr'))
@@ -21,7 +20,7 @@ describe('<Stats>', () => {
   })
 
   it('renders component with correct data', async () => {
-    const {container} = render(Stats, {totalDict, filledDict, indent, defaultLang, totalLangs})
+    const {container} = render(Stats, {stats, indent, defaultLang, totalLangs})
     const rows = container.querySelectorAll('tr')
     expect(rows[0].querySelectorAll('td')[1].textContent).to.equal('9')
     expect(rows[1].querySelectorAll('td')[1].textContent).to.equal('4')

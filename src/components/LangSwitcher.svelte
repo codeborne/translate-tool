@@ -3,11 +3,11 @@
   export let project: Record<string, any>
   export let selectedProject
   export let lang;
-  let selectedLangInList:string;
+  let selectedLang:string;
   export let changed:boolean
 
   function selectLang() {
-    lang = selectedLangInList
+    lang = selectedLang
     toggleButtons()
   }
 
@@ -20,14 +20,14 @@
 
   function toggleButtons() {
     const buttons = document.querySelectorAll('.select-lang') as HTMLButtonElement[]
-    if (selectedLangInList == lang) {
+    if (selectedLang == lang) {
       buttons.forEach(btn => btn.disabled = true)
     } else {
       buttons.forEach(btn => btn.disabled = false)
     }
   }
 
-  $: if (selectedLangInList) toggleButtons()
+  $: if (selectedLang) toggleButtons()
 
 </script>
 
@@ -35,7 +35,7 @@
 <div class="outline p-3 w-50">
   <h5 class="mb-4">Language Selection</h5>
   <div class="d-flex flex-column">
-    <select bind:value={selectedLangInList} class="form-select mb-3">
+    <select bind:value={selectedLang} class="form-select mb-3">
       {#each project.langs as l}
         <option value={l}>{l.toUpperCase()}</option>
       {/each}

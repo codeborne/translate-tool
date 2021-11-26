@@ -1,6 +1,7 @@
 <script lang="ts">
 
   export let project: Record<string, any>
+  export let selected
   export let lang;
   let selectedLangInList:string;
   export let changed:boolean
@@ -9,6 +10,13 @@
     lang = selectedLangInList
     toggleButtons()
   }
+
+  $: if (selected) setLangOnProjectChange()
+
+  function setLangOnProjectChange() {
+    lang = project.defaultLang
+  }
+
 
   function toggleButtons() {
     const buttons = document.querySelectorAll('.select-lang') as HTMLButtonElement[]

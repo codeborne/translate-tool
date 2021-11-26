@@ -30,14 +30,14 @@
     initOriginalDict()
   }
 
-  $: if(selected) {
+  $: if(project) {
     updateProjectInEditor()
   }
 
   async function updateProjectInEditor() {
     loadChangedLang() // sets dict and originalDict
     defaultDict = await load(project.defaultLang)
-    stats.total = getTotalDictCount(dict)
+    stats.total = getTotalDictCount(defaultDict)
     stats.filled = getFilledDictCount(dict)
     saved = true
   }
@@ -87,18 +87,26 @@
   <LangSwitcher
     bind:changed={saved}
     bind:project
+    bind:selected
     bind:lang />
   <Stats
-    {stats}
+    bind:stats
     bind:indent={project.indent}
     defaultLang={project.defaultLang}
     totalLangs={project.langs.length} />
 </div>
 
 
-<div class="mt-3 outline p-3 d-flex flex-column justify-content-center align-items-center">
+<div class="mt-3 outline p-3 d-flex flex-column align-items-center">
   {#if dict && defaultDict && originalDict}
-    <KeyFilter bind:filter/>
+
+    <div class="d-flex flex-row justify-content-between w-100">
+      <KeyFilter bind:filter/>
+      <div class="dl-flex justify-content-center align-items-center">
+        <a class="btn btn-primary" href="#output">Jump to bottom</a>
+      </div>
+    </div>
+
     <table class="table table-striped">
       <thead>
       <tr>
@@ -116,7 +124,11 @@
   {/if}
 </div>
 <div class="mt-3 outline p-3">
-  <h3>RAW output:</h3>
+  <div class="d-flex justify-content-between mb-3">
+    <h3 id="output">RAW output:</h3>
+    <a class="btn btn-primary" href="#top">Jump to top</a>
+  </div>
+
   <textarea id="rawOutput" bind:this={textarea}
             class="form-control mb-3 bg-light"
             style={{width: '100%'}}

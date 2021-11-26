@@ -1,7 +1,7 @@
 <script lang="ts">
   import KeyValueTableRow from './KeyValueTableRow.svelte'
   import {cleanEmptyKeys} from './cleanEmptyKeys'
-  import {getTotalDictCount, getFilledDictCount} from './languageStats'
+  import {getTotalKeys, getTotalFilledKeys} from './languageStats'
   import {areObjectsEqual, getRootUrl, b64DecodeUnicode} from '../utils'
   import KeyFilter from "./KeyFilter.svelte";
   import Stats from "./Stats.svelte";
@@ -37,8 +37,8 @@
   async function updateProjectInEditor() {
     loadChangedLang() // sets selectedDict and uneditedDict
     defaultDict = await load(project.defaultLang)
-    dictKeyStats.total = getTotalDictCount(defaultDict)
-    dictKeyStats.filled = getFilledDictCount(selectedDict)
+    dictKeyStats.total = getTotalKeys(defaultDict)
+    dictKeyStats.filled = getTotalFilledKeys(selectedDict)
     copied = true
   }
 
@@ -66,7 +66,7 @@
 
   $: if (selectedDict) {
     selectedDict = cleanEmptyKeys(selectedDict)
-    dictKeyStats.filled = getFilledDictCount(selectedDict)
+    dictKeyStats.filled = getTotalFilledKeys(selectedDict)
     checkForChanges()
   }
 

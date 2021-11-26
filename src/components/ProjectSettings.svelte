@@ -7,7 +7,7 @@
   let indent: number
   let defaultLang: string
 
-  function deleteFromStorage() {
+  function deleteProject() {
     projects = projects.filter(obj => obj.title !== select)
     localStorage.setItem('projects', JSON.stringify(projects))
   }
@@ -16,7 +16,7 @@
     showEditor = !showEditor
   }
 
-  function saveChangesToProject() {
+  function editProject() {
     let project: Record<string, any> = projects.find(obj => obj.title === select)
     let filteredStorage: any[] = projects.filter(obj => obj.title !== select)
     project.title = title
@@ -63,12 +63,12 @@
     </div>
     <div class="d-flex gap-5 mt-3">
     <button on:click={toggleForm} type="button" class="btn btn-primary w-auto">Cancel</button>
-    <button on:click={saveChangesToProject} type="button" class="btn btn-primary w-auto">Save</button>
+    <button on:click={editProject} type="button" class="btn btn-primary w-auto">Save</button>
     </div>
   {:else}
     <div class="d-flex gap-5 mt-3">
     <button on:click={toggleForm} type="button" class="btn btn-primary w-auto">Edit</button>
-      <button on:click={deleteFromStorage} type="button" class="btn btn-danger w-auto">Delete</button>
+      <button on:click={deleteProject} type="button" class="btn btn-danger w-auto">Delete</button>
     </div>
   {/if}
 </div>

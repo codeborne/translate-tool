@@ -35,7 +35,6 @@
     getProjectTitles()
   }
 
-
 </script>
 
 <Navbar bind:selectedProject bind:projectNames bind:showConfigButton={displayLangImporter}/>

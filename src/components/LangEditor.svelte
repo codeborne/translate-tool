@@ -26,17 +26,19 @@
     copied = true
   }
 
+  $: if (selectedDict) console.log(copied)
+
   async function loadChangedLang() {
     selectedDict = await load(lang)
     initOriginalDict()
   }
 
-  $: if(project) {
+  $: if(selectedProject) {
     updateProjectInEditor()
   }
 
   async function updateProjectInEditor() {
-    loadChangedLang() // sets selectedDict and uneditedDict
+    await loadChangedLang()
     defaultDict = await load(project.defaultLang)
     dictKeyStats.total = getTotalKeys(defaultDict)
     dictKeyStats.filled = getTotalFilledKeys(selectedDict)

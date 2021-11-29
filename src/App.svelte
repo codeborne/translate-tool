@@ -2,6 +2,7 @@
   import LangEditor from './components/LangEditor.svelte'
   import LangImporter from './components/LangImporter.svelte'
   import Navbar from "./components/Navbar.svelte";
+  import {onMount} from 'svelte'
 
   let displayLangImporter: boolean = true;
   let projects: any[] = []
@@ -9,29 +10,47 @@
   let project: Record<string, any>
   let projectNames: string[] = []
 
-  // localStorage check data
-  if (localStorage.getItem('projects')) {
-    projects = JSON.parse(localStorage.getItem('projects') as string)
-    if (projects.length == 0) {
-      displayLangImporter = false
-    }
-    if (!localStorage.getItem('selectedProject') && projects.length > 0) {
-      localStorage.setItem('selectedProject', projects[0].title)
-      selectedProject = projects[0]
+  onMount(async () => {
+    await getEnvProject()
+    checkLocalStorage()
+  })
+
+  async function getEnvProject() {
+    try {
+      let fetched = await fetch(`projects.json`).then(r => r.json())
+      localStorage.setItem('projects', JSON.stringify(fetched))
+      projects = fetched
+      selectedProject = projects[0].title
+      localStorage.setItem('selectedProject', JSON.stringify(selectedProject))
+    } catch (e) {
+      console.warn('No environment file found, or it may have incorrect incorrect formatting, letting the user import project instead..')
     }
   }
 
-  // localStorage check current/last selectedProject project
-  if (localStorage.getItem('selectedProject') && projects) {
-    selectedProject = localStorage.getItem('selectedProject') as string
-    project = projects.find(o => { return o.title === selectedProject })
-    displayLangImporter = false
+  function checkLocalStorage() {
+    if (localStorage.getItem('projects')) {
+      projects = JSON.parse(localStorage.getItem('projects') as string)
+      if (projects.length == 0) {
+        displayLangImporter = false
+      }
+      if (!localStorage.getItem('selectedProject') && projects.length > 0) {
+        localStorage.setItem('selectedProject', projects[0].title)
+        selectedProject = projects[0]
+      }
+    }
+
+    if (localStorage.getItem('selectedProject') && projects) {
+      selectedProject = localStorage.getItem('selectedProject') as string
+      project = projects.find(o => { return o.title === selectedProject })
+      displayLangImporter = false
+    }
   }
 
   function getProjectTitles() {
     projectNames = []
     for (let p of projects) projectNames.push(p.title)
   }
+
 
   $: if (selectedProject) {
     project = projects.find(o => { return o.title === selectedProject })

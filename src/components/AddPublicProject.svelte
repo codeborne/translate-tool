@@ -13,7 +13,7 @@
   async function submit() {
     warning = ''
     if (url) {
-      let dict = await fetchDict(url)
+      let dict = await fetchDict(url + 'langs.json')
       if (validate(dict)) {
         langs = dict
         await save(url)

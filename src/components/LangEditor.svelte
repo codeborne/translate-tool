@@ -47,7 +47,6 @@
     dictKeyStats.total = getTotalKeys(defaultDict)
     dictKeyStats.filled = getTotalFilledKeys(selectedDict)
     copied = true
-    console.log(project)
   }
 
   async function load(lang: string) {

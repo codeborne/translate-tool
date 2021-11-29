@@ -1,7 +1,7 @@
 <script lang="ts">
   import LangEditor from './components/LangEditor.svelte'
   import LangImporter from './components/LangImporter.svelte'
-  import Navbar from "./components/Navbar.svelte";
+  import Navbar from './components/Navbar.svelte'
   import {onMount} from 'svelte'
 
   let displayLangImporter: boolean = true;
@@ -17,12 +17,11 @@
 
   async function getEnvProject() {
     try {
-      let fetched = await fetch(`projects.json`).then(r => r.json())
-      projects = fetched
+      projects = await fetch(`project.json`).then(r => r.json())
       selectedProject = projects[0].title
       localStorage.setItem('selectedProject', JSON.stringify(selectedProject))
     } catch (e) {
-      console.warn('No environment file found, or it may have incorrect incorrect formatting, letting the user import project instead..')
+      console.warn('No environment file found, or it may have incorrect incorrect formatting. Letting the user import a project instead..')
     }
   }
 

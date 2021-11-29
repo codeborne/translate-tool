@@ -18,8 +18,8 @@
   async function submit() {
     warning = ''
     if (areInputsValid()) {
-      let dictUrl = `https://api.github.com/repos/${username}/${repo}/contents${structure}/langs.json`
-      let dict = await fetchDict(dictUrl, token)
+      let dictUrl = `https://api.github.com/repos/${username}/${repo}/contents${structure}/`
+      let dict = await fetchDict(dictUrl + 'langs.json', token)
       if (dict) {
         dict = JSON.parse(b64DecodeUnicode(dict.content)) // content is base64 encoded and required decoding
         validate(dict)

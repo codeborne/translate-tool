@@ -3,32 +3,35 @@
 
   export let projectTitles: string[]
   export let selectedProjectTitle: string = ''
-  export let showConfigButton: boolean
+  export let showConfig: boolean
 </script>
 
 <nav id="top" class="navbar navbar-expand-lg navbar-light bg-white outline">
   <div class="container-fluid">
     <a class="navbar-brand text-dark" href="#"><h3>Translation Tool <i class="fas fa-globe"></i></h3></a>
+
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
-    <div class="collapse navbar-collapse" id="navbarText">
-      {#if projectTitles}
+
+    {#if !showConfig}
+      <div class="collapse navbar-collapse" id="navbarText">
         <div class="collapse navbar-collapse">
-          {#each projectTitles as name}
-            <NavbarProjectTab title={name} bind:selectedProjectTitle bind:isImporterOpen={showConfigButton} />
+          {#each projectTitles as title}
+            <NavbarProjectTab {title} bind:selectedProjectTitle bind:isImporterOpen={showConfig} />
           {/each}
         </div>
-      {/if}
-    </div>
+      </div>
+    {/if}
+
     <div>
-      {#if !showConfigButton}
-        <button type="button" class="btn btn-outline-secondary bg-light text-dark" on:click={() => (showConfigButton = true)}>
+      {#if !showConfig}
+        <button type="button" class="btn btn-outline-secondary bg-light text-dark" on:click={() => showConfig = true}>
           Project Settings <i class="fas fa-wrench"></i>
         </button>
       {/if}
-      {#if showConfigButton && projectTitles.length > 0}
-        <button type="button" class="btn btn-outline-secondary bg-light text-dark" on:click={() => (showConfigButton = false)}>
+      {#if showConfig && projectTitles.length > 0}
+        <button type="button" class="btn btn-outline-secondary bg-light text-dark" on:click={() => showConfig = false}>
           Back to Editor <i class="fas fa-arrow-circle-right"></i>
         </button>
       {/if}

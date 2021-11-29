@@ -5,7 +5,7 @@
   import {onMount} from 'svelte'
   import type {Project} from './Project'
 
-  let displayLangImporter = false
+  let showConfig = false
   let projects: Project[]
   let selectedProjectTitle = localStorage.getItem('selectedProject')
   let project: Project
@@ -13,7 +13,7 @@
   onMount(async () => {
     await tryLoadPreConfiguredProjects()
     if (!projects) tryInitFromLocalStorage()
-    if (!projects) return displayLangImporter = true
+    if (!projects) return showConfig = true
   })
 
   async function tryLoadPreConfiguredProjects() {
@@ -36,10 +36,10 @@
 </script>
 
 {#if projects}
-  <Navbar projectTitles={projects.map(p => p.title)} bind:selectedProjectTitle bind:showConfigButton={displayLangImporter}/>
+  <Navbar projectTitles={projects.map(p => p.title)} bind:selectedProjectTitle bind:showConfig/>
   <main class="mt-5 mb-5 container">
-    {#if displayLangImporter}
-      <LangImporter bind:projects bind:selectedProjectTitle bind:isOpen={displayLangImporter}/>
+    {#if showConfig}
+      <LangImporter bind:projects bind:selectedProjectTitle bind:isOpen={showConfig}/>
     {:else}
       <LangEditor bind:project bind:selectedProjectTitle/>
     {/if}

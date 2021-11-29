@@ -1,17 +1,9 @@
 <script lang="ts">
-
   export let title: string
-  export let selectedProject: string
-  export let isImporterOpen: boolean
-
-  function setProject() {
-    selectedProject = title
-    isImporterOpen = false
-  }
-
+  export let selectedProjectTitle: string
 </script>
 
-<button on:click={setProject} class="btn btn-sm" class:selected={title === selectedProject}>
+<button class="btn btn-sm" class:selected={title === selectedProjectTitle} on:click={() => selectedProjectTitle = title}>
   {title}
 </button>
 

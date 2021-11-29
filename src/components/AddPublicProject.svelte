@@ -1,7 +1,6 @@
 <script lang="ts">
 
   export let isOpen: boolean
-  export let token: string = '' //TODO remove
   export let projects: any[]
   export let selectedProject: string
 
@@ -39,7 +38,6 @@
       url: dictUrl,
       langs,
       isPublic,
-      token,
       indent,
       defaultLang
     }

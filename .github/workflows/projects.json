@@ -8,7 +8,7 @@
       "pl"
     ],
     "isPublic": false,
-    "token": "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",
+    "token": "GITHUB_TOKEN",
     "indent": 2,
     "defaultLang": "en"
   },
@@ -21,7 +21,7 @@
       "pl"
     ],
     "isPublic": false,
-    "token": "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",
+    "token": "GITHUB_TOKEN",
     "indent": 2,
     "defaultLang": "en"
   },
@@ -34,7 +34,7 @@
       "pl"
     ],
     "isPublic": false,
-    "token": "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",
+    "token": "GITHUB_TOKEN",
     "indent": 2,
     "defaultLang": "en"
   },
@@ -45,7 +45,7 @@
       "en"
     ],
     "isPublic": false,
-    "token": "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",
+    "token": "GITHUB_TOKEN",
     "indent": 2,
     "defaultLang": "en"
   }

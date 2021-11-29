@@ -13,7 +13,10 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v2
-      - run: docker build -t $IMG:$GITHUB_SHA --build-arg PROJECTS_FILE=.github/workflows/projects.json .
+      - name: Build
+        run: |
+          sed -i 's/GITHUB_TOKEN/${{ secrets.ACCESS_TOKEN }}' .github/workflows/projects.json
+          docker build -t $IMG:$GITHUB_SHA --build-arg PROJECTS_FILE=.github/workflows/projects.json .
       - name: Setup GCloud CLI
         uses: google-github-actions/setup-gcloud@v0.2.0
         with:

@@ -10,7 +10,9 @@
   export let project: Record<string, any>
   export let selectedProject: string
   export let copied: boolean = true
-  let lang: string = project.langs[0]
+
+  let langs: string[] = []
+  let lang: string = ''
   let dictKeyStats: Record<string, number> = {'total': 0, 'filled': 0}
   let filter: string = ''
   let rawOutput: HTMLTextAreaElement
@@ -38,23 +40,24 @@
   }
 
   async function updateProjectInEditor() {
-    lang = project.defaultLang
+    langs = await load('langs')
+    lang = langs[0]
     await loadChangedLang()
-    defaultDict = await load(project.defaultLang)
+    defaultDict = await load(langs[0])
     dictKeyStats.total = getTotalKeys(defaultDict)
     dictKeyStats.filled = getTotalFilledKeys(selectedDict)
     copied = true
+    console.log(project)
   }
 
   async function load(lang: string) {
-    const isPublic: boolean = project.isPublic
     const dictUrl = `${getPathUrl(project.url)}/${lang}.json`
-    if (isPublic) {
+    if (!project.token) {
         isFetched = true
         return fetch(dictUrl)
           .then(r => r.json())
           .catch(e => {
-            console.warn('Something went from while fetching: ' + e.message)
+            console.warn('Something went wrong while fetching: ' + e.message)
             isFetched = false
           })
     } else {
@@ -101,12 +104,14 @@
       bind:changed={copied}
       bind:project
       bind:selectedProject
-      bind:lang />
+      bind:lang
+      bind:langs
+    />
     <Stats
       bind:stats={dictKeyStats}
       bind:indent={project.indent}
-      defaultLang={project.defaultLang}
-      totalLangs={project.langs.length} />
+      defaultLang={langs[0]}
+      totalLangs={langs.length} />
   </div>
 
     <div class="mt-3 outline p-3 d-flex flex-column align-items-center">
@@ -122,7 +127,7 @@
       <tr>
         <th class="fit" scope="col">Key</th>
         <th class="fit" scope="col">Selected ( {lang} )</th>
-        <th class="fit" scope="col">Default ( {project.defaultLang} )</th>
+        <th class="fit" scope="col">Default ( {langs[0]} )</th>
       </tr>
       </thead>
       <tbody on:input={() => selectedDict = selectedDict}>

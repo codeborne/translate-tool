@@ -14,7 +14,6 @@
   let structure: string = '/i18n/common'
   let title: string = 'Paywerk Common'
   let indent: number = 2
-  let defaultLang: string = 'en'
 
   async function submit() {
     warning = ''
@@ -26,7 +25,7 @@
         validate(dict)
         if (warning == '') {
           langs = dict
-          save(dictUrl, false)
+          save(dictUrl)
           isOpen = false
           warning = ''
         }
@@ -56,7 +55,7 @@
   }
 
 
-  function save(langsUrl: string, isPublic: boolean) {
+  function save(langsUrl: string) {
     if (!localStorage.getItem('projects')) {
       localStorage.clear() // clears everything from localStorage, including selectedProject key.
       localStorage.setItem('projects', JSON.stringify([]))
@@ -65,11 +64,8 @@
     let newProject = {
       title,
       url: langsUrl,
-      langs,
-      isPublic,
       token,
       indent,
-      defaultLang
     }
 
     let newProjects: any[] = JSON.parse(localStorage.getItem('projects') as string)

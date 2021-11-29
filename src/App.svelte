@@ -6,7 +6,7 @@
 
   let displayLangImporter: boolean = true;
   let projects: any[] = []
-  let selectedProject: string
+  let selectedProject: string = ''
   let project: Record<string, any>
   let projectNames: string[] = []
 

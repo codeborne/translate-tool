@@ -15,6 +15,7 @@
   let filter: string = ''
   let rawOutput: HTMLTextAreaElement
   let isFetched: boolean = true
+  let showEmptyKeys: boolean = false
 
   let defaultDict: Record<string, any> // the dictionary being referenced as template
   let selectedDict: Record<string, any> // dictionary being edited
@@ -110,7 +111,7 @@
 
     <div class="mt-3 outline p-3 d-flex flex-column align-items-center">
     <div class="d-flex flex-row justify-content-between w-100">
-      <KeyFilter bind:filter/>
+      <KeyFilter bind:filter bind:showEmptyKeys />
       <div class="dl-flex justify-content-center align-items-center">
         <a class="btn btn-primary" href="#output">Jump to bottom</a>
       </div>
@@ -125,7 +126,7 @@
       </tr>
       </thead>
       <tbody on:input={() => selectedDict = selectedDict}>
-        <KeyValueTableRow {selectedDict} {defaultDict} {uneditedDict} {filter}/>
+        <KeyValueTableRow {selectedDict} {defaultDict} {uneditedDict} {filter} bind:showEmptyKeys/>
       </tbody>
     </table>
 

@@ -40,7 +40,7 @@
   },
   {
     "title": "Backoffice",
-    "url": "https://api.github.com/repos/paywerk/paywerk/contents/i18n/bo/langs.json",
+    "url": "https://api.github.com/repos/paywerk/paywerk/contents/i18n/backoffice/langs.json",
     "langs": [
       "en"
     ],

@@ -9,8 +9,7 @@ COPY . ./
 RUN npm run build
 
 ARG PROJECTS_FILE=''
-RUN rm build/projects.json
-RUN [ -e "$PROJECTS_FILE" ] && cp "$PROJECTS_FILE" build/projects.json || true
+RUN [ -e "$PROJECTS_FILE" ] && cp -f "$PROJECTS_FILE" build/projects.json || true
 
 FROM nginx:alpine
 WORKDIR /usr/share/nginx/html/

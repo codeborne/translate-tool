@@ -12,12 +12,12 @@
 
   onMount(async () => {
     await getEnvProject()
-    checkLocalStorage()
+    if (!projects.length) checkLocalStorage()
   })
 
   async function getEnvProject() {
     try {
-      projects = await fetch(`project.json`).then(r => r.json())
+      projects = await fetch(`projects.json`).then(r => r.json())
       selectedProject = projects[0].title
       localStorage.setItem('selectedProject', JSON.stringify(selectedProject))
     } catch (e) {
@@ -37,7 +37,7 @@
       }
     }
 
-    if (localStorage.getItem('selectedProject') && projects) {
+    if (localStorage.getItem('selectedProject') && projects.length) {
       selectedProject = localStorage.getItem('selectedProject') as string
       project = projects.find(o => { return o.title === selectedProject })
       displayLangImporter = false
@@ -51,9 +51,11 @@
 
 
   $: if (selectedProject) {
-    project = projects.find(o => { return o.title === selectedProject })
-    localStorage.setItem('selectedProject', selectedProject)
-    getProjectTitles()
+    if (projects && projects.length) {
+      project = projects.find(o => { return o.title === selectedProject }) ?? projects[0]
+      localStorage.setItem('selectedProject', selectedProject)
+      getProjectTitles()
+    }
   }
 
 </script>

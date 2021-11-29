@@ -6,6 +6,7 @@
   import KeyFilter from "./KeyFilter.svelte";
   import Stats from "./Stats.svelte";
   import LangSwitcher from "./LangSwitcher.svelte";
+  import ShowEmptyKeyFilter from "./ShowEmptyKeyFilter.svelte";
 
   export let project: Record<string, any>
   export let selectedProject: string
@@ -25,18 +26,19 @@
 
   $: if (lang) loadChangedLang()
 
-  function initOriginalDict() {
+  function initUneditedDict() {
     uneditedDict = cleanEmptyKeys(JSON.parse(JSON.stringify(selectedDict)))
     copied = true
   }
 
   async function loadChangedLang() {
     selectedDict = await load(lang)
-    initOriginalDict()
+    initUneditedDict()
   }
 
   $: if(selectedProject) {
     updateProjectInEditor()
+    lang = lang
   }
 
   async function updateProjectInEditor() {
@@ -49,8 +51,8 @@
     copied = true
   }
 
-  async function load(lang: string) {
-    const dictUrl = `${getPathUrl(project.url)}/${lang}.json`
+  async function load(file: string) {
+    const dictUrl = `${getPathUrl(project.url)}/${file}.json`
     if (!project.token) {
         isFetched = true
         return fetch(dictUrl)
@@ -92,7 +94,7 @@
     rawOutput.focus()
     rawOutput.select()
     document.execCommand('copy')
-    initOriginalDict()
+    initUneditedDict()
   }
 </script>
 
@@ -115,7 +117,8 @@
 
     <div class="mt-3 outline p-3 d-flex flex-column align-items-center">
     <div class="d-flex flex-row justify-content-between w-100">
-      <KeyFilter bind:filter bind:showEmptyKeys />
+      <KeyFilter bind:filter />
+      <ShowEmptyKeyFilter bind:showEmptyKeys />
       <div class="dl-flex justify-content-center align-items-center">
         <a class="btn btn-primary" href="#output">Jump to bottom</a>
       </div>

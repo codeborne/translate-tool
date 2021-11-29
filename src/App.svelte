@@ -3,73 +3,50 @@
   import LangImporter from './components/LangImporter.svelte'
   import Navbar from './components/Navbar.svelte'
   import {onMount} from 'svelte'
+  import type {Project} from './Project'
 
-  let displayLangImporter: boolean = true;
-  let projects: any[] = []
-  let selectedProject: string = ''
-  let project: Record<string, any>
-  let projectNames: string[] = []
+  let displayLangImporter = false
+  let projects: Project[]
+  let selectedProjectTitle = localStorage.getItem('selectedProject')
+  let project: Project
 
   onMount(async () => {
-    await getEnvProject()
-    if (!projects.length) checkLocalStorage()
+    await tryLoadPreConfiguredProjects()
+    if (!projects) tryInitFromLocalStorage()
+    if (!projects) return displayLangImporter = true
   })
 
-  async function getEnvProject() {
+  async function tryLoadPreConfiguredProjects() {
     try {
-      projects = await fetch(`projects.json`).then(r => r.json())
-      selectedProject = projects[0].title
-      localStorage.setItem('selectedProject', JSON.stringify(selectedProject))
+      projects = await fetch('projects.json').then(r => r.json())
     } catch (e) {
       console.warn('No environment file found, or it may have incorrect incorrect formatting. Letting the user import a project instead..')
     }
   }
 
-  function checkLocalStorage() {
-    if (localStorage.getItem('projects')) {
-      projects = JSON.parse(localStorage.getItem('projects') as string)
-      if (projects.length == 0) {
-        displayLangImporter = false
-      }
-      if (!localStorage.getItem('selectedProject') && projects.length > 0) {
-        localStorage.setItem('selectedProject', projects[0].title)
-        selectedProject = projects[0]
-      }
-    }
-
-    if (localStorage.getItem('selectedProject') && projects.length) {
-      selectedProject = localStorage.getItem('selectedProject') as string
-      project = projects.find(o => { return o.title === selectedProject })
-      displayLangImporter = false
-    }
+  function tryInitFromLocalStorage() {
+    projects = JSON.parse(localStorage.getItem('projects') ?? 'null')
   }
 
-  function getProjectTitles() {
-    projectNames = []
-    for (let p of projects) projectNames.push(p.title)
+  $: if (selectedProjectTitle && projects?.length) {
+    project = projects.find(p => p.title === selectedProjectTitle) ?? projects[0]
+    selectedProjectTitle = project.title
+    localStorage.setItem('selectedProject', selectedProjectTitle)
   }
-
-
-  $: if (selectedProject) {
-    if (projects && projects.length) {
-      project = projects.find(o => { return o.title === selectedProject }) ?? projects[0]
-      localStorage.setItem('selectedProject', selectedProject)
-      getProjectTitles()
-    }
-  }
-
 </script>
 
-<Navbar bind:selectedProject bind:projectNames bind:showConfigButton={displayLangImporter}/>
-<main class="mt-5 mb-5 container">
-    {#if !displayLangImporter}
-      <LangEditor
-        bind:project
-        bind:selectedProject />
+{#if projects}
+  <Navbar projectTitles={projects.map(p => p.title)} bind:selectedProjectTitle bind:showConfigButton={displayLangImporter}/>
+  <main class="mt-5 mb-5 container">
+    {#if displayLangImporter}
+      <LangImporter bind:projects bind:selectedProjectTitle bind:isOpen={displayLangImporter}/>
     {:else}
-      <LangImporter bind:projects bind:selectedProject bind:isOpen={displayLangImporter}/>
+      <LangEditor bind:project bind:selectedProjectTitle/>
     {/if}
-</main>
+  </main>
+{:else}
+  <div class="spinner"></div>
+{/if}
 
 <style>
   .outline {

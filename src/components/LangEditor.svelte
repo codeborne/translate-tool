@@ -1,28 +1,29 @@
 <script lang="ts">
   import KeyValueTableRow from './KeyValueTableRow.svelte'
   import {cleanEmptyKeys} from './cleanEmptyKeys'
-  import {getTotalKeys, getTotalFilledKeys} from './languageStats'
-  import {areObjectsEqual, getPathUrl, b64DecodeUnicode} from '../utils'
-  import KeyFilter from "./KeyFilter.svelte";
-  import Stats from "./Stats.svelte";
-  import LangSwitcher from "./LangSwitcher.svelte";
-  import ShowEmptyKeyFilter from "./ShowEmptyKeyFilter.svelte";
+  import {getTotalFilledKeys, getTotalKeys} from './languageStats'
+  import {areObjectsEqual, b64DecodeUnicode, getPathUrl} from '../utils'
+  import KeyFilter from './KeyFilter.svelte'
+  import Stats from './Stats.svelte'
+  import LangSwitcher from './LangSwitcher.svelte'
+  import ShowEmptyKeyFilter from './ShowEmptyKeyFilter.svelte'
+  import type {Project} from '../Project'
 
-  export let project: Record<string, any>
-  export let selectedProject: string
-  export let copied: boolean = true
+  export let project: Project
+  export let selectedProjectTitle: string
+  export let copied = true
 
   let langs: string[] = []
   let lang: string = ''
-  let dictKeyStats: Record<string, number> = {'total': 0, 'filled': 0}
+  let dictKeyStats = {total: 0, filled: 0}
   let filter: string = ''
   let rawOutput: HTMLTextAreaElement
   let isFetched: boolean = true
   let showEmptyKeys: boolean = false
 
-  let defaultDict: Record<string, any> // the dictionary being referenced as template
-  let selectedDict: Record<string, any> // dictionary being edited
-  let uneditedDict: Record<string, any> // original unchanged dictionary
+  let defaultDict: Record<string, any>
+  let selectedDict: Record<string, any>
+  let uneditedDict: Record<string, any>
 
   $: if (lang) loadChangedLang()
 
@@ -36,9 +37,8 @@
     initUneditedDict()
   }
 
-  $: if(selectedProject) {
+  $: if (selectedProjectTitle) {
     updateProjectInEditor()
-    lang = lang
   }
 
   async function updateProjectInEditor() {
@@ -104,7 +104,7 @@
     <LangSwitcher
       bind:changed={copied}
       bind:project
-      bind:selectedProject
+      bind:selectedProjectTitle
       bind:lang
       bind:langs
     />

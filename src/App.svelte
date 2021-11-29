@@ -63,7 +63,6 @@
 <Navbar bind:selectedProject bind:projectNames bind:showConfigButton={displayLangImporter}/>
 <main class="mt-5 mb-5 container">
     {#if !displayLangImporter}
-      <h4 class="text-center mb-3">{project.title}</h4>
       <LangEditor
         bind:project
         bind:selectedProject />

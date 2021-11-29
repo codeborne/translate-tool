@@ -1,0 +1,52 @@
+[
+  {
+    "title": "Common",
+    "url": "https://api.github.com/repos/paywerk/paywerk/contents/i18n/common/langs.json",
+    "langs": [
+      "en",
+      "de",
+      "pl"
+    ],
+    "isPublic": false,
+    "token": "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",
+    "indent": 2,
+    "defaultLang": "en"
+  },
+  {
+    "title": "Shopper",
+    "url": "https://api.github.com/repos/paywerk/paywerk/contents/i18n/shopper/langs.json",
+    "langs": [
+      "en",
+      "de",
+      "pl"
+    ],
+    "isPublic": false,
+    "token": "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",
+    "indent": 2,
+    "defaultLang": "en"
+  },
+  {
+    "title": "Merchant",
+    "url": "https://api.github.com/repos/paywerk/paywerk/contents/i18n/merchant/langs.json",
+    "langs": [
+      "en",
+      "de",
+      "pl"
+    ],
+    "isPublic": false,
+    "token": "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",
+    "indent": 2,
+    "defaultLang": "en"
+  },
+  {
+    "title": "Backoffice",
+    "url": "https://api.github.com/repos/paywerk/paywerk/contents/i18n/bo/langs.json",
+    "langs": [
+      "en"
+    ],
+    "isPublic": false,
+    "token": "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",
+    "indent": 2,
+    "defaultLang": "en"
+  }
+]

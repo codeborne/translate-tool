@@ -1,0 +1,35 @@
+name: Build & Deploy dev
+
+on: [push]
+
+env:
+  CLUSTER: paywerk-dev
+  REGION: europe-north1
+  IMG: eu.gcr.io/paywerk-dev/translate-tool
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - run: docker build -t $IMG:$GITHUB_SHA --build-arg PROJECTS_FILE=.github/workflows/projects.json .
+      - name: Setup GCloud CLI
+        uses: google-github-actions/setup-gcloud@v0.2.0
+        with:
+          service_account_key: ${{ secrets.GKE_SA_KEY }}
+          project_id: paywerk-dev
+      - run: gcloud auth configure-docker && docker info
+      - name: Push
+        run: |
+          docker push $IMG:$GITHUB_SHA
+          docker tag $IMG:$GITHUB_SHA $IMG:latest
+          docker push $IMG:latest
+      - run: .k8s/deploy.sh dev
+      - name: Cleanup old images
+        run: |
+          export DATE=$(date -d '3 days ago' +%Y-%m-%d)
+          for digest in $(gcloud container images list-tags $IMG --filter="timestamp.datetime < '$DATE'" --format='get(digest)' --sort-by=TIMESTAMP); do
+            (set -x; gcloud container images delete -q --force-delete-tags "$IMG@$digest")
+          done
+      - run: kubectl rollout status deployments/translate-tool

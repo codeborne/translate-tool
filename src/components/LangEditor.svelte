@@ -14,6 +14,7 @@
   let dictKeyStats: Record<string, number> = {'total': 0, 'filled': 0}
   let filter: string = ''
   let rawOutput: HTMLTextAreaElement
+  let isFetched: boolean = true
 
   let defaultDict: Record<string, any> // the dictionary being referenced as template
   let selectedDict: Record<string, any> // dictionary being edited
@@ -48,18 +49,28 @@
     const isPublic: boolean = project.isPublic
     const dictUrl = `${getPathUrl(project.url)}/${lang}.json`
     if (isPublic) {
-      return fetch(dictUrl).then(r => r.json())
+        isFetched = true
+        return fetch(dictUrl)
+          .then(r => r.json())
+          .catch(e => {
+            console.warn('Something went from while fetching: ' + e.message)
+            isFetched = false
+          })
     } else {
       const token = project.token
       const headers = new Headers({'Authorization': `token ${token}`});
       let newDict = await fetch(dictUrl, {method: 'GET', headers})
         .then(response => {
           if (response.ok) {
+            isFetched = true
             return response.json()
           } else {
             throw new Error(response.text() as string)
           }})
-        .catch((err) => console.log(err))
+        .catch((err) => {
+          isFetched = false
+          console.log(err)
+        })
       return JSON.parse(b64DecodeUnicode(newDict.content))
     }
   }
@@ -82,23 +93,22 @@
   }
 </script>
 
-<div class="d-flex justify-content-around gap-3">
-  <LangSwitcher
-    bind:changed={copied}
-    bind:project
-    bind:selectedProject
-    bind:lang />
-  <Stats
-    bind:stats={dictKeyStats}
-    bind:indent={project.indent}
-    defaultLang={project.defaultLang}
-    totalLangs={project.langs.length} />
-</div>
+{#if selectedDict && defaultDict && uneditedDict && isFetched}
 
+  <div class="d-flex justify-content-around gap-3">
+    <LangSwitcher
+      bind:changed={copied}
+      bind:project
+      bind:selectedProject
+      bind:lang />
+    <Stats
+      bind:stats={dictKeyStats}
+      bind:indent={project.indent}
+      defaultLang={project.defaultLang}
+      totalLangs={project.langs.length} />
+  </div>
 
-<div class="mt-3 outline p-3 d-flex flex-column align-items-center">
-  {#if selectedDict && defaultDict && uneditedDict}
-
+    <div class="mt-3 outline p-3 d-flex flex-column align-items-center">
     <div class="d-flex flex-row justify-content-between w-100">
       <KeyFilter bind:filter/>
       <div class="dl-flex justify-content-center align-items-center">
@@ -120,7 +130,7 @@
     </table>
 
     <button on:click={copy} class="btn btn-primary mt-3 mb-5 w-auto">Copy to clipboard <i class="fas fa-copy"></i></button>
-  {/if}
+
 </div>
 <div class="mt-3 outline p-3">
   <div class="d-flex justify-content-between mb-3">
@@ -133,6 +143,9 @@
             style={{width: '100%'}}
             rows="20">{JSON.stringify(selectedDict, null, project.indent)}</textarea>
 </div>
+    {:else }
+  <h6 class="text-center mb-3">Something went wrong</h6>
+  {/if}
 
 <style>
   .outline {

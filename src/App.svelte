@@ -18,7 +18,6 @@
   async function getEnvProject() {
     try {
       let fetched = await fetch(`projects.json`).then(r => r.json())
-      localStorage.setItem('projects', JSON.stringify(fetched))
       projects = fetched
       selectedProject = projects[0].title
       localStorage.setItem('selectedProject', JSON.stringify(selectedProject))

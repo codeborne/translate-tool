@@ -1,59 +1,64 @@
 <script lang="ts">
   import KeyValueTableRow from './KeyValueTableRow.svelte'
   import {cleanEmptyKeys} from './cleanEmptyKeys'
-  import {getTotalKeys, getTotalFilledKeys} from './languageStats'
-  import {areObjectsEqual, getPathUrl, b64DecodeUnicode} from '../utils'
-  import KeyFilter from "./KeyFilter.svelte";
-  import Stats from "./Stats.svelte";
-  import LangSwitcher from "./LangSwitcher.svelte";
+  import {getTotalFilledKeys, getTotalKeys} from './languageStats'
+  import {areObjectsEqual, b64DecodeUnicode, getPathUrl} from '../utils'
+  import KeyFilter from './KeyFilter.svelte'
+  import Stats from './Stats.svelte'
+  import LangSwitcher from './LangSwitcher.svelte'
+  import ShowEmptyKeyFilter from './ShowEmptyKeyFilter.svelte'
+  import type {Project} from '../Project'
 
-  export let project: Record<string, any>
-  export let selectedProject: string
-  export let copied: boolean = true
-  let lang: string = project.langs[0]
-  let dictKeyStats: Record<string, number> = {'total': 0, 'filled': 0}
+  export let project: Project
+  export let selectedProjectTitle: string
+  export let copied = true
+
+  let langs: string[] = []
+  let lang: string = ''
+  let dictKeyStats = {total: 0, filled: 0}
   let filter: string = ''
   let rawOutput: HTMLTextAreaElement
   let isFetched: boolean = true
+  let showEmptyKeys: boolean = false
 
-  let defaultDict: Record<string, any> // the dictionary being referenced as template
-  let selectedDict: Record<string, any> // dictionary being edited
-  let uneditedDict: Record<string, any> // original unchanged dictionary
+  let defaultDict: Record<string, any>
+  let selectedDict: Record<string, any>
+  let uneditedDict: Record<string, any>
 
   $: if (lang) loadChangedLang()
 
-  function initOriginalDict() {
+  function initUneditedDict() {
     uneditedDict = cleanEmptyKeys(JSON.parse(JSON.stringify(selectedDict)))
     copied = true
   }
 
   async function loadChangedLang() {
     selectedDict = await load(lang)
-    initOriginalDict()
+    initUneditedDict()
   }
 
-  $: if(selectedProject) {
+  $: if (selectedProjectTitle) {
     updateProjectInEditor()
   }
 
   async function updateProjectInEditor() {
-    lang = project.defaultLang
+    langs = await load('langs')
+    lang = langs[0]
     await loadChangedLang()
-    defaultDict = await load(project.defaultLang)
+    defaultDict = await load(langs[0])
     dictKeyStats.total = getTotalKeys(defaultDict)
     dictKeyStats.filled = getTotalFilledKeys(selectedDict)
     copied = true
   }
 
-  async function load(lang: string) {
-    const isPublic: boolean = project.isPublic
-    const dictUrl = `${getPathUrl(project.url)}/${lang}.json`
-    if (isPublic) {
+  async function load(file: string) {
+    const dictUrl = `${getPathUrl(project.url)}/${file}.json`
+    if (!project.token) {
         isFetched = true
         return fetch(dictUrl)
           .then(r => r.json())
           .catch(e => {
-            console.warn('Something went from while fetching: ' + e.message)
+            console.warn('Something went wrong while fetching: ' + e.message)
             isFetched = false
           })
     } else {
@@ -89,7 +94,7 @@
     rawOutput.focus()
     rawOutput.select()
     document.execCommand('copy')
-    initOriginalDict()
+    initUneditedDict()
   }
 </script>
 
@@ -99,18 +104,21 @@
     <LangSwitcher
       bind:changed={copied}
       bind:project
-      bind:selectedProject
-      bind:lang />
+      bind:selectedProjectTitle
+      bind:lang
+      bind:langs
+    />
     <Stats
       bind:stats={dictKeyStats}
       bind:indent={project.indent}
-      defaultLang={project.defaultLang}
-      totalLangs={project.langs.length} />
+      defaultLang={langs[0]}
+      totalLangs={langs.length} />
   </div>
 
     <div class="mt-3 outline p-3 d-flex flex-column align-items-center">
     <div class="d-flex flex-row justify-content-between w-100">
-      <KeyFilter bind:filter/>
+      <KeyFilter bind:filter />
+      <ShowEmptyKeyFilter bind:showEmptyKeys />
       <div class="dl-flex justify-content-center align-items-center">
         <a class="btn btn-primary" href="#output">Jump to bottom</a>
       </div>
@@ -121,11 +129,11 @@
       <tr>
         <th class="fit" scope="col">Key</th>
         <th class="fit" scope="col">Selected ( {lang} )</th>
-        <th class="fit" scope="col">Default ( {project.defaultLang} )</th>
+        <th class="fit" scope="col">Default ( {langs[0]} )</th>
       </tr>
       </thead>
       <tbody on:input={() => selectedDict = selectedDict}>
-        <KeyValueTableRow {selectedDict} {defaultDict} {uneditedDict} {filter}/>
+        <KeyValueTableRow {selectedDict} {defaultDict} {uneditedDict} {filter} bind:showEmptyKeys/>
       </tbody>
     </table>
 

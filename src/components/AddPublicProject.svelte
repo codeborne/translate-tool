@@ -8,16 +8,15 @@
   let langs: Record<string, any>
   let title: string = 'Example Public'
   let indent: number = 2
-  let defaultLang: string = 'en'
 
   let warning = ''
   async function submit() {
     warning = ''
     if (url) {
-      let dict = await fetchDict(url)
+      let dict = await fetchDict(url + 'langs.json')
       if (validate(dict)) {
         langs = dict
-        await save(url, true)
+        await save(url)
         isOpen = false
         warning = ''
       }
@@ -27,7 +26,7 @@
   }
 
 
-  function save(dictUrl: string, isPublic: boolean) {
+  function save(dictUrl: string) {
     if (!localStorage.getItem('projects')) {
       localStorage.clear()
       localStorage.setItem('projects', JSON.stringify([]))
@@ -36,10 +35,7 @@
     let newProject = {
       title,
       url: dictUrl,
-      langs,
-      isPublic,
       indent,
-      defaultLang
     }
     let newProjects: any[] = JSON.parse(localStorage.getItem('projects') as string)
     newProjects.push(newProject)

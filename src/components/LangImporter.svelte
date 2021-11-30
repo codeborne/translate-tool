@@ -2,17 +2,18 @@
   import ProjectSettings from "./ProjectSettings.svelte";
   import AddPublicProject from "./AddPublicProject.svelte";
   import AddPrivateProject from "./AddPrivateProject.svelte";
+  import type {Project} from '../Project'
 
   export let isOpen: boolean
-  export let projects: any[]
+  export let projects: Project[]
   export let selectedProject: string
-
 </script>
+
 {#if projects.length > 0}
-  <ProjectSettings bind:projects />
+  <ProjectSettings bind:projects/>
 {/if}
-<AddPublicProject bind:projects bind:isOpen bind:selectedProject />
-<AddPrivateProject bind:projects bind:isOpen bind:selectedProject />
+<AddPublicProject bind:projects bind:isOpen bind:selectedProject/>
+<AddPrivateProject bind:projects bind:isOpen bind:selectedProject/>
 
 <style>
   .outline {

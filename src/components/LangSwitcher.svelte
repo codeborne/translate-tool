@@ -4,6 +4,7 @@
   export let selectedProject
   export let lang;
   export let changed:boolean
+  export let langs: string[]
 
   let selectedLang:string;
 
@@ -37,7 +38,7 @@
   <h5 class="mb-4">Language Selection</h5>
   <div class="d-flex flex-column">
     <select bind:value={selectedLang} class="form-select mb-3">
-      {#each project.langs as language}
+      {#each langs as language}
         <option value={language}>{language.toUpperCase()}</option>
       {/each}
     </select>

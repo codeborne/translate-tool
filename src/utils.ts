@@ -18,7 +18,7 @@ export function areObjectsEqual(a: Record<string, any>, b: Record<string, any>):
   return true;
 }
 
-export function getPathUrl(url: string) {
+export function getBaseUrl(url: string) {
   return url.substring(0, url.lastIndexOf('/'))
 }
 
@@ -28,3 +28,6 @@ export function b64DecodeUnicode(str: string) {
   }).join(''))
 }
 
+export function deepCopy(v: any) {
+  return JSON.parse(JSON.stringify(v))
+}

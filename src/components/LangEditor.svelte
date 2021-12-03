@@ -17,19 +17,18 @@
 
   let langs: string[]
   let lang: string
+  let loadedLang: string
   let dictKeyStats = {total: 0, filled: 0}
   let filter: string = ''
   let rawOutput: HTMLTextAreaElement
   let showEmptyKeys: boolean = false
 
-  let error: string
-
-  let defaultDict: Record<string, any>
-  let selectedDict: Record<string, any>
-  let uneditedDict: Record<string, any>
+  let selectedDict: Record<string, any> | undefined
+  let defaultDict: Record<string, any> | undefined
+  let uneditedDict: Record<string, any> | undefined
 
   $: if (selectedProjectTitle) loadProject()
-  $: if (lang) loadDict()
+  $: if (lang && lang != loadedLang) loadDict(lang)
 
   function initDefaultDict() {
     defaultDict = deepCopy(selectedDict)
@@ -43,20 +42,23 @@
   }
 
   async function loadProject() {
+    selectedDict = undefined
     langs = await load('langs')
-    lang = langs[0]
-    await loadDict()
+    const defaultLang = langs[0]
+    await loadDict(defaultLang)
     initDefaultDict()
+    lang = defaultLang
     copied = true
   }
 
-  async function loadDict() {
+  async function loadDict(lang: string) {
     selectedDict = await load(lang)
+    loadedLang = lang
     initUneditedDict()
   }
 
   function load(fileBaseName: string) {
-    return jsonLoader.load(project, fileBaseName).catch(e => error = e.message)
+    return jsonLoader.load(project, fileBaseName)
   }
 
   $: if (selectedDict) {
@@ -76,10 +78,6 @@
     initUneditedDict()
   }
 </script>
-
-{#if error}
-  <h6 class="text-center">{error}</h6>
-{/if}
 
 {#if !selectedDict || !defaultDict || !uneditedDict}
   <LoadingSpinner/>

@@ -7,6 +7,7 @@
   import Stats from './Stats.svelte'
   import LangSwitcher from './LangSwitcher.svelte'
   import ShowEmptyKeyFilter from './ShowEmptyKeyFilter.svelte'
+  import LoadingSpinner from './LoadingSpinner.svelte'
   import type {Project} from '../Project'
 
   export let project: Project
@@ -98,8 +99,8 @@
   }
 </script>
 
-{#if selectedDict && defaultDict && uneditedDict && isFetched}
-
+{#if selectedDict && defaultDict && uneditedDict}
+  {#if isFetched}
   <div class="d-flex justify-content-around gap-3">
     <LangSwitcher
       bind:changed={copied}
@@ -116,44 +117,44 @@
   </div>
 
     <div class="mt-3 outline p-3 d-flex flex-column align-items-center">
-    <div class="d-flex flex-row justify-content-between w-100">
-      <KeyFilter bind:filter />
-      <ShowEmptyKeyFilter bind:showEmptyKeys />
-      <div class="dl-flex justify-content-center align-items-center">
-        <a class="btn btn-primary" href="#output">Jump to bottom</a>
+      <div class="d-flex flex-row justify-content-between w-100">
+        <KeyFilter bind:filter />
+        <ShowEmptyKeyFilter bind:showEmptyKeys />
+        <div class="dl-flex justify-content-center align-items-center">
+          <a class="btn btn-primary" href="#output">Jump to bottom</a>
+        </div>
       </div>
+      <table class="table table-striped">
+        <thead>
+        <tr>
+          <th class="fit" scope="col">Key</th>
+          <th class="fit" scope="col">Selected ( {lang} )</th>
+          <th class="fit" scope="col">Default ( {langs[0]} )</th>
+        </tr>
+        </thead>
+        <tbody on:input={() => selectedDict = selectedDict}>
+          <KeyValueTableRow {selectedDict} {defaultDict} {uneditedDict} {filter} bind:showEmptyKeys/>
+        </tbody>
+      </table>
+      <button on:click={copy} class="btn btn-primary mt-3 mb-5 w-auto">Copy to clipboard <i class="fas fa-copy"></i></button>
     </div>
+    <div class="mt-3 outline p-3">
+      <div class="d-flex justify-content-between mb-3">
+        <h3 id="output">RAW output:</h3>
+        <a class="btn btn-primary" href="#top">Jump to top</a>
+      </div>
 
-    <table class="table table-striped">
-      <thead>
-      <tr>
-        <th class="fit" scope="col">Key</th>
-        <th class="fit" scope="col">Selected ( {lang} )</th>
-        <th class="fit" scope="col">Default ( {langs[0]} )</th>
-      </tr>
-      </thead>
-      <tbody on:input={() => selectedDict = selectedDict}>
-        <KeyValueTableRow {selectedDict} {defaultDict} {uneditedDict} {filter} bind:showEmptyKeys/>
-      </tbody>
-    </table>
-
-    <button on:click={copy} class="btn btn-primary mt-3 mb-5 w-auto">Copy to clipboard <i class="fas fa-copy"></i></button>
-
-</div>
-<div class="mt-3 outline p-3">
-  <div class="d-flex justify-content-between mb-3">
-    <h3 id="output">RAW output:</h3>
-    <a class="btn btn-primary" href="#top">Jump to top</a>
-  </div>
-
-  <textarea id="rawOutput" bind:this={rawOutput}
-            class="form-control mb-3 bg-light"
-            style={{width: '100%'}}
-            rows="20">{JSON.stringify(selectedDict, null, project.indent)}</textarea>
-</div>
-    {:else }
-  <h6 class="text-center mb-3">Something went wrong</h6>
+      <textarea id="rawOutput" bind:this={rawOutput}
+                class="form-control mb-3 bg-light"
+                style={{width: '100%'}}
+                rows="20">{JSON.stringify(selectedDict, null, project.indent)}</textarea>
+    </div>
+  {:else}
+    <h6 class="text-center">Something went wrong</h6>
   {/if}
+{:else }
+  <LoadingSpinner/>
+{/if}
 
 <style>
   .outline {

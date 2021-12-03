@@ -4,6 +4,7 @@
   import Navbar from './components/Navbar.svelte'
   import {onMount} from 'svelte'
   import type {Project} from './Project'
+  import LoadingSpinner from "./components/LoadingSpinner.svelte";
 
   let showConfig = false
   let projects: Project[]
@@ -13,15 +14,15 @@
   onMount(async () => {
     await tryLoadPreConfiguredProjects()
     if (!projects) tryInitFromLocalStorage()
-    if (!projects) return showConfig = true
+    if (projects && !selectedProjectTitle) selectedProjectTitle = projects[0].title
+    if (!projects) {
+      projects = []
+      return showConfig = true
+    }
   })
 
   async function tryLoadPreConfiguredProjects() {
-    try {
-      projects = await fetch('projects.json').then(r => r.json())
-    } catch (e) {
-      console.warn('No environment file found, or it may have incorrect incorrect formatting. Letting the user import a project instead..')
-    }
+      projects = await fetch('projects.json').then(r => r.json()).catch(e => console.warn('No deployment argument file found.'))
   }
 
   function tryInitFromLocalStorage() {
@@ -45,7 +46,7 @@
     {/if}
   </main>
 {:else}
-  <div class="spinner"></div>
+  <LoadingSpinner/>
 {/if}
 
 <style>

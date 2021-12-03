@@ -18,7 +18,7 @@
       <div class="collapse navbar-collapse" id="navbarText">
         <div class="collapse navbar-collapse">
           {#each projectTitles as title}
-            <NavbarProjectTab {title} bind:selectedProjectTitle bind:isImporterOpen={showConfig} />
+            <NavbarProjectTab {title} bind:selectedProjectTitle />
           {/each}
         </div>
       </div>

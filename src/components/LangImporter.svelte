@@ -6,14 +6,14 @@
 
   export let isOpen: boolean
   export let projects: Project[]
-  export let selectedProject: string
+  export let selectedProjectTitle: string
 </script>
 
 {#if projects.length > 0}
   <ProjectSettings bind:projects/>
 {/if}
-<AddPublicProject bind:projects bind:isOpen bind:selectedProject/>
-<AddPrivateProject bind:projects bind:isOpen bind:selectedProject/>
+<AddPublicProject bind:projects bind:isOpen bind:selectedProjectTitle/>
+<AddPrivateProject bind:projects bind:isOpen bind:selectedProjectTitle/>
 
 <style>
   .outline {

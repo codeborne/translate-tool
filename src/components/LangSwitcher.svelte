@@ -1,7 +1,7 @@
 <script lang="ts">
 
   export let project: Record<string, any>
-  export let selectedProject
+  export let selectedProjectTitle
   export let lang;
   export let changed:boolean
   export let langs: string[]
@@ -13,7 +13,7 @@
     toggleButtons()
   }
 
-  $: if (selectedProject) setLangOnProjectChange()
+  $: if (selectedProjectTitle) setLangOnProjectChange()
 
   function setLangOnProjectChange() {
     lang = project.defaultLang

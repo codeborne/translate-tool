@@ -2,7 +2,7 @@
 
   export let isOpen: boolean
   export let projects: any[]
-  export let selectedProject: string
+  export let selectedProjectTitle: string
 
   let url: string = ''
   let langs: Record<string, any>
@@ -40,7 +40,7 @@
     let newProjects: any[] = JSON.parse(localStorage.getItem('projects') as string)
     newProjects.push(newProject)
     localStorage.setItem('projects', JSON.stringify(newProjects))
-    selectedProject = title
+    selectedProjectTitle = title
     projects = newProjects
     isOpen = false
   }

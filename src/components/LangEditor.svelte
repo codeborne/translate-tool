@@ -14,8 +14,8 @@
   export let selectedProjectTitle: string
   export let copied = true
 
-  let langs: string[] = []
-  let lang: string = ''
+  let langs: string[]
+  let lang: string
   let dictKeyStats = {total: 0, filled: 0}
   let filter: string = ''
   let rawOutput: HTMLTextAreaElement
@@ -28,6 +28,10 @@
 
   $: if (lang) loadChangedLang()
 
+  $: if (selectedProjectTitle) {
+    updateProjectInEditor()
+  }
+
   function initUneditedDict() {
     uneditedDict = cleanEmptyKeys(JSON.parse(JSON.stringify(selectedDict)))
     copied = true
@@ -38,15 +42,11 @@
     initUneditedDict()
   }
 
-  $: if (selectedProjectTitle) {
-    updateProjectInEditor()
-  }
-
   async function updateProjectInEditor() {
     langs = await load('langs')
     lang = langs[0]
     await loadChangedLang()
-    defaultDict = await load(langs[0])
+    defaultDict = JSON.parse(JSON.stringify(selectedDict))
     dictKeyStats.total = getTotalKeys(defaultDict)
     dictKeyStats.filled = getTotalFilledKeys(selectedDict)
     copied = true
@@ -99,8 +99,7 @@
   }
 </script>
 
-{#if selectedDict && defaultDict && uneditedDict}
-  {#if isFetched}
+{#if selectedDict && defaultDict && uneditedDict && lang && isFetched}
   <div class="d-flex justify-content-around gap-3">
     <LangSwitcher
       bind:changed={copied}
@@ -143,17 +142,18 @@
         <h3 id="output">RAW output:</h3>
         <a class="btn btn-primary" href="#top">Jump to top</a>
       </div>
-
       <textarea id="rawOutput" bind:this={rawOutput}
                 class="form-control mb-3 bg-light"
                 style={{width: '100%'}}
                 rows="20">{JSON.stringify(selectedDict, null, project.indent)}</textarea>
     </div>
+
+{:else }
+  {#if isFetched}
+    <LoadingSpinner/>
   {:else}
     <h6 class="text-center">Something went wrong</h6>
   {/if}
-{:else }
-  <LoadingSpinner/>
 {/if}
 
 <style>

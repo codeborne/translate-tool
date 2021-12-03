@@ -13,12 +13,6 @@
     toggleButtons()
   }
 
-  $: if (selectedProjectTitle) setLangOnProjectChange()
-
-  function setLangOnProjectChange() {
-    lang = project.defaultLang
-  }
-
 
   function toggleButtons() {
     const buttons = document.querySelectorAll('.select-lang') as HTMLButtonElement[]

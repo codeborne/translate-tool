@@ -24,6 +24,7 @@ describe('JsonLoader', () => {
       stub(window, 'fetch').resolves({ok: false} as Response)
       await jsonLoader.loadJson(project.url)
       throw 'expecting failure'
+      // @ts-ignore
     } catch (e: Error) {
       expect(e.message).to.eq(`Failed to load ${project.url}`)
     }

@@ -26,12 +26,12 @@
 
     <div>
       {#if !showConfig}
-        <button type="button" class="btn btn-outline-secondary bg-light text-dark" on:click={() => showConfig = true}>
+        <button id="backToImporterBtn" type="button" class="btn btn-outline-secondary bg-light text-dark" on:click={() => showConfig = true}>
           Project Settings <i class="fas fa-wrench"></i>
         </button>
       {/if}
       {#if showConfig && projectTitles.length > 0}
-        <button type="button" class="btn btn-outline-secondary bg-light text-dark" on:click={() => showConfig = false}>
+        <button id="backToEditorBtn" type="button" class="btn btn-outline-secondary bg-light text-dark" on:click={() => showConfig = false}>
           Back to Editor <i class="fas fa-arrow-circle-right"></i>
         </button>
       {/if}

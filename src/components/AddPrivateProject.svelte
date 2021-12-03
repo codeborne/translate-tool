@@ -98,7 +98,7 @@
   }
 </script>
 
-<div class="outline p-3 mb-3 d-flex flex-column justify-content-center align-items-center">
+<div id="addPrivate" class="outline p-3 mb-3 d-flex flex-column justify-content-center align-items-center">
   <h5 class="mb-4">Import a private dictionary via GitHub</h5>
   <div class="mb-3" >
     <label class="form-label">Project name</label>

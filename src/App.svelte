@@ -34,7 +34,14 @@
     selectedProjectTitle = project.title
     localStorage.setItem('selectedProject', selectedProjectTitle)
   }
+
+  function showUnhandledError(e: PromiseRejectionEvent) {
+    console.error(e.reason)
+    alert('Error, please reload the page:\n\n' + e.reason?.message ?? '')
+  }
 </script>
+
+<svelte:window on:unhandledrejection={showUnhandledError}/>
 
 {#if projects}
   <Navbar projectTitles={projects.map(p => p.title)} bind:selectedProjectTitle bind:showConfig/>

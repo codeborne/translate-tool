@@ -9,7 +9,7 @@ class JsonLoader {
     })
   }
 
-  async load(project: Project, fileBaseName: string) {
+  async load(project: Project, fileBaseName: string): Promise<any> {
     const headers = project.token ? {Authorization: 'token ' + project.token} : undefined
     const response = await this.loadJson(getBaseUrl(project.url) + '/' + fileBaseName + '.json', {headers})
     if (response.content && response.encoding === 'base64') return JSON.parse(b64DecodeUnicode(response.content))

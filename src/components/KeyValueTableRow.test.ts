@@ -14,13 +14,14 @@ const selectedDict: Record<string, any> = {
   }
 }
 
+const showEmptyKeys = false
 const uneditedDict: Record<string, any> = selectedDict
 const defaultDict: Record<string, any> = selectedDict
 let filter: string = ''
 
 describe('<KeyValueTableRow>', () => {
   it('renders all inputs', () => {
-    const {container} = render(KeyValueTableRow, {selectedDict, defaultDict, uneditedDict, filter})
+    const {container} = render(KeyValueTableRow, {selectedDict, defaultDict, uneditedDict, filter, showEmptyKeys})
     expect(container.querySelectorAll('input')).to.have.length(5)
     const rows = container.querySelectorAll('tr')
     const firstRow = rows[0].querySelectorAll('td')
@@ -41,12 +42,10 @@ describe('<KeyValueTableRow>', () => {
 
   it('shows only filtered inputs', () => {
     filter = 'nested'
-    const {container, getByText} = render(KeyValueTableRow, {selectedDict, defaultDict, uneditedDict, filter})
+    const {container} = render(KeyValueTableRow, {selectedDict, defaultDict, uneditedDict, filter, showEmptyKeys})
     const inputs = container.querySelectorAll('input')
     expect(inputs).to.have.length(3)
     expect(inputs[0].value).to.contain('worlddd')
-
-    // expect(document.body.contains(getByText(/hello/i)))
     expect(container.textContent).to.not.contain('hello')
   })
 })

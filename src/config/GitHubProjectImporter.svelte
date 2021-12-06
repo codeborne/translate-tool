@@ -91,9 +91,9 @@
   }
 </script>
 
-<div id="addPrivate" class="outline p-3 mb-3 d-flex flex-column justify-content-center align-items-center">
-  <h5 class="mb-4">Import a private dictionary via GitHub</h5>
-  <div class="mb-3" >
+<div id="addPrivate" class="card p-3 mb-3 d-flex flex-column justify-content-center align-items-center">
+  <h5 class="card-title">Import a private dictionary via GitHub</h5>
+  <div class="card-body">
     <label class="form-label">Project name</label>
     <input type="text" placeholder="project name" bind:value={title} class="form-control" aria-describedby="url">
     <div class="form-text mb-4"><i>You can change it at any time.</i></div>
@@ -114,19 +114,12 @@
     <label class="form-label">Authorization token</label>
     <input type="text" placeholder="auth token" bind:value={token} class="form-control" aria-describedby="url">
     <div class="form-text mb-4">This token will be used to access the private repository</div>
-  </div>
-  <button on:click={submit} type="button" class="btn btn-primary w-auto">Import</button>
-  {#if warning}
-    <div class="alert alert-warning">
-      {warning}
-    </div>
-  {/if}
-</div>
 
-<style>
-  .outline {
-    border: 1px solid lightgray;
-    border-radius: 5px;
-    background-color: white;
-  }
-</style>
+    <button on:click={submit} type="button" class="btn btn-primary w-auto mt-3">Import</button>
+    {#if warning}
+      <div class="alert alert-warning mt-3">
+        {warning}
+      </div>
+    {/if}
+  </div>
+</div>

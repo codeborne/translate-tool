@@ -1,24 +1,12 @@
-export function getTotalFilledKeys(dict: Record<string, any>) {
-  let total = 0;
-  for (let [key, value] of Object.entries(dict)) {
-    const isObject = typeof value === 'object'
-    if (isObject && !isEmpty(value)) total += getTotalFilledKeys(value)
-    if (value && !isObject) total++
-  }
-  return total
-}
+import type {Dict} from '../common/Project'
 
-export function getTotalKeys(dict: Record<string, any>) {
+export function totalKeys(dict: Dict) {
   let total = 0;
-  for (let [key, value] of Object.entries(dict)) {
+  for (let value of Object.values(dict)) {
     // total++
     const isObject = typeof value === 'object'
-    if (isObject) total += getTotalKeys(value)
+    if (isObject) total += totalKeys(value as Dict)
     if (value && !isObject) total++
   }
   return total
-}
-
-function isEmpty(value: object) {
-  return !Object.keys(value).length
 }

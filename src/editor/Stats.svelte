@@ -1,56 +1,53 @@
 <script lang="ts">
-  export let stats: Record<string, number>
+  import type {Dict} from '../common/Project'
+  import {totalKeys} from './languageStats'
+
+  export let dict: Dict
+  export let defaultDict: Dict
   export let indent: number
   export let defaultLang: string
   export let totalLangs: number
 
+  $: total = totalKeys(defaultDict)
+  $: filled = totalKeys(dict)
 </script>
 
-<div class="w-100 outline p-3">
-  <h5 class="mb-4">Stats</h5>
-  <div class="d-flex gap-3">
-    <table class="table">
-      <tbody>
-      <tr>
-        <td>Total Fields</td>
-        <td>{stats.total}</td>
-      </tr>
-      <tr>
-        <td>Filled fields</td>
-        <td>{stats.filled}</td>
-      </tr>
-      <tr>
-        <td>Empty Fields</td>
-        <td>{stats.total - stats.filled}</td>
-      </tr>
-      </tbody>
-    </table>
-    <table class="table">
-      <tbody>
-      <tr>
-        <td>Default Language</td>
-        <td>{defaultLang}</td>
-      </tr>
-      <tr>
-        <td>Total Languages</td>
-        <td>{totalLangs}</td>
-      </tr>
-      <tr>
-        <td>JSON Indent</td>
-        <td>{indent}</td>
-      </tr>
-      </tbody>
-    </table>
+<div class="card">
+  <h5 class="card-title">Stats</h5>
+  <div class="card-body">
+    <div class="d-flex gap-3">
+      <table class="table">
+        <tbody>
+        <tr>
+          <td>Total keys</td>
+          <td>{total}</td>
+        </tr>
+        <tr>
+          <td>Translated keys</td>
+          <td>{filled}</td>
+        </tr>
+        <tr>
+          <td>Untranslated keys</td>
+          <td>{total - filled}</td>
+        </tr>
+        </tbody>
+      </table>
+      <table class="table">
+        <tbody>
+        <tr>
+          <td>Default Language</td>
+          <td>{defaultLang}</td>
+        </tr>
+        <tr>
+          <td>Total Languages</td>
+          <td>{totalLangs}</td>
+        </tr>
+        <tr>
+          <td>JSON Indent</td>
+          <td>{indent}</td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
   </div>
 </div>
-
-<style>
-  .outline {
-    border: 1px solid lightgray;
-    border-radius: 5px;
-    background-color: white;
-  }
-  h1, h2, h3, h4, h5, h6 {
-    color: #404142;
-  }
-</style>

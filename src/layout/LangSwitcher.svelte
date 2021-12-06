@@ -2,11 +2,11 @@
   import type {LoadedProject} from '../common/Project'
 
   export let project: LoadedProject
-  export let lang: string
+  export let lang: string = project.langs[0]
 </script>
 
 <select bind:value={lang} class="form-select w-auto me-3">
-  {#each Object.keys(project.dicts) as l}
+  {#each project.langs as l}
     <option>{l}</option>
   {/each}
 </select>

@@ -1,110 +1,69 @@
 <script lang="ts">
   import KeyValueTableRow from './KeyValueTableRow.svelte'
   import {cleanEmptyKeys} from './cleanEmptyKeys'
-  import {getTotalFilledKeys, getTotalKeys} from './languageStats'
-  import {areObjectsEqual, deepCopy} from '../common/utils'
+  import {deepCopy} from '../common/utils'
   import KeyFilter from './KeyFilter.svelte'
   import Stats from './Stats.svelte'
   import ShowEmptyKeyFilter from './ShowEmptyKeyFilter.svelte'
-  import LoadingSpinner from '../common/LoadingSpinner.svelte'
-  import type {LoadedProject} from '../common/Project'
+  import type {Dict, LoadedProject} from '../common/Project'
+  import DictClipboardOutput from './DictClipboardOutput.svelte'
 
   export let project: LoadedProject
-  export let copied = true
+  export let lang: string
 
-  let langs: string[]
-  let lang: string
-  let loadedLang: string
-  let dictKeyStats = {total: 0, filled: 0}
+  let dict: Dict
+  let uneditedDict: Dict
+  let defaultLang: string
+  let defaultDict: Dict
+
+  $: initProject(project)
+  $: initLang(lang)
+  $: dict = cleanEmptyKeys(dict)
+
+  function initProject(project: LoadedProject) {
+    defaultLang = project.langs[0]
+    defaultDict = project.dicts[defaultLang]
+  }
+
+  function initLang(lang: string) {
+    dict = project.dicts[lang]
+    uneditedDict = deepCopy(dict)
+  }
+
   let filter: string = ''
-  let rawOutput: HTMLTextAreaElement
   let showEmptyKeys: boolean = false
-
-  let selectedDict: Record<string, any> | undefined
-  let defaultDict: Record<string, any> | undefined
-  let uneditedDict: Record<string, any> | undefined
-
-  function initDefaultDict() {
-    defaultDict = deepCopy(selectedDict)
-    dictKeyStats.total = getTotalKeys(defaultDict)
-    dictKeyStats.filled = getTotalFilledKeys(selectedDict)
-  }
-
-  function initUneditedDict() {
-    uneditedDict = cleanEmptyKeys(deepCopy(selectedDict))
-    copied = true
-  }
-
-  $: if (selectedDict) {
-    selectedDict = cleanEmptyKeys(selectedDict)
-    dictKeyStats.filled = getTotalFilledKeys(selectedDict)
-    checkForChanges()
-  }
-
-  function checkForChanges() {
-    copied = areObjectsEqual(cleanEmptyKeys(selectedDict), cleanEmptyKeys(uneditedDict))
-  }
-
-  function copy() {
-    rawOutput.focus()
-    rawOutput.select()
-    document.execCommand('copy')
-    initUneditedDict()
-  }
 </script>
 
-{#if !selectedDict || !defaultDict || !uneditedDict}
-  <LoadingSpinner/>
-{:else}
-  <div class="d-flex justify-content-around gap-3">
-    <Stats
-      bind:stats={dictKeyStats}
-      bind:indent={project.indent}
-      defaultLang={langs[0]}
-      totalLangs={langs.length} />
+<div class="d-flex justify-content-around gap-3">
+  <Stats {dict} {defaultLang} {defaultDict} indent={project.indent} totalLangs={project.langs.length}/>
+</div>
+
+<div class="mt-3 card p-3 d-flex flex-column align-items-center">
+  <div class="d-flex flex-row justify-content-between w-100">
+    <KeyFilter bind:filter />
+    <ShowEmptyKeyFilter bind:showEmptyKeys />
+    <div class="dl-flex justify-content-center align-items-center">
+      <a class="btn btn-primary" href="#output">Jump to bottom</a>
+    </div>
   </div>
 
-  <div class="mt-3 outline p-3 d-flex flex-column align-items-center">
-    <div class="d-flex flex-row justify-content-between w-100">
-      <KeyFilter bind:filter />
-      <ShowEmptyKeyFilter bind:showEmptyKeys />
-      <div class="dl-flex justify-content-center align-items-center">
-        <a class="btn btn-primary" href="#output">Jump to bottom</a>
-      </div>
-    </div>
-    <table class="table table-striped">
-      <thead>
-      <tr>
-        <th class="fit" scope="col">Key</th>
-        <th class="fit" scope="col">Selected ( {lang} )</th>
-        <th class="fit" scope="col">Default ( {langs[0]} )</th>
-      </tr>
-      </thead>
-      <tbody on:input={() => selectedDict = selectedDict}>
-        <KeyValueTableRow {selectedDict} {defaultDict} {uneditedDict} {filter} bind:showEmptyKeys/>
-      </tbody>
-    </table>
-    <button on:click={copy} class="btn btn-primary mt-3 mb-5 w-auto">Copy to clipboard <i class="fas fa-copy"></i></button>
-  </div>
-  <div class="mt-3 outline p-3">
-    <div class="d-flex justify-content-between mb-3">
-      <h3 id="output">RAW output:</h3>
-      <a class="btn btn-primary" href="#top">Jump to top</a>
-    </div>
-    <textarea id="rawOutput" bind:this={rawOutput}
-              class="form-control mb-3 bg-light"
-              style={{width: '100%'}}
-              rows="20">{JSON.stringify(selectedDict, null, project.indent)}</textarea>
-  </div>
-{/if}
+  <table class="table table-striped">
+    <thead>
+    <tr>
+      <th class="fit" scope="col">Key</th>
+      <th class="fit" scope="col">{lang}</th>
+      <th class="fit" scope="col">{defaultLang}</th>
+    </tr>
+    </thead>
+    <tbody on:input={() => dict = dict}>
+      <KeyValueTableRow {dict} {defaultDict} {uneditedDict} {filter} bind:showEmptyKeys/>
+    </tbody>
+  </table>
+</div>
+
+<DictClipboardOutput {dict} indent={project.config.indent} on:copied={() => alert('No paste it to you version control system')}/>
 
 <style>
-  .outline {
-    border: 1px solid lightgray;
-    border-radius: 5px;
-    background-color: white;
-  }
-
   .fit {
     white-space: nowrap;
     width: 33%;

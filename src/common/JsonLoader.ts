@@ -1,4 +1,5 @@
-import type {Dict, LoadedProject, Project} from './Project'
+import type {Dict, Project} from './Project'
+import {LoadedProject} from './Project'
 import {b64DecodeUnicode, getBaseUrl} from './utils'
 
 class JsonLoader {
@@ -22,7 +23,7 @@ class JsonLoader {
     const dicts = loadedDicts.reduce((r, dict, i) => {
       r[langs[i]] = dict; return r
     }, {} as Record<string, Dict>)
-    return {...project, dicts}
+    return new LoadedProject(project, dicts)
   }
 }
 

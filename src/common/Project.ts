@@ -7,6 +7,17 @@ export interface Project {
 
 export type Dict = Record<string, object | string>
 
-export interface LoadedProject extends Project {
-  dicts: Record<string, Dict>
+export class LoadedProject {
+  constructor(
+    public config: Project,
+    public dicts: Record<string, Dict>
+  ) {}
+
+  get title() {
+    return this.config.title
+  }
+
+  get langs() {
+    return Object.keys(this.dicts)
+  }
 }

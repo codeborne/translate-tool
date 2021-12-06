@@ -55,10 +55,16 @@
   <main class="mt-5 mb-5 container">
     {#if showConfig}
       <ConfigEditor bind:projects/>
-    {:else}
+    {:else if lang}
       <DictEditor bind:project={selectedProject} {lang}/>
     {/if}
   </main>
 {:else}
   <LoadingSpinner/>
 {/if}
+
+<style>
+  :global(h1, h2, h3, h4, h5, h6) {
+    color: #404142;
+  }
+</style>

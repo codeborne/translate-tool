@@ -41,8 +41,8 @@
 
 <svelte:window on:unhandledrejection={showUnhandledError}/>
 
-{#if loadedProjects}
-  <Navbar>
+<Navbar>
+  {#if loadedProjects}
     {#if !showConfig}
       <ProjectSwitcher projects={loadedProjects} bind:selectedProject/>
       <LangSwitcher project={selectedProject} bind:lang/>
@@ -50,18 +50,18 @@
       <div class="flex-grow-1"></div>
     {/if}
     <ToggleConfigButton bind:showConfig showBack={loadedProjects.length > 0}/>
-  </Navbar>
+  {/if}
+</Navbar>
 
-  <main class="mt-5 mb-5 container">
-    {#if showConfig}
-      <ConfigEditor bind:projects/>
-    {:else if lang}
-      <DictEditor project={selectedProject} {lang}/>
-    {/if}
-  </main>
-{:else}
-  <LoadingSpinner/>
-{/if}
+<main class="my-3 container">
+  {#if !loadedProjects}
+    <LoadingSpinner class="my-5"/>
+  {:else if showConfig}
+    <ConfigEditor bind:projects/>
+  {:else if lang}
+    <DictEditor project={selectedProject} {lang}/>
+  {/if}
+</main>
 
 <style>
   :global(h1, h2, h3, h4, h5, h6) {

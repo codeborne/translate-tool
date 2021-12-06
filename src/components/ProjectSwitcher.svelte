@@ -12,3 +12,9 @@
     </a>
   {/each}
 </ul>
+
+<style>
+  .nav-link.active {
+    border-bottom: 3px solid dodgerblue;
+  }
+</style>

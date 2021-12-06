@@ -39,6 +39,7 @@
   async function loadProject() {
     selectedDict = undefined
     langs = await load('langs')
+    // langs = allProjectDictionaries.find(p => p.title === selectedProjectTitle).dictionaries.map(l => l.lang)
     const defaultLang = langs[0]
     await loadDict(defaultLang)
     initDefaultDict()

@@ -11,15 +11,3 @@
     </div>
   </div>
 </nav>
-
-<style>
-  .outline {
-    border-bottom: 1px solid lightgray;
-  }
-  .btn-outline-secondary {
-    border: 1px solid lightgray;
-  }
-  .nav-link.active {
-    border-bottom: 3px solid dodgerblue;
-  }
-</style>

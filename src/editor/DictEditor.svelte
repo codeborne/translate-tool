@@ -7,6 +7,8 @@
   import ShowEmptyKeyFilter from './ShowEmptyKeyFilter.svelte'
   import type {Dict, LoadedProject} from '../common/Project'
   import DictClipboardOutput from './DictClipboardOutput.svelte'
+  import Filter from './Filter'
+  import FilterControls from './FilterControls.svelte'
 
   export let project: LoadedProject
   export let lang: string
@@ -31,8 +33,7 @@
     uneditedDict = deepCopy(dict)
   }
 
-  let filter = ''
-  let showEmptyValuesOnly = false
+  let filter = new Filter()
 </script>
 
 <div class="d-flex justify-content-around gap-3">
@@ -41,8 +42,7 @@
 
 <div class="mt-3 card p-3 d-flex flex-column align-items-center">
   <div class="d-flex flex-row justify-content-between w-100">
-    <KeyFilter bind:filter />
-    <ShowEmptyKeyFilter bind:showEmptyValuesOnly/>
+    <FilterControls bind:filter/>
     <div class="dl-flex justify-content-center align-items-center">
       <a class="btn btn-primary" href="#output">Jump to bottom</a>
     </div>
@@ -57,7 +57,7 @@
     </tr>
     </thead>
     <tbody on:input={() => dict = dict}>
-      <KeyValueTableRow {dict} {defaultDict} {uneditedDict} {filter} {showEmptyValuesOnly}/>
+      <KeyValueTableRow {dict} {defaultDict} {uneditedDict} {filter}/>
     </tbody>
   </table>
 </div>

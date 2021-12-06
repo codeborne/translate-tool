@@ -1,24 +1,20 @@
 <script lang="ts">
+  import Filter from './Filter'
+
   export let dict: Record<string, any>
   export let defaultDict: Record<any, string>
   export let uneditedDict: Record<string, any>
   export let keyPrefix = ''
 
-  export let filter: string
-  export let showEmptyValuesOnly: boolean
+  export let filter: Filter
 
   const fullKey = (key: string) => (keyPrefix ? keyPrefix + '.' : '') + key
-
-  function show(key: string, value: string, filter: string, showEmptyValuesOnly: boolean) {
-    return (!filter || fullKey(key).toLowerCase().includes(filter.toLowerCase())) &&
-           (!showEmptyValuesOnly || !value)
-  }
 </script>
 
 {#each Object.entries(defaultDict) as [key, defaultValue]}
   {#if typeof defaultValue === 'object'}
-    <svelte:self keyPrefix={fullKey(key)} dict={dict[key] ??= {}} defaultDict={defaultValue} uneditedDict={uneditedDict[key] ??= {}} {filter} {showEmptyValuesOnly}/>
-  {:else if show(key, uneditedDict[key], filter, showEmptyValuesOnly)}
+    <svelte:self keyPrefix={fullKey(key)} dict={dict[key] ??= {}} defaultDict={defaultValue} uneditedDict={uneditedDict[key] ??= {}} {filter}/>
+  {:else if filter.shouldShow(fullKey(key), uneditedDict[key])}
     <tr class:empty={!dict[key]}>
       <td>{fullKey(key)}</td>
       <td>

@@ -19,7 +19,7 @@
     <svelte:self bind:showEmptyKeys keyPrefix={fullKey(key)} selectedDict={selectedDict[key] ??= {}} defaultDict={defaultDict[key]} uneditedDict={uneditedDict[key] ??= {}} {filter}/>
   {:else}
 
-    {#if fullKey(key).includes(filter) || filter.length === 0}
+    {#if fullKey(key).toLowerCase().includes(filter.toLowerCase()) || filter.length === 0}
       {#if showEmptyKeys}
         {#if !uneditedDict[key]}
           <tr>

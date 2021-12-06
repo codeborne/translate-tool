@@ -1,6 +1,11 @@
 export interface ProjectDictionary {
   title: string
-  dictionaries: Record<string, any>
+  dictionaries: ProjectDictionaryInfo[]
+}
+
+export interface ProjectDictionaryInfo {
+  lang: string,
+  dict: Record<string, any>
 }
 
 /*
@@ -10,14 +15,11 @@ export interface ProjectDictionary {
   dictionaries: [
     {
       lang: "en",
-      dict: {
-      app: "aaa"
-    },
+      dict: {},
     {
       lang: "de",
-      dict: {
-      app: "bbb"
-    }]
+      dict: {}
+      ]
   },
   {
   title: "proj2"

@@ -6,15 +6,17 @@
   import type {Project} from './Project'
   import LoadingSpinner from "./components/LoadingSpinner.svelte";
   import type {ProjectDictionary} from './ProjectDictionary'
+  import JsonLoader from './JsonLoader'
 
   let showConfig = false
   let projects: Project[]
   let selectedProjectTitle = localStorage.getItem('selectedProject')
   let project: Project
-  let projectDictionaries: ProjectDictionary[]
+  let projectDictionaries: ProjectDictionary[] = []
 
   onMount(async () => {
     await tryLoadPreConfiguredProjects()
+    await tryLoadAllProjectLanguages()
     if (!projects) tryInitFromLocalStorage()
     if (projects && !selectedProjectTitle) selectedProjectTitle = projects[0].title
     if (!projects) {
@@ -25,6 +27,33 @@
 
   async function tryLoadPreConfiguredProjects() {
       projects = await fetch('projects.json').then(r => r.json()).catch(e => console.warn('No deployment argument file found.'))
+  }
+
+  async function tryLoadAllProjectLanguages() {
+    for (let i = 0; i < projects.length; i++) {
+
+      let projInfo: ProjectDictionary = {
+        title: projects[i].title,
+        dictionaries: []
+      }
+
+      let projectLangs: string[]= []
+      try {
+      projectLangs = await JsonLoader.load(projects[i], "langs") ?? undefined
+      } catch (e: Error) { console.warn('Could not load url, skipping.. ' + e.message) }
+      projectLangs && projectDictionaries.push(projInfo)
+      projectLangs && projectLangs.forEach((lang) => projectDictionaries[i].dictionaries.push({lang, dict: {}}))
+    }
+    await tryLoadAllProjectDictionaries()
+  }
+
+  async function tryLoadAllProjectDictionaries() {
+    for (let i = 0; i < projectDictionaries.length; i++) {
+      for (let dicts of projectDictionaries[i].dictionaries) {
+        dicts.dict = await JsonLoader.load(projects[i], dicts.lang)
+      }
+    }
+    console.log(projectDictionaries)
   }
 
   function tryInitFromLocalStorage() {

@@ -42,13 +42,13 @@
     </div>
   </div>
 
-  <table class="table table-striped">
-    <thead>
-    <tr>
-      <th class="fit" scope="col">Key</th>
-      <th class="fit" scope="col">{lang} ({totalKeys(dict)})</th>
-      <th class="fit" scope="col">{defaultLang} ({totalKeys(defaultDict)})</th>
-    </tr>
+  <table class="w-100 mt-3">
+    <thead class="border-bottom">
+      <tr>
+        <th>Key</th>
+        <th>{lang} ({totalKeys(dict)})</th>
+        <th>{defaultLang} ({totalKeys(defaultDict)})</th>
+      </tr>
     </thead>
     <tbody on:input={() => dict = dict}>
       <KeyValueTableRow {dict} {defaultDict} {uneditedDict} {filter}/>
@@ -59,8 +59,20 @@
 <DictClipboardOutput {dict} indent={project.config.indent} on:copied={() => alert('Now paste it to you version control system')}/>
 
 <style>
-  .fit {
-    white-space: nowrap;
+  th {
     width: 33%;
+    padding-bottom: 0.5em;
+  }
+
+  tbody :global(td) {
+    padding: 0.2em 0;
+  }
+
+  th:last-of-type, tbody :global(td:last-of-type) {
+    padding-left: 0.75em;
+  }
+
+  tbody :global(tr:hover) {
+    background: #eee;
   }
 </style>

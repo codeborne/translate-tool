@@ -2,13 +2,11 @@
   import KeyValueTableRow from './KeyValueTableRow.svelte'
   import {cleanEmptyKeys} from './cleanEmptyKeys'
   import {deepCopy} from '../common/utils'
-  import KeyFilter from './KeyFilter.svelte'
-  import Stats from './Stats.svelte'
-  import ShowEmptyKeyFilter from './ShowEmptyKeyFilter.svelte'
   import type {Dict, LoadedProject} from '../common/Project'
   import DictClipboardOutput from './DictClipboardOutput.svelte'
   import Filter from './Filter'
   import FilterControls from './FilterControls.svelte'
+  import {totalKeys} from './languageStats'
 
   export let project: LoadedProject
   export let lang: string
@@ -36,10 +34,6 @@
   let filter = new Filter()
 </script>
 
-<div class="d-flex justify-content-around gap-3">
-  <Stats {dict} {defaultLang} {defaultDict} indent={project.config.indent} totalLangs={project.langs.length}/>
-</div>
-
 <div class="mt-3 card p-3 d-flex flex-column align-items-center">
   <div class="d-flex flex-row justify-content-between w-100">
     <FilterControls bind:filter/>
@@ -52,8 +46,8 @@
     <thead>
     <tr>
       <th class="fit" scope="col">Key</th>
-      <th class="fit" scope="col">{lang}</th>
-      <th class="fit" scope="col">{defaultLang}</th>
+      <th class="fit" scope="col">{lang} ({totalKeys(dict)})</th>
+      <th class="fit" scope="col">{defaultLang} ({totalKeys(defaultDict)})</th>
     </tr>
     </thead>
     <tbody on:input={() => dict = dict}>

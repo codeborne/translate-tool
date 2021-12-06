@@ -5,11 +5,13 @@
   import {onMount} from 'svelte'
   import type {Project} from './Project'
   import LoadingSpinner from "./components/LoadingSpinner.svelte";
+  import type {ProjectDictionary} from './ProjectDictionary'
 
   let showConfig = false
   let projects: Project[]
   let selectedProjectTitle = localStorage.getItem('selectedProject')
   let project: Project
+  let projectDictionaries: ProjectDictionary[]
 
   onMount(async () => {
     await tryLoadPreConfiguredProjects()

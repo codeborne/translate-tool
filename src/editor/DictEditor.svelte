@@ -56,7 +56,7 @@
   </table>
 </div>
 
-<DictClipboardOutput {dict} indent={project.config.indent} on:copied={() => alert('No paste it to you version control system')}/>
+<DictClipboardOutput {dict} indent={project.config.indent} on:copied={() => alert('Now paste it to you version control system')}/>
 
 <style>
   .fit {

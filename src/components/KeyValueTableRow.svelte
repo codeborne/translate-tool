@@ -22,11 +22,12 @@
     {#if fullKey(key).toLowerCase().includes(filter.toLowerCase()) || filter.length === 0}
       {#if showEmptyKeys}
         {#if !uneditedDict[key]}
-          <tr>
+          <tr class:empty={selectedDict[key] === undefined || !selectedDict[key].length}>
             <td>{fullKey(key)}</td>
             <td>
               <input bind:value={selectedDict[key]} on:change={() => checkForChanges(selectedDict[key], uneditedDict[key])} class="form-control"
-                     class:changed={selectedDict[key] !==  uneditedDict[key]}>
+                     class:changed={selectedDict[key] !==  uneditedDict[key]}
+                     class:empty={selectedDict[key] === undefined || !selectedDict[key].length}>
             </td>
             <td>{defaultDict[key]}</td>
           </tr>
@@ -34,11 +35,12 @@
       {/if}
 
       {#if !showEmptyKeys}
-        <tr>
+        <tr class:empty={selectedDict[key] === undefined || !selectedDict[key].length}>
           <td>{fullKey(key)}</td>
           <td>
             <input bind:value={selectedDict[key]} on:change={() => checkForChanges(selectedDict[key], uneditedDict[key])} class="form-control"
-                   class:changed={selectedDict[key] !==  uneditedDict[key]}>
+                   class:changed={selectedDict[key] !==  uneditedDict[key]}
+                   >
           </td>
           <td>{defaultDict[key]}</td>
         </tr>
@@ -56,5 +58,10 @@
   .changed {
     background-color: aliceblue;
     border-color: lightblue;
+  }
+
+  .empty {
+    background-color: #fbfce1;
+    border-color: #feffe0;
   }
 </style>

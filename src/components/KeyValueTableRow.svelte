@@ -26,8 +26,7 @@
             <td>{fullKey(key)}</td>
             <td>
               <input bind:value={selectedDict[key]} on:change={() => checkForChanges(selectedDict[key], uneditedDict[key])} class="form-control"
-                     class:changed={selectedDict[key] !==  uneditedDict[key]}
-                     class:empty={selectedDict[key] === undefined || !selectedDict[key].length}>
+                     class:changed={selectedDict[key] !==  uneditedDict[key]}>
             </td>
             <td>{defaultDict[key]}</td>
           </tr>

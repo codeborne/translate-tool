@@ -1,4 +1,3 @@
-import JsonLoader from './JsonLoader'
 import jsonLoader from './JsonLoader'
 import {expect} from 'chai'
 import {stub} from 'sinon'
@@ -14,9 +13,9 @@ describe('JsonLoader', () => {
   const response = ['test1', 'test2']
 
   it('successfully returns a response', async () => {
-    stub(jsonLoader, 'load').resolves(response)
-    expect(await jsonLoader.load(project, 'tests')).to.equal(response)
-    expect(jsonLoader.load).calledWith(project, 'tests')
+    stub(jsonLoader, 'loadFor').resolves(response)
+    expect(await jsonLoader.loadFor(project, 'tests')).to.equal(response)
+    expect(jsonLoader.loadFor).calledWith(project, 'tests')
   })
 
   it('returns error if fetch fails', async () => {
@@ -31,10 +30,10 @@ describe('JsonLoader', () => {
   })
 
   it('decodes base64-encoded content in GitHub API response', async () => {
-    const githubResponse = {encoding: 'base64', content: 'eyJ0ZXN0IjoxMjN9Cg=='} // content -> '{test:123}' in base64
+    const githubResponse = {encoding: 'base64', content: 'eyJ0ZXN0IjoxMjN9Cg=='}
     stub(jsonLoader, 'loadJson').resolves(githubResponse)
 
-    expect(await jsonLoader.load(project, 'de')).to.deep.equal({test: 123})
+    expect(await jsonLoader.loadFor(project, 'de')).to.deep.equal({test: 123})
     expect(jsonLoader.loadJson).calledWith('some_project_url/de.json',{headers: { Authorization: 'token ' + project.token }})
   })
 })

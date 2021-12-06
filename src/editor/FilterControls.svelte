@@ -1,10 +1,15 @@
 <script lang="ts">
   import Filter from './Filter'
-  import KeyFilter from './KeyFilter.svelte'
-  import ShowEmptyKeyFilter from './ShowEmptyKeyFilter.svelte'
 
   export let filter: Filter
 </script>
 
-<KeyFilter bind:filter={filter.search}/>
-<ShowEmptyKeyFilter bind:showEmptyValuesOnly={filter.showEmptyValuesOnly}/>
+<div class="d-flex align-items-center">
+  <input class="form-control" bind:value={filter.search} placeholder="Filter...">
+
+  <div class="ms-3 form-check form-switch">
+    <input class="form-check-input" type="checkbox" bind:checked={filter.showEmptyValuesOnly} id="show-empty-only">
+    <label class="form-check-label text-nowrap" for="show-empty-only">Show only empty</label>
+  </div>
+</div>
+

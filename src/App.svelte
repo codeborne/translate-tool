@@ -1,9 +1,8 @@
 <script lang="ts">
-  import LangEditor from './components/LangEditor.svelte'
-  import LangImporter from './components/LangImporter.svelte'
+  import ConfigEditor from './components/config/ConfigEditor.svelte'
   import Navbar from './components/Navbar.svelte'
   import {onMount} from 'svelte'
-  import type {Project, LoadedProject} from './Project'
+  import type {LoadedProject, Project} from './Project'
   import LoadingSpinner from './components/LoadingSpinner.svelte'
   import jsonLoader from './JsonLoader'
 
@@ -41,7 +40,7 @@
   <Navbar projects={loadedProjects} bind:selectedProject bind:showConfig/>
   <main class="mt-5 mb-5 container">
     {#if showConfig}
-<!--      <LangImporter bind:projects bind:selectedProjectTitle bind:isOpen={showConfig}/>-->
+      <ConfigEditor bind:projects/>
     {:else}
 <!--      <LangEditor bind:project={selectedProject} bind:selectedProjectTitle/>-->
     {/if}

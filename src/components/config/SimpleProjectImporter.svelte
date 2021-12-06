@@ -1,8 +1,7 @@
 <script lang="ts">
+  import type {Project} from '../../Project'
 
-  export let isOpen: boolean
-  export let projects: any[]
-  export let selectedProjectTitle: string
+  export let projects: Project[]
 
   let url: string = ''
   let langs: Record<string, any>
@@ -17,14 +16,12 @@
       if (validate(dict)) {
         langs = dict
         await save(url)
-        isOpen = false
         warning = ''
       }
     } else {
       warning = 'Input must not be empty'
     }
   }
-
 
   function save(dictUrl: string) {
     if (!localStorage.getItem('projects')) {
@@ -40,9 +37,7 @@
     let newProjects: any[] = JSON.parse(localStorage.getItem('projects') as string)
     newProjects.push(newProject)
     localStorage.setItem('projects', JSON.stringify(newProjects))
-    selectedProjectTitle = title
     projects = newProjects
-    isOpen = false
   }
 
   const fetchDict = (dictUrl) => fetch(dictUrl).then(r => r.json()).catch((e) => warning = e)
@@ -74,7 +69,7 @@
   </div>
   <button on:click={submit} type="button" class="btn btn-primary w-auto">Import</button>
   {#if warning}
-    <div class="warning p-3 mb-3 mt-3">
+    <div class="alert alert-warning">
       {warning}
     </div>
   {/if}
@@ -85,16 +80,5 @@
     border: 1px solid lightgray;
     border-radius: 5px;
     background-color: white;
-  }
-
-  .warning {
-    border: 1px solid lightgray;
-    border-radius: 5px;
-    background-color: #F9D8D8;
-    text-align: center;
-  }
-
-  h1, h2, h3, h4, h5, h6 {
-    color: #404142;
   }
 </style>

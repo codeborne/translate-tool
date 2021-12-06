@@ -1,6 +1,6 @@
 import {act, render} from '@testing-library/svelte'
 import {expect} from 'chai'
-import LangImporter from './LangImporter.svelte'
+import LangImporter from './ConfigEditor.svelte'
 
 describe('<LangImporter>', () => {
   const projects: any[] = ['a','b']

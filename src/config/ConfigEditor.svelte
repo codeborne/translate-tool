@@ -5,7 +5,6 @@
   import type {Project} from '../common/Project'
 
   export let projects: Project[]
-  export let selectedProjectTitle: string
 </script>
 
 {#if projects.length > 0}

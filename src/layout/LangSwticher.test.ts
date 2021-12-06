@@ -1,10 +1,11 @@
 import {render} from '@testing-library/svelte'
 import {expect} from 'chai'
 import LangSwitcher from './LangSwitcher.svelte'
-import type {LoadedProject} from '../common/Project'
+import type {Project} from '../common/Project'
+import {LoadedProject} from '../common/Project'
 
 describe('<LangSwitcher>', () => {
-  const project = {dicts: {de: {}, et: {}, es: {}}} as Partial<LoadedProject>
+  const project = new LoadedProject({} as Project, {de: {}, et: {}, es: {}})
   const lang = 'de'
 
   it('renders project languages', () => {

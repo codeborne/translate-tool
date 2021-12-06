@@ -9,14 +9,14 @@
   let warning: string
   let username: string = ''
   let repo: string = ''
-  let structure: string = '/i18n/common'
+  let path: string = '/i18n/common'
   let title: string = ''
   let indent: number = 2
 
   async function submit() {
     warning = ''
     if (areInputsValid()) {
-      let dictUrl = `https://api.github.com/repos/${username}/${repo}/contents${structure}/`
+      let dictUrl = `https://api.github.com/repos/${username}/${repo}/contents${path}`
       let dict = await fetchDict(dictUrl + 'langs.json', token)
       if (dict) {
         dict = JSON.parse(b64DecodeUnicode(dict.content)) // content is base64 encoded and required decoding
@@ -33,7 +33,7 @@
   function areInputsValid() {
     if (username) {
       if (token) {
-        if (structure) {
+        if (path) {
           if (repo) {
             return true
           } else {
@@ -91,35 +91,34 @@
   }
 </script>
 
-<div id="addPrivate" class="card p-3 mb-3 d-flex flex-column justify-content-center align-items-center">
+<form id="addPrivate" class="card p-3 mb-3 d-flex flex-column justify-content-center align-items-center" on:submit|preventDefault={submit}>
   <h5 class="card-title">Import a private dictionary from GitHub repository</h5>
   <div class="card-body">
     <label class="form-label">Project name</label>
-    <input type="text" bind:value={title} class="form-control">
+    <input type="text" bind:value={title} class="form-control" required>
     <div class="form-text mb-4"><i>You can change it at any time.</i></div>
 
-    <label class="form-label">Repository owner's username</label>
-    <input type="text" bind:value={username} class="form-control">
+    <label class="form-label">Repository owner</label>
+    <input type="text" bind:value={username} class="form-control" required>
     <div class="form-text mb-4">eg. <b>codeborne</b> for <i>https://github.com/<b>codeborne</b></i></div>
 
     <label class="form-label">Repository name</label>
-    <input type="text" bind:value={repo} class="form-control">
+    <input type="text" bind:value={repo} class="form-control" required>
     <div class="form-text mb-4">eg. <b>translate-tool</b> for <i>https://github.com/codeborne/<b>translate-tool</b></i></div>
 
-    <label class="form-label">Project location</label>
-    <input type="text" bind:value={structure} class="form-control">
+    <label class="form-label">Path within repository</label>
+    <input type="text" bind:value={path} class="form-control" pattern="/.*/" required>
     <div class="form-text mb-4">Where the project is located within the root repository. eg <b>/i18n/</b></div>
-
 
     <label class="form-label">Personal auth token</label>
     <input type="text" bind:value={token} class="form-control">
     <div class="form-text mb-4">This token will be used to access the private repository</div>
   </div>
 
-  <button on:click={submit} type="button" class="btn btn-primary w-auto">Import</button>
+  <button class="btn btn-primary w-auto">Import</button>
   {#if warning}
     <div class="alert alert-warning mt-3">
       {warning}
     </div>
   {/if}
-</div>
+</form>

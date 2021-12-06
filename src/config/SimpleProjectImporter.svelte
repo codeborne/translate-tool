@@ -56,21 +56,21 @@
   }
 </script>
 
-<div id="addPublic" class="card p-3 mb-3 d-flex flex-column justify-content-center align-items-center">
+<form id="addPublic" class="card p-3 mb-3 d-flex flex-column justify-content-center align-items-center" on:submit|preventDefault={submit}>
   <h5 class="mb-4">Import a public dictionary</h5>
   <div class="mb-3">
     <label class="form-label">Project name</label>
-    <input type="text" bind:value={title} class="form-control" autofocus>
+    <input type="text" bind:value={title} class="form-control" required autofocus>
     <div class="form-text mb-4"><i>You can change it at any time</i></div>
 
     <label class="form-label">Translation files URL</label>
-    <input type="text" placeholder="Must end with /" bind:value={url} class="form-control" pattern=".*/">
+    <input type="url" placeholder="Must end with /" bind:value={url} class="form-control" pattern=".*/" required>
     <div class="form-text mb-4">Should contain <b><i>langs.json</i></b> and corresponding language files, e.g. <b><i>en.json</i></b></div>
   </div>
-  <button on:click={submit} type="button" class="btn btn-primary w-auto">Import</button>
+  <button class="btn btn-primary w-auto">Import</button>
   {#if warning}
     <div class="alert alert-warning">
       {warning}
     </div>
   {/if}
-</div>
+</form>

@@ -23,6 +23,7 @@
   function initProject(project: LoadedProject) {
     defaultLang = project.langs[0]
     defaultDict = project.dicts[defaultLang]
+    if (dict) initLang(lang)
   }
 
   function initLang(lang: string) {

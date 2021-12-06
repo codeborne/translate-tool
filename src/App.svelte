@@ -56,7 +56,7 @@
     {#if showConfig}
       <ConfigEditor bind:projects/>
     {:else if lang}
-      <DictEditor bind:project={selectedProject} {lang}/>
+      <DictEditor project={selectedProject} {lang}/>
     {/if}
   </main>
 {:else}

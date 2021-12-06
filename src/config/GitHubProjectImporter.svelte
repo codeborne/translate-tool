@@ -7,10 +7,10 @@
   let url: string = ''
   let langs: Record<string, any>
   let warning: string
-  let username: string = 'paywerk'
-  let repo: string = 'paywerk'
+  let username: string = ''
+  let repo: string = ''
   let structure: string = '/i18n/common'
-  let title: string = 'Paywerk Common'
+  let title: string = ''
   let indent: number = 2
 
   async function submit() {
@@ -92,34 +92,34 @@
 </script>
 
 <div id="addPrivate" class="card p-3 mb-3 d-flex flex-column justify-content-center align-items-center">
-  <h5 class="card-title">Import a private dictionary via GitHub</h5>
+  <h5 class="card-title">Import a private dictionary from GitHub repository</h5>
   <div class="card-body">
     <label class="form-label">Project name</label>
-    <input type="text" placeholder="project name" bind:value={title} class="form-control" aria-describedby="url">
+    <input type="text" bind:value={title} class="form-control">
     <div class="form-text mb-4"><i>You can change it at any time.</i></div>
 
     <label class="form-label">Repository owner's username</label>
-    <input type="text" placeholder="repo owner" bind:value={username} class="form-control" aria-describedby="url">
+    <input type="text" bind:value={username} class="form-control">
     <div class="form-text mb-4">eg. <b>codeborne</b> for <i>https://github.com/<b>codeborne</b></i></div>
 
     <label class="form-label">Repository name</label>
-    <input type="text" placeholder="repo name" bind:value={repo} class="form-control" aria-describedby="url">
+    <input type="text" bind:value={repo} class="form-control">
     <div class="form-text mb-4">eg. <b>translate-tool</b> for <i>https://github.com/codeborne/<b>translate-tool</b></i></div>
 
     <label class="form-label">Project location</label>
-    <input type="text" placeholder="project structure" bind:value={structure} class="form-control" aria-describedby="url">
-    <div class="form-text mb-4">Where the project is located within the root repository. eg <b>/i18n</b> or <b>/i18n/merchant</b></div>
+    <input type="text" bind:value={structure} class="form-control">
+    <div class="form-text mb-4">Where the project is located within the root repository. eg <b>/i18n/</b></div>
 
 
-    <label class="form-label">Authorization token</label>
-    <input type="text" placeholder="auth token" bind:value={token} class="form-control" aria-describedby="url">
+    <label class="form-label">Personal auth token</label>
+    <input type="text" bind:value={token} class="form-control">
     <div class="form-text mb-4">This token will be used to access the private repository</div>
-
-    <button on:click={submit} type="button" class="btn btn-primary w-auto mt-3">Import</button>
-    {#if warning}
-      <div class="alert alert-warning mt-3">
-        {warning}
-      </div>
-    {/if}
   </div>
+
+  <button on:click={submit} type="button" class="btn btn-primary w-auto">Import</button>
+  {#if warning}
+    <div class="alert alert-warning mt-3">
+      {warning}
+    </div>
+  {/if}
 </div>

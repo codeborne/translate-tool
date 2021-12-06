@@ -5,7 +5,7 @@
 
   let url: string = ''
   let langs: Record<string, any>
-  let title: string = 'Example Public'
+  let title: string = ''
   let indent: number = 2
 
   let warning = ''
@@ -59,13 +59,13 @@
 <div id="addPublic" class="card p-3 mb-3 d-flex flex-column justify-content-center align-items-center">
   <h5 class="mb-4">Import a public dictionary</h5>
   <div class="mb-3">
-    <label for="url" class="form-label">Project name</label>
-    <input type="text" placeholder="project name" bind:value={title} class="form-control" aria-describedby="url">
-    <div class="form-text mb-4"><i>You can change it at any time.</i></div>
+    <label class="form-label">Project name</label>
+    <input type="text" bind:value={title} class="form-control" autofocus>
+    <div class="form-text mb-4"><i>You can change it at any time</i></div>
 
-    <label for="url" class="form-label">Public configuration link</label>
-    <input type="text" placeholder="url link" bind:value={url} class="form-control" aria-describedby="url">
-    <div id="url" class="form-text mb-4">You can change it at any time. Example link: <i>../../i18n/langs.json</i></div>
+    <label class="form-label">Translation files URL</label>
+    <input type="text" placeholder="Must end with /" bind:value={url} class="form-control" pattern=".*/">
+    <div class="form-text mb-4">Should contain <b><i>langs.json</i></b> and corresponding language files, e.g. <b><i>en.json</i></b></div>
   </div>
   <button on:click={submit} type="button" class="btn btn-primary w-auto">Import</button>
   {#if warning}

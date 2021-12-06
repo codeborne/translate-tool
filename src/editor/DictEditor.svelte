@@ -31,18 +31,18 @@
     uneditedDict = deepCopy(dict)
   }
 
-  let filter: string = ''
-  let showEmptyKeys: boolean = false
+  let filter = ''
+  let showEmptyValuesOnly = false
 </script>
 
 <div class="d-flex justify-content-around gap-3">
-  <Stats {dict} {defaultLang} {defaultDict} indent={project.indent} totalLangs={project.langs.length}/>
+  <Stats {dict} {defaultLang} {defaultDict} indent={project.config.indent} totalLangs={project.langs.length}/>
 </div>
 
 <div class="mt-3 card p-3 d-flex flex-column align-items-center">
   <div class="d-flex flex-row justify-content-between w-100">
     <KeyFilter bind:filter />
-    <ShowEmptyKeyFilter bind:showEmptyKeys />
+    <ShowEmptyKeyFilter bind:showEmptyValuesOnly/>
     <div class="dl-flex justify-content-center align-items-center">
       <a class="btn btn-primary" href="#output">Jump to bottom</a>
     </div>
@@ -57,7 +57,7 @@
     </tr>
     </thead>
     <tbody on:input={() => dict = dict}>
-      <KeyValueTableRow {dict} {defaultDict} {uneditedDict} {filter} bind:showEmptyKeys/>
+      <KeyValueTableRow {dict} {defaultDict} {uneditedDict} {filter} {showEmptyValuesOnly}/>
     </tbody>
   </table>
 </div>

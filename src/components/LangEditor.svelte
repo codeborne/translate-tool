@@ -8,11 +8,9 @@
   import LangSwitcher from './LangSwitcher.svelte'
   import ShowEmptyKeyFilter from './ShowEmptyKeyFilter.svelte'
   import LoadingSpinner from './LoadingSpinner.svelte'
-  import type {Project} from '../Project'
-  import jsonLoader from '../JsonLoader'
+  import type {LoadedProject} from '../Project'
 
-  export let project: Project
-  export let selectedProjectTitle: string
+  export let project: LoadedProject
   export let copied = true
 
   let langs: string[]
@@ -26,9 +24,6 @@
   let selectedDict: Record<string, any> | undefined
   let defaultDict: Record<string, any> | undefined
   let uneditedDict: Record<string, any> | undefined
-
-  $: if (selectedProjectTitle) loadProject()
-  $: if (lang && lang != loadedLang) loadDict(lang)
 
   function initDefaultDict() {
     defaultDict = deepCopy(selectedDict)
@@ -49,16 +44,6 @@
     initDefaultDict()
     lang = defaultLang
     copied = true
-  }
-
-  async function loadDict(lang: string) {
-    selectedDict = await load(lang)
-    loadedLang = lang
-    initUneditedDict()
-  }
-
-  function load(fileBaseName: string) {
-    return jsonLoader.load(project, fileBaseName)
   }
 
   $: if (selectedDict) {
@@ -83,13 +68,6 @@
   <LoadingSpinner/>
 {:else}
   <div class="d-flex justify-content-around gap-3">
-    <LangSwitcher
-      bind:changed={copied}
-      bind:project
-      bind:selectedProjectTitle
-      bind:lang
-      bind:langs
-    />
     <Stats
       bind:stats={dictKeyStats}
       bind:indent={project.indent}

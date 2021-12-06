@@ -5,7 +5,7 @@ export interface Project {
   indent: number
 }
 
-export type Dict = object
+export type Dict = Record<string, object | string>
 
 export interface LoadedProject extends Project {
   dicts: Record<string, Dict>

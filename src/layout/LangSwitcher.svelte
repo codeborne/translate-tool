@@ -1,5 +1,5 @@
 <script lang="ts">
-  import type {LoadedProject} from '../Project'
+  import type {LoadedProject} from '../common/Project'
 
   export let project: LoadedProject
   export let lang: string

@@ -1,13 +1,14 @@
 <script lang="ts">
-  import ConfigEditor from './components/config/ConfigEditor.svelte'
-  import Navbar from './components/Navbar.svelte'
+  import ConfigEditor from './config/ConfigEditor.svelte'
+  import Navbar from './layout/Navbar.svelte'
   import {onMount} from 'svelte'
-  import type {LoadedProject, Project} from './Project'
-  import LoadingSpinner from './components/LoadingSpinner.svelte'
-  import jsonLoader from './JsonLoader'
-  import LangSwitcher from "./components/LangSwitcher.svelte";
-  import ProjectSwitcher from "./components/ProjectSwitcher.svelte";
-  import ToggleConfigButton from "./components/config/ToggleConfigButton.svelte";
+  import type {LoadedProject, Project} from './common/Project'
+  import LoadingSpinner from './common/LoadingSpinner.svelte'
+  import jsonLoader from './common/JsonLoader'
+  import LangSwitcher from "./layout/LangSwitcher.svelte";
+  import ProjectSwitcher from "./layout/ProjectSwitcher.svelte";
+  import ToggleConfigButton from "./config/ToggleConfigButton.svelte";
+  import DictEditor from "./editor/DictEditor.svelte";
 
   let showConfig = false
   let projects: Project[]
@@ -55,7 +56,7 @@
     {#if showConfig}
       <ConfigEditor bind:projects/>
     {:else}
-<!--      <LangEditor bind:project={selectedProject} bind:selectedProjectTitle/>-->
+      <DictEditor bind:project={selectedProject} {lang}/>
     {/if}
   </main>
 {:else}

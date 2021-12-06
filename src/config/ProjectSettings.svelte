@@ -1,5 +1,5 @@
 <script lang="ts">
-  import type {Project} from '../../Project'
+  import type {Project} from '../common/Project'
 
   export let projects: Project[]
 

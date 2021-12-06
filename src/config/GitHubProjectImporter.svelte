@@ -1,5 +1,5 @@
 <script lang="ts">
-  import {b64DecodeUnicode} from '../../utils'
+  import {b64DecodeUnicode} from '../common/utils'
 
   export let token: string = ''
   export let projects: any[]

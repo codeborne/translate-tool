@@ -1,9 +1,9 @@
 import {act, render} from '@testing-library/svelte'
 import {expect} from 'chai'
-import LangEditor from './LangEditor.svelte'
+import LangEditor from './DictEditor.svelte'
 import {stub} from 'sinon'
-import type {Project} from '../Project'
-import jsonLoader from '../JsonLoader'
+import type {Project} from '../common/Project'
+import jsonLoader from '../common/JsonLoader'
 
 describe('<LangEditor>', () => {
   const dict = {hello: 'world', nested: {hello: 'Another World'}}

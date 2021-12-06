@@ -2,13 +2,12 @@
   import KeyValueTableRow from './KeyValueTableRow.svelte'
   import {cleanEmptyKeys} from './cleanEmptyKeys'
   import {getTotalFilledKeys, getTotalKeys} from './languageStats'
-  import {areObjectsEqual, deepCopy} from '../utils'
+  import {areObjectsEqual, deepCopy} from '../common/utils'
   import KeyFilter from './KeyFilter.svelte'
   import Stats from './Stats.svelte'
-  import LangSwitcher from './LangSwitcher.svelte'
   import ShowEmptyKeyFilter from './ShowEmptyKeyFilter.svelte'
-  import LoadingSpinner from './LoadingSpinner.svelte'
-  import type {LoadedProject} from '../Project'
+  import LoadingSpinner from '../common/LoadingSpinner.svelte'
+  import type {LoadedProject} from '../common/Project'
 
   export let project: LoadedProject
   export let copied = true
@@ -33,17 +32,6 @@
 
   function initUneditedDict() {
     uneditedDict = cleanEmptyKeys(deepCopy(selectedDict))
-    copied = true
-  }
-
-  async function loadProject() {
-    selectedDict = undefined
-    langs = await load('langs')
-    // langs = allProjectDictionaries.find(p => p.title === selectedProjectTitle).dictionaries.map(l => l.lang)
-    const defaultLang = langs[0]
-    await loadDict(defaultLang)
-    initDefaultDict()
-    lang = defaultLang
     copied = true
   }
 

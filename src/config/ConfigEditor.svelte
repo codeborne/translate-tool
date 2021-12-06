@@ -2,7 +2,7 @@
   import ProjectSettings from './ProjectSettings.svelte';
   import SimpleProjectImporter from './SimpleProjectImporter.svelte';
   import GitHubProjectImporter from './GitHubProjectImporter.svelte';
-  import type {Project} from '../../Project'
+  import type {Project} from '../common/Project'
 
   export let projects: Project[]
   export let selectedProjectTitle: string

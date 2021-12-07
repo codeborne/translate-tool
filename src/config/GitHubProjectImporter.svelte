@@ -72,7 +72,7 @@
   }
 
   function fetchDict(dictUrl, token) {
-    const headers = new Headers({'Authorization': `token ${token}`});
+    const headers = new Headers({'Authorization': `token ${token}`})
     return fetch(dictUrl, { method: 'GET', headers})
       .then(response => {
         if (response.ok) {

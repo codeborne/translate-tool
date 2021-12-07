@@ -5,10 +5,10 @@
   import type {LoadedProject, Project} from './common/Project'
   import LoadingSpinner from './common/LoadingSpinner.svelte'
   import jsonLoader from './common/JsonLoader'
-  import LangSwitcher from "./layout/LangSwitcher.svelte";
-  import ProjectSwitcher from "./layout/ProjectSwitcher.svelte";
-  import ToggleConfigButton from "./config/ToggleConfigButton.svelte";
-  import DictEditor from "./editor/DictEditor.svelte";
+  import LangSwitcher from './layout/LangSwitcher.svelte'
+  import ProjectSwitcher from './layout/ProjectSwitcher.svelte'
+  import ToggleConfigButton from './config/ToggleConfigButton.svelte'
+  import DictEditor from './editor/DictEditor.svelte'
 
   let showConfig = false
   let projects: Project[]

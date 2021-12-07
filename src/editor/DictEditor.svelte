@@ -58,11 +58,13 @@
   </table>
 </div>
 
-{#if project.config.url.includes(gitHubHost)}
-  <GitHubOutput {dict} config={project.config}/>
-{:else}
-  <DictClipboardOutput {dict} indent={project.config.indent} on:copied={() => alert('Now paste it to you version control system')}/>
-{/if}
+<div id="output">
+  {#if project.config.url.includes(gitHubHost)}
+    <GitHubOutput {dict} config={project.config}/>
+  {:else}
+    <DictClipboardOutput {dict} indent={project.config.indent} on:copied={() => alert('Now paste it to you version control system')}/>
+  {/if}
+</div>
 
 <style>
   th {

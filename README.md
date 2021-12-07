@@ -1,7 +1,11 @@
 # Translation Tool
 
 The tool to edit json translation files conveniently.
-(Work in progress)
+
+This is a pre-configured fork of codeborne/translation-tool, to update to the latest version use:
+```
+git pull git@github.com:codeborne/translate-tool.git master
+```
 
 ## Available Scripts
 

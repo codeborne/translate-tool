@@ -1,56 +1,70 @@
 <script lang="ts">
-  import LangEditor from './components/LangEditor.svelte'
-  import LangImporter from './components/LangImporter.svelte'
-  import Navbar from './components/Navbar.svelte'
+  import ConfigEditor from './config/ConfigEditor.svelte'
+  import Navbar from './layout/Navbar.svelte'
   import {onMount} from 'svelte'
-  import type {Project} from './Project'
+  import type {LoadedProject, Project} from './common/Project'
+  import LoadingSpinner from './common/LoadingSpinner.svelte'
+  import jsonLoader from './common/JsonLoader'
+  import LangSwitcher from './layout/LangSwitcher.svelte'
+  import ProjectSwitcher from './layout/ProjectSwitcher.svelte'
+  import ToggleConfigButton from './config/ToggleConfigButton.svelte'
+  import DictEditor from './editor/DictEditor.svelte'
 
   let showConfig = false
   let projects: Project[]
-  let selectedProjectTitle = localStorage.getItem('selectedProject')
-  let project: Project
+  let loadedProjects: LoadedProject[]
+  let selectedProject: LoadedProject
+  let lang: string
 
   onMount(async () => {
-    await tryLoadPreConfiguredProjects()
-    if (!projects) tryInitFromLocalStorage()
-    if (!projects) return showConfig = true
+    projects = await tryLoadPreConfiguredProjects()
+    if (!projects) projects = tryInitFromLocalStorage()
+    loadedProjects = await Promise.all(projects.map(p => jsonLoader.loadProject(p)))
+    const lastTitle = localStorage.getItem('selectedProject')
+    selectedProject = loadedProjects.find(p => p.title == lastTitle) ?? loadedProjects[0]
+    showConfig = !selectedProject
   })
 
-  async function tryLoadPreConfiguredProjects() {
-    try {
-      projects = await fetch('projects.json').then(r => r.json())
-    } catch (e) {
-      console.warn('No environment file found, or it may have incorrect incorrect formatting. Letting the user import a project instead..')
-    }
+  function tryLoadPreConfiguredProjects() {
+    return jsonLoader.loadJson('projects.json').catch(e => console.warn('No deployment argument file found.'))
   }
 
-  function tryInitFromLocalStorage() {
-    projects = JSON.parse(localStorage.getItem('projects') ?? 'null')
+  function tryInitFromLocalStorage(): Project[] {
+    return JSON.parse(localStorage.getItem('projects') ?? '[]')
   }
 
-  $: if (selectedProjectTitle && projects?.length) {
-    project = projects.find(p => p.title === selectedProjectTitle) ?? projects[0]
-    selectedProjectTitle = project.title
-    localStorage.setItem('selectedProject', selectedProjectTitle)
+  function showUnhandledError(e: PromiseRejectionEvent) {
+    console.error(e.reason)
+    alert('Error, please reload the page:\n\n' + e.reason?.message ?? '')
   }
 </script>
 
-{#if projects}
-  <Navbar projectTitles={projects.map(p => p.title)} bind:selectedProjectTitle bind:showConfig/>
-  <main class="mt-5 mb-5 container">
-    {#if showConfig}
-      <LangImporter bind:projects bind:selectedProjectTitle bind:isOpen={showConfig}/>
+<svelte:window on:unhandledrejection={showUnhandledError}/>
+
+<Navbar>
+  {#if loadedProjects}
+    {#if !showConfig}
+      <ProjectSwitcher projects={loadedProjects} bind:selectedProject/>
+      <LangSwitcher project={selectedProject} bind:lang/>
     {:else}
-      <LangEditor bind:project bind:selectedProjectTitle/>
+      <div class="flex-grow-1"></div>
     {/if}
-  </main>
-{:else}
-  <div class="spinner"></div>
-{/if}
+    <ToggleConfigButton bind:showConfig showBack={loadedProjects.length > 0}/>
+  {/if}
+</Navbar>
+
+<main class="my-3 container">
+  {#if !loadedProjects}
+    <LoadingSpinner class="my-5"/>
+  {:else if showConfig}
+    <ConfigEditor bind:projects/>
+  {:else if lang}
+    <DictEditor project={selectedProject} {lang}/>
+  {/if}
+</main>
 
 <style>
-  .outline {
-    border: 1px solid lightgray;
-    border-radius: 5px;
+  :global(h1, h2, h3, h4, h5, h6) {
+    color: #404142;
   }
 </style>

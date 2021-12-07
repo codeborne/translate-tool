@@ -1,6 +1,7 @@
-process.env.NODE_ENV = 'test';
+process.env.NODE_ENV = 'test'
 
 module.exports = {
+  testsFinishTimeout: 5000,
   plugins: [require('@snowpack/web-test-runner-plugin')()],
   testRunnerHtml: testFramework =>
     `<html>

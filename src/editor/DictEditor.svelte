@@ -7,6 +7,8 @@
   import Filter from './Filter'
   import FilterControls from './FilterControls.svelte'
   import {totalKeys} from './languageStats'
+  import {gitHubHost} from '../common/JsonLoader'
+  import GitHubOutput from './GitHubOutput.svelte'
 
   export let project: LoadedProject
   export let lang: string
@@ -51,12 +53,16 @@
       </tr>
     </thead>
     <tbody on:input={() => dict = dict}>
-      <KeyValueTableRow {dict} {defaultDict} {uneditedDict} {filter}/>
+      <KeyValueTableRow {lang} {dict} {defaultDict} {uneditedDict} {filter}/>
     </tbody>
   </table>
 </div>
 
-<DictClipboardOutput {dict} indent={project.config.indent} on:copied={() => alert('Now paste it to you version control system')}/>
+{#if project.config.url.includes(gitHubHost)}
+  <GitHubOutput {dict} config={project.config}/>
+{:else}
+  <DictClipboardOutput {dict} indent={project.config.indent} on:copied={() => alert('Now paste it to you version control system')}/>
+{/if}
 
 <style>
   th {

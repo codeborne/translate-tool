@@ -1,6 +1,7 @@
 <script lang="ts">
   import Filter from './Filter'
 
+  export let lang: string
   export let dict: Record<string, any>
   export let defaultDict: Record<any, string>
   export let uneditedDict: Record<string, any>
@@ -18,7 +19,7 @@
     <tr class:empty={!dict[key]}>
       <td>{fullKey(key)}</td>
       <td>
-        <input bind:value={dict[key]} class="form-control" class:changed={dict[key] !== uneditedDict[key]}>
+        <input {lang} bind:value={dict[key]} class="form-control" class:changed={dict[key] !== uneditedDict[key]}>
       </td>
       <td>{defaultDict[key]}</td>
     </tr>

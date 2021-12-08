@@ -41,7 +41,7 @@ export class GitHubClient {
   }
 
   request(url: string, init?: RequestInit) {
-    return jsonLoader.request(url, {headers: {...this.authHeader(), ...init?.headers}, ...init})
+    return jsonLoader.request(url, {...init, headers: {...this.authHeader(), ...init?.headers}})
   }
 
   post(url: string, body: any) {

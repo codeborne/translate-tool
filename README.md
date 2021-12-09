@@ -1,8 +1,11 @@
 # Translation Tool
 
-[![Build & Test](https://github.com/codeborne/translate-tool/actions/workflows/ci.yml/badge.svg)](https://github.com/codeborne/translate-tool/actions/workflows/ci.yml)
-
 The tool to edit json translation files conveniently.
+
+This is a pre-configured fork of codeborne/translation-tool, to update to the latest version use:
+```
+git pull git@github.com:codeborne/translate-tool.git master
+```
 
 ## Available Scripts
 

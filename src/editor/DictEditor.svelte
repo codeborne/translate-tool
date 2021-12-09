@@ -7,8 +7,8 @@
   import Filter from './Filter'
   import FilterControls from './FilterControls.svelte'
   import {totalKeys} from './languageStats'
-  import {gitHubHost} from '../common/JsonLoader'
-  import GitHubOutput from './GitHubOutput.svelte'
+  import GitHubOutput from '../github/GitHubOutput.svelte'
+  import {GitHubClient} from '../github/GitHubClient'
 
   export let project: LoadedProject
   export let lang: string
@@ -59,7 +59,7 @@
 </div>
 
 <div id="output">
-  {#if project.config.url.includes(gitHubHost) && project.config.token}
+  {#if project.config.url.includes(GitHubClient.host) && project.config.token}
     <GitHubOutput {dict} {lang} config={project.config}/>
   {:else}
     <DictClipboardOutput {dict} indent={project.config.indent} on:copied={() => alert('Now paste it to you version control system')}/>

@@ -3,6 +3,8 @@
 
   export let project: LoadedProject
   export let lang: string = project.langs[0]
+
+  $: if (!project.dicts[lang]) lang = project.langs[0]
 </script>
 
 <select bind:value={lang} class="form-select w-auto me-3">

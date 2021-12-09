@@ -29,7 +29,7 @@
   }
 
   function initLang(lang: string) {
-    dict = project.dicts[lang]
+    dict = project.dicts[lang] ?? {}
     uneditedDict = deepCopy(dict)
   }
 

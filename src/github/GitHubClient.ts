@@ -34,7 +34,7 @@ export class GitHubClient {
   }
 
   async getFileContent(url: string) {
-    const response = await this.getFileData(url)
+    const response = await this.getFileData(url, this.branch).catch(() => this.getFileData(url))
     if (response.encoding === 'base64') return JSON.parse(b64DecodeUnicode(response.content))
     else response.content
   }

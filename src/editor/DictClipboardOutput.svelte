@@ -19,7 +19,7 @@
 
 <div class="mt-3 card p-3">
   <div class="d-flex justify-content-between mb-3">
-    <button on:click={copy} class="btn btn-primary w-auto">Copy json to clipboard <i class="fas fa-copy"></i></button>
+    <button on:click={copy} class="btn btn-primary w-auto"><i class="fas fa-copy me-1"></i> Copy json to clipboard</button>
     <a class="btn btn-primary" href="#top">Jump to top</a>
   </div>
   <textarea id="rawOutput" bind:this={textarea}

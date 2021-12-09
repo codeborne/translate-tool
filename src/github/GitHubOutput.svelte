@@ -8,7 +8,7 @@
 
   const client = new GitHubClient(config)
 
-  async function push() {
+  async function save() {
     const result = await client.saveFile(lang, dict)
     if (confirm(`Saved to ${client.branch}, open it for review?`))
       window.open(result.commit.html_url, '_blank')
@@ -17,7 +17,7 @@
 
 <div class="mt-3 card p-3">
   <div class="d-flex justify-content-between mb-3">
-    <button on:click={push} class="btn btn-primary w-auto"><i class="fas fa-save me-1"></i> Save to <i>{client.branch}</i> branch</button>
+    <button on:click={save} class="btn btn-primary w-auto"><i class="fas fa-save me-1"></i> Save to <i>{client.branch}</i> branch</button>
     <a class="btn btn-primary" href="#top">Jump to top</a>
   </div>
 </div>

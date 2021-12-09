@@ -66,18 +66,18 @@ export class GitHubClient {
   }
 }
 
-interface GitHubFile {
+export interface GitHubFile {
   content: string,
   encoding: string,
   sha: string
 }
 
-interface GitHubSavedFile {
+export interface GitHubSavedFile {
   content: {name: string, path: string, sha: string, html_url: string}
   commit: {sha: string, html_url: string}
 }
 
-interface GitHubRef {
+export interface GitHubRef {
   ref: string,
   url: string
   object: {

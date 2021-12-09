@@ -28,12 +28,4 @@ describe('JsonLoader', () => {
       expect(e.message).to.eq(`Failed to load ${project.url}`)
     }
   })
-
-  it('decodes base64-encoded content in GitHub API response', async () => {
-    const githubResponse = {encoding: 'base64', content: 'eyJ0ZXN0IjoxMjN9Cg=='}
-    stub(jsonLoader, 'loadJson').resolves(githubResponse)
-
-    expect(await jsonLoader.loadFor(project, 'de')).to.deep.equal({test: 123})
-    expect(jsonLoader.loadJson).calledWith('some_project_url/de.json',{headers: { Authorization: 'token ' + project.token }})
-  })
 })

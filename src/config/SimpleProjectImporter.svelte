@@ -1,12 +1,11 @@
 <script lang="ts">
+  import type {Project} from '../common/Project'
 
-  export let isOpen: boolean
-  export let projects: any[]
-  export let selectedProject: string
+  export let projects: Project[]
 
   let url: string = ''
   let langs: Record<string, any>
-  let title: string = 'Example Public'
+  let title: string = ''
   let indent: number = 2
 
   let warning = ''
@@ -17,14 +16,12 @@
       if (validate(dict)) {
         langs = dict
         await save(url)
-        isOpen = false
         warning = ''
       }
     } else {
       warning = 'Input must not be empty'
     }
   }
-
 
   function save(dictUrl: string) {
     if (!localStorage.getItem('projects')) {
@@ -40,9 +37,7 @@
     let newProjects: any[] = JSON.parse(localStorage.getItem('projects') as string)
     newProjects.push(newProject)
     localStorage.setItem('projects', JSON.stringify(newProjects))
-    selectedProject = title
     projects = newProjects
-    isOpen = false
   }
 
   const fetchDict = (dictUrl) => fetch(dictUrl).then(r => r.json()).catch((e) => warning = e)
@@ -61,40 +56,21 @@
   }
 </script>
 
-<div class="outline p-3 mb-3 d-flex flex-column justify-content-center align-items-center">
+<form id="addPublic" class="card p-3 mb-3 d-flex flex-column justify-content-center align-items-center" on:submit|preventDefault={submit}>
   <h5 class="mb-4">Import a public dictionary</h5>
   <div class="mb-3">
-    <label for="url" class="form-label">Project name</label>
-    <input type="text" placeholder="project name" bind:value={title} class="form-control" aria-describedby="url">
-    <div class="form-text mb-4"><i>You can change it at any time.</i></div>
+    <label class="form-label">Project name</label>
+    <input type="text" bind:value={title} class="form-control" required autofocus>
+    <div class="form-text mb-4"><i>You can change it at any time</i></div>
 
-    <label for="url" class="form-label">Public configuration link</label>
-    <input type="text" placeholder="url link" bind:value={url} class="form-control" aria-describedby="url">
-    <div id="url" class="form-text mb-4">You can change it at any time. Example link: <i>../../i18n/langs.json</i></div>
+    <label class="form-label">Translation files URL</label>
+    <input type="url" placeholder="Must end with /" bind:value={url} class="form-control" pattern=".*/" required>
+    <div class="form-text mb-4">Should contain <b><i>langs.json</i></b> and corresponding language files, e.g. <b><i>en.json</i></b></div>
   </div>
-  <button on:click={submit} type="button" class="btn btn-primary w-auto">Import</button>
+  <button class="btn btn-primary w-auto">Import</button>
   {#if warning}
-    <div class="warning p-3 mb-3 mt-3">
+    <div class="alert alert-warning">
       {warning}
     </div>
   {/if}
-</div>
-
-<style>
-  .outline {
-    border: 1px solid lightgray;
-    border-radius: 5px;
-    background-color: white;
-  }
-
-  .warning {
-    border: 1px solid lightgray;
-    border-radius: 5px;
-    background-color: #F9D8D8;
-    text-align: center;
-  }
-
-  h1, h2, h3, h4, h5, h6 {
-    color: #404142;
-  }
-</style>
+</form>

@@ -1,7 +1,8 @@
 # Translation Tool
 
+[![Build & Test](https://github.com/codeborne/translate-tool/actions/workflows/ci.yml/badge.svg)](https://github.com/codeborne/translate-tool/actions/workflows/ci.yml)
+
 The tool to edit json translation files conveniently.
-(Work in progress)
 
 ## Available Scripts
 

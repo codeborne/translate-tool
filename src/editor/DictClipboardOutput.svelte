@@ -3,6 +3,7 @@
   import type {Dict} from '../common/Project'
 
   export let dict: Dict
+  export let lang: string
   export let indent: number
 
   let textarea: HTMLTextAreaElement
@@ -24,7 +25,7 @@
   <a class="btn btn-primary" href="#top">Jump to top</a>
 </div>
 
-<textarea id="rawOutput" bind:this={textarea}
+<textarea id="rawOutput" {lang} bind:this={textarea}
           class="form-control mb-3 bg-light"
           style={{width: '100%'}}
           rows="20">{JSON.stringify(dict, null, indent)}</textarea>

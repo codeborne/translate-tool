@@ -14,7 +14,7 @@
 
 {#each Object.entries(defaultDict) as [key, defaultValue]}
   {#if typeof defaultValue === 'object'}
-    <svelte:self keyPrefix={fullKey(key)} dict={dict[key] ??= {}} defaultDict={defaultValue} uneditedDict={uneditedDict[key] ??= {}} {filter}/>
+    <svelte:self keyPrefix={fullKey(key)} dict={dict[key] ??= {}} defaultDict={defaultValue} uneditedDict={uneditedDict[key] ??= {}} {filter} {lang}/>
   {:else if filter.shouldShow(fullKey(key), uneditedDict[key])}
     <tr class:empty={!dict[key]}>
       <td>{fullKey(key)}</td>

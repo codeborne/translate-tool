@@ -1,4 +1,4 @@
-import {deepEqual} from './utils'
+import {decodeBase64Unicode, deepEqual, encodeBase64Unicode} from './utils'
 import {expect} from 'chai'
 
 describe('areObjectsEqual', () => {
@@ -29,4 +29,9 @@ describe('areObjectsEqual', () => {
     expect(deepEqual(obj11, obj12)).to.equal(true)
     expect(deepEqual(obj11, obj13)).to.equal(false)
   })
+})
+
+it('encodes and decodes UTF-8 base64', () => {
+  expect(encodeBase64Unicode('õun')).to.eq('w7V1bg==')
+  expect(decodeBase64Unicode('w7V1bg==')).to.eq('õun')
 })

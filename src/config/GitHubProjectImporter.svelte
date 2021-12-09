@@ -1,5 +1,5 @@
 <script lang="ts">
-  import {b64DecodeUnicode} from '../common/utils'
+  import {decodeBase64Unicode} from '../common/utils'
 
   export let token: string = ''
   export let projects: any[]
@@ -16,10 +16,11 @@
   async function submit() {
     warning = ''
     if (areInputsValid()) {
+      // TODO: use GitHubClient
       let dictUrl = `https://api.github.com/repos/${username}/${repo}/contents${path}`
       let dict = await fetchDict(dictUrl + 'langs.json', token)
       if (dict) {
-        dict = JSON.parse(b64DecodeUnicode(dict.content)) // content is base64 encoded and required decoding
+        dict = JSON.parse(decodeBase64Unicode(dict.content)) // content is base64 encoded and required decoding
         validate(dict)
         if (warning == '') {
           langs = dict

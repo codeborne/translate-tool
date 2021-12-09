@@ -1,5 +1,5 @@
 import type {Dict, Project} from '../common/Project'
-import {b64DecodeUnicode} from '../common/utils'
+import {decodeBase64Unicode, encodeBase64Unicode} from '../common/utils'
 import jsonLoader from '../common/JsonLoader'
 
 export class GitHubClient {
@@ -35,15 +35,15 @@ export class GitHubClient {
 
   async getFileContent(url: string) {
     const response = await this.getFileData(url, this.branch).catch(() => this.getFileData(url))
-    if (response.encoding === 'base64') return JSON.parse(b64DecodeUnicode(response.content))
+    if (response.encoding === 'base64') return JSON.parse(decodeBase64Unicode(response.content))
     else response.content
   }
 
   async saveFile(lang: string, dict: Dict) {
     await this.createBranchIfNeeded()
     const fileUrl = this.config.url + lang + '.json'
-    const content = btoa(JSON.stringify(dict, null, this.config.indent)) // TODO: move stringify logic to a common place
-    const previousFileBlobSha = (await this.getFileData(fileUrl + '?ref=' + this.branch)).sha // TODO: store initial file sha in LoadedProject
+    const content = encodeBase64Unicode(JSON.stringify(dict, null, this.config.indent)) // TODO: move stringify logic to a common place, e.g. LoadedProject
+    const previousFileBlobSha = (await this.getFileData(fileUrl + '?ref=' + this.branch)).sha // TODO: store initial loaded file(blob) sha in LoadedProject
     return await this.put(fileUrl, {
       message: `Updated ${lang} translations`,
       sha: previousFileBlobSha,

@@ -19,7 +19,7 @@ describe('GithubClient', () => {
   it('decodes base64 content', async () => {
     const githubResponse = {encoding: 'base64', content: 'eyJ0ZXN0IjoxMjN9Cg=='} as GitHubFile
     stub(client, 'request').resolves(githubResponse)
-    const content = await client.getFileContent(client.config.url + 'en.json') // TODO: pass just the filename here
+    const content = await client.getFileContent('en.json')
     expect(content).to.deep.eq({test: 123})
   })
 })

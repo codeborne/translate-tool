@@ -16,10 +16,9 @@ class JsonLoader {
   }
 
   loadFor(project: Project, fileBaseName: string): Promise<any> {
-    const url = getBaseUrl(project.url) + '/' + fileBaseName + '.json'
-    return url.includes(GitHubClient.host) ?
-      new GitHubClient(project).getFileContent(url) :
-      this.loadJson(url)
+    return project.url.includes(GitHubClient.host) ?
+      new GitHubClient(project).getFileContent(fileBaseName + '.json') :
+      this.loadJson(getBaseUrl(project.url) + '/' + fileBaseName + '.json')
   }
 
   async loadProject(project: Project): Promise<LoadedProject> {

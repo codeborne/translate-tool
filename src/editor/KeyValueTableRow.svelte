@@ -21,7 +21,11 @@
       <td>
         <textarea {lang} bind:value={dict[key]} class="form-control" class:changed={dict[key] !== uneditedDict[key]} rows="1"></textarea>
       </td>
-      <td>{defaultDict[key]}</td>
+      <td>
+        {defaultDict[key]}
+        <a target="translate" href="https://translate.google.com/?sl=auto&tl={lang}&text={encodeURIComponent(defaultDict[key])}&op=translate"
+           title="Open Google Translate" class="float-end"><i class="fas fa-language"></i></a>
+      </td>
     </tr>
   {/if}
 {/each}

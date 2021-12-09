@@ -15,9 +15,4 @@
   }
 </script>
 
-<div class="mt-3 card p-3">
-  <div class="d-flex justify-content-between mb-3">
-    <button on:click={save} class="btn btn-primary w-auto"><i class="fas fa-save me-1"></i> Save to <i>{client.branch}</i> branch</button>
-    <a class="btn btn-primary" href="#top">Jump to top</a>
-  </div>
-</div>
+<button on:click={save} class="btn btn-primary w-auto"><i class="fas fa-save me-1"></i> Save to <i>{client.branch}</i> branch</button>

@@ -17,13 +17,13 @@
   }
 </script>
 
-<div class="mt-3 card p-3">
-  <div class="d-flex justify-content-between mb-3">
-    <button on:click={copy} class="btn btn-primary w-auto"><i class="fas fa-copy me-1"></i> Copy json to clipboard</button>
-    <a class="btn btn-primary" href="#top">Jump to top</a>
-  </div>
-  <textarea id="rawOutput" bind:this={textarea}
-            class="form-control mb-3 bg-light"
-            style={{width: '100%'}}
-            rows="20">{JSON.stringify(dict, null, indent)}</textarea>
+<div class="d-flex justify-content-between mb-3">
+  <slot/>
+  <button on:click={copy} class="btn btn-primary w-auto"><i class="fas fa-copy me-1"></i> Copy json to clipboard</button>
+  <a class="btn btn-primary" href="#top">Jump to top</a>
 </div>
+
+<textarea id="rawOutput" bind:this={textarea}
+          class="form-control mb-3 bg-light"
+          style={{width: '100%'}}
+          rows="20">{JSON.stringify(dict, null, indent)}</textarea>

@@ -58,12 +58,12 @@
   </table>
 </div>
 
-<div id="output">
-  {#if project.config.url.includes(GitHubClient.host) && project.config.token}
-    <GitHubOutput {dict} {lang} config={project.config}/>
-  {:else}
-    <DictClipboardOutput {dict} indent={project.config.indent} on:copied={() => alert('Now paste it to you version control system')}/>
-  {/if}
+<div id="output" class="mt-3 card p-3">
+  <DictClipboardOutput {dict} indent={project.config.indent} on:copied={() => alert('Now paste it to you version control system')}>
+    {#if project.config.url.includes(GitHubClient.host) && project.config.token}
+      <GitHubOutput {dict} {lang} config={project.config}/>
+    {/if}
+  </DictClipboardOutput>
 </div>
 
 <style>

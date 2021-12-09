@@ -19,7 +19,7 @@
     <tr class:empty={!dict[key]}>
       <td>{fullKey(key)}</td>
       <td>
-        <input {lang} bind:value={dict[key]} class="form-control" class:changed={dict[key] !== uneditedDict[key]}>
+        <textarea {lang} bind:value={dict[key]} class="form-control" class:changed={dict[key] !== uneditedDict[key]} rows="1"></textarea>
       </td>
       <td>{defaultDict[key]}</td>
     </tr>
@@ -27,10 +27,6 @@
 {/each}
 
 <style>
-  input {
-    width: 100%;
-  }
-
   .changed {
     background-color: aliceblue;
     border-color: lightblue;

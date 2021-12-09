@@ -3,12 +3,14 @@
   import {GitHubClient} from '../common/JsonLoader'
 
   export let dict: Dict
+  export let lang: string
   export let config: Project
 
   async function push() {
     const client = new GitHubClient(config)
-    const result = await client.saveProject(dict)
-    alert('Saved to ' + result.ref)
+    const result = await client.saveFile(lang, dict)
+    if (confirm(`Saved to ${client.branch}, open it for review?`))
+      window.open(result.commit.html_url, '_blank')
   }
 </script>
 

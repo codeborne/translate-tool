@@ -60,7 +60,7 @@
 
 <div id="output">
   {#if project.config.url.includes(gitHubHost) && project.config.token}
-    <GitHubOutput {dict} config={project.config}/>
+    <GitHubOutput {dict} {lang} config={project.config}/>
   {:else}
     <DictClipboardOutput {dict} indent={project.config.indent} on:copied={() => alert('Now paste it to you version control system')}/>
   {/if}

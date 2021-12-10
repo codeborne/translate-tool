@@ -40,18 +40,29 @@ export class GitHubClient {
     else response.content
   }
 
+  async createPullRequest(title: string) {
+    this.send(this.getPullsUrl(), 'POST', {base: 'master', head: this.branch, title})
+  }
+
+  getPullsUrl() {
+    return this.config.url.substring(0, this.config.url.lastIndexOf('/content')) + '/pulls'
+  }
+
   async saveFile(lang: string, dict: Dict) {
     await this.createBranchIfNeeded()
     const fileName = lang + '.json'
     const content = encodeBase64Unicode(LoadedProject.prettyFormat(dict, this.config.indent))
     const previousFileBlobSha = (await this.getFile(fileName + '?ref=' + this.branch)).sha // TODO: store initial loaded file(blob) sha in LoadedProject
-    return await this.put(this.config.url + fileName, {
-      message: `Updated ${lang} translations`,
+    const message = `Updated ${lang} translations`
+    const result = await this.put(this.config.url + fileName, {
+      message,
       sha: previousFileBlobSha,
       branch: this.branch,
       content,
       author: {name: 'Translate Tool', email: 'translate@codeborne.com'}
     }) as GitHubSavedFile
+    await this.createPullRequest(message)
+    return result
   }
 
   private async createBranchIfNeeded() {
@@ -63,6 +74,7 @@ export class GitHubClient {
       branchSha = refs[0].object.sha
       await this.post(refsUrl, {ref: 'refs/heads/' + this.branch, sha: branchSha})
       // TODO: create a PR here
+      // this.createPullRequest gets error as response when doing it here: "No commits between master and translations"
     }
   }
 }

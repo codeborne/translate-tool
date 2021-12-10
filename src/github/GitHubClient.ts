@@ -2,10 +2,11 @@ import type {Dict, Project} from '../common/Project'
 import {decodeBase64Unicode, encodeBase64Unicode} from '../common/utils'
 import jsonLoader from '../common/JsonLoader'
 import {LoadedProject} from '../common/Project'
+import {cleanEmptyKeys} from '../editor/cleanEmptyKeys'
 
 export class GitHubClient {
   static host = 'api.github.com'
-  branch = 'translations'
+  branch = 'translations-test'
   constructor(public config: Project) {
     if (!config.url.includes(GitHubClient.host)) throw new Error('Not a GitHub url: ' + config.url)
   }
@@ -41,7 +42,7 @@ export class GitHubClient {
   }
 
   async createPullRequest(title: string) {
-    this.send(this.getPullsUrl(), 'POST', {base: 'master', head: this.branch, title})
+    this.send(this.getPullsUrl(), 'POST', {base: 'translations-test-main', head: this.branch, title})
   }
 
   getPullsUrl() {
@@ -51,7 +52,7 @@ export class GitHubClient {
   async saveFile(lang: string, dict: Dict) {
     await this.createBranchIfNeeded()
     const fileName = lang + '.json'
-    const content = encodeBase64Unicode(LoadedProject.prettyFormat(dict, this.config.indent))
+    const content = encodeBase64Unicode(LoadedProject.prettyFormat(cleanEmptyKeys(dict), this.config.indent))
     const previousFileBlobSha = (await this.getFile(fileName + '?ref=' + this.branch)).sha // TODO: store initial loaded file(blob) sha in LoadedProject
     const message = `Updated ${lang} translations`
     const result = await this.put(this.config.url + fileName, {

@@ -1,7 +1,7 @@
 <script lang="ts">
   import KeyValueTableRow from './KeyValueTableRow.svelte'
   import {cleanEmptyKeys} from './cleanEmptyKeys'
-  import {deepCopy} from '../common/utils'
+  import {deepCopy, deepEqual} from '../common/utils'
   import type {Dict, LoadedProject} from '../common/Project'
   import DictClipboardOutput from './DictClipboardOutput.svelte'
   import Filter from './Filter'
@@ -22,11 +22,13 @@
   $: initLang(lang)
   $: dict = cleanEmptyKeys(dict)
 
+
   function initProject(project: LoadedProject) {
     defaultLang = project.langs[0]
     defaultDict = project.dicts[defaultLang]
     if (dict) initLang(lang)
   }
+
 
   function initLang(lang: string) {
     dict = project.dicts[lang] ?? {}
@@ -59,7 +61,7 @@
 </div>
 
 <div id="output" class="mt-3 card p-3">
-  <DictClipboardOutput {dict} {lang} indent={project.config.indent} on:copied={() => alert('Now paste it to you version control system')}>
+  <DictClipboardOutput dict={cleanEmptyKeys(dict)} {lang} indent={project.config.indent} on:copied={() => alert('Now paste it to you version control system')}>
     {#if project.config.url.includes(GitHubClient.host) && project.config.token}
       <GitHubOutput {dict} {lang} config={project.config}/>
     {/if}

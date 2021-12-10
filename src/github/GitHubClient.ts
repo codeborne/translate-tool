@@ -6,7 +6,7 @@ import {cleanEmptyKeys} from '../editor/cleanEmptyKeys'
 
 export class GitHubClient {
   static host = 'api.github.com'
-  branch = 'translations-test'
+  branch = 'translations'
   constructor(public config: Project) {
     if (!config.url.includes(GitHubClient.host)) throw new Error('Not a GitHub url: ' + config.url)
   }
@@ -42,7 +42,11 @@ export class GitHubClient {
   }
 
   async createPullRequest(title: string) {
-    this.send(this.getPullsUrl(), 'POST', {base: 'translations-test-main', head: this.branch, title})
+    this.send(this.getPullsUrl(), 'POST', {base: 'master', head: this.branch, title})
+  }
+
+  async checkIfPullRequestExists() {
+    return this.request(this.getPullsUrl())
   }
 
   getPullsUrl() {
@@ -54,15 +58,14 @@ export class GitHubClient {
     const fileName = lang + '.json'
     const content = encodeBase64Unicode(LoadedProject.prettyFormat(cleanEmptyKeys(dict), this.config.indent))
     const previousFileBlobSha = (await this.getFile(fileName + '?ref=' + this.branch)).sha // TODO: store initial loaded file(blob) sha in LoadedProject
-    const message = `Updated ${lang} translations`
     const result = await this.put(this.config.url + fileName, {
-      message,
+      message: `Updated ${lang} translations`,
       sha: previousFileBlobSha,
       branch: this.branch,
       content,
       author: {name: 'Translate Tool', email: 'translate@codeborne.com'}
     }) as GitHubSavedFile
-    await this.createPullRequest(message)
+      !(await this.checkIfPullRequestExists()).length && await this.createPullRequest('Updated translations')
     return result
   }
 
@@ -76,6 +79,7 @@ export class GitHubClient {
       await this.post(refsUrl, {ref: 'refs/heads/' + this.branch, sha: branchSha})
       // TODO: create a PR here
       // this.createPullRequest gets error as response when doing it here: "No commits between master and translations"
+      // also upon creating a request "A pull request already exists for paywerk:translations-test"
     }
   }
 }

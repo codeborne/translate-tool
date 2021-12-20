@@ -21,6 +21,7 @@ export class LoadedProject {
     return Object.keys(this.dicts)
   }
 
+  // TODO: should not be static
   public static prettyFormat(dict: Dict, indent: number): string {
     return JSON.stringify(dict, null, indent)
   }

@@ -17,13 +17,22 @@
 <button bind:this={button} class="key-adder border-0" title="Add new key here" on:click={add}>+</button>
 
 <style>
-  :global(tr .key-adder) {
-    position: absolute;
-    display: none;
-    left: 0;
+  :global(tr td) {
+    position: relative;
   }
 
-  :global(tr:hover .key-adder) {
+  :global(tr) .key-adder {
+    position: absolute;
+    display: none;
+    left: -0.5em;
+    bottom: -0.5em;
+    background: transparent;
+    font-size: 2em;
+    line-height: 1;
+    color: var(--bs-primary);
+  }
+
+  :global(tr:hover) .key-adder {
     display: block;
   }
 </style>

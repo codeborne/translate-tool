@@ -1,7 +1,7 @@
 <script lang="ts">
   import KeyValueTableRow from './KeyValueTableRow.svelte'
   import {cleanEmptyKeys} from './cleanEmptyKeys'
-  import {deepCopy, deepEqual} from '../common/utils'
+  import {deepCopy} from '../common/utils'
   import type {Dict, LoadedProject} from '../common/Project'
   import DictClipboardOutput from './DictClipboardOutput.svelte'
   import Filter from './Filter'

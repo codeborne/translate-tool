@@ -1,5 +1,6 @@
 <script lang="ts">
   import Filter from './Filter'
+  import DictKeyAdder from './DictKeyAdder.svelte'
 
   export let lang: string
   export let dict: Record<string, any>
@@ -17,7 +18,10 @@
     <svelte:self keyPrefix={fullKey(key)} dict={dict[key] ??= {}} defaultDict={defaultValue} uneditedDict={uneditedDict[key] ??= {}} {filter} {lang}/>
   {:else if filter.shouldShow(fullKey(key), uneditedDict[key])}
     <tr class:empty={!dict[key]}>
-      <td>{fullKey(key)}</td>
+      <td>
+        {fullKey(key)}
+        <DictKeyAdder {lang} {keyPrefix}/>
+      </td>
       <td>
         <textarea {lang} bind:value={dict[key]} class="form-control" class:changed={dict[key] !== uneditedDict[key]} rows="1"></textarea>
       </td>

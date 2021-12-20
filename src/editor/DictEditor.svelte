@@ -20,8 +20,6 @@
 
   $: initProject(project)
   $: initLang(lang)
-  $: dict = cleanEmptyKeys(dict)
-
 
   function initProject(project: LoadedProject) {
     defaultLang = project.langs[0]
@@ -61,7 +59,7 @@
 </div>
 
 <div id="output" class="mt-3 card p-3">
-  <DictClipboardOutput dict={cleanEmptyKeys(dict)} {lang} indent={project.config.indent} on:copied={() => alert('Now paste it to you version control system')}>
+  <DictClipboardOutput {dict} {lang} indent={project.config.indent} on:copied={() => alert('Now paste it to you version control system')}>
     {#if project.config.url.includes(GitHubClient.host) && project.config.token}
       <GitHubOutput {dict} {lang} config={project.config}/>
     {/if}

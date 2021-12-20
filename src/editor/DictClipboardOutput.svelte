@@ -10,8 +10,7 @@
   export let indent: number
 
   let output: Dict
-
-  $: if (dict) output = deepCopy(dict)
+  $: if (dict) output = cleanEmptyKeys(deepCopy(dict))
 
   let textarea: HTMLTextAreaElement
 
@@ -35,4 +34,4 @@
 <textarea id="rawOutput" {lang} bind:this={textarea}
           class="form-control mb-3 bg-light"
           style={{width: '100%'}}
-          rows="20">{LoadedProject.prettyFormat(cleanEmptyKeys(output), indent)}</textarea>
+          rows="20">{LoadedProject.prettyFormat(output, indent)}</textarea>

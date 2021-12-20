@@ -29,6 +29,7 @@
     background: transparent;
     font-size: 2em;
     line-height: 1;
+    padding: 5px;
     color: var(--bs-primary);
   }
 

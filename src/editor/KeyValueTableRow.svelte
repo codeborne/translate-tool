@@ -1,11 +1,10 @@
 <script lang="ts">
   import Filter from './Filter'
   import DictKeyAdder from './DictKeyAdder.svelte'
+  import type {Dict} from '../common/Project'
 
   export let lang: string
-  export let dict: Record<string, any>
-  export let defaultDict: Record<any, string>
-  export let uneditedDict: Record<string, any>
+  export let dict: Dict, defaultDict: Dict, uneditedDict: Dict
   export let keyPrefix = ''
 
   export let filter: Filter
@@ -20,7 +19,9 @@
     <tr class:empty={!dict[key]}>
       <td>
         {fullKey(key)}
-        <DictKeyAdder {lang} {keyPrefix}/>
+        {#if dict === defaultDict}
+          <DictKeyAdder {dict} {keyPrefix} on:added/>
+        {/if}
       </td>
       <td>
         <textarea {lang} bind:value={dict[key]} class="form-control" class:changed={dict[key] !== uneditedDict[key]} rows="1"></textarea>

@@ -1,19 +1,20 @@
 <script lang="ts">
-  import {LoadedProject} from '../common/Project'
+  import {Dict} from '../common/Project'
 
-  export let project: LoadedProject
-  export let lang: string
+  export let dict: Dict
   export let keyPrefix: string
+
+  let button: HTMLButtonElement
 
   function add() {
     const keySuffix = prompt('New key: ' + keyPrefix + '.')
     if (!keySuffix) return
-    const key = keyPrefix + '.' + keySuffix
-    alert('Creating ' + key)
+    dict[keySuffix] = ''
+    button.dispatchEvent(new InputEvent('input', {bubbles: true}))
   }
 </script>
 
-<button class="key-adder border-0" title="Add new key here" on:click={add}>+</button>
+<button bind:this={button} class="key-adder border-0" title="Add new key here" on:click={add}>+</button>
 
 <style>
   :global(tr .key-adder) {

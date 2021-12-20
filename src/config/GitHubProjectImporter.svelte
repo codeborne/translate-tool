@@ -17,49 +17,25 @@
 
   async function submit() {
     warning = ''
-    if (areInputsValid()) {
-      // TODO: use GitHubClient
-      project.url = `https://api.github.com/repos/${username}/${repo}/contents${path}`
-      project.title = title
-      project.token = token
-      project.indent = 2
+    // TODO: use GitHubClient
+    project.url = `https://api.github.com/repos/${username}/${repo}/contents${path}`
+    project.title = title
+    project.token = token
+    project.indent = 2
 
-      let githubClient = new GitHubClient(project)
+    let githubClient = new GitHubClient(project)
 
-      let langs: LoadedProject = await githubClient.getFileContent('langs')
-      if (!langs) {
-        warning = 'Could not load project'
-      } else {
-        validate(langs)
-        if (warning == '') {
-          save()
-          warning = ''
-        }
-      }
-    }
-  }
-
-  function areInputsValid() {
-    if (username) {
-      if (token) {
-        if (path) {
-          if (repo) {
-            return true
-          } else {
-            warning = 'Repository name must not be empty'
-          }
-        } else {
-          warning = 'Project location must not be empty'
-        }
-      } else {
-        warning = 'Token must not be empty'
-      }
+    let langs: LoadedProject = await githubClient.getFileContent('langs')
+    if (!langs) {
+      warning = 'Could not load project'
     } else {
-      warning = 'Url must not be empty'
+      validate(langs)
+      if (warning == '') {
+        save()
+        warning = ''
+      }
     }
-    return false
   }
-
 
   function save() {
     if (!localStorage.getItem('projects')) {
@@ -79,7 +55,8 @@
   }
 </script>
 
-<form id="addPrivate" class="card p-3 mb-3 d-flex flex-column justify-content-center align-items-center" on:submit|preventDefault={submit}>
+<form id="addPrivate" class="card p-3 mb-3 d-flex flex-column justify-content-center align-items-center"
+      on:submit|preventDefault={submit}>
   <h5 class="card-title">Import a private dictionary from GitHub repository</h5>
   <div class="card-body">
     <label class="form-label">Project name</label>

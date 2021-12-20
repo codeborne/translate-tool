@@ -11,9 +11,9 @@
 
   async function save() {
     inProgress = true
-    let commitMessage: string|null = await window.prompt("Write down your commit message\n\nLeave it blank for the default commit message")
-    if (!commitMessage.length) commitMessage = null
+    const commitMessage = prompt('Commit message (what have you changed?)', `Updated ${lang} translations`)
     try {
+      if (!commitMessage) return
       const result = await client.saveFile(lang, dict, commitMessage)
       if (confirm(`Saved to ${client.branch}, open it for review?`))
         window.open(result.commit.html_url, '_blank')

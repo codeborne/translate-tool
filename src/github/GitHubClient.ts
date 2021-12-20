@@ -53,13 +53,13 @@ export class GitHubClient {
     return this.config.url.substring(0, this.config.url.lastIndexOf('/content')) + '/pulls'
   }
 
-  async saveFile(lang: string, dict: Dict, message: string|null) {
+  async saveFile(lang: string, dict: Dict, commitMessage: string) {
     await this.createBranchIfNeeded()
     const fileName = lang + '.json'
     const content = encodeBase64Unicode(LoadedProject.prettyFormat(cleanEmptyKeys(dict), this.config.indent))
     const previousFileBlobSha = (await this.getFile(fileName + '?ref=' + this.branch)).sha // TODO: store initial loaded file(blob) sha in LoadedProject
     const result = await this.put(this.config.url + fileName, {
-      message: message ?? `Updated ${lang} translations`,
+      message: commitMessage,
       sha: previousFileBlobSha,
       branch: this.branch,
       content,

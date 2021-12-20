@@ -55,7 +55,7 @@
         <th>{defaultLang} ({totalKeys(defaultDict)})</th>
       </tr>
     </thead>
-    <tbody on:input={onChange}>
+    <tbody on:change={onChange}>
       <KeyValueTableRow {lang} {dict} {defaultDict} {uneditedDict} {filter}/>
     </tbody>
   </table>

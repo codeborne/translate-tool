@@ -10,7 +10,7 @@
     const keySuffix = prompt('New key: ' + keyPrefix + '.')
     if (!keySuffix) return
     dict[keySuffix] = ''
-    button.dispatchEvent(new InputEvent('input', {bubbles: true}))
+    button.dispatchEvent(new Event('change', {bubbles: true}))
   }
 </script>
 

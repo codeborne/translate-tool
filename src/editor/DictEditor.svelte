@@ -1,6 +1,5 @@
 <script lang="ts">
   import KeyValueTableRow from './KeyValueTableRow.svelte'
-  import {cleanEmptyKeys} from './cleanEmptyKeys'
   import {deepCopy} from '../common/utils'
   import type {Dict, LoadedProject} from '../common/Project'
   import DictClipboardOutput from './DictClipboardOutput.svelte'
@@ -20,7 +19,6 @@
 
   $: initProject(project)
   $: initLang(lang)
-  $: dict = cleanEmptyKeys(dict)
 
   function initProject(project: LoadedProject) {
     defaultLang = project.langs[0]
@@ -31,6 +29,11 @@
   function initLang(lang: string) {
     dict = project.dicts[lang] ?? {}
     uneditedDict = deepCopy(dict)
+  }
+
+  function onChange() {
+    dict = dict
+    if (dict === defaultDict) defaultDict = defaultDict
   }
 
   let filter = new Filter()
@@ -52,7 +55,7 @@
         <th>{defaultLang} ({totalKeys(defaultDict)})</th>
       </tr>
     </thead>
-    <tbody on:input={() => dict = dict}>
+    <tbody on:change={onChange}>
       <KeyValueTableRow {lang} {dict} {defaultDict} {uneditedDict} {filter}/>
     </tbody>
   </table>

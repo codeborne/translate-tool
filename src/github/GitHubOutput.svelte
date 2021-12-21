@@ -11,8 +11,10 @@
 
   async function save() {
     inProgress = true
+    const commitMessage = prompt('Commit message (what have you changed?)', `Updated ${lang} translations`)
     try {
-      const result = await client.saveFile(lang, dict)
+      if (!commitMessage) return
+      const result = await client.saveFile(lang, dict, commitMessage)
       if (confirm(`Saved to ${client.branch}, open it for review?`))
         window.open(result.commit.html_url, '_blank')
     } finally {

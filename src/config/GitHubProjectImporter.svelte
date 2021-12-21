@@ -1,5 +1,7 @@
 <script lang="ts">
-  import {decodeBase64Unicode} from '../common/utils'
+  import type {Project} from '../common/Project'
+  import {LoadedProject} from '../common/Project'
+  import {GitHubClient} from '../github/GitHubClient'
 
   export let token: string = ''
   export let projects: any[]
@@ -11,80 +13,41 @@
   let repo: string = ''
   let path: string = '/i18n/common'
   let title: string = ''
-  let indent: number = 2
+  let project: Project
 
   async function submit() {
     warning = ''
-    if (areInputsValid()) {
-      // TODO: use GitHubClient
-      let dictUrl = `https://api.github.com/repos/${username}/${repo}/contents${path}`
-      let dict = await fetchDict(dictUrl + 'langs.json', token)
-      if (dict) {
-        dict = JSON.parse(decodeBase64Unicode(dict.content)) // content is base64 encoded and required decoding
-        validate(dict)
-        if (warning == '') {
-          langs = dict
-          save(dictUrl)
-          warning = ''
-        }
-      }
-    }
-  }
+    // TODO: use GitHubClient
+    project.url = `https://api.github.com/repos/${username}/${repo}/contents${path}`
+    project.title = title
+    project.token = token
+    project.indent = 2
 
-  function areInputsValid() {
-    if (username) {
-      if (token) {
-        if (path) {
-          if (repo) {
-            return true
-          } else {
-            warning = 'Repository name must not be empty'
-          }
-        } else {
-          warning = 'Project location must not be empty'
-        }
-      } else {
-        warning = 'Token must not be empty'
-      }
+    let githubClient = new GitHubClient(project)
+
+    let langs: LoadedProject = await githubClient.getFileContent('langs')
+    if (!langs) {
+      warning = 'Could not load project'
     } else {
-      warning = 'Url must not be empty'
+      validate(langs)
+      if (warning == '') {
+        save()
+        warning = ''
+      }
     }
-    return false
   }
 
-
-  function save(langsUrl: string) {
+  function save() {
     if (!localStorage.getItem('projects')) {
       localStorage.clear() // clears everything from localStorage, including selectedProject key.
       localStorage.setItem('projects', JSON.stringify([]))
     }
     if (!localStorage.getItem('selectedProject')) localStorage.setItem('selectedProject', title)
-    let newProject = {
-      title,
-      url: langsUrl,
-      token,
-      indent,
-    }
 
     let newProjects: any[] = JSON.parse(localStorage.getItem('projects') as string)
-    newProjects.push(newProject)
+    newProjects.push(project)
     localStorage.setItem('projects', JSON.stringify(newProjects))
     projects = newProjects
-  }
-
-  function fetchDict(dictUrl, token) {
-    const headers = new Headers({'Authorization': `token ${token}`})
-    return fetch(dictUrl, { method: 'GET', headers})
-      .then(response => {
-        if (response.ok) {
-          return response.json()
-        } else {
-          return response.text().then(text => {
-            throw (JSON.parse(text))
-          })}})
-      .catch((err) => {
-        warning = err.message
-      })
   }
 
   function validate(arr: any) {
@@ -92,7 +55,8 @@
   }
 </script>
 
-<form id="addPrivate" class="card p-3 mb-3 d-flex flex-column justify-content-center align-items-center" on:submit|preventDefault={submit}>
+<form id="addPrivate" class="card p-3 mb-3 d-flex flex-column justify-content-center align-items-center"
+      on:submit|preventDefault={submit}>
   <h5 class="card-title">Import a private dictionary from GitHub repository</h5>
   <div class="card-body">
     <label class="form-label">Project name</label>

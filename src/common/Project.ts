@@ -20,4 +20,13 @@ export class LoadedProject {
   get langs() {
     return Object.keys(this.dicts)
   }
+
+  // TODO: should not be static
+  public static prettyFormat(dict: Dict, indent: number): string {
+    return JSON.stringify(dict, null, indent)
+  }
+
+  public prettyFormat(dict: Dict): string {
+    return LoadedProject.prettyFormat(dict, this.config.indent)
+  }
 }

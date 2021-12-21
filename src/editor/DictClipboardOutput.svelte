@@ -1,10 +1,16 @@
 <script lang="ts">
   import {createEventDispatcher} from 'svelte'
   import type {Dict} from '../common/Project'
+  import {LoadedProject} from '../common/Project'
+  import {deepCopy} from '../common/utils'
+  import {cleanEmptyKeys} from './cleanEmptyKeys'
 
   export let dict: Dict
   export let lang: string
   export let indent: number
+
+  let output: Dict
+  $: if (dict) output = cleanEmptyKeys(deepCopy(dict))
 
   let textarea: HTMLTextAreaElement
 
@@ -28,4 +34,4 @@
 <textarea id="rawOutput" {lang} bind:this={textarea}
           class="form-control mb-3 bg-light"
           style={{width: '100%'}}
-          rows="20">{JSON.stringify(dict, null, indent)}</textarea>
+          rows="20">{LoadedProject.prettyFormat(output, indent)}</textarea>

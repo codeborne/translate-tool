@@ -1,5 +1,6 @@
 <script lang="ts">
   import type {Project} from '../common/Project'
+  import {createEventDispatcher} from 'svelte'
 
   export let projects: Project[]
 
@@ -7,6 +8,8 @@
   let selectedTitle: string
   let title: string
   let indent: number
+
+  const dispatch = createEventDispatcher()
 
   function deleteProject() {
     projects = projects.filter(obj => obj.title !== selectedTitle)
@@ -25,6 +28,7 @@
     filteredStorage.push(project)
     localStorage.setItem('projects', JSON.stringify(filteredStorage))
     projects = filteredStorage
+    dispatch('changed')
     toggleForm()
   }
 

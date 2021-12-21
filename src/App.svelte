@@ -19,11 +19,15 @@
   onMount(async () => {
     projects = await tryLoadPreConfiguredProjects()
     if (!projects) projects = tryInitFromLocalStorage()
+    loadAllProjects()
+  })
+
+  async function loadAllProjects() {
     loadedProjects = await Promise.all(projects.map(p => jsonLoader.loadProject(p)))
     const lastTitle = localStorage.getItem('selectedProject')
     selectedProject = loadedProjects.find(p => p.title == lastTitle) ?? loadedProjects[0]
     showConfig = !selectedProject
-  })
+  }
 
   function tryLoadPreConfiguredProjects() {
     return jsonLoader.loadJson('projects.json').catch(e => console.warn('No deployment argument file found.'))
@@ -57,7 +61,7 @@
   {#if !loadedProjects}
     <LoadingSpinner class="my-5"/>
   {:else if showConfig}
-    <ConfigEditor bind:projects/>
+    <ConfigEditor bind:projects on:changed={loadAllProjects}/>
   {:else if lang}
     <DictEditor project={selectedProject} {lang}/>
   {/if}

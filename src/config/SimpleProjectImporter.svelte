@@ -1,5 +1,6 @@
 <script lang="ts">
   import type {Project} from '../common/Project'
+  import {createEventDispatcher} from 'svelte'
 
   export let projects: Project[]
 
@@ -7,6 +8,8 @@
   let langs: Record<string, any>
   let title: string = ''
   let indent: number = 2
+
+  const dispatch = createEventDispatcher()
 
   let warning = ''
   async function submit() {
@@ -38,6 +41,7 @@
     newProjects.push(newProject)
     localStorage.setItem('projects', JSON.stringify(newProjects))
     projects = newProjects
+    dispatch('changed')
   }
 
   const fetchDict = (dictUrl) => fetch(dictUrl).then(r => r.json()).catch((e) => warning = e)

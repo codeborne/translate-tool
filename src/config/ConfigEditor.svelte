@@ -8,8 +8,8 @@
 </script>
 
 {#if projects.length > 0}
-  <ProjectSettings bind:projects/>
+  <ProjectSettings bind:projects on:changed/>
 {/if}
 
-<SimpleProjectImporter bind:projects/>
-<GitHubProjectImporter bind:projects/>
+<SimpleProjectImporter bind:projects on:changed/>
+<GitHubProjectImporter bind:projects on:changed/>

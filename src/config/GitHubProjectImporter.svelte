@@ -2,9 +2,10 @@
   import type {Project} from '../common/Project'
   import {LoadedProject} from '../common/Project'
   import {GitHubClient} from '../github/GitHubClient'
+  import {createEventDispatcher} from 'svelte'
 
   export let token: string = ''
-  export let projects: any[]
+  export let projects: Project[]
 
   let url: string = ''
   let warning: string
@@ -13,6 +14,8 @@
   let path: string = '/i18n/'
   let title: string = ''
   let project: Project = {url: '', title: '', token: '', indent: 2}
+
+  const dispatch = createEventDispatcher()
 
   async function submit() {
     warning = ''
@@ -47,6 +50,7 @@
     newProjects.push(project)
     localStorage.setItem('projects', JSON.stringify(newProjects))
     projects = newProjects
+    dispatch('changed')
   }
 
   function validate(arr: any) {

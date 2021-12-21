@@ -7,13 +7,12 @@
   export let projects: any[]
 
   let url: string = ''
-  let langs: Record<string, any>
   let warning: string
   let username: string = ''
   let repo: string = ''
-  let path: string = '/i18n/common'
+  let path: string = '/i18n/'
   let title: string = ''
-  let project: Project
+  let project: Project = {url: '', title: '', token: '', indent: 2}
 
   async function submit() {
     warning = ''
@@ -25,7 +24,7 @@
 
     let githubClient = new GitHubClient(project)
 
-    let langs: LoadedProject = await githubClient.getFileContent('langs')
+    let langs: LoadedProject = await githubClient.getFileContent('langs.json')
     if (!langs) {
       warning = 'Could not load project'
     } else {
@@ -39,7 +38,7 @@
 
   function save() {
     if (!localStorage.getItem('projects')) {
-      localStorage.clear() // clears everything from localStorage, including selectedProject key.
+      localStorage.clear()
       localStorage.setItem('projects', JSON.stringify([]))
     }
     if (!localStorage.getItem('selectedProject')) localStorage.setItem('selectedProject', title)

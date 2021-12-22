@@ -67,8 +67,8 @@
     {#if project.config.url.includes(GitHubClient.host) && project.config.token}
       <GitHubOutput {dict} {lang} config={project.config}/>
     {/if}
+    <ChangesCounter slot="counter" {dict} {uneditedDict} />
   </DictClipboardOutput>
-  <ChangesCounter {dict} {uneditedDict} />
 </div>
 
 <style>

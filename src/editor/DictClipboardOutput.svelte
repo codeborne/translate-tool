@@ -31,6 +31,8 @@
   <a class="btn btn-primary" href="#top">Jump to top</a>
 </div>
 
+<slot name="counter"/>
+
 <textarea id="rawOutput" {lang} bind:this={textarea}
           class="form-control mb-3 bg-light"
           style={{width: '100%'}}

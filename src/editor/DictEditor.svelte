@@ -8,6 +8,7 @@
   import {totalKeys} from './languageStats'
   import GitHubOutput from '../github/GitHubOutput.svelte'
   import {GitHubClient} from '../github/GitHubClient'
+  import ChangesCounter from './ChangesCounter.svelte'
 
   export let project: LoadedProject
   export let lang: string
@@ -67,6 +68,7 @@
       <GitHubOutput {dict} {lang} config={project.config}/>
     {/if}
   </DictClipboardOutput>
+  <ChangesCounter {dict} {uneditedDict} />
 </div>
 
 <style>

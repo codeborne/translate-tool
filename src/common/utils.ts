@@ -20,10 +20,11 @@ export function deepEqual(a: Record<string, any>, b: Record<string, any>): boole
   return JSON.stringify(a) == JSON.stringify(b)
 }
 
-export function insertKey(dict: Dict, key: string, pos: number) {
-  return Object.entries(dict).reduce((newObj: Dict, [k,v], i) => {
-    newObj[k] = v
-    if (i === pos) newObj[key] = ''
-    return newObj
-  }, {})
+export function insertKey(dict: Dict, key: string, afterPos: number) {
+  Object.assign(dict, Object.entries(dict).reduce((d: Dict, [k,v], i) => {
+    delete dict[k]
+    d[k] = v
+    if (i === afterPos) d[key] = ''
+    return d
+  }, {}))
 }

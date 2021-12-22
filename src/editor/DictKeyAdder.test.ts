@@ -28,7 +28,6 @@ describe('DictKeyAdder', () => {
   it('user can create a new key', async () => {
     const onChange = await clickPlusButton('new')
     expect(prompt).calledWith('New key: aaa.bbb.')
-    expect(dict['new']).to.eq('')
     expect(onChange).called
   })
 })

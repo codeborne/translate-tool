@@ -17,13 +17,13 @@
     <svelte:self keyPrefix={fullKey(key)} dict={dict[key] ??= {}} defaultDict={defaultValue} uneditedDict={uneditedDict[key] ??= {}} {filter} {lang}/>
   {:else if filter.shouldShow(fullKey(key), uneditedDict[key])}
     <tr class:empty={!dict[key]}>
-      <td>
+      <td class="w-25">
         {fullKey(key)}
         {#if dict === defaultDict}
           <DictKeyAdder {dict} {keyPrefix} {key}/>
         {/if}
       </td>
-      <td>
+      <td class="w-100">
         <textarea {lang} bind:value={dict[key]} class="form-control" class:changed={dict[key] !== uneditedDict[key]} rows="1"></textarea>
       </td>
       <td>
@@ -39,6 +39,19 @@
   .changed {
     background-color: aliceblue;
     border-color: lightblue;
+  }
+
+  textarea:focus {
+    max-height: 30em;
+    height: 8em;
+  }
+
+  textarea {
+    width: 100%;
+    height: 0px;
+    max-height: 0px;
+    transition: 0.3s;
+    overflow: hidden;
   }
 
   .empty {

@@ -48,11 +48,11 @@
     </div>
   </div>
 
-  <table class="w-100 mt-3">
+  <table class="mt-3 w-100">
     <thead class="border-bottom">
       <tr>
         <th>Key</th>
-        <th>{lang} ({totalKeys(dict)})</th>
+        <th class="w-50">{lang} ({totalKeys(dict)})</th>
         <th>{defaultLang} ({totalKeys(defaultDict)})</th>
       </tr>
     </thead>
@@ -73,12 +73,15 @@
 
 <style>
   th {
-    width: 33%;
     padding-bottom: 0.5em;
   }
 
   tbody :global(td) {
     padding: 0.2em 0;
+  }
+
+  table {
+    table-layout: fixed
   }
 
   th:last-of-type, tbody :global(td:last-of-type) {

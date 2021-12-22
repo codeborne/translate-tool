@@ -1,3 +1,5 @@
+import type {Dict} from './Project'
+
 export function getBaseUrl(url: string) {
   return url.substring(0, url.lastIndexOf('/'))
 }
@@ -16,4 +18,12 @@ export function deepCopy(v: any) {
 
 export function deepEqual(a: Record<string, any>, b: Record<string, any>): boolean {
   return JSON.stringify(a) == JSON.stringify(b)
+}
+
+export function insertKey(dict: Dict, key: string, pos: number) {
+  return Object.entries(dict).reduce((newObj: Dict, [k,v], i) => {
+    newObj[k] = v
+    if (i === pos) newObj[key] = ''
+    return newObj
+  }, {})
 }

@@ -15,6 +15,5 @@ describe('totalDifferentValues', () => {
     const original = {t1: '1', t2: '2', t: {t3: '3', t4: '4', t: {t5: '5', t6: '6'}}}
     const comparedWith = {t1: '1', t2: '2', t: {t3: '3', t4: '4', t: {t5: '', t6: 'new value'}}}
     expect(totalDifferentValues(original, comparedWith)).to.equal(2)
-
   })
 })

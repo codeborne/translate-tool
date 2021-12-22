@@ -1,6 +1,5 @@
 import {decodeBase64Unicode, deepEqual, encodeBase64Unicode, insertKey} from './utils'
 import {expect} from 'chai'
-import type {Dict} from './Project'
 
 describe('areObjectsEqual', () => {
   it('returns true if objects are equal, false if not', () => {
@@ -40,18 +39,9 @@ describe('encode/decodeBase64Unicode', () => {
 })
 
 describe('insertKey', () => {
-  const keySuffix: string = 'newKey'
-  it('adds a new key in specific order in the object root and preserves nested objects', () => {
-    const before: Dict = {t1: '1', t2: '2', t: {t3: '3', t4: '4', t: {t5: '5', t6: '6'}}}
-    const after: Dict = {t1: '1', newKey: '', t2: '2', t: {t3: '3', t4: '4', t: {t5: '5', t6: '6'}}}
-    expect(insertKey(before, keySuffix, 0)).to.deep.equal(after)
-  })
-
-  it('add a new key in specific order to an existing object child element', () => {
-    let before: Dict = {t1: '1', t2: '2', t: {t3: '3', t4: '4', t: {t5: '5', t6: '6'}}}
-    const after: Dict = {t1: '1', t2: '2', t: {t3: '3', t4: '4', newKey: '', t: {t5: '5', t6: '6'}}}
-
-    before['t'] = insertKey(before['t'] as Dict, keySuffix, 1)
-    expect(before).to.deep.equal(after)
+  it('adds a new key in specified order to an object', () => {
+    const dict = {x: '1', aa: '10', v: '3'}
+    insertKey(dict, 'z', 1)
+    expect(JSON.stringify(dict)).to.eq(`{"x":"1","aa":"10","z":"","v":"3"}`)
   })
 })

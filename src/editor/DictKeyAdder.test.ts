@@ -6,10 +6,11 @@ import type {Dict} from '../common/Project'
 
 describe('DictKeyAdder', () => {
   const keyPrefix = 'aaa.bbb'
+  const key = 'bbb'
   let dict: Dict = {aaa: {bbb: {ccc: 'cc'}, bb: 'bb'}}
 
   async function clickPlusButton(promptResult: string|null) {
-    const {container} = render(DictKeyAdder, {dict, keyPrefix})
+    const {container} = render(DictKeyAdder, {dict, keyPrefix, key})
     const button = container.querySelector('button')!
     stub(window, 'prompt').returns(promptResult)
     const onChange = fake()

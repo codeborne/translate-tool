@@ -1,8 +1,7 @@
 <script lang="ts">
   import ProjectSettings from './ProjectSettings.svelte'
-  import SimpleProjectImporter from './SimpleProjectImporter.svelte'
-  import GitHubProjectImporter from './GitHubProjectImporter.svelte'
   import type {Project} from '../common/Project'
+  import ProjectImportList from './ProjectImportList.svelte'
 
   export let projects: Project[]
 </script>
@@ -11,5 +10,4 @@
   <ProjectSettings bind:projects on:changed/>
 {/if}
 
-<SimpleProjectImporter bind:projects on:changed/>
-<GitHubProjectImporter bind:projects on:changed/>
+<ProjectImportList bind:projects/>

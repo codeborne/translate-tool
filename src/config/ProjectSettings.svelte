@@ -14,6 +14,7 @@
   function deleteProject() {
     projects = projects.filter(obj => obj.title !== selectedTitle)
     localStorage.setItem('projects', JSON.stringify(projects))
+    dispatch('changed')
   }
 
   function toggleForm() {

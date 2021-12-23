@@ -9,6 +9,7 @@
   import ProjectSwitcher from './layout/ProjectSwitcher.svelte'
   import ToggleConfigButton from './config/ToggleConfigButton.svelte'
   import DictEditor from './editor/DictEditor.svelte'
+  import ProjectAddButton from './layout/ProjectAddButton.svelte'
 
   let showConfig = false
   let projects: Project[]
@@ -47,14 +48,11 @@
 
 <Navbar>
   {#if loadedProjects}
-    {#if !showConfig}
       <ProjectSwitcher projects={loadedProjects} bind:selectedProject/>
       <LangSwitcher project={selectedProject} bind:lang/>
-    {:else}
-      <div class="flex-grow-1"></div>
-    {/if}
     <ToggleConfigButton bind:showConfig showBack={loadedProjects.length > 0}/>
   {/if}
+  <ProjectAddButton/>
 </Navbar>
 
 <main class="my-3 container">

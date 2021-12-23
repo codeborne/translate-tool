@@ -19,7 +19,6 @@
 
   async function submit() {
     warning = ''
-    // TODO: use GitHubClient
     project.url = `https://api.github.com/repos/${username}/${repo}/contents${path}`
     project.title = title
     project.token = token
@@ -61,7 +60,7 @@
 <form id="addPrivate" class="card p-3 mb-3 d-flex flex-column justify-content-center align-items-center"
       on:submit|preventDefault={submit}>
   <h5 class="card-title">Import a private dictionary from GitHub repository</h5>
-  <div class="card-body">
+  <div class="card-body w-75">
     <label class="form-label">Project name</label>
     <input type="text" bind:value={title} class="form-control" required>
     <div class="form-text mb-4"><i>You can change it at any time.</i></div>

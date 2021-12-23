@@ -62,7 +62,7 @@
 
 <form id="addPublic" class="card p-3 mb-3 d-flex flex-column justify-content-center align-items-center" on:submit|preventDefault={submit}>
   <h5 class="mb-4">Import a public dictionary</h5>
-  <div class="mb-3">
+  <div class="mb-3 w-75">
     <label class="form-label">Project name</label>
     <input type="text" bind:value={title} class="form-control" required autofocus>
     <div class="form-text mb-4"><i>You can change it at any time</i></div>

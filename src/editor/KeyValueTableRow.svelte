@@ -24,7 +24,9 @@
         {/if}
       </td>
       <td class="w-100">
-        <textarea {lang} bind:value={dict[key]} class="form-control" class:changed={dict[key] !== uneditedDict[key]} rows="1"></textarea>
+        <textarea {lang} bind:value={dict[key]} class="form-control" rows="1"
+                  class:changed={dict[key] !== uneditedDict[key]}
+                  class:dynamic-textarea={dict[key].length > 50}></textarea>
       </td>
       <td>
         {defaultDict[key]}
@@ -41,9 +43,10 @@
     border-color: lightblue;
   }
 
-  textarea:focus {
+  .dynamic-textarea:focus {
     max-height: 30em;
     height: 8em;
+    overflow-y: auto;
   }
 
   textarea {

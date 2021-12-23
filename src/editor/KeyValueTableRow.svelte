@@ -26,7 +26,7 @@
       <td class="w-100">
         <textarea {lang} bind:value={dict[key]} class="form-control" rows="1"
                   class:changed={dict[key] !== uneditedDict[key]}
-                  class:dynamic-textarea={dict[key].length > 50}></textarea>
+                  class:dynamic-textarea={dict && dict[key] && dict[key].length > 50}></textarea>
       </td>
       <td>
         {defaultDict[key]}

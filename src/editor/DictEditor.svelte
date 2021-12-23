@@ -5,7 +5,7 @@
   import DictClipboardOutput from './DictClipboardOutput.svelte'
   import Filter from './Filter'
   import FilterControls from './FilterControls.svelte'
-  import {totalKeys} from './languageStats'
+  import {totalDifferentValues, totalKeys} from './languageStats'
   import GitHubOutput from '../github/GitHubOutput.svelte'
   import {GitHubClient} from '../github/GitHubClient'
   import ChangesCounter from './ChangesCounter.svelte'
@@ -36,6 +36,10 @@
     dict = dict
     if (dict === defaultDict) defaultDict = defaultDict
   }
+
+  window.onbeforeunload = () => {
+    if (totalDifferentValues(uneditedDict, dict) > 0) return 'ok';
+  };
 
   let filter = new Filter()
 </script>

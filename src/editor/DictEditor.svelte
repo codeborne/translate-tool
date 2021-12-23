@@ -37,9 +37,14 @@
     if (dict === defaultDict) defaultDict = defaultDict
   }
 
+  function onCopied() {
+    alert('Results have been copied')
+    defaultDict = uneditedDict = deepCopy(dict)
+  }
+
   window.onbeforeunload = () => {
-    if (totalDifferentValues(uneditedDict, dict) > 0) return 'ok';
-  };
+    if (totalDifferentValues(uneditedDict, dict) > 0) return ''
+  }
 
   let filter = new Filter()
 </script>
@@ -67,11 +72,11 @@
 </div>
 
 <div id="output" class="mt-3 card p-3">
-  <DictClipboardOutput {dict} {lang} indent={project.config.indent} on:copied={() => alert('Now paste it to you version control system')}>
+  <DictClipboardOutput {dict} {lang} indent={project.config.indent} on:copied={onCopied}>
     {#if project.config.url.includes(GitHubClient.host) && project.config.token}
       <GitHubOutput {dict} {lang} config={project.config}/>
     {/if}
-    <ChangesCounter slot="counter" {dict} {uneditedDict} />
+    <ChangesCounter slot="counter" {dict} {uneditedDict}/>
   </DictClipboardOutput>
 </div>
 

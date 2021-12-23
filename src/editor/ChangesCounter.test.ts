@@ -1,18 +1,24 @@
 import {render} from '@testing-library/svelte'
 import {expect} from 'chai'
 import ChangesCounter from './ChangesCounter.svelte'
+import {tick} from 'svelte'
 
 describe('ChangesCounter', () => {
-  const uneditedDict = {t1: '1', t2: '2', t: {t3: '3', t4: '4', t: {t5: '5', t6: '6'}}}
-  let dict = uneditedDict
-  it('Shows default value upon render', async () => {
-    const {container, component} = render(ChangesCounter, {dict, uneditedDict})
-    expect(container.querySelector('div span')!.textContent).to.contain('0')
-  })
+  const uneditedDict = {t: '1', t2: {t3: '3'}}
 
-  it('Shows correct amount of different values if dictionaries are different', async () => {
-    dict = {t1: 'new', t2: '2', t: {t3: '3', t4: '4', t: {t5: '', t6: 'new value'}}}
-    const {container, component} = render(ChangesCounter, {dict, uneditedDict})
-    expect(container.querySelector('div span')!.textContent).to.contain('3')
+  it('shows number of changes', async () => {
+    const {container, component} = render(ChangesCounter, {dict: uneditedDict, uneditedDict})
+    const numChanges = container.querySelector('.num-changes') as HTMLElement
+    expect(numChanges.classList.contains('invisible')).to.be.true
+    expect(numChanges.textContent).to.contain('0 changes')
+
+    component.$$set!({dict: {...uneditedDict, t1: '2'}})
+    await tick()
+    expect(numChanges.classList.contains('invisible')).to.be.false
+    expect(numChanges.textContent).to.contain('1 change')
+
+    component.$$set!({dict: {t: '2', t2: {t3: '4'}}})
+    await tick()
+    expect(numChanges.textContent).to.contain('2 changes')
   })
 })

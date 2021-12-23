@@ -61,7 +61,7 @@
   {#if !loadedProjects}
     <LoadingSpinner class="my-5"/>
   {:else if showConfig}
-    <ConfigEditor bind:projects on:changed={loadAllProjects}/>
+    <ConfigEditor bind:selectedProject={selectedProject.config} bind:projects on:changed={loadAllProjects}/>
   {:else if lang}
     <DictEditor project={selectedProject} {lang}/>
   {/if}

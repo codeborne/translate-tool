@@ -26,12 +26,13 @@
 
 <div class="d-flex justify-content-between mb-3">
   <!-- TODO: show how many keys changed -->
-  <slot/>
-  <button on:click={copy} class="btn btn-primary w-auto"><i class="fas fa-copy me-1"></i> Copy json to clipboard</button>
+  <div class="d-flex gap-1">
+    <slot/>
+    <button on:click={copy} class="btn btn-primary w-auto"><i class="fas fa-copy me-1"></i> Copy json to clipboard</button>
+    <slot name="counter"/>
+  </div>
   <a class="btn btn-primary" href="#top">Jump to top</a>
 </div>
-
-<slot name="counter"/>
 
 <textarea id="rawOutput" {lang} bind:this={textarea}
           class="form-control mb-3 bg-light"

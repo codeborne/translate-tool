@@ -28,7 +28,7 @@
   function setupNewProjectIfNotExists() {
     projects = []
     selectedProject = new LoadedProject({url: '', token: '', title: '', indent: 2}, {})
-    showConfig = true
+    showAddProject = true
   }
 
   async function loadAllProjects() {
@@ -37,11 +37,10 @@
       loadedProjects = await Promise.all(projects.map(p => jsonLoader.loadProject(p)))
       const lastTitle = localStorage.getItem('selectedProject')
       selectedProject = (loadedProjects.find(p => p.title == lastTitle) ?? loadedProjects[0])
-      showConfig = !selectedProject
+      showAddProject = !selectedProject
     } else {
       setupNewProjectIfNotExists()
       loadedProjects = []
-      window.dispatchEvent(new Event('show', {bubbles: true}))
     }
   }
 
@@ -64,9 +63,7 @@
 <Navbar>
   {#if loadedProjects && loadedProjects.length}
     <ProjectSwitcher projects={loadedProjects} bind:selectedProject/>
-    {#if showConfig}
-      <ProjectAddButton bind:showAddProject/>
-    {/if}
+    <ProjectAddButton bind:showAddProject/>
     <LangSwitcher project={selectedProject} bind:lang/>
     <ToggleConfigButton bind:showConfig showBack={loadedProjects.length > 0}/>
   {/if}

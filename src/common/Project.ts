@@ -5,7 +5,7 @@ export interface Project {
   indent: number
 }
 
-export type Dict = Record<string, object | string>
+export type Dict = Record<string, any | string>
 
 export class LoadedProject {
   constructor(

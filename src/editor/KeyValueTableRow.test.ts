@@ -17,12 +17,13 @@ describe('<KeyValueTableRow>', () => {
     }
   }
 
+  const lang = 'en'
   const filter = new Filter()
   const defaultDict: Dict = dict
   const uneditedDict: Dict = dict
 
   it('renders all inputs', () => {
-    const {container} = render(KeyValueTableRow, {dict, defaultDict, uneditedDict, filter})
+    const {container} = render(KeyValueTableRow, {dict, defaultDict, uneditedDict, filter, lang})
     expect(container.querySelectorAll('textarea')).to.have.length(5)
     const rows = container.querySelectorAll('tr')
     const firstRow = rows[0].querySelectorAll('td')
@@ -43,7 +44,7 @@ describe('<KeyValueTableRow>', () => {
 
   it('shows only filtered inputs', () => {
     filter.search = 'nested'
-    const {container} = render(KeyValueTableRow, {dict, defaultDict, uneditedDict, filter})
+    const {container} = render(KeyValueTableRow, {dict, defaultDict, uneditedDict, filter, lang})
     const inputs = container.querySelectorAll('textarea')
     expect(inputs).to.have.length(3)
     expect(inputs[0].value).to.contain('worlddd')

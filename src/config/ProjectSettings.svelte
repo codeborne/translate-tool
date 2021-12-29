@@ -1,69 +1,64 @@
 <script lang="ts">
   import type {Project} from '../common/Project'
+  import {createEventDispatcher} from 'svelte'
 
   export let projects: Project[]
+  export let selectedProject: Project
 
-  let showEditor: boolean = false
-  let selectedTitle: string
   let title: string
   let indent: number
+  let url: string
+  let token: string
+
+  const dispatch = createEventDispatcher()
 
   function deleteProject() {
-    projects = projects.filter(obj => obj.title !== selectedTitle)
+    projects = projects.filter(obj => obj.title !== selectedProject.title)
     localStorage.setItem('projects', JSON.stringify(projects))
-  }
-
-  function toggleForm() {
-    showEditor = !showEditor
+    dispatch('changed')
   }
 
   function editProject() {
-    let project: Record<string, any> = projects.find(obj => obj.title === selectedTitle)
-    let filteredStorage: any[] = projects.filter(obj => obj.title !== selectedTitle)
-    project.title = title
-    project.indent = indent as number
-    filteredStorage.push(project)
+    let filteredStorage: Project[] = projects.filter(obj => obj.title !== selectedProject.title)
+    selectedProject.title = title
+    selectedProject.indent = indent as number
+    selectedProject.token = token
+    selectedProject.url = url
+    filteredStorage.push(selectedProject)
     localStorage.setItem('projects', JSON.stringify(filteredStorage))
     projects = filteredStorage
-    toggleForm()
+    dispatch('changed')
   }
 
   function setFormInputs() {
-    let project = projects.find(obj => obj.title === selectedTitle)
-    title = project.title
-    indent = project.indent
+    title = selectedProject.title
+    indent = selectedProject.indent
+    url = selectedProject.url
+    token = selectedProject.token
   }
 
-  $: if (selectedTitle) setFormInputs()
+  $: if (selectedProject) setFormInputs()
 </script>
 
 <div class="card p-3 mb-3 d-flex flex-column justify-content-center align-items-center">
-  <h5 class="card-title">Manage Projects</h5>
-
-  <div class="card-body" >
-      <select bind:value={selectedTitle} class="form-select" aria-label="Select project">
-        {#each projects as p }
-          <option value={p.title}>{p.title}</option>
-        {/each}
-      </select>
-  </div>
-
-  {#if showEditor}
+  <h5 class="card-title">Manage Project</h5>
+  <div class="card-body w-50" >
     <div class="d-flex flex-column justify-content-center align-items-center">
       <label class="form-label">Project name</label>
-      <input type="text" placeholder="project name" bind:value={title} class="form-control mb-4">
+      <input type="text" placeholder="Project name" bind:value={title} class="form-control mb-4">
 
       <label class="form-label">Indent spaces</label>
-      <input type="number" placeholder="space indent" bind:value={indent} class="form-control mb-4">
+      <input type="number" placeholder="Space indent" bind:value={indent} class="form-control mb-4">
+
+      <label class="form-label">URL</label>
+      <input type="text" placeholder="Project url" bind:value={url} class="form-control mb-4">
+
+      <label class="form-label">Access Token</label>
+      <input type="text" placeholder="In case a token is required to access the url" bind:value={token} class="form-control mb-4">
     </div>
-    <div class="d-flex gap-5 mt-3">
-      <button on:click={toggleForm} type="button" class="btn btn-primary w-auto">Cancel</button>
-      <button on:click={editProject} type="button" class="btn btn-primary w-auto">Save</button>
+    <div class="d-flex justify-content-between gap-5 mt-3">
+      <button on:click={editProject} type="button" class="btn btn-primary">Save</button>
+      <button on:click={deleteProject} type="button" class="btn btn-danger">Delete</button>
     </div>
-  {:else}
-    <div class="d-flex gap-5 mt-3">
-      <button on:click={toggleForm} type="button" class="btn btn-primary w-auto">Edit</button>
-      <button on:click={deleteProject} type="button" class="btn btn-danger w-auto">Delete</button>
-    </div>
-  {/if}
+  </div>
 </div>

@@ -1,15 +1,17 @@
 <script lang="ts">
-  import {Dict} from '../common/Project'
+  import type {Dict} from '../common/Project'
+  import {insertKey} from '../common/utils'
 
   export let dict: Dict
   export let keyPrefix: string
+  export let key: string
 
   let button: HTMLButtonElement
 
   function add() {
     const keySuffix = prompt('New key: ' + keyPrefix + '.')
     if (!keySuffix) return
-    dict[keySuffix] = ''
+    insertKey(dict, keySuffix, Object.keys(dict).indexOf(key))
     button.dispatchEvent(new Event('change', {bubbles: true}))
   }
 </script>

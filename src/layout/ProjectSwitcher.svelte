@@ -1,5 +1,6 @@
 <script lang="ts">
-  import {LoadedProject} from '../common/Project'
+
+  import type {LoadedProject} from '../common/Project'
 
   export let projects: LoadedProject[]
   export let selectedProject: LoadedProject
@@ -7,7 +8,7 @@
 
 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
   {#each projects as p}
-    <a class="nav-link" class:active={p === selectedProject} href on:click|preventDefault={() => selectedProject = p}>
+    <a class="nav-link" class:active={p === selectedProject} on:click|preventDefault={() => selectedProject = p}>
       {p.title}
     </a>
   {/each}

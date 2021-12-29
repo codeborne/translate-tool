@@ -1,4 +1,4 @@
-import {decodeBase64Unicode, deepEqual, encodeBase64Unicode} from './utils'
+import {decodeBase64Unicode, deepEqual, encodeBase64Unicode, insertKey} from './utils'
 import {expect} from 'chai'
 
 describe('areObjectsEqual', () => {
@@ -31,7 +31,17 @@ describe('areObjectsEqual', () => {
   })
 })
 
-it('encodes and decodes UTF-8 base64', () => {
-  expect(encodeBase64Unicode('õun')).to.eq('w7V1bg==')
-  expect(decodeBase64Unicode('w7V1bg==')).to.eq('õun')
+describe('encode/decodeBase64Unicode', () => {
+  it('encodes and decodes UTF-8 base64', () => {
+    expect(encodeBase64Unicode('õun')).to.eq('w7V1bg==')
+    expect(decodeBase64Unicode('w7V1bg==')).to.eq('õun')
+  })
+})
+
+describe('insertKey', () => {
+  it('adds a new key in specified order to an object', () => {
+    const dict = {x: '1', aa: '10', v: '3'}
+    insertKey(dict, 'z', 1)
+    expect(JSON.stringify(dict)).to.eq(`{"x":"1","aa":"10","z":"","v":"3"}`)
+  })
 })

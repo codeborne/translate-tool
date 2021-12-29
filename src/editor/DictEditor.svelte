@@ -5,9 +5,10 @@
   import DictClipboardOutput from './DictClipboardOutput.svelte'
   import Filter from './Filter'
   import FilterControls from './FilterControls.svelte'
-  import {totalKeys} from './languageStats'
+  import {totalDifferentValues, totalKeys} from './languageStats'
   import GitHubOutput from '../github/GitHubOutput.svelte'
   import {GitHubClient} from '../github/GitHubClient'
+  import ChangesCounter from './ChangesCounter.svelte'
 
   export let project: LoadedProject
   export let lang: string
@@ -36,6 +37,15 @@
     if (dict === defaultDict) defaultDict = defaultDict
   }
 
+  function onCopied() {
+    alert('Results have been copied')
+    defaultDict = uneditedDict = deepCopy(dict)
+  }
+
+  window.onbeforeunload = () => {
+    if (totalDifferentValues(uneditedDict, dict) > 0) return ''
+  }
+
   let filter = new Filter()
 </script>
 
@@ -47,11 +57,11 @@
     </div>
   </div>
 
-  <table class="w-100 mt-3">
+  <table class="mt-3 w-100">
     <thead class="border-bottom">
       <tr>
         <th>Key</th>
-        <th>{lang} ({totalKeys(dict)})</th>
+        <th class="w-50">{lang} ({totalKeys(dict)})</th>
         <th>{defaultLang} ({totalKeys(defaultDict)})</th>
       </tr>
     </thead>
@@ -62,21 +72,25 @@
 </div>
 
 <div id="output" class="mt-3 card p-3">
-  <DictClipboardOutput {dict} {lang} indent={project.config.indent} on:copied={() => alert('Now paste it to you version control system')}>
+  <DictClipboardOutput {dict} {lang} indent={project.config.indent} on:copied={onCopied}>
     {#if project.config.url.includes(GitHubClient.host) && project.config.token}
       <GitHubOutput {dict} {lang} config={project.config}/>
     {/if}
+    <ChangesCounter slot="counter" {dict} {uneditedDict}/>
   </DictClipboardOutput>
 </div>
 
 <style>
   th {
-    width: 33%;
     padding-bottom: 0.5em;
   }
 
   tbody :global(td) {
     padding: 0.2em 0;
+  }
+
+  table {
+    table-layout: fixed
   }
 
   th:last-of-type, tbody :global(td:last-of-type) {

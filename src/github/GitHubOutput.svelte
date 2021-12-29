@@ -1,5 +1,6 @@
 <script lang="ts">
-  import {Dict, Project} from '../common/Project'
+
+  import type {Dict, Project} from '../common/Project'
   import {GitHubClient} from './GitHubClient'
 
   export let dict: Dict

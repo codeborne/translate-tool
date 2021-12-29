@@ -1,12 +1,14 @@
 <script lang="ts">
   import type {Project} from '../common/Project'
+  import {createEventDispatcher} from 'svelte'
 
   export let projects: Project[]
 
   let url: string = ''
-  let langs: Record<string, any>
   let title: string = ''
   let indent: number = 2
+
+  const dispatch = createEventDispatcher()
 
   let warning = ''
   async function submit() {
@@ -14,8 +16,7 @@
     if (url) {
       let dict = await fetchDict(url + 'langs.json')
       if (validate(dict)) {
-        langs = dict
-        await save(url)
+        save(url)
         warning = ''
       }
     } else {
@@ -38,9 +39,10 @@
     newProjects.push(newProject)
     localStorage.setItem('projects', JSON.stringify(newProjects))
     projects = newProjects
+    dispatch('changed')
   }
 
-  const fetchDict = (dictUrl) => fetch(dictUrl).then(r => r.json()).catch((e) => warning = e)
+  const fetchDict = (dictUrl: string) => fetch(dictUrl).then(r => r.json()).catch((e) => warning = e)
 
   function validate(arr: any) {
     if (arr) {
@@ -58,7 +60,7 @@
 
 <form id="addPublic" class="card p-3 mb-3 d-flex flex-column justify-content-center align-items-center" on:submit|preventDefault={submit}>
   <h5 class="mb-4">Import a public dictionary</h5>
-  <div class="mb-3">
+  <div class="mb-3 w-75">
     <label class="form-label">Project name</label>
     <input type="text" bind:value={title} class="form-control" required autofocus>
     <div class="form-text mb-4"><i>You can change it at any time</i></div>

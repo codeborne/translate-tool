@@ -2,7 +2,8 @@
   import ConfigEditor from './config/ConfigEditor.svelte'
   import Navbar from './layout/Navbar.svelte'
   import {onMount} from 'svelte'
-  import type {LoadedProject, Project} from './common/Project'
+  import type {Project} from './common/Project'
+  import {LoadedProject} from './common/Project'
   import LoadingSpinner from './common/LoadingSpinner.svelte'
   import jsonLoader from './common/JsonLoader'
   import LangSwitcher from './layout/LangSwitcher.svelte'
@@ -20,13 +21,20 @@
   onMount(async () => {
     projects = await tryLoadPreConfiguredProjects()
     if (!projects) projects = tryInitFromLocalStorage()
-    loadAllProjects()
+    !projects.length ? setupNewProjectIfNotExists() : await loadAllProjects()
   })
+
+  function setupNewProjectIfNotExists() {
+    projects = []
+    selectedProject = new LoadedProject({url: '', token: '', title: '', indent: 2}, {})
+    showConfig = true
+  }
 
   async function loadAllProjects() {
     loadedProjects = await Promise.all(projects.map(p => jsonLoader.loadProject(p)))
     const lastTitle = localStorage.getItem('selectedProject')
-    selectedProject = loadedProjects.find(p => p.title == lastTitle) ?? loadedProjects[0]
+    selectedProject = (loadedProjects.find(p => p.title == lastTitle) ?? loadedProjects[0])
+    console.log('called')
     showConfig = !selectedProject
   }
 
@@ -48,15 +56,15 @@
 
 <Navbar>
   {#if loadedProjects}
-      <ProjectSwitcher projects={loadedProjects} bind:selectedProject/>
-      <LangSwitcher project={selectedProject} bind:lang/>
+    <ProjectSwitcher projects={loadedProjects} bind:selectedProject/>
+    <LangSwitcher project={selectedProject} bind:lang/>
     <ToggleConfigButton bind:showConfig showBack={loadedProjects.length > 0}/>
   {/if}
   <ProjectAddButton/>
 </Navbar>
 
 <main class="my-3 container">
-  {#if !loadedProjects}
+  {#if !loadedProjects && !selectedProject}
     <LoadingSpinner class="my-5"/>
   {:else if showConfig}
     <ConfigEditor bind:selectedProject={selectedProject.config} bind:projects on:changed={loadAllProjects}/>

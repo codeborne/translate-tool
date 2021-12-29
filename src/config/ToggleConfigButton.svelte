@@ -11,7 +11,7 @@
   {/if}
   {#if showConfig && showBack}
     <button id="backToEditorBtn" type="button" class="btn btn-outline-secondary" on:click={() => showConfig = false}>
-      <i class="fas fa-arrow-circle-right me-1"></i> Back to Editor
+      <i class="fas fa-arrow-circle-left me-1"></i> Back to Editor
     </button>
   {/if}
 </div>

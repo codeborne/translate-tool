@@ -19,6 +19,8 @@
   let selectedProject: LoadedProject
   let lang: string
 
+  $: if (!showConfig) showAddProject = false
+
   onMount(async () => {
     projects = await tryLoadPreConfiguredProjects()
     if (!projects) projects = tryInitFromLocalStorage()

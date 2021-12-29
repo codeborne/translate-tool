@@ -1,15 +1,9 @@
 <script lang="ts">
   import SimpleProjectImporter from './SimpleProjectImporter.svelte'
   import GitHubProjectImporter from './GitHubProjectImporter.svelte'
-  import {createEventDispatcher} from 'svelte'
   import type {Project} from '../common/Project'
 
   export let projects: Project[]
-
-  const dispatch = createEventDispatcher()
-
-  const onChanged = () => dispatch('changed')
-
 
 </script>
 
@@ -22,7 +16,7 @@
         </button>
       </h2>
       <div class="accordion-collapse collapse m-3 collapseGithub" aria-labelledby="headingThree" data-bs-parent=".addNew">
-        <GitHubProjectImporter bind:projects on:changed={onChanged}/>
+        <GitHubProjectImporter bind:projects on:changed/>
       </div>
     </div>
 
@@ -33,7 +27,7 @@
         </button>
       </h2>
       <div class="accordion-collapse collapse show m-3 collapsePublic" aria-labelledby="headingThree" data-bs-parent=".addNew">
-        <SimpleProjectImporter bind:projects on:changed={onChanged}/>
+        <SimpleProjectImporter bind:projects on:changed/>
       </div>
     </div>
 

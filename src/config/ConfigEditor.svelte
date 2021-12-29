@@ -2,25 +2,23 @@
   import ProjectSettings from './ProjectSettings.svelte'
   import type {Project} from '../common/Project'
   import ProjectImportList from './ProjectImportList.svelte'
-  import {createEventDispatcher} from 'svelte'
 
   export let projects: Project[]
   export let selectedProject: Project
 
-  const dispatch = createEventDispatcher()
+  let showImporters: boolean = !(projects.length > 0)
 
-  const onChanged = () => dispatch('changed')
-
-
-  let showImporters: boolean
-
-  function onAddPrompt() {
-    if (projects.length) return false
+  function onAddProjectClick() {
+    if (projects.length > 0) showImporters = !showImporters
   }
+
 </script>
 
-{#if projects.length > 0}
-  <ProjectSettings bind:projects bind:selectedProject on:changed={onChanged}/>
+<button on:click={onAddProjectClick}>test</button>
+
+{#if showImporters}
+  <ProjectImportList bind:projects on:changed/>
+{:else}
+    <ProjectSettings bind:projects bind:selectedProject on:changed/>
 {/if}
 
-<ProjectImportList bind:projects on:changed={onChanged}/>

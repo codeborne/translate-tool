@@ -34,7 +34,6 @@
     loadedProjects = await Promise.all(projects.map(p => jsonLoader.loadProject(p)))
     const lastTitle = localStorage.getItem('selectedProject')
     selectedProject = (loadedProjects.find(p => p.title == lastTitle) ?? loadedProjects[0])
-    console.log('called')
     showConfig = !selectedProject
   }
 

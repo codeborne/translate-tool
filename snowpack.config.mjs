@@ -1,5 +1,11 @@
 const isTest = process.env.NODE_ENV === 'test'
 
+const svelteIgnore = [
+  'a11y-autofocus',
+  'a11y-missing-attribute',
+  'a11y-label-has-associated-control'
+]
+
 /** @type {import("snowpack").SnowpackUserConfig } */
 export default {
   mount: {
@@ -9,6 +15,9 @@ export default {
   plugins: [
     '@snowpack/plugin-svelte',
     '@snowpack/plugin-dotenv',
+    ['@snowpack/plugin-run-script',
+      {cmd: 'svelte-check --output human --compiler-warnings ' + svelteIgnore.map(i => i + ':ignore').join(','), watch: '$1 --watch', output: 'stream'}
+    ],
     [
       '@snowpack/plugin-typescript',
       {

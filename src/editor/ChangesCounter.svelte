@@ -6,8 +6,6 @@
 
   let changes = 0
 
-  function hello() {}
-
   $: if (dict) changes = totalDifferentValues(dict, uneditedDict)
 </script>
 

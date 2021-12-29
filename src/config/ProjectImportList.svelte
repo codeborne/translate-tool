@@ -13,7 +13,7 @@
 
 </script>
 
-<div class="accordion importTypes">
+<div class="accordion addNew">
 
     <div class="accordion-item">
       <h2 class="accordion-header">
@@ -21,7 +21,7 @@
           Via GitHub
         </button>
       </h2>
-      <div class="accordion-collapse collapse m-3 collapseGithub" aria-labelledby="headingThree" data-bs-parent=".importTypes">
+      <div class="accordion-collapse collapse m-3 collapseGithub" aria-labelledby="headingThree" data-bs-parent=".addNew">
         <GitHubProjectImporter bind:projects on:changed={onChanged}/>
       </div>
     </div>
@@ -32,7 +32,7 @@
           Via Public URL
         </button>
       </h2>
-      <div class="accordion-collapse collapse show m-3 collapsePublic" aria-labelledby="headingThree" data-bs-parent=".importTypes">
+      <div class="accordion-collapse collapse show m-3 collapsePublic" aria-labelledby="headingThree" data-bs-parent=".addNew">
         <SimpleProjectImporter bind:projects on:changed={onChanged}/>
       </div>
     </div>

@@ -7,7 +7,7 @@
   import jsonLoader from './common/JsonLoader'
   import LangSwitcher from './layout/LangSwitcher.svelte'
   import ProjectSwitcher from './layout/ProjectSwitcher.svelte'
-  import ToggleConfigButton from './config/ToggleConfigButton.svelte'
+  import ToggleConfigButton from './config/TogglePagesButton.svelte'
   import DictEditor from './editor/DictEditor.svelte'
   import ProjectAddButton from './layout/ProjectAddButton.svelte'
   import ProjectImportList from './config/ProjectImportList.svelte'
@@ -35,7 +35,6 @@
 
   async function loadAllProjects() {
     if (projects.length) {
-      console.log('here')
       loadedProjects = await Promise.all(projects.map(p => jsonLoader.loadProject(p)))
       const lastTitle = localStorage.getItem('selectedProject')
       selectedProject = (loadedProjects.find(p => p.title == lastTitle) ?? loadedProjects[0])
@@ -65,9 +64,11 @@
 <Navbar>
   {#if loadedProjects && loadedProjects.length}
     <ProjectSwitcher projects={loadedProjects} bind:selectedProject/>
+    {#if !showConfig && !showAddProject}
+      <LangSwitcher project={selectedProject} bind:lang/>
+    {/if}
     <ProjectAddButton bind:showAddProject/>
-    <LangSwitcher project={selectedProject} bind:lang/>
-    <ToggleConfigButton bind:showConfig showBack={loadedProjects.length > 0}/>
+    <ToggleConfigButton bind:showAddProject bind:showConfig showBack={loadedProjects.length > 0}/>
   {/if}
 </Navbar>
 

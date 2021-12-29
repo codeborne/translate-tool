@@ -41,7 +41,7 @@
 </script>
 
 <div class="card p-3 mb-3 d-flex flex-column justify-content-center align-items-center">
-  <h5 class="card-title">Manage Projects</h5>
+  <h5 class="card-title">Manage Project</h5>
   <div class="card-body w-50" >
     <div class="d-flex flex-column justify-content-center align-items-center">
       <label class="form-label">Project name</label>

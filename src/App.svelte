@@ -1,5 +1,4 @@
 <script lang="ts">
-  import ConfigEditor from './config/ConfigEditor.svelte'
   import Navbar from './layout/Navbar.svelte'
   import {onMount} from 'svelte'
   import type {Project} from './common/Project'
@@ -11,8 +10,10 @@
   import ToggleConfigButton from './config/ToggleConfigButton.svelte'
   import DictEditor from './editor/DictEditor.svelte'
   import ProjectAddButton from './layout/ProjectAddButton.svelte'
+  import ProjectImportList from './config/ProjectImportList.svelte'
+  import ProjectSettings from './config/ProjectSettings.svelte'
 
-  let showConfig = false
+  let showConfig = false, showAddProject = false
   let projects: Project[]
   let loadedProjects: LoadedProject[]
   let selectedProject: LoadedProject
@@ -63,19 +64,21 @@
 <Navbar>
   {#if loadedProjects && loadedProjects.length}
     <ProjectSwitcher projects={loadedProjects} bind:selectedProject/>
+    {#if showConfig}
+      <ProjectAddButton bind:showAddProject/>
+    {/if}
     <LangSwitcher project={selectedProject} bind:lang/>
     <ToggleConfigButton bind:showConfig showBack={loadedProjects.length > 0}/>
-  {/if}
-  {#if showConfig && projects.length}
-    <ProjectAddButton bind:showConfig />
   {/if}
 </Navbar>
 
 <main class="my-3 container">
   {#if !loadedProjects && !selectedProject}
     <LoadingSpinner class="my-5"/>
+  {:else if showAddProject}
+    <ProjectImportList bind:projects on:changed={loadAllProjects}/>
   {:else if showConfig}
-    <ConfigEditor bind:selectedProject={selectedProject.config} bind:projects on:changed={loadAllProjects}/>
+    <ProjectSettings bind:selectedProject={selectedProject.config} bind:projects on:changed={loadAllProjects}/>
   {:else if lang}
     <DictEditor project={selectedProject} {lang}/>
   {/if}

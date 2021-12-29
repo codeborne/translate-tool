@@ -8,13 +8,15 @@
 
   let showImporters: boolean = !(projects.length > 0)
 
+
   function onAddProjectClick() {
-    if (projects.length > 0) showImporters = !showImporters
+    showImporters = !showImporters
+    console.log(showImporters)
   }
 
 </script>
 
-<button on:click={onAddProjectClick}>test</button>
+<svelte:window on:show={onAddProjectClick}/>
 
 {#if showImporters}
   <ProjectImportList bind:projects on:changed/>

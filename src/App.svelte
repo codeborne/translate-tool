@@ -31,14 +31,21 @@
   }
 
   async function loadAllProjects() {
-    loadedProjects = await Promise.all(projects.map(p => jsonLoader.loadProject(p)))
-    const lastTitle = localStorage.getItem('selectedProject')
-    selectedProject = (loadedProjects.find(p => p.title == lastTitle) ?? loadedProjects[0])
-    showConfig = !selectedProject
+    if (projects.length) {
+      console.log('here')
+      loadedProjects = await Promise.all(projects.map(p => jsonLoader.loadProject(p)))
+      const lastTitle = localStorage.getItem('selectedProject')
+      selectedProject = (loadedProjects.find(p => p.title == lastTitle) ?? loadedProjects[0])
+      showConfig = !selectedProject
+    } else {
+      setupNewProjectIfNotExists()
+      loadedProjects = []
+      window.dispatchEvent(new Event('show', {bubbles: true}))
+    }
   }
 
   async function tryLoadPreConfiguredProjects() {
-    return jsonLoader.loadJson('project.json').catch(() => console.warn('No deployment argument file found.'))
+    return jsonLoader.loadJson('projects.json').catch(() => console.warn('No deployment argument file found.'))
   }
 
   function tryInitFromLocalStorage(): Project[] {
@@ -54,12 +61,14 @@
 <svelte:window on:unhandledrejection={showUnhandledError}/>
 
 <Navbar>
-  {#if loadedProjects}
+  {#if loadedProjects && loadedProjects.length}
     <ProjectSwitcher projects={loadedProjects} bind:selectedProject/>
     <LangSwitcher project={selectedProject} bind:lang/>
     <ToggleConfigButton bind:showConfig showBack={loadedProjects.length > 0}/>
   {/if}
-  <ProjectAddButton/>
+  {#if showConfig && projects.length}
+    <ProjectAddButton bind:showConfig />
+  {/if}
 </Navbar>
 
 <main class="my-3 container">

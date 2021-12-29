@@ -1,5 +1,6 @@
 <script lang="ts">
-  import {LoadedProject} from '../common/Project'
+
+  import type {LoadedProject} from '../common/Project'
 
   export let projects: LoadedProject[]
   export let selectedProject: LoadedProject

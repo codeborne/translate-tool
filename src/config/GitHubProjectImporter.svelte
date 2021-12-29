@@ -1,13 +1,12 @@
 <script lang="ts">
-  import type {Project} from '../common/Project'
-  import {LoadedProject} from '../common/Project'
-  import {GitHubClient} from '../github/GitHubClient'
+
+  import type {LoadedProject, Project} from '../common/Project'
   import {createEventDispatcher} from 'svelte'
+  import {GitHubClient} from '../github/GitHubClient'
 
   export let token: string = ''
   export let projects: Project[]
 
-  let url: string = ''
   let warning: string
   let username: string = ''
   let repo: string = ''

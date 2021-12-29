@@ -36,5 +36,4 @@
 
 <textarea id="rawOutput" {lang} bind:this={textarea}
           class="form-control mb-3 bg-light"
-          style={{width: '100%'}}
           rows="20">{LoadedProject.prettyFormat(output, indent)}</textarea>

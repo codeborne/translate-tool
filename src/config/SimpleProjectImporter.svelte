@@ -5,7 +5,6 @@
   export let projects: Project[]
 
   let url: string = ''
-  let langs: Record<string, any>
   let title: string = ''
   let indent: number = 2
 
@@ -17,8 +16,7 @@
     if (url) {
       let dict = await fetchDict(url + 'langs.json')
       if (validate(dict)) {
-        langs = dict
-        await save(url)
+        save(url)
         warning = ''
       }
     } else {
@@ -44,7 +42,7 @@
     dispatch('changed')
   }
 
-  const fetchDict = (dictUrl) => fetch(dictUrl).then(r => r.json()).catch((e) => warning = e)
+  const fetchDict = (dictUrl: string) => fetch(dictUrl).then(r => r.json()).catch((e) => warning = e)
 
   function validate(arr: any) {
     if (arr) {

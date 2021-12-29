@@ -1,8 +1,9 @@
 <script lang="ts">
   import {totalDifferentValues} from './languageStats'
+  import type {Dict} from '../common/Project'
 
-  export let dict
-  export let uneditedDict
+  export let dict: Dict
+  export let uneditedDict: Dict
 
   let changes = 0
 

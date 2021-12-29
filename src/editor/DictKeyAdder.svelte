@@ -1,5 +1,5 @@
 <script lang="ts">
-  import {Dict} from '../common/Project'
+  import type {Dict} from '../common/Project'
   import {insertKey} from '../common/utils'
 
   export let dict: Dict

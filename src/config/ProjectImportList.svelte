@@ -2,8 +2,9 @@
   import SimpleProjectImporter from './SimpleProjectImporter.svelte'
   import GitHubProjectImporter from './GitHubProjectImporter.svelte'
   import {createEventDispatcher} from 'svelte'
+  import type {Project} from '../common/Project'
 
-  export let projects
+  export let projects: Project[]
 
   const dispatch = createEventDispatcher()
 

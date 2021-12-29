@@ -1,5 +1,6 @@
 <script lang="ts">
-  import Filter from './Filter'
+
+  import type Filter from './Filter'
 
   export let filter: Filter
 </script>

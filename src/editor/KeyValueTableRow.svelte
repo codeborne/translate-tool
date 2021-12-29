@@ -56,8 +56,8 @@
 
   textarea {
     width: 100%;
-    height: 0px;
-    max-height: 0px;
+    height: 0;
+    max-height: 0;
     transition: 0.3s;
     overflow: hidden;
   }

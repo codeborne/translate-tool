@@ -20,7 +20,7 @@ describe('TextInput', () => {
 
   it('renders textarea if key does not end with Html', async () => {
     key = 'something'
-    const {container, component} = render(TextInput, {uneditedDict:dict, dict, key, lang})
+    const {container} = render(TextInput, {uneditedDict:dict, dict, key, lang})
     const element = container.querySelector('textarea')
     expect(element).to.exist
     expect(element!.value).to.contain('html')

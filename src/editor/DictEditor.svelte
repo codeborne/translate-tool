@@ -33,6 +33,7 @@
   }
 
   function onChange() {
+    console.log('changed')
     dict = dict
     if (dict === defaultDict) defaultDict = defaultDict
   }
@@ -65,7 +66,7 @@
         <th>{defaultLang} ({totalKeys(defaultDict)})</th>
       </tr>
     </thead>
-    <tbody on:change={onChange}>
+    <tbody on:focusout={onChange}>
       <KeyValueTableRow {lang} {dict} {defaultDict} {uneditedDict} {filter}/>
     </tbody>
   </table>

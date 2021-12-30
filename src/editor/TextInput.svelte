@@ -8,21 +8,24 @@
   export let dict: Dict
   export let uneditedDict: Dict
 
+
   const isHtml = (suffix: string) => suffix.endsWith("Html")
+
+  $: dict[key] = dict[key] ?? ''
+  $: uneditedDict[key] = uneditedDict[key] ?? ''
 
 </script>
 
 {#if !isHtml(key)}
   <textarea {lang} bind:value={dict[key]} class="form-control"
-            class:changed={getValue(key, dict) !== getValue(key, uneditedDict)}
+            class:changed={(getValue(key, dict) ?? '') !== (getValue(key, uneditedDict) ?? '')}
             class:dynamic-textarea={dict && dict[key] && getValue(key, dict).length > 50}></textarea>
 {:else}
   <div bind:innerHTML={dict[key]} class="form-control"
        contenteditable="true"
-       class:changed={getValue(key, dict) !== getValue(key, uneditedDict)}
+       class:changed={(getValue(key, dict) ?? '') !== (getValue(key, uneditedDict) ?? '')}
        class:dynamic-textarea={dict && dict[key] && getValue(key, dict).length > 50}>
   </div>
-  <div>{dict[key]}</div>
 {/if}
 
 <style>

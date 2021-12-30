@@ -28,3 +28,7 @@ export function insertKey(dict: Dict, key: string, afterPos: number) {
     return d
   }, {}))
 }
+
+export function getValue(key: string, dict: Dict): string {
+  return dict[key] as string
+}

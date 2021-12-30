@@ -34,10 +34,11 @@
         <div class="form-text bg-light ">
           <i class="fab fa-html5"></i> HTML
         </div>
-        <div class="form-control w-100 h-100"
+        <div class="form-control"
+             contenteditable="true"
+             bind:textContent={dict[key]}
              class:changed={(getValue(key, dict) ?? '') !== (getValue(key, uneditedDict) ?? '')}
              class:dynamic-textarea={dict && dict[key] && getValue(key, dict).length > 50}>
-          {dict[key]}
         </div>
       </div>
     {/if}

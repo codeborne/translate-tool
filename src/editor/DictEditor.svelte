@@ -40,7 +40,8 @@
 
   function onCopied() {
     alert('Results have been copied')
-    defaultDict = uneditedDict = deepCopy(dict)
+    uneditedDict = deepCopy(dict)
+    if (lang == defaultLang) defaultDict = deepCopy(dict)
   }
 
   window.onbeforeunload = () => {

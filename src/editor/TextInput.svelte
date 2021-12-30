@@ -76,6 +76,7 @@
     max-height: 38px;
     overflow-y: hidden;
     transition: max-height 0.5s ease-in-out;
+    resize: none;
   }
 
   .form-control:focus, textarea:focus {

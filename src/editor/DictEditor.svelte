@@ -33,7 +33,6 @@
   }
 
   function onChange() {
-    console.log('changed')
     dict = dict
     if (dict === defaultDict) defaultDict = defaultDict
   }

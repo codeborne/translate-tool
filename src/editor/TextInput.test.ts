@@ -9,7 +9,7 @@ describe('TextInput', () => {
   let key = 'somethingHtml'
   let lang = 'en'
 
-  it('renders editable div if given key that ends with Html', async () => {
+  it('renders element with contenteditable if given key that ends with Html', async () => {
     const {container} = render(TextInput, {uneditedDict:dict, dict, key, lang})
     const element = container.querySelector('[contenteditable]')
     expect(element).to.exist

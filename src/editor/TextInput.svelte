@@ -19,15 +19,13 @@
 
 {#if !isHtml(key)}
   <textarea {lang} bind:value={dict[key]} class="form-control"
-            class:changed={(getValue(key, dict) ?? '') !== (getValue(key, uneditedDict) ?? '')}
-            class:dynamic-textarea={dict && dict[key] && getValue(key, dict).length > 50}></textarea>
+            class:changed={(getValue(key, dict) ?? '') !== (getValue(key, uneditedDict) ?? '')}></textarea>
 {:else}
   <div class="d-flex html-input">
     {#if !isPreviewing}
       <div bind:innerHTML={dict[key]} class="form-control"
            contenteditable="true"
-           class:changed={(getValue(key, dict) ?? '') !== (getValue(key, uneditedDict) ?? '')}
-           class:dynamic-textarea={dict && dict[key] && getValue(key, dict).length > 50}>
+           class:changed={(getValue(key, dict) ?? '') !== (getValue(key, uneditedDict) ?? '')}>
       </div>
     {:else}
       <div class="preview">
@@ -37,8 +35,7 @@
         <div class="form-control"
              contenteditable="true"
              bind:textContent={dict[key]}
-             class:changed={(getValue(key, dict) ?? '') !== (getValue(key, uneditedDict) ?? '')}
-             class:dynamic-textarea={dict && dict[key] && getValue(key, dict).length > 50}>
+             class:changed={(getValue(key, dict) ?? '') !== (getValue(key, uneditedDict) ?? '')}>
         </div>
       </div>
     {/if}
@@ -55,7 +52,6 @@
     width: 100%;
     display: flex;
     flex-direction: column;
-    transition: 3s;
   }
 
   .preview .form-text {
@@ -70,23 +66,29 @@
     border-top-left-radius: 0;
   }
 
-  textarea, [contenteditable] {
-    width: 100%;
-    height: 100%;
-    transition: 0.3s;
-    overflow: hidden;
-  }
-
-  textarea {
-    max-height: 0;
-  }
-
   .html-input .form-control {
     border-bottom-right-radius: 0;
     border-top-right-radius: 0;
   }
 
-  .form-control:focus {
+  .form-control {
+    min-height: 38px;
+    max-height: 38px;
+    overflow-y: hidden;
+    transition: max-height 0.5s ease-in-out;
+  }
+
+  .form-control:focus, textarea:focus {
+    max-height: 12rem;
+    box-shadow: none;
+    overflow-y: scroll;
+  }
+
+  .preview .form-control {
+    max-height: 12rem;
+  }
+
+  .btn {
     box-shadow: none;
   }
 
@@ -100,11 +102,5 @@
   .changed {
     background-color: aliceblue;
     border-color: lightblue;
-  }
-
-  .dynamic-textarea:focus {
-    max-height: 30em;
-    height: 8em;
-    overflow-y: auto;
   }
 </style>

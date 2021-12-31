@@ -52,8 +52,6 @@
     </button>
   </div>
 {/if}
-{fullKey}
-{isHtml(fullKey)}
 
 <style>
 

@@ -12,6 +12,7 @@
   import ProjectAddButton from './layout/ProjectAddButton.svelte'
   import ProjectImportList from './config/ProjectImportList.svelte'
   import ProjectSettings from './config/ProjectSettings.svelte'
+  import {decodeBase64Unicode} from './common/utils'
 
   let showConfig = false, showAddProject = false
   let projects: Project[]
@@ -24,8 +25,23 @@
   onMount(async () => {
     projects = await tryLoadPreConfiguredProjects()
     if (!projects) projects = tryInitFromLocalStorage()
+    await tryLoadSharedUrl()
+    if (projects) localStorage.setItem('projects', JSON.stringify(projects))
     !projects.length ? setupNewProjectIfNotExists() : await loadAllProjects()
   })
+
+  async function tryLoadSharedUrl() {
+    const urlParams = new URLSearchParams(window.location.search)
+    if (!urlParams.has('shared')) return
+    try {
+      const sharedProject = JSON.parse(decodeBase64Unicode(urlParams.get('shared')))
+      if (projects.find((p) => p.title === sharedProject.title)) sharedProject.title = `${sharedProject.title} (Duplicate)`
+      projects.push(sharedProject)
+    } catch(e: Error) {
+      alert(`Something went wrong while parsing the shared link and the project was not added.\n\nError message:\n${e.message}`)
+    }
+    window.history.replaceState(null, null!, window.location.pathname);
+  }
 
   function setupNewProjectIfNotExists() {
     projects = []

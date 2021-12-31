@@ -13,6 +13,7 @@
   const dispatch = createEventDispatcher()
 
   function deleteProject() {
+    if (!confirm(`Are you sure you want to delete the project: ${selectedProject.title}?`)) return
     projects = projects.filter(obj => obj.title !== selectedProject.title)
     localStorage.setItem('projects', JSON.stringify(projects))
     dispatch('changed')

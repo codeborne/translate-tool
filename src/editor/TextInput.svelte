@@ -5,19 +5,26 @@
 
   export let lang: string
   export let key: string
+  export let fullKey: string
   export let dict: Dict
   export let uneditedDict: Dict
 
   let isPreviewing: boolean = false
 
-  const isHtml = (suffix: string) => suffix.endsWith("Html")
+  function isHtml(fullKey: string): boolean {
+    let result: boolean = false
+    fullKey.split('.').forEach((key: string) => {
+      if (key.endsWith("Html")) result = true
+    })
+    return result
+  }
 
   $: dict[key] = dict[key] ?? ''
   $: uneditedDict[key] = uneditedDict[key] ?? ''
 
 </script>
 
-{#if !isHtml(key)}
+{#if !isHtml(fullKey)}
   <textarea {lang} bind:value={dict[key]} class="form-control"
             class:changed={(getValue(key, dict) ?? '') !== (getValue(key, uneditedDict) ?? '')}></textarea>
 {:else}
@@ -45,6 +52,8 @@
     </button>
   </div>
 {/if}
+{fullKey}
+{isHtml(fullKey)}
 
 <style>
 

@@ -27,7 +27,7 @@
         {/if}
       </td>
       <td class="w-100">
-        <TextInput bind:dict {key} {uneditedDict} {lang}/>
+        <TextInput bind:dict {key} fullKey={fullKey(key)} {uneditedDict} {lang}/>
       </td>
       <td>
         {defaultDict[key]}

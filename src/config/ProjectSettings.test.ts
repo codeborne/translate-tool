@@ -1,7 +1,8 @@
-import {render} from '@testing-library/svelte'
+import {fireEvent, render} from '@testing-library/svelte'
 import {expect} from 'chai'
 import ProjectSettings from './ProjectSettings.svelte'
 import type {Project} from '../common/Project'
+import {stub} from 'sinon'
 
 describe('ProjectSettings', () => {
 
@@ -18,5 +19,15 @@ describe('ProjectSettings', () => {
     expect((container.querySelector('.url-input') as HTMLInputElement).value).to.equal(selectedProject.url)
     expect((container.querySelector('.indent-input') as HTMLInputElement).value).to.equal(selectedProject.indent.toString())
     expect((container.querySelector('.token-input') as HTMLInputElement).value).to.equal(selectedProject.token)
+  })
+
+  it('gives prompt when clicking share button', async () => {
+    const {container} = render(ProjectSettings, {projects, selectedProject})
+    const shareBtn = container.querySelector('.btn-light') as HTMLButtonElement
+    expect(shareBtn).to.exist
+    let prompt = stub(window, 'prompt')
+    await fireEvent.click(shareBtn)
+    expect(prompt).called
+
   })
 })

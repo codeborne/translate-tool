@@ -37,8 +37,8 @@
       const sharedProject = JSON.parse(decodeBase64Unicode(urlParams.get('shared')))
       if (projects.find((p) => p.title === sharedProject.title)) sharedProject.title = `${sharedProject.title} (Duplicate)`
       projects.push(sharedProject)
-    } catch(e: Error) {
-      alert(`Something went wrong while parsing the shared link and the project was not added.\n\nError message:\n${e.message}`)
+    } catch (e: any) {
+      if (e.message) alert(`Something went wrong while parsing the shared link and the project was not added.\n\nError message:\n${e.message}`)
     }
     window.history.replaceState(null, null!, window.location.pathname);
   }

@@ -67,7 +67,9 @@
     {#if !showConfig && !showAddProject}
       <LangSwitcher project={selectedProject} bind:lang/>
     {/if}
-    <ProjectAddButton bind:showAddProject/>
+    {#if !showAddProject}
+      <ProjectAddButton bind:showAddProject/>
+    {/if}
     <ToggleConfigButton bind:showAddProject bind:showConfig showBack={loadedProjects.length > 0}/>
   {/if}
 </Navbar>

@@ -14,7 +14,7 @@ describe('DictKeyAdder', () => {
     const button = container.querySelector('button')!
     stub(window, 'prompt').returns(promptResult)
     const onChange = fake()
-    button.addEventListener('change', onChange)
+    button.addEventListener('focusout', onChange)
     await fireEvent.click(button)
     return onChange
   }

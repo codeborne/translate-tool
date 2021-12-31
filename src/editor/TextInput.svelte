@@ -46,7 +46,7 @@
         </div>
       </div>
     {/if}
-    <button class="btn btn-sm btn-light text-primary" title="Preview HTML"
+    <button class="btn btn-sm btn-light text-primary" title={isPreviewing ? 'Show styled text' : 'Show HTML'}
             on:click={() => isPreviewing = !isPreviewing}>
       <i class="fas fa-code"></i>
     </button>

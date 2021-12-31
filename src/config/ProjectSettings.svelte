@@ -1,6 +1,7 @@
 <script lang="ts">
   import type {Project} from '../common/Project'
   import {createEventDispatcher} from 'svelte'
+  import {encodeBase64Unicode} from '../common/utils'
 
   export let projects: Project[]
   export let selectedProject: Project
@@ -31,6 +32,12 @@
     dispatch('changed')
   }
 
+  function shareProject() {
+    const siteUrl: string = window.location.origin
+    const encodedProject: string = encodeBase64Unicode(JSON.stringify(selectedProject))
+    prompt(`Share the project using the following url:`, `${siteUrl}/?shared=${encodedProject}`)
+  }
+
   function setFormInputs() {
     title = selectedProject.title
     indent = selectedProject.indent
@@ -59,6 +66,7 @@
     </div>
     <div class="d-flex justify-content-between gap-5 mt-3">
       <button on:click={editProject} type="button" class="btn btn-primary">Save</button>
+      <button on:click={shareProject} type="button" class="btn btn-light border-secondary">Share</button>
       <button on:click={deleteProject} type="button" class="btn btn-danger">Delete</button>
     </div>
   </div>

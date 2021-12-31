@@ -31,7 +31,7 @@
     <button on:click={copy} class="btn btn-primary w-auto"><i class="fas fa-copy me-1"></i> Copy json to clipboard</button>
     <slot name="counter"/>
   </div>
-  <a class="btn btn-primary" href="#top">Jump to top</a>
+  <a class="btn btn-primary" href="#top"><i class="fas fa-arrow-up"></i> Jump to top</a>
 </div>
 
 <textarea id="rawOutput" {lang} bind:this={textarea}

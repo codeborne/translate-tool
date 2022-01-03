@@ -35,7 +35,7 @@ describe('ProjectSettings', () => {
     const {container} = render(ProjectSettings, {projects, selectedProject})
     const editBtn = container.querySelector('.btn-primary') as HTMLButtonElement
     expect(editBtn).to.exist
-    expect(localStorage.getItem('projects')).to.equal('[]')
+    localStorage.clear()
     await fireEvent.click(editBtn)
     await tick()
     expect(localStorage.getItem('projects')).to.equal(JSON.stringify(projects))

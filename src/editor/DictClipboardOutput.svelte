@@ -25,7 +25,6 @@
 </script>
 
 <div class="d-flex justify-content-between mb-3">
-  <!-- TODO: show how many keys changed -->
   <div class="d-flex gap-1">
     <slot/>
     <button on:click={copy} class="btn btn-primary w-auto"><i class="fas fa-copy me-1"></i> Copy json to clipboard</button>

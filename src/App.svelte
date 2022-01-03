@@ -80,13 +80,15 @@
 <Navbar>
   {#if loadedProjects && loadedProjects.length}
     <ProjectSwitcher projects={loadedProjects} bind:selectedProject/>
-    {#if !showConfig && !showAddProject}
-      <LangSwitcher project={selectedProject} bind:lang/>
-    {/if}
-    {#if !showAddProject}
-      <ProjectAddButton bind:showAddProject/>
-    {/if}
-    <ToggleConfigButton bind:showAddProject bind:showConfig showBack={loadedProjects.length > 0}/>
+    <div class="nav-responsive">
+      {#if !showConfig && !showAddProject}
+        <LangSwitcher project={selectedProject} bind:lang/>
+      {/if}
+      {#if !showAddProject}
+        <ProjectAddButton bind:showAddProject/>
+      {/if}
+      <ToggleConfigButton bind:showAddProject bind:showConfig showBack={loadedProjects.length > 0}/>
+    </div>
   {/if}
 </Navbar>
 
@@ -109,6 +111,12 @@
 
   :global(h1, h2, h3, h4, h5, h6) {
     color: #404142;
+  }
+
+  .nav-responsive {
+    display: flex;
+    gap: 1rem;
+    justify-content: space-between;
   }
 
   .container {

@@ -34,7 +34,7 @@
     const urlParams = new URLSearchParams(window.location.search)
     if (!urlParams.has('shared')) return
     try {
-      const sharedProject = JSON.parse(decodeBase64Unicode(urlParams.get('shared')))
+      const sharedProject: Project = JSON.parse(decodeBase64Unicode(urlParams.get('shared')!))
       if (projects.find((p) => p.title === sharedProject.title)) sharedProject.title = `${sharedProject.title} (Duplicate)`
       projects.push(sharedProject)
     } catch (e: any) {

@@ -84,9 +84,7 @@
       {#if !showConfig && !showAddProject}
         <LangSwitcher project={selectedProject} bind:lang/>
       {/if}
-      {#if !showAddProject}
-        <ProjectAddButton bind:showAddProject/>
-      {/if}
+      <ProjectAddButton bind:showAddProject/>
       <ToggleConfigButton bind:showAddProject bind:showConfig showBack={loadedProjects.length > 0}/>
     </div>
   {/if}

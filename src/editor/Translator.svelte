@@ -1,6 +1,6 @@
 <script lang="ts">
-  import {setCORS} from 'google-translate-api-browser'
   import type {Dict} from '../common/Project'
+  import {setCORS, translate} from '../translator/translate'
 
   export let lang: string
   export let defaultLang: string
@@ -8,17 +8,21 @@
   export let defaultDict: Dict
   export let key: string
 
-  const translate = setCORS("https://secret-ocean-49799.herokuapp.com/") // TODO replace with more reliable/own proxy
+  // interface TranslationResponse {text: string}
+
+  setCORS("https://secret-ocean-49799.herokuapp.com/") // TODO replace with more reliable/own proxy
 
   function handleTranslation() {
     translate(defaultDict[key], { from: defaultLang, to: lang })
-      .then(res => {
-        dict[key] = res['text']
+      .then(res=> {
+        console.log(res)
+        dict[key] = res
       })
       .catch(err => {
         console.error(err);
       });
   }
+
 </script>
 
 {#if lang !== defaultLang}

@@ -58,7 +58,7 @@
   }
 </script>
 
-<form id="addPublic" class="card p-3 mb-3 d-flex flex-column justify-content-center align-items-center" on:submit|preventDefault={submit}>
+<form class="card p-3 mb-3 d-flex flex-column justify-content-center align-items-center" on:submit|preventDefault={submit}>
   <h5 class="mb-4">Import a public dictionary</h5>
   <div class="mb-3 w-75">
     <label class="form-label">Project name</label>

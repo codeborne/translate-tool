@@ -12,7 +12,7 @@
     const keySuffix = prompt('New key: ' + keyPrefix + '.')
     if (!keySuffix) return
     insertKey(dict, keySuffix, Object.keys(dict).indexOf(key))
-    button.dispatchEvent(new Event('change', {bubbles: true}))
+    button.dispatchEvent(new Event('focusout', {bubbles: true}))
   }
 </script>
 

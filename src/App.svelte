@@ -12,6 +12,7 @@
   import ProjectAddButton from './layout/ProjectAddButton.svelte'
   import ProjectImportList from './config/ProjectImportList.svelte'
   import ProjectSettings from './config/ProjectSettings.svelte'
+  import {decodeBase64Unicode} from './common/utils'
 
   let showConfig = false, showAddProject = false
   let projects: Project[]
@@ -24,8 +25,23 @@
   onMount(async () => {
     projects = await tryLoadPreConfiguredProjects()
     if (!projects) projects = tryInitFromLocalStorage()
+    await tryLoadSharedUrl()
+    if (projects) localStorage.setItem('projects', JSON.stringify(projects))
     !projects.length ? setupNewProjectIfNotExists() : await loadAllProjects()
   })
+
+  async function tryLoadSharedUrl() {
+    const urlParams = new URLSearchParams(window.location.search)
+    if (!urlParams.has('shared')) return
+    try {
+      const sharedProject: Project = JSON.parse(decodeBase64Unicode(urlParams.get('shared')!))
+      if (projects.find((p) => p.title === sharedProject.title)) sharedProject.title = `${sharedProject.title} (Duplicate)`
+      projects.push(sharedProject)
+    } catch (e: any) {
+      if (e.message) alert(`Something went wrong while parsing the shared link and the project was not added.\n\nError message:\n${e.message}`)
+    }
+    window.history.replaceState(null, null!, window.location.pathname);
+  }
 
   function setupNewProjectIfNotExists() {
     projects = []
@@ -64,11 +80,13 @@
 <Navbar>
   {#if loadedProjects && loadedProjects.length}
     <ProjectSwitcher projects={loadedProjects} bind:selectedProject/>
-    {#if !showConfig && !showAddProject}
-      <LangSwitcher project={selectedProject} bind:lang/>
-    {/if}
-    <ProjectAddButton bind:showAddProject/>
-    <ToggleConfigButton bind:showAddProject bind:showConfig showBack={loadedProjects.length > 0}/>
+    <div class="nav-responsive">
+      {#if !showConfig && !showAddProject}
+        <LangSwitcher project={selectedProject} bind:lang/>
+      {/if}
+      <ProjectAddButton bind:showAddProject/>
+      <ToggleConfigButton bind:showAddProject bind:showConfig showBack={loadedProjects.length > 0}/>
+    </div>
   {/if}
 </Navbar>
 
@@ -91,6 +109,12 @@
 
   :global(h1, h2, h3, h4, h5, h6) {
     color: #404142;
+  }
+
+  .nav-responsive {
+    display: flex;
+    gap: 1rem;
+    justify-content: space-between;
   }
 
   .container {

@@ -39,7 +39,8 @@
 
   function onCopied() {
     alert('Results have been copied')
-    defaultDict = uneditedDict = deepCopy(dict)
+    uneditedDict = deepCopy(dict)
+    if (lang == defaultLang) defaultDict = deepCopy(dict)
   }
 
   window.onbeforeunload = () => {
@@ -53,7 +54,7 @@
   <div class="d-flex flex-row justify-content-between w-100">
     <FilterControls bind:filter/>
     <div class="dl-flex justify-content-center align-items-center">
-      <a class="btn btn-primary" href="#output">Jump to bottom</a>
+      <a class="btn btn-primary" href="#output"><i class="fas fa-arrow-down"></i> Jump to bottom</a>
     </div>
   </div>
 
@@ -65,8 +66,8 @@
         <th>{defaultLang} ({totalKeys(defaultDict)})</th>
       </tr>
     </thead>
-    <tbody on:change={onChange}>
-      <KeyValueTableRow {lang} {dict} {defaultDict} {uneditedDict} {filter}/>
+    <tbody on:focusout={onChange}>
+      <KeyValueTableRow {lang} {dict} {defaultDict} {uneditedDict} {filter} {defaultLang}/>
     </tbody>
   </table>
 </div>

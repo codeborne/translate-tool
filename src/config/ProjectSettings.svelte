@@ -1,6 +1,7 @@
 <script lang="ts">
   import type {Project} from '../common/Project'
   import {createEventDispatcher} from 'svelte'
+  import {encodeBase64Unicode} from '../common/utils'
 
   export let projects: Project[]
   export let selectedProject: Project
@@ -13,6 +14,7 @@
   const dispatch = createEventDispatcher()
 
   function deleteProject() {
+    if (!confirm(`Are you sure you want to delete the project: ${selectedProject.title}?`)) return
     projects = projects.filter(obj => obj.title !== selectedProject.title)
     localStorage.setItem('projects', JSON.stringify(projects))
     dispatch('changed')
@@ -30,6 +32,12 @@
     dispatch('changed')
   }
 
+  function shareProject() {
+    const siteUrl: string = window.location.origin
+    const encodedProject: string = encodeBase64Unicode(JSON.stringify(selectedProject))
+    prompt(`Share the project using the following url:`, `${siteUrl}/?shared=${encodedProject}`)
+  }
+
   function setFormInputs() {
     title = selectedProject.title
     indent = selectedProject.indent
@@ -45,19 +53,20 @@
   <div class="card-body w-50" >
     <div class="d-flex flex-column justify-content-center align-items-center">
       <label class="form-label">Project name</label>
-      <input type="text" placeholder="Project name" bind:value={title} class="form-control mb-4">
+      <input type="text" placeholder="Project name" bind:value={title} class="form-control mb-4 name-input">
 
       <label class="form-label">Indent spaces</label>
-      <input type="number" placeholder="Space indent" bind:value={indent} class="form-control mb-4">
+      <input type="number" placeholder="Space indent" bind:value={indent} class="form-control mb-4 indent-input">
 
       <label class="form-label">URL</label>
-      <input type="text" placeholder="Project url" bind:value={url} class="form-control mb-4">
+      <input type="text" placeholder="Project url" bind:value={url} class="form-control mb-4 url-input">
 
       <label class="form-label">Access Token</label>
-      <input type="text" placeholder="In case a token is required to access the url" bind:value={token} class="form-control mb-4">
+      <input type="text" placeholder="In case a token is required to access the url" bind:value={token} class="form-control mb-4 token-input">
     </div>
     <div class="d-flex justify-content-between gap-5 mt-3">
       <button on:click={editProject} type="button" class="btn btn-primary">Save</button>
+      <button on:click={shareProject} type="button" class="btn btn-light border-secondary">Share</button>
       <button on:click={deleteProject} type="button" class="btn btn-danger">Delete</button>
     </div>
   </div>

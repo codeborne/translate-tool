@@ -5,8 +5,10 @@
   import DictKeyAdder from './DictKeyAdder.svelte'
   import TextInput from './TextInput.svelte'
   import {getValue} from '../common/utils'
+  import Translator from './Translator.svelte'
 
   export let lang: string
+  export let defaultLang: string
   export let dict: Dict, defaultDict: Dict, uneditedDict: Dict
   export let keyPrefix = ''
 
@@ -17,7 +19,7 @@
 
 {#each Object.entries(defaultDict) as [key, defaultValue]}
   {#if typeof defaultValue === 'object'}
-    <svelte:self keyPrefix={fullKey(key)} dict={dict[key] ??= {}} defaultDict={defaultValue} uneditedDict={uneditedDict[key] ??= {}} {filter} {lang}/>
+    <svelte:self keyPrefix={fullKey(key)} dict={dict[key] ??= {}} defaultDict={defaultValue} {defaultLang} uneditedDict={uneditedDict[key] ??= {}} {filter} {lang}/>
     {:else if filter.shouldShow(fullKey(key), getValue(key, uneditedDict))}
     <tr class:empty={!dict[key]}>
       <td class="w-25">
@@ -31,8 +33,9 @@
       </td>
       <td>
         {defaultDict[key]}
-        <a target="translate" href="https://translate.google.com/?sl=auto&tl={lang}&text={encodeURIComponent(getValue(key, defaultDict))}&op=translate"
-           title="Open Google Translate" class="float-end"><i class="fas fa-language"></i></a>
+<!--        <a target="translate" href="https://translate.google.com/?sl=auto&tl={lang}&text={encodeURIComponent(getValue(key, defaultDict))}&op=translate"-->
+<!--           title="Open Google Translate" class="float-end"><i class="fas fa-language"></i></a>-->
+        <Translator {lang} {defaultLang} bind:dict {key} {defaultDict}/>
       </td>
     </tr>
   {/if}

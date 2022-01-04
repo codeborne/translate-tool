@@ -67,7 +67,7 @@
       </tr>
     </thead>
     <tbody on:focusout={onChange}>
-      <KeyValueTableRow {lang} {dict} {defaultDict} {uneditedDict} {filter}/>
+      <KeyValueTableRow {lang} {dict} {defaultDict} {uneditedDict} {filter} {defaultLang}/>
     </tbody>
   </table>
 </div>

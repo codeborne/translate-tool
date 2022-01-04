@@ -5,7 +5,6 @@
     "test": "web-test-runner \"src/**/*.test.ts\""
   },
   "dependencies": {
-    "google-translate-api-browser": "^1.1.71",
     "svelte": "^3.37.0"
   },
   "devDependencies": {

@@ -1,12 +1,21 @@
-<nav id="top" class="navbar navbar-expand-lg navbar-light bg-white outline">
-  <div class="container-fluid">
-    <a class="navbar-brand text-dark"><h3>Translation Tool <i class="fas fa-globe"></i></h3></a>
+<div class="bg-white outline navbar-light navbar-expand-lg ">
+  <nav id="top" class="navbar">
+    <div class="container-fluid">
+      <a class="navbar-brand text-dark"><h3>Translation Tool <i class="fas fa-globe"></i></h3></a>
 
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse gap-2" id="navbarText">
-      <slot/>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse gap-2" id="navbarText">
+        <slot/>
+      </div>
     </div>
-  </div>
-</nav>
+  </nav>
+  <slot name="authenticated"/>
+</div>
+
+<style>
+  nav {
+    padding: 0;
+  }
+</style>

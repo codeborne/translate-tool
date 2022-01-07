@@ -11,6 +11,10 @@ RUN npm run build
 ARG PROJECTS_FILE=''
 RUN [ -e "$PROJECTS_FILE" ] && cp -f "$PROJECTS_FILE" build/projects.json || true
 
+ARG AUTH_FILE=''
+RUN [ -e "$AUTH_FILE" ] && cp -f "$AUTH_FILE" build/auth.json || true
+
+
 FROM nginx:alpine
 WORKDIR /usr/share/nginx/html/
 COPY --from=build /app/build ./

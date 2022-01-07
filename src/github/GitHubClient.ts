@@ -1,14 +1,23 @@
 import type {Dict, Project} from '../common/Project'
+import {LoadedProject} from '../common/Project'
 import {decodeBase64Unicode, encodeBase64Unicode} from '../common/utils'
 import jsonLoader from '../common/JsonLoader'
-import {LoadedProject} from '../common/Project'
 import {cleanEmptyKeys} from '../editor/cleanEmptyKeys'
 
 export class GitHubClient {
   static host = 'api.github.com'
   branch = 'translations'
+  author = {name: 'Translate Tool', email: 'translate@codeborne.com'}
   constructor(public config: Project) {
     if (!config.url.includes(GitHubClient.host)) throw new Error('Not a GitHub url: ' + config.url)
+  }
+
+  setAuthorName(name: string) {
+    this.author.name = name
+  }
+
+  setAuthorEmail(email: string) {
+    this.author.email = email
   }
 
   authHeader() {
@@ -63,7 +72,7 @@ export class GitHubClient {
       sha: previousFileBlobSha,
       branch: this.branch,
       content,
-      author: {name: 'Translate Tool', email: 'translate@codeborne.com'}
+      author: this.author
     }) as GitHubSavedFile
       !(await this.checkIfPullRequestExists()).length && await this.createPullRequest('Updated translations')
     return result

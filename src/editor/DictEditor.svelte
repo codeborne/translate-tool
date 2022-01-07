@@ -9,9 +9,11 @@
   import GitHubOutput from '../github/GitHubOutput.svelte'
   import {GitHubClient} from '../github/GitHubClient'
   import ChangesCounter from './ChangesCounter.svelte'
+  import type {GoogleAuthUser} from '../common/GoogleAuthUser'
 
   export let project: LoadedProject
   export let lang: string
+  export let user: GoogleAuthUser
 
   let dict: Dict
   let uneditedDict: Dict
@@ -75,7 +77,7 @@
 <div id="output" class="mt-3 card p-3">
   <DictClipboardOutput {dict} {lang} indent={project.config.indent} on:copied={onCopied}>
     {#if project.config.url.includes(GitHubClient.host) && project.config.token}
-      <GitHubOutput {dict} {lang} config={project.config}/>
+      <GitHubOutput {user} {dict} {lang} config={project.config}/>
     {/if}
     <ChangesCounter slot="counter" {dict} {uneditedDict}/>
   </DictClipboardOutput>

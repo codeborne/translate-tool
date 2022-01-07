@@ -105,7 +105,7 @@
   {:else if showConfig}
     <ProjectSettings bind:selectedProject={selectedProject.config} bind:projects on:changed={loadAllProjects}/>
   {:else if lang}
-    <DictEditor project={selectedProject} {lang}/>
+    <DictEditor project={selectedProject} {lang} {user}/>
   {/if}
 </main>
 

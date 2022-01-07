@@ -14,13 +14,14 @@
   import ProjectSettings from './config/ProjectSettings.svelte'
   import GoogleAuth from './GoogleAuth.svelte'
   import {decodeBase64Unicode} from './common/utils'
+  import type {GoogleAuthUser} from './common/GoogleAuthUser'
 
   let showConfig = false, showAddProject = false
   let projects: Project[]
   let loadedProjects: LoadedProject[]
   let selectedProject: LoadedProject
   let lang: string
-  let user: any
+  let user: GoogleAuthUser
 
   $: if (!showConfig) showAddProject = false
 

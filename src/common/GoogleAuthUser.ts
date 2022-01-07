@@ -1,0 +1,1 @@
+export type GoogleAuthUser = Record<string, any>|undefined

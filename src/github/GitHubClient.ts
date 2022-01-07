@@ -50,32 +50,18 @@ export class GitHubClient {
     else response.content
   }
 
-  async createPullRequest(title: string) {
-    this.send(this.getPullsUrl(), 'POST', {base: 'master', head: this.branch, title})
-  }
-
-  async checkIfPullRequestExists() {
-    return this.request(this.getPullsUrl())
-  }
-
-  getPullsUrl() {
-    return this.config.url.substring(0, this.config.url.lastIndexOf('/content')) + '/pulls'
-  }
-
   async saveFile(lang: string, dict: Dict, commitMessage: string) {
     await this.createBranchIfNeeded()
     const fileName = lang + '.json'
     const content = encodeBase64Unicode(LoadedProject.prettyFormat(cleanEmptyKeys(dict), this.config.indent))
     const previousFileBlobSha = (await this.getFile(fileName + '?ref=' + this.branch)).sha // TODO: store initial loaded file(blob) sha in LoadedProject
-    const result = await this.put(this.config.url + fileName, {
+    return await this.put(this.config.url + fileName, {
       message: commitMessage,
       sha: previousFileBlobSha,
       branch: this.branch,
       content,
       author: this.author
     }) as GitHubSavedFile
-      !(await this.checkIfPullRequestExists()).length && await this.createPullRequest('Updated translations')
-    return result
   }
 
   private async createBranchIfNeeded() {
@@ -86,9 +72,6 @@ export class GitHubClient {
     if (!branchSha) {
       branchSha = refs[0].object.sha
       await this.post(refsUrl, {ref: 'refs/heads/' + this.branch, sha: branchSha})
-      // TODO: create a PR here
-      // this.createPullRequest gets error as response when doing it here: "No commits between master and translations"
-      // also upon creating a request "A pull request already exists for paywerk:translations"
     }
   }
 }

@@ -1,5 +1,7 @@
 <script lang="ts">
-  export let user
+  import type {GoogleAuthUser} from '../common/GoogleAuthUser'
+
+  export let user: GoogleAuthUser
 </script>
 
 {#if user}

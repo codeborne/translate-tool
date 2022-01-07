@@ -13,7 +13,7 @@
   import AuthenticatedUserDisplay from './layout/AuthenticatedUserDisplay.svelte'
   import ProjectImportList from './config/ProjectImportList.svelte'
   import ProjectSettings from './config/ProjectSettings.svelte'
-  import GoogleAuth from './GoogleAuth.svelte'
+  import GoogleAuth from './common/GoogleAuth.svelte'
   import {decodeBase64Unicode} from './common/utils'
   import type {GoogleAuthUser} from './common/GoogleAuthUser'
 

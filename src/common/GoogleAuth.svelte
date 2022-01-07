@@ -1,7 +1,7 @@
 <script lang="ts">
 
   import {onMount} from 'svelte'
-  import type {GoogleAuthUser} from './common/GoogleAuthUser'
+  import type {GoogleAuthUser} from './GoogleAuthUser'
 
   export let user: GoogleAuthUser
 

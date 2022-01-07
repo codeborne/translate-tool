@@ -12,6 +12,7 @@
   import ProjectAddButton from './layout/ProjectAddButton.svelte'
   import ProjectImportList from './config/ProjectImportList.svelte'
   import ProjectSettings from './config/ProjectSettings.svelte'
+  import GoogleAuth from './GoogleAuth.svelte'
   import {decodeBase64Unicode} from './common/utils'
 
   let showConfig = false, showAddProject = false
@@ -86,6 +87,7 @@
       {/if}
       <ProjectAddButton bind:showAddProject/>
       <ToggleConfigButton bind:showAddProject bind:showConfig showBack={loadedProjects.length > 0}/>
+      <GoogleAuth/>
     </div>
   {/if}
 </Navbar>

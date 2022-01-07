@@ -2,13 +2,14 @@
 
   import {onMount} from 'svelte'
 
+  export let user
+
   let GoogleAuth
   let clientId: string
-  let user
 
   onMount(() => {
     clientId = '530758130588-2smj2veadedmqa5eemrjund6aivhr1al.apps.googleusercontent.com'
-    load()
+    if (clientId) load()
   })
 
   async function handleLogin() {
@@ -43,12 +44,14 @@
   }
 </script>
 
-{#if user}
-  <button class="btn" on:click={handleLogout}>
-    <i class="fab fa-google"></i> Sign out
-  </button>
-{:else}
-  <button class="btn" on:click={handleLogin}>
-    <i class="fab fa-google"></i> Sign in
-  </button>
+{#if clientId}
+  {#if user}
+    <button class="btn btn-light" on:click={handleLogout}>
+      <i class="fab fa-google"></i> Log out
+    </button>
+  {:else}
+    <button class="btn btn-light" on:click={handleLogin}>
+      <i class="fab fa-google"></i> Login
+    </button>
+  {/if}
 {/if}

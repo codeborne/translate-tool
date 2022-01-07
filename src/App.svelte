@@ -20,6 +20,7 @@
   let loadedProjects: LoadedProject[]
   let selectedProject: LoadedProject
   let lang: string
+  let user: any
 
   $: if (!showConfig) showAddProject = false
 
@@ -87,7 +88,7 @@
       {/if}
       <ProjectAddButton bind:showAddProject/>
       <ToggleConfigButton bind:showAddProject bind:showConfig showBack={loadedProjects.length > 0}/>
-      <GoogleAuth/>
+      <GoogleAuth bind:user />
     </div>
   {/if}
 </Navbar>

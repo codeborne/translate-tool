@@ -21,9 +21,7 @@
   function checkForLoggedInUser() {
     if (GoogleAuth.isSignedIn.get()) {
       user = GoogleAuth.currentUser.get().getBasicProfile();
-      console.log('User is logged in: ' + user.getName());
     } else {
-      console.log('not signed')
       user = undefined
     }
   }

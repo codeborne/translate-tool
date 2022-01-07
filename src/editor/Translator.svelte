@@ -15,7 +15,6 @@
   function handleTranslation() {
     translate(defaultDict[key], { from: defaultLang, to: lang })
       .then(res=> {
-        console.log(res)
         dict[key] = res
       })
       .catch(err => {

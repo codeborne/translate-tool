@@ -10,6 +10,9 @@
   export let user: GoogleAuthUser
 
   $: client = new GitHubClient(config)
+
+  $: if (user) client = new GitHubClient(config)
+
   let inProgress = false
 
   async function save() {

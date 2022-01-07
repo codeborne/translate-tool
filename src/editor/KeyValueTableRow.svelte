@@ -33,8 +33,6 @@
       </td>
       <td>
         {defaultDict[key]}
-<!--        <a target="translate" href="https://translate.google.com/?sl=auto&tl={lang}&text={encodeURIComponent(getValue(key, defaultDict))}&op=translate"-->
-<!--           title="Open Google Translate" class="float-end"><i class="fas fa-language"></i></a>-->
         <Translator {lang} {defaultLang} bind:dict {key} {defaultDict}/>
       </td>
     </tr>

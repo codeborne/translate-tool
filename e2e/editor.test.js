@@ -19,7 +19,7 @@ test('editor page functionality', async ({page}) => {
   expect(await page.inputValue('#rawOutput')).toContain('Public Testing')
 
   await page.locator('table .form-control').first().fill('Changed! Abcdefghijklmnopqrstuvwxyz')
-  await page.locator('[href="#output"]').click()
+  await page.locator('body').click()
   expect(await page.inputValue('table .form-control:first-of-type')).toContain('Changed! Abcdefghijklmnopqrstuvwxyz')
   expect(await page.inputValue('#rawOutput')).toContain('Changed! Abcdefghijklmnopqrstuvwxyz')
   expect(await page.inputValue('#rawOutput')).not.toContain('Public Testing')
@@ -27,11 +27,11 @@ test('editor page functionality', async ({page}) => {
   await expect(page.locator('.num-changes')).toBeVisible()
   await expect(page.locator('.num-changes')).toContainText('1 change')
   await page.locator('table .form-control').last().fill('other change')
-  await page.locator('[href="#output"]').click()
+  await page.locator('body').click()
   await expect(page.locator('.num-changes')).toContainText('2 changes')
   await page.locator('table .form-control').last().fill('Submit')
   await page.locator('table .form-control').first().fill('Public Testing')
-  await page.locator('[href="#output"]').click()
+  await page.locator('body').click()
   await expect(page.locator('.num-changes')).not.toBeVisible()
 
   await page.locator('table .form-control').last().fill('to be saved')

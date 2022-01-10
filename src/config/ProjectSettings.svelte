@@ -75,7 +75,7 @@
       <label class="form-label">Access Token</label>
       <input type="text" placeholder="In case a token is required to access the url" bind:value={token} class="form-control mb-4 token-input">
 
-      {#if selectedProject.url.includes('github')}
+      {#if selectedProject.url.includes('api.github.com')}
         <label class="form-label">Branch</label>
         <input type="text" placeholder="Translations branch" bind:value={branch} class="form-control mb-4 branch-input">
       {/if}

@@ -2,7 +2,8 @@ export interface Project {
   title: string,
   url: string,
   token: string,
-  indent: number
+  indent: number,
+  branch?: string
 }
 
 export type Dict = Record<string, any | string>

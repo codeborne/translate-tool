@@ -8,7 +8,7 @@ import {GitHubClient} from '../github/GitHubClient'
 
 describe('GitHubProjectImporter', () => {
   const projects: Project[] = [
-    {title:'project', url:'someurl', indent: 2, token:'123123'}
+    {title:'project', url:'someurl', indent: 2, token:'123123', branch: 'translations'}
   ]
 
   it('shows error if invalid inputs', async () => {

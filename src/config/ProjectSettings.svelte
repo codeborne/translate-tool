@@ -10,6 +10,7 @@
   let indent: number
   let url: string
   let token: string
+  let branch: string
 
   const dispatch = createEventDispatcher()
 
@@ -20,12 +21,17 @@
     dispatch('changed')
   }
 
-  function editProject() {
-    let filteredStorage: Project[] = projects.filter(obj => obj.title !== selectedProject.title)
+  function setSelectedProjectValues() {
     selectedProject.title = title
     selectedProject.indent = indent as number
     selectedProject.token = token
     selectedProject.url = url
+    if (branch) selectedProject.branch = branch
+  }
+
+  function editProject() {
+    let filteredStorage: Project[] = projects.filter(obj => obj.title !== selectedProject.title)
+    setSelectedProjectValues()
     filteredStorage.push(selectedProject)
     localStorage.setItem('projects', JSON.stringify(filteredStorage))
     projects = filteredStorage
@@ -43,6 +49,7 @@
     indent = selectedProject.indent
     url = selectedProject.url
     token = selectedProject.token
+    if (selectedProject.branch) branch = selectedProject.branch
   }
 
   $: if (selectedProject) setFormInputs()
@@ -63,6 +70,11 @@
 
       <label class="form-label">Access Token</label>
       <input type="text" placeholder="In case a token is required to access the url" bind:value={token} class="form-control mb-4 token-input">
+
+      {#if selectedProject.url.includes('github')}
+        <label class="form-label">Branch</label>
+        <input type="text" placeholder="Translations branch" bind:value={branch} class="form-control mb-4 branch-input">
+      {/if}
     </div>
     <div class="d-flex justify-content-between gap-5 mt-3">
       <button on:click={editProject} type="button" class="btn btn-primary">Save</button>

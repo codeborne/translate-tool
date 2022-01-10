@@ -10,6 +10,7 @@
   import {GitHubClient} from '../github/GitHubClient'
   import ChangesCounter from './ChangesCounter.svelte'
   import type {GoogleAuthUser} from '../common/GoogleAuthUser'
+  import BranchLoadedFrom from './BranchLoadedFrom.svelte'
 
   export let project: LoadedProject
   export let lang: string
@@ -51,6 +52,8 @@
 
   let filter = new Filter()
 </script>
+
+<BranchLoadedFrom config={project.config} />
 
 <div class="mt-3 card p-3 d-flex flex-column align-items-center">
   <div class="d-flex flex-row justify-content-between w-100">

@@ -2,6 +2,9 @@
   export let config
 </script>
 
-<div>
-  Translations loaded from {config.branch ? config.branch : 'translations'} branch
-</div>
+{#if config.url.includes('api.github.com')}
+  <div class="form-text">
+    <i class="fas fa-code-branch"></i>
+    Translations loaded from <b>{config.branch ? config.branch : 'translations'}</b> branch
+  </div>
+{/if}

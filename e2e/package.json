@@ -1,0 +1,8 @@
+{
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.17.2"
+  }
+}

@@ -10,6 +10,7 @@ export class GitHubClient {
   author = {name: 'Translate Tool', email: 'translate@codeborne.com'}
   constructor(public config: Project) {
     if (!config.url.includes(GitHubClient.host)) throw new Error('Not a GitHub url: ' + config.url)
+    if (config.branch) this.branch = config.branch
   }
 
   setAuthorName(name: string) {

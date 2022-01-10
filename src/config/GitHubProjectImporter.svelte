@@ -12,7 +12,8 @@
   let repo: string = ''
   let path: string = '/i18n/'
   let title: string = ''
-  let project: Project = {url: '', title: '', token: '', indent: 2}
+  let branch = 'translations'
+  let project: Project = {url: '', title: '', token: '', indent: 2, branch}
 
   const dispatch = createEventDispatcher()
 
@@ -22,6 +23,7 @@
     project.title = title
     project.token = token
     project.indent = 2
+    project.branch = branch
 
     let githubClient = new GitHubClient(project)
 
@@ -79,6 +81,10 @@
     <label class="form-label">Personal auth token</label>
     <input type="text" bind:value={token} class="form-control">
     <div class="form-text mb-4">This token will be used to access the private repository</div>
+
+    <label class="form-label">Translations branch</label>
+    <input type="text" bind:value={branch} class="form-control" required>
+    <div class="form-text mb-4">Where the tool will commit changes</div>
   </div>
 
   <button class="btn btn-primary w-auto">Import</button>

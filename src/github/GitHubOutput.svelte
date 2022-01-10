@@ -13,11 +13,18 @@
 
   $: if (user) client = new GitHubClient(config)
 
+  $: if (config.branch) setBranchIfConfigured()
+
   let inProgress = false
+
+  function setBranchIfConfigured() {
+    client.branch = (config.branch) ? client.branch : 'translations'
+  }
 
   async function save() {
     inProgress = true
-    checkIfUserExists()
+    checkIfUserExistsAndSetAuthor()
+    setBranchIfConfigured()
     const commitMessage = prompt('Commit message (what have you changed?)', `Updated ${lang} translations`)
     try {
       if (!commitMessage) return
@@ -29,7 +36,7 @@
     }
   }
 
-  function checkIfUserExists() {
+  function checkIfUserExistsAndSetAuthor() {
     if (user) {
       client.setAuthorEmail(user.getEmail())
       client.setAuthorName(user.getName())

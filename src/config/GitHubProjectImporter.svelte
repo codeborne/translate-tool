@@ -17,26 +17,22 @@
 
   const dispatch = createEventDispatcher()
 
-  async function submit() {
+  function setProjectKeys() {
     warning = ''
     project.url = `https://api.github.com/repos/${username}/${repo}/contents${path}`
     project.title = title
     project.token = token
     project.indent = 2
     project.branch = branch
+  }
 
+  async function submit() {
+    setProjectKeys()
     let githubClient = new GitHubClient(project)
-
     let langs: LoadedProject = await githubClient.getFileContent('langs.json')
-    if (!langs) {
-      warning = 'Could not load project'
-    } else {
-      validate(langs)
-      if (warning == '') {
-        save()
-        warning = ''
-      }
-    }
+    if (!langs)  warning = 'Could not load project'
+    else validate(langs)
+    if (warning == '') save()
   }
 
   function save() {

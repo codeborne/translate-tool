@@ -25,6 +25,10 @@
     inProgress = true
     checkIfUserExistsAndSetAuthor()
     setBranchIfConfigured()
+    await tryCommit()
+  }
+
+  async function tryCommit() {
     const commitMessage = prompt('Commit message (what have you changed?)', `Updated ${lang} translations`)
     try {
       if (!commitMessage) return

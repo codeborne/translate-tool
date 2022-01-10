@@ -32,6 +32,10 @@
   function editProject() {
     let filteredStorage: Project[] = projects.filter(obj => obj.title !== selectedProject.title)
     setSelectedProjectValues()
+    rewriteProjectLists(filteredStorage)
+  }
+
+  function rewriteProjectLists(filteredStorage: Project[]) {
     filteredStorage.push(selectedProject)
     localStorage.setItem('projects', JSON.stringify(filteredStorage))
     projects = filteredStorage

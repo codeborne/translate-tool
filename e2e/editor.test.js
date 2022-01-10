@@ -39,7 +39,17 @@ test('editor page functionality', async ({page}) => {
   await expect(page.locator('.num-changes')).toContainText('1 change')
   expect(await page.inputValue('#rawOutput')).toContain('to be saved')
   await page.locator('text=clipboard').click()
-  await page.on('dialog', dialog => dialog.accept())
+  await page.on('dialog', dialog => dialog.dismiss())
   await expect(page.locator('.num-changes')).not.toBeVisible()
+
+  await page.locator('table .form-control').first().fill('Will stay after changing language')
+  await page.locator('nav .form-select').selectOption({label: 'de'})
+  await page.locator('body').click()
+  await expect(page.locator('thead th:nth-of-type(2)')).toContainText('de')
+  expect(await page.inputValue('#rawOutput')).not.toContain('Will stay after changing language')
+  await page.locator('nav .form-select').selectOption({label: 'en'})
+  await page.locator('body').click()
+  await expect(page.locator('thead th:nth-of-type(2)')).toContainText('en')
+  expect(await page.inputValue('#rawOutput')).toContain('Will stay after changing language')
 })
 

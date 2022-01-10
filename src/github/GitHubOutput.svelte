@@ -18,7 +18,7 @@
   let inProgress = false
 
   function setBranchIfConfigured() {
-    client.branch = (config.branch) ? client.branch : 'translations'
+    client.branch = (config.branch) ? config.branch : 'translations'
   }
 
   async function save() {

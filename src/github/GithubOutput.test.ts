@@ -9,7 +9,7 @@ import type {GoogleAuthUser} from '../common/GoogleAuthUser'
 describe('GitHubOutput', () => {
   const dict: Dict = {}
   const lang = 'en'
-  const config: Project = {title: '', url: 'api.github.com', token: '', indent: 2}
+  let config: Project = {title: '', url: 'api.github.com', token: '', indent: 2}
   const user: GoogleAuthUser = undefined
 
   async function clickSaveButton(message: string) {
@@ -38,5 +38,18 @@ describe('GitHubOutput', () => {
     expect(GitHubClient.prototype.saveFile).calledWith(lang, dict, 'Custom message')
     await act(GitHubClient.prototype.saveFile)
     expect(confirm).called
+  })
+
+  it('commit button shows default translations branch if no branch in config', async () => {
+    const {container} = render(GitHubOutput, {dict, lang, config, user})
+    const btn = container.querySelector('button')
+    expect(btn?.textContent).to.contain('Save to translations branch')
+  })
+
+  it('commit button shows config branch', async () => {
+    config.branch = 'test'
+    const {container} = render(GitHubOutput, {dict, lang, config, user})
+    const btn = container.querySelector('button')
+    expect(btn?.textContent).to.contain('Save to test branch')
   })
 })

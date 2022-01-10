@@ -1,4 +1,4 @@
-  /** @type {import('@playwright/test').PlaywrightTestConfig} */
+/** @type {import('@playwright/test').PlaywrightTestConfig} */
 export default {
   workers: 1,
   timeout: 90000,

@@ -25,7 +25,9 @@
   }
 
   async function handleLogin() {
-    await GoogleAuth.signIn()
+    try {
+      await GoogleAuth.signIn()
+    } catch {}
     checkForLoggedInUser()
   }
 

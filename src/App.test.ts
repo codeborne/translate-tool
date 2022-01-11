@@ -19,7 +19,7 @@ describe('<App>', () => {
     const {container} = render(App)
     expect(fetch)
     await act(fetch)
-    expect(container.querySelector('main')).to.exist
+    expect(container.querySelector('.addNew')).to.exist
   })
 
   it.skip('renders editor if localStorage exists', async () => {
@@ -32,7 +32,7 @@ describe('<App>', () => {
     await act(fetch)
     await act(fetch)
     await tick()
-    expect(container.querySelector('#rawOutput')).to.exist
+    expect(container.querySelector('#output')).to.exist
   })
 
   it.skip('renders editor if project deployment file exists', async () => {
@@ -46,6 +46,6 @@ describe('<App>', () => {
     await act(fetch)
     await act(fetch)
     await tick()
-    expect(container.querySelector('#rawOutput')).to.exist
+    expect(container.querySelector('#output')).to.exist
   })
 })

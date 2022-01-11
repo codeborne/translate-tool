@@ -33,7 +33,7 @@
       </td>
       <td>
         {defaultDict[key]}
-        <Translator {lang} {defaultLang} bind:dict {key} {defaultDict}/>
+        <Translator {lang} {defaultLang} bind:dict {key} {defaultDict} {uneditedDict}/>
       </td>
     </tr>
   {/if}

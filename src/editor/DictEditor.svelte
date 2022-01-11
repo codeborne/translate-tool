@@ -42,6 +42,10 @@
 
   function onCopied() {
     alert('Results have been copied')
+    updateUneditedDict()
+  }
+
+  function updateUneditedDict() {
     uneditedDict = deepCopy(dict)
     if (lang == defaultLang) defaultDict = deepCopy(dict)
   }
@@ -80,7 +84,7 @@
 <div id="output" class="mt-3 card p-3">
   <DictClipboardOutput {dict} {lang} indent={project.config.indent} on:copied={onCopied}>
     {#if project.config.url.includes(GitHubClient.host) && project.config.token}
-      <GitHubOutput {user} {dict} {lang} config={project.config}/>
+      <GitHubOutput {user} {dict} {lang} config={project.config} on:saved={updateUneditedDict}/>
     {/if}
     <ChangesCounter slot="counter" {dict} {uneditedDict}/>
   </DictClipboardOutput>

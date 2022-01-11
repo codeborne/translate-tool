@@ -15,9 +15,9 @@ export default {
   plugins: [
     '@snowpack/plugin-svelte',
     '@snowpack/plugin-dotenv',
-    ['@snowpack/plugin-run-script',
-      {cmd: 'svelte-check --output human --compiler-warnings ' + svelteIgnore.map(i => i + ':ignore').join(','), watch: '$1 --watch', output: 'stream'}
-    ],
+    // ['@snowpack/plugin-run-script',
+    //   {cmd: 'svelte-check --output human --compiler-warnings ' + svelteIgnore.map(i => i + ':ignore').join(','), watch: '$1 --watch', output: 'stream'}
+    // ],
     [
       '@snowpack/plugin-typescript',
       {

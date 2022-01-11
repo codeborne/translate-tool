@@ -4,7 +4,7 @@
   import type {GoogleAuthUser} from './GoogleAuthUser'
   import jsonLoader from './JsonLoader'
 
-  export let user: GoogleAuthUser
+  export let user: GoogleAuthUser = undefined
 
   let GoogleAuth
   let clientId: string
@@ -32,11 +32,8 @@
   }
 
   function checkForLoggedInUser() {
-    if (GoogleAuth.isSignedIn.get()) {
-      user = GoogleAuth.currentUser.get().getBasicProfile()
-    } else {
-      user = undefined
-    }
+    if (GoogleAuth.isSignedIn.get()) user = GoogleAuth.currentUser.get().getBasicProfile()
+    else user = undefined
   }
 
   async function init() {

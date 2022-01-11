@@ -9,7 +9,6 @@ describe('BranchLoadedFrom', () => {
   it('renders default branch if no branch in config', async () => {
     const {container} = render(BranchLoadedFrom, { config })
     const text = container.querySelector('div')?.textContent
-    console.log(container.querySelector('div'))
     expect(text).to.contain('Translations loaded from translations branch')
   })
 
@@ -17,7 +16,6 @@ describe('BranchLoadedFrom', () => {
     config.branch = 'test'
     const {container} = render(BranchLoadedFrom, { config })
     const text = container.querySelector('div')?.textContent
-    console.log(container.querySelector('div'))
     expect(text).to.contain('Translations loaded from test branch')
   })
 

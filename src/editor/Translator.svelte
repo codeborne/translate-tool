@@ -8,8 +8,6 @@
   export let defaultDict: Dict
   export let key: string
 
-  // interface TranslationResponse {text: string}
-
   setCORS("https://secret-ocean-49799.herokuapp.com/") // TODO replace with more reliable/own proxy
 
   function handleTranslation() {

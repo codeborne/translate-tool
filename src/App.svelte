@@ -28,22 +28,26 @@
   onMount(async () => {
     projects = await tryLoadPreConfiguredProjects()
     if (!projects) projects = tryInitFromLocalStorage()
-    await tryLoadSharedUrl()
+    await handleSharedUrl()
     if (projects) localStorage.setItem('projects', JSON.stringify(projects))
-    !projects.length ? setupNewProjectIfNotExists() : await loadAllProjects()
+    !projects.length ? setupNewProjectIfNotExists() : await refreshProjects()
   })
 
-  async function tryLoadSharedUrl() {
+  async function handleSharedUrl() {
     const urlParams = new URLSearchParams(window.location.search)
     if (!urlParams.has('shared')) return
+    await tryLoadSharedUrl(urlParams.get('shared')!)
+    window.history.replaceState(null, null!, window.location.pathname);
+  }
+
+  async function tryLoadSharedUrl(encoded: string) {
     try {
-      const sharedProject: Project = JSON.parse(decodeBase64Unicode(urlParams.get('shared')!))
+      const sharedProject: Project = JSON.parse(decodeBase64Unicode(encoded))
       if (projects.find((p) => p.title === sharedProject.title)) sharedProject.title = `${sharedProject.title} (Duplicate)`
       projects.push(sharedProject)
     } catch (e: any) {
       if (e.message) alert(`Something went wrong while parsing the shared link and the project was not added.\n\nError message:\n${e.message}`)
     }
-    window.history.replaceState(null, null!, window.location.pathname);
   }
 
   function setupNewProjectIfNotExists() {
@@ -53,15 +57,18 @@
   }
 
   async function loadAllProjects() {
-    if (projects.length) {
-      loadedProjects = await Promise.all(projects.map(p => jsonLoader.loadProject(p)))
-      const lastTitle = localStorage.getItem('selectedProject')
-      selectedProject = (loadedProjects.find(p => p.title == lastTitle) ?? loadedProjects[0])
-      showAddProject = !selectedProject
-    } else {
+    if (projects.length) await refreshProjects()
+    else {
       setupNewProjectIfNotExists()
       loadedProjects = []
     }
+  }
+
+  async function refreshProjects() {
+    loadedProjects = await Promise.all(projects.map(p => jsonLoader.loadProject(p)))
+    const lastTitle = localStorage.getItem('selectedProject')
+    selectedProject = (loadedProjects.find(p => p.title == lastTitle) ?? loadedProjects[0])
+    showAddProject = !selectedProject
   }
 
   async function tryLoadPreConfiguredProjects() {

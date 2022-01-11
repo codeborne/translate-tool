@@ -32,16 +32,12 @@ test('can edit project config', async ({page}) => {
   await page.locator('.name-input').fill('nameIsChanged')
   await page.locator('text=Save').click()
   await expect(page.locator('nav .nav-link:first-of-type')).toContainText('nameIsChanged')
+  await page.once('dialog', dialog => dialog.dismiss())
   await page.locator('text=Share').click()
-  await page.on('dialog', dialog => dialog.dismiss())
 
   await expect(page.locator('[title="Add a new project"]')).toBeVisible()
+  await page.once('dialog', dialog => dialog.accept())
   await page.locator('text=Delete').click()
-  await page.on('dialog', dialog => dialog.accept())
-
-  // TODO fix these deletion tests
-  // await expect(await page.locator('[title="Add a new project"]')).not.toBeVisible()
-  // await expect(await page.locator('nav .nav-link')).not.toBeVisible()
-
-
+  await expect(await page.locator('[title="Add a new project"]')).not.toBeVisible()
+  await expect(await page.locator('nav .nav-link')).not.toBeVisible()
 })

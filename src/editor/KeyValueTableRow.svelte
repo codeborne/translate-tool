@@ -5,7 +5,7 @@
   import DictKeyAdder from './DictKeyAdder.svelte'
   import TextInput from './TextInput.svelte'
   import {getValue} from '../common/utils'
-  import Translator from './Translator.svelte'
+  import Translator from '../translator/Translator.svelte'
 
   export let lang: string
   export let defaultLang: string

@@ -1,6 +1,6 @@
 <script lang="ts">
   import type {Dict} from '../common/Project'
-  import {setCORS, translate} from '../translator/translate'
+  import {setCORS, translate} from './translate'
 
   export let lang: string
   export let defaultLang: string

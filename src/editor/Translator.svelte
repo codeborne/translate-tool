@@ -18,7 +18,6 @@
     if (!translation) await fetchTranslation()
     isTranslated = true
     dict[key] = translation
-
   }
 
   async function fetchTranslation() {

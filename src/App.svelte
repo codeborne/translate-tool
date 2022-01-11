@@ -10,7 +10,6 @@
   import ToggleConfigButton from './config/TogglePagesButton.svelte'
   import DictEditor from './editor/DictEditor.svelte'
   import ProjectAddButton from './layout/ProjectAddButton.svelte'
-  import AuthenticatedUserDisplay from './layout/AuthenticatedUserDisplay.svelte'
   import ProjectImportList from './config/ProjectImportList.svelte'
   import ProjectSettings from './config/ProjectSettings.svelte'
   import GoogleAuth from './common/GoogleAuth.svelte'
@@ -93,8 +92,6 @@
       <GoogleAuth bind:user />
     </div>
   {/if}
-  <AuthenticatedUserDisplay slot="authenticated" {user}/>
-
 </Navbar>
 
 <main class="my-3 container">

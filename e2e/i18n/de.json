@@ -1,0 +1,32 @@
+{
+  "countries": {
+    "AT": "Austria",
+    "DE": "Deutchland"
+  },
+  "errors": {
+    "alreadyExists": "Bereits vorhanden",
+    "apiVersionMismatch": "Der Server wurde aktualisiert und lädt die Seite neu, um die Kompatibilität sicherzustellen",
+    "notJson": "Die Kommunikation mit dem Server ist blockiert. Bitte überprüfen Sie Ihre Netzwerkverbindung",
+    "unsupportedIEBrowser": "Sie verwenden den Internet Explorer, der 2013 veröffentlicht wurde und nicht die neuesten Webstandards unterstützt, mit denen diese App funktioniert. Aktualisieren Sie auf einen modernen Webbrowser wie Chrome, Firefox oder <a href='https://microsoft.com/edge'> den neuen Microsoft Edge </a> .",
+    "upgradeLegacyEdgeBrowser": "Sie verwenden eine ältere Version des Microsoft Edge-Browsers, die nicht unterstützt wird. Damit alle Funktionen ordnungsgemäß funktionieren, <a href='https://microsoft.com/edge'> auf den neuen Edge </a> ."
+  },
+  "login": {
+    "logout": "Ausloggen"
+  },
+  "pages": {
+    "shopper": {
+      "menu": "Käufer"
+    },
+    "merchant": {
+      "menu": "Händler"
+    },
+    "integration": {
+      "menu": "Integrierung"
+    }
+  },
+  "title": "Testing",
+  "wizard": {
+    "back": "Zurück",
+    "next": "Nächste"
+  }
+}

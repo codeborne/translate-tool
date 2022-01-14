@@ -3,6 +3,7 @@ import {expect} from 'chai'
 import App from './App.svelte'
 import {stub} from 'sinon'
 import {tick} from 'svelte'
+import jsonLoader from './common/JsonLoader'
 
 // TODO fix all of these tests and work out how to properly test multiple fetch requests
 const loadedProject = {hello: 'world', nested: {hello: 'Another World'}}
@@ -14,36 +15,43 @@ const projects = [
   }]
 
 describe('<App>', () => {
-  it.skip('renders language importer with no config file or localstorage', async () => {
-    stub(window, 'fetch').resolves({json: async () => undefined} as Response)
+  it('renders language importer with no config file or localstorage', async () => {
+    stub(jsonLoader, 'loadJson').resolves({json: async () => undefined} as Response)
     const {container} = render(App)
-    expect(fetch)
-    await act(fetch)
+    expect(jsonLoader.loadJson).called
+    await act(jsonLoader.loadJson)
+    await tick()
     expect(container.querySelector('.addNew')).to.exist
   })
 
   it.skip('renders editor if localStorage exists, but no deployed projects', async () => {
-    localStorage.setItem('projects', JSON.stringify(projects))
-    stub(window, 'fetch')
-      .onFirstCall().resolves({json: async () => null} as Response)
-      .onSecondCall().resolves({json: async () => loadedProject} as Response)
+    stub(window.localStorage, 'getItem').returns(JSON.stringify(projects))
+    stub(jsonLoader, 'loadJson').resolves({json: async () => null} as Response)
+
+    // @ts-ignore
+    stub(jsonLoader, 'loadProject').returns(loadedProject)
     const {container} = render(App)
-    expect(fetch)
-    await act(fetch)
-    await act(fetch)
+
+    expect(jsonLoader.loadJson).called
+    await act(jsonLoader.loadJson)
+
+    expect(window.localStorage.getItem).calledWith('projects')
+    await act(window.localStorage.getItem)
+
+    expect(jsonLoader.loadProject).called
+    await act(jsonLoader.loadProject)
+
     await tick()
     expect(container.querySelector('#output')).to.exist
   })
 
   it.skip('renders editor if project file exists', async () => {
-    stub(window, 'fetch')
-      .onFirstCall().resolves({json: async () => projects} as Response)
-      .onSecondCall().resolves({json: async () => loadedProject} as Response)
+    // @ts-ignore
+    stub(jsonLoader, 'loadJson').resolves({json: async () => projects} as Response)
     const {container} = render(App)
     expect(container.querySelector('main')).to.exist
-    expect(fetch)
-    await act(fetch)
-    await act(fetch)
+    expect(jsonLoader.loadJson).calledWith('projects.json')
+    await act(jsonLoader.loadJson)
     await tick()
     expect(container.querySelector('#output')).to.exist
   })

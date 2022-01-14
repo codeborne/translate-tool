@@ -12,7 +12,7 @@
   let translation: string = ''
   let isTranslated: boolean = false
 
-  setCORS("https://secret-ocean-49799.herokuapp.com/") // TODO replace with more reliable/own proxy
+  setCORS(`${window.location.protocol}//${window.location.hostname}:8998/`)
 
   async function handleTranslation() {
     if (!translation) await fetchTranslation()

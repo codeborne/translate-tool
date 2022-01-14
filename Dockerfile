@@ -1,4 +1,6 @@
 FROM node:16-alpine as build
+RUN apk add --no-cache chromium
+ENV TEST_CHROME_ARGS='--no-sandbox'
 
 WORKDIR /app
 

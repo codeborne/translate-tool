@@ -8,6 +8,16 @@ pipeline {
   stages {
     stage('Build') {
       steps {
+        sh 'docker build --target build -t ${REPO_NAME}_build .'
+      }
+    }
+    stage('Test') {
+      steps {
+        sh 'docker run ${REPO_NAME}_build npm test'
+      }
+    }
+    stage('Build final') {
+      steps {
         sh 'docker-compose -p $REPO_NAME build'
       }
     }

@@ -4,6 +4,7 @@ cd `dirname $0`
 
 npm ci
 
+cp -r i18n ../build
 cd ../build
 mv projects.json projects.json.bak 2>/dev/null
 npx -y http-server -p 9874 &

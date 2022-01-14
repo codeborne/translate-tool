@@ -1,10 +1,10 @@
 import {expect, test} from '@playwright/test'
-import {PUBLIC_TEST_PROJECT_URL, url} from './config.js'
+import {url} from './config.js'
 
 async function fillPublicImport(page) {
   await expect(page.locator('.collapsePublic')).toBeVisible()
   await page.locator('.collapsePublic input:nth-of-type(1)').fill('ConfigTest')
-  await page.locator('.collapsePublic input:nth-of-type(2)').fill(PUBLIC_TEST_PROJECT_URL)
+  await page.locator('.collapsePublic input:nth-of-type(2)').fill(url + '/i18n/')
   await page.locator('.collapsePublic button').click()
   await expect(page.locator('.collapsePublic')).not.toBeVisible()
 }
@@ -26,7 +26,7 @@ test('can edit project config', async ({page}) => {
   await expect(page.locator('nav .nav-link:first-of-type')).toContainText('ConfigTest')
   expect(await page.inputValue('.name-input')).toBe('ConfigTest')
   expect(await page.inputValue('.indent-input')).toBe('2')
-  expect(await page.inputValue('.url-input')).toBe(PUBLIC_TEST_PROJECT_URL)
+  expect(await page.inputValue('.url-input')).toBe(url + '/i18n/')
   expect(await page.inputValue('.token-input')).toBe('')
 
   await page.locator('.name-input').fill('nameIsChanged')

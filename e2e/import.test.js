@@ -1,10 +1,10 @@
 import {expect, test} from '@playwright/test'
-import {PUBLIC_TEST_PROJECT_URL, url} from './config.js'
+import {url} from './config.js'
 
 async function fillPublicImport(projectName, page) {
   await expect(page.locator('.collapsePublic')).toBeVisible()
   await page.locator('.collapsePublic input:nth-of-type(1)').fill(projectName)
-  await page.locator('.collapsePublic input:nth-of-type(2)').fill(PUBLIC_TEST_PROJECT_URL)
+  await page.locator('.collapsePublic input:nth-of-type(2)').fill(url + '/i18n/')
 }
 
 test('import public twice', async ({page}) => {

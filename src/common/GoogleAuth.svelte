@@ -1,5 +1,4 @@
 <script lang="ts">
-
   import {onMount} from 'svelte'
   import type {GoogleAuthUser} from './GoogleAuthUser'
   import jsonLoader from './JsonLoader'
@@ -14,14 +13,18 @@
     if (clientId) await init()
   })
 
-  async function loadAuthInfo() {
-    const authFile: Record<string, any> = await tryLoadAuthFile()
-    if (!authFile) return
-    clientId = authFile['google']['client_id']
+  interface AuthInfo {
+    google: {client_id: string}
   }
 
-  async function tryLoadAuthFile() {
-    return jsonLoader.loadJson('auth.json').catch()
+  async function loadAuthInfo() {
+    const authFile = await tryLoadAuthFile()
+    if (!authFile) return
+    clientId = authFile.google.client_id
+  }
+
+  async function tryLoadAuthFile(): Promise<AuthInfo> {
+    return jsonLoader.loadJson('auth.json').catch(e => console.warn(e))
   }
 
   async function handleLogin() {

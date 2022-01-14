@@ -65,7 +65,7 @@
   }
 
   async function refreshProjects() {
-    loadedProjects = await Promise.all(projects.map(p => jsonLoader.loadProject(p)))
+    loadedProjects = await jsonLoader.loadProjects(projects)
     const lastTitle = localStorage.getItem('selectedProject')
     selectedProject = (loadedProjects.find(p => p.title == lastTitle) ?? loadedProjects[0])
     showAddProject = !selectedProject
@@ -96,7 +96,7 @@
       {/if}
       <ProjectAddButton bind:showAddProject/>
       <ToggleConfigButton bind:showAddProject bind:showConfig showBack={loadedProjects.length > 0}/>
-      <GoogleAuth bind:user />
+      <GoogleAuth bind:user/>
     </div>
   {/if}
 </Navbar>

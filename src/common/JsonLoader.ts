@@ -29,6 +29,10 @@ class JsonLoader {
     }, {} as Record<string, Dict>)
     return new LoadedProject(project, dicts)
   }
+
+  loadProjects(projects: Project[]) {
+    return Promise.all(projects.map(p => this.loadProject(p)))
+  }
 }
 
 const jsonLoader = new JsonLoader()

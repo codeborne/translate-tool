@@ -42,6 +42,7 @@
     dispatch('changed')
   }
 
+  // TODO: use jsonLoader
   const fetchDict = (dictUrl: string) => fetch(dictUrl).then(r => r.json()).catch((e) => warning = e)
 
   function validate(arr: any) {

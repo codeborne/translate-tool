@@ -1,58 +1,59 @@
 import {act, render} from '@testing-library/svelte'
 import {expect} from 'chai'
 import App from './App.svelte'
-import {stub} from 'sinon'
+import {SinonStub, stub} from 'sinon'
 import {tick} from 'svelte'
 import jsonLoader from './common/JsonLoader'
+import type {Project} from './common/Project'
+import {LoadedProject} from './common/Project'
 
-// TODO fix all of these tests and work out how to properly test multiple fetch requests
-const loadedProject = {hello: 'world', nested: {hello: 'Another World'}}
-const projects = [
-  {
-    title: 'TestTitle',
-    url: 'TestUrl',
-    indent: 2
-  }]
+const project = {
+  title: 'TestTitle',
+  url: 'TestUrl',
+  indent: 2
+} as Project
+
+const loadedProject = new LoadedProject(project, {en: {hello: 'world', world: 'hello'}})
 
 describe('<App>', () => {
+  let loadJson: SinonStub
+
+  beforeEach(() => {
+    loadJson = stub(jsonLoader, 'loadJson').resolves(undefined)
+    stub(jsonLoader, 'loadProjects').resolves([loadedProject])
+    localStorage.clear()
+  })
+
   it('renders language importer with no config file or localstorage', async () => {
-    stub(jsonLoader, 'loadJson').resolves({json: async () => undefined} as Response)
     const {container} = render(App)
-    expect(jsonLoader.loadJson).called
+    expect(jsonLoader.loadJson).calledWith('projects.json')
     await act(jsonLoader.loadJson)
     await tick()
     expect(container.querySelector('.addNew')).to.exist
   })
 
-  it.skip('renders editor if localStorage exists, but no deployed projects', async () => {
-    stub(window.localStorage, 'getItem').returns(JSON.stringify(projects))
-    stub(jsonLoader, 'loadJson').resolves({json: async () => null} as Response)
-
-    // @ts-ignore
-    stub(jsonLoader, 'loadProject').returns(loadedProject)
+  it('renders editor if localStorage exists, but no deployed projects', async () => {
+    localStorage['projects'] = JSON.stringify([project])
     const {container} = render(App)
-
-    expect(jsonLoader.loadJson).called
     await act(jsonLoader.loadJson)
 
-    expect(window.localStorage.getItem).calledWith('projects')
-    await act(window.localStorage.getItem)
-
-    expect(jsonLoader.loadProject).called
-    await act(jsonLoader.loadProject)
+    expect(jsonLoader.loadProjects).calledWith([project])
+    await act(jsonLoader.loadProjects)
 
     await tick()
     expect(container.querySelector('#output')).to.exist
   })
 
-  it.skip('renders editor if project file exists', async () => {
-    // @ts-ignore
-    stub(jsonLoader, 'loadJson').resolves({json: async () => projects} as Response)
+  it('renders editor if project file exists', async () => {
+    loadJson.withArgs('projects.json').resolves([project])
     const {container} = render(App)
     expect(container.querySelector('main')).to.exist
+
     expect(jsonLoader.loadJson).calledWith('projects.json')
     await act(jsonLoader.loadJson)
-    await tick()
+
+    expect(jsonLoader.loadProjects).calledWith([project])
+    await act(jsonLoader.loadProjects)
     expect(container.querySelector('#output')).to.exist
   })
 })

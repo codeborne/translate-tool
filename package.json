@@ -1,6 +1,7 @@
 {
   "scripts": {
     "start": "snowpack dev",
+    "proxy": "node proxy.js",
     "build": "snowpack build",
     "test": "web-test-runner \"src/**/*.test.ts\""
   },

@@ -6,7 +6,8 @@
     "test": "web-test-runner \"src/**/*.test.ts\""
   },
   "dependencies": {
-    "cors-anywhere": "^0.4.4",
+    "express": "^4.17.2",
+    "request": "^2.88.2",
     "svelte": "^3.37.0"
   },
   "devDependencies": {

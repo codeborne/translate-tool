@@ -1,12 +1,12 @@
 import type {Dict, Project} from '../common/Project'
 import {LoadedProject} from '../common/Project'
-import {decodeBase64Unicode, encodeBase64Unicode} from '../common/utils'
+import {encodeBase64Unicode} from '../common/utils'
 import jsonLoader from '../common/JsonLoader'
 import {cleanEmptyKeys} from '../editor/cleanEmptyKeys'
 
 export class BitBucketClient {
   static host = 'api.bitbucket.org'
-  branch = 'translations'
+  branch = this.config.branch ?? 'translations'
   author = {name: 'Translate Tool', email: 'translate@codeborne.com'}
   constructor(public config: Project) {
     if (!config.url.includes(BitBucketClient.host)) throw new Error('Not a BitBucket url: ' + config.url)
@@ -41,14 +41,11 @@ export class BitBucketClient {
     return this.send(url, 'PUT', body)
   }
 
-  getFile(file: string, branch?: string) {
-    return this.request(this.config.url + file + (branch ? '?ref=' + branch : '')) as Promise<BitBucketFile>
-  }
 
-  async getFileContent(file: string) {
-    const response = await this.getFile(file, this.branch).catch(() => this.getFile(file))
-    if (response.encoding === 'base64') return JSON.parse(decodeBase64Unicode(response.content))
-    else response.content
+
+  async getFile(file: string, branch?: string) {
+    const url = branch ? this.config.url.replace('/main/', `/${branch}/`) : this.config.url
+    return await this.request(url + file)
   }
 
   async saveFile(lang: string, dict: Dict, commitMessage: string) {

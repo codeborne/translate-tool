@@ -8,10 +8,10 @@
   export let projects: Project[]
 
   let warning: string
-  let username: string = ''
-  let repo: string = ''
+  let username: string = 'dr1nky'
+  let repo: string = 'i18n-public'
   let path: string = '/i18n/'
-  let title: string = ''
+  let title: string = 'BitBucketTest'
   let branch = 'translations'
   let project: Project = {url: '', title: '', token: '', indent: 2, branch}
 
@@ -19,17 +19,17 @@
 
   function setProjectKeys() {
     warning = ''
-    project.url = `https://api.bitbucket.org/2.0/repositories/${username}/${repo}/src/main${path}`
     project.title = title
     project.token = token
     project.indent = 2
-    project.branch = branch
+    project.branch = branch ?? 'translations'
+    project.url = `https://api.bitbucket.org/2.0/repositories/${username}/${repo}/src/main${path}`
   }
 
   async function submit() {
     setProjectKeys()
     let bitbucketClient = new BitBucketClient(project)
-    let langs: LoadedProject = await bitbucketClient.getFileContent('langs.json')
+    let langs: LoadedProject = await bitbucketClient.getFile('langs.json')
     if (!langs)  warning = 'Could not load project'
     else validate(langs)
     if (warning == '') save()

@@ -1,6 +1,7 @@
 <script lang="ts">
   import type {Project} from '../common/Project'
   import {createEventDispatcher} from 'svelte'
+  import jsonLoader from '../common/JsonLoader'
 
   export let projects: Project[]
 
@@ -14,14 +15,9 @@
   async function submit() {
     warning = ''
     if (url) {
-      let dict = await fetchDict(url + 'langs.json')
-      if (validate(dict)) {
-        save(url)
-        warning = ''
-      }
-    } else {
-      warning = 'Input must not be empty'
-    }
+      let dict = await jsonLoader.loadJson(url + 'langs.json')
+      if (validate(dict)) save(url)
+    } else warning = 'Input must not be empty'
   }
 
   function save(dictUrl: string) {
@@ -41,9 +37,6 @@
     projects = newProjects
     dispatch('changed')
   }
-
-  // TODO: use jsonLoader
-  const fetchDict = (dictUrl: string) => fetch(dictUrl).then(r => r.json()).catch((e) => warning = e)
 
   function validate(arr: any) {
     if (arr) {

@@ -27,6 +27,6 @@ RUN npm ci --production
 
 COPY server.mjs ./
 
-EXPOSE 8998
+EXPOSE 8999
 
 CMD node server.mjs

@@ -2,7 +2,7 @@
 
   import type {LoadedProject, Project} from '../common/Project'
   import {createEventDispatcher} from 'svelte'
-  import {GitHubClient} from '../github/GitHubClient'
+  import {BitBucketClient} from '../bitbucket/BitBucketClient'
 
   export let token: string = ''
   export let projects: Project[]
@@ -19,7 +19,7 @@
 
   function setProjectKeys() {
     warning = ''
-    project.url = `https://api.github.com/repos/${username}/${repo}/contents${path}`
+    project.url = `https://api.bitbucket.org/2.0/repositories/${username}/${repo}/src/main${path}`
     project.title = title
     project.token = token
     project.indent = 2
@@ -28,8 +28,8 @@
 
   async function submit() {
     setProjectKeys()
-    let githubClient = new GitHubClient(project)
-    let langs: LoadedProject = await githubClient.getFileContent('langs.json')
+    let bitbucketClient = new BitBucketClient(project)
+    let langs: LoadedProject = await bitbucketClient.getFileContent('langs.json')
     if (!langs)  warning = 'Could not load project'
     else validate(langs)
     if (warning == '') save()

@@ -5,7 +5,7 @@ import jsonLoader from '../common/JsonLoader'
 import {cleanEmptyKeys} from '../editor/cleanEmptyKeys'
 
 export class BitBucketClient {
-  static host = 'api.github.com'
+  static host = 'api.bitbucket.org'
   branch = 'translations'
   author = {name: 'Translate Tool', email: 'translate@codeborne.com'}
   constructor(public config: Project) {

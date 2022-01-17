@@ -12,7 +12,7 @@
   let translation: string = ''
   let isTranslated: boolean = false
 
-  setCORS(`${window.location.protocol}//${window.location.hostname}:8998/`)
+  setCORS(`${window.location.protocol}//${window.location.hostname}:${window.location.port}/proxy/`)
 
   async function handleTranslation() {
     if (!translation) await fetchTranslation()

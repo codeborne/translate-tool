@@ -1,17 +1,16 @@
 import express from 'express'
 import request from 'request'
 
-const port = process.env.PORT ?? 8998
+const port = process.env.PORT ?? 8999
 const domain = process.env.DOMAIN ?? 'localhost'
 
 const app = express()
 
-app.get('/proxy', (req, res) => {
-  const url = req.url.slice(1, req.url.length)
-  res.header("Access-Control-Allow-Origin", "*");
+app.get('/proxy/**', (req, res) => {
+  const url = req.url.slice(7, req.url.length)
   request(url).pipe(res)
 })
 
 app.use(express.static('build'))
 
-app.listen(port, () => console.log(`Listening on http://${domain}:${port}`))
+app.listen(port, () => console.log(`Listening on port: ${port}`))

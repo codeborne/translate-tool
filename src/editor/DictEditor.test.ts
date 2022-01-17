@@ -1,34 +1,23 @@
-import {act, render} from '@testing-library/svelte'
+import {render} from '@testing-library/svelte'
 import {expect} from 'chai'
 import DictEditor from './DictEditor.svelte'
-import {stub} from 'sinon'
-import type {Project} from '../common/Project'
-import jsonLoader from '../common/JsonLoader'
+import type {Dict, Project} from '../common/Project'
+import {LoadedProject} from '../common/Project'
 
 describe('<DictEditor>', () => {
-  const dict = {hello: 'world', nested: {hello: 'Another World'}}
-  const selectedProjectTitle = 'testproject'
-  const project: Project = {title: 'project', indent: 2, url: '../../i18n/langs.json', token: ''}
+  const dict: Dict = {hello: 'world', nested: {hello: 'Another World'}}
+  const lang = 'en'
+  const user = undefined
+  const config: Project = {title: 'project', indent: 2, url: '../../i18n/langs.json', token: ''}
+  const project: LoadedProject = new LoadedProject(config, dict)
 
-  it.skip('renders spinner if loading', () => {
-    stub(jsonLoader, 'loadFor').returns(new Promise(() => {}))
-    const {container} = render(DictEditor, {selectedProjectTitle, project})
-    expect(container.querySelector('.spinner-border')).to.exist
+  it('renders fetched dictionary data correctly', async () => {
+    const {container} = render(DictEditor, {lang, project, user})
+    expect(container.querySelector('#rawOutput')).to.exist
   })
 
-  it.skip('renders fetched dictionary data correctly', async () => {
-    stub(jsonLoader, 'loadFor')
-      .withArgs(project, 'langs').resolves(['en', 'et'])
-      .withArgs(project, 'en').resolves(dict)
-      .withArgs(project, 'et').resolves(dict)
-    const {container} = render(DictEditor, {selectedProjectTitle, project})
-    expect(jsonLoader.loadFor).calledWith(project, 'langs')
-    await act(() => Promise.resolve())
-    expect(jsonLoader.loadFor).calledWith(project, 'en')
-    await act(() => Promise.resolve())
-    await act(() => Promise.resolve())
-    expect(container.querySelector('#rawOutput'))
-      .property('value')
-      .contains(JSON.stringify(dict, null, 2), 'correct raw output')
-  })
+  // TODO redo the test entirely, eg check how many rows there are and pass the below code
+  // expect(container.querySelector('#rawOutput'))
+  //   .property('value')
+  //   .contains(JSON.stringify(dict, null, 2))
 })

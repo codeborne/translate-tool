@@ -2,7 +2,6 @@ import express from 'express'
 import request from 'request'
 
 const port = process.env.PORT ?? 8999
-const domain = process.env.DOMAIN ?? 'localhost'
 
 const app = express()
 

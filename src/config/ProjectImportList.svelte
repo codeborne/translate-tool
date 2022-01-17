@@ -1,6 +1,7 @@
 <script lang="ts">
   import SimpleProjectImporter from './SimpleProjectImporter.svelte'
   import GitHubProjectImporter from './GitHubProjectImporter.svelte'
+  import BitBucketProjectImporter from './BitBucketProjectImporter.svelte'
   import type {Project} from '../common/Project'
 
   export let projects: Project[]
@@ -19,6 +20,17 @@
         <GitHubProjectImporter bind:projects on:changed/>
       </div>
     </div>
+
+  <div class="accordion-item">
+    <h2 class="accordion-header">
+      <button class="accordion-button collapsed bitbucketImport" type="button" data-bs-toggle="collapse" data-bs-target=".collapseBitbucket" aria-expanded="false" aria-controls="collapseThree">
+        Via BitBucket
+      </button>
+    </h2>
+    <div class="accordion-collapse collapse m-3 collapseBitbucket" aria-labelledby="headingThree" data-bs-parent=".addNew">
+      <BitBucketProjectImporter bind:projects on:changed/>
+    </div>
+  </div>
 
     <div class="accordion-item">
       <h2 class="accordion-header">

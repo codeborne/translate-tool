@@ -3,6 +3,7 @@ import {expect} from 'chai'
 import GoogleAuth from './GoogleAuth.svelte'
 import type {GoogleAuthUser} from './GoogleAuthUser'
 import {stub} from 'sinon'
+import jsonLoader from './JsonLoader'
 
 describe('GoogleAuth', () => {
   const user: GoogleAuthUser = undefined
@@ -12,24 +13,25 @@ describe('GoogleAuth', () => {
     // @ts-ignore
     window['gapi'] = {
       load() {
-        return null;
-      }
+        return null
+      },
     }
   })
 
   it('renders nothing if auth file contains no client id', async () => {
+    stub(jsonLoader, 'loadJson').resolves(undefined)
     const {container} = render(GoogleAuth, {user})
-    stub(window, 'fetch').resolves(undefined)
-    await act(() => Promise.resolve())
+    expect(jsonLoader.loadJson).called
+    await act(jsonLoader.loadJson)
     expect(container.querySelector('.login')).to.not.exist
     expect(container.querySelector('.logout')).to.not.exist
   })
 
   it.skip('renders login/logout buttons if auth file has client id', async () => {
-    stub(window, 'fetch').resolves({json: async () => authFile} as Response)
+    stub(jsonLoader, 'loadJson').resolves({json: async () => authFile} as Response)
     const {container} = render(GoogleAuth, {user})
-    await act(() => Promise.resolve())
-    expect(fetch).called
+    expect(jsonLoader.loadJson).calledWith('auth.json')
+    await act(jsonLoader.loadJson)
     expect(container.querySelector('.login')).to.exist
     expect(container.querySelector('.logout')).to.not.exist
   })

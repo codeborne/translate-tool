@@ -32,6 +32,7 @@ describe('SimpleProjectImporter', () => {
     stub(window, 'fetch').resolves({json: async () => ['en', 'de']} as Response)
     await fireEvent.click(button)
     await tick()
-    expect(fetch)
+
+    // TODO improve these tests
   })
 })

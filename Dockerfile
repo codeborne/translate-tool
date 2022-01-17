@@ -17,6 +17,16 @@ ARG AUTH_FILE=''
 RUN [ -e "$AUTH_FILE" ] && cp -f "$AUTH_FILE" build/auth.json || true
 
 
-FROM nginx:alpine
-WORKDIR /usr/share/nginx/html/
-COPY --from=build /app/build ./
+FROM node:16-alpine
+
+WORKDIR /app
+COPY --from=build /app/build build
+
+COPY *.json ./
+RUN npm ci --production
+
+COPY server.mjs ./
+
+EXPOSE 8998
+
+CMD node server.mjs

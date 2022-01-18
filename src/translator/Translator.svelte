@@ -20,6 +20,8 @@
     dict[key] = translation
   }
 
+  $: if (lang) resetTranslation()
+
   async function fetchTranslation() {
     await translate(defaultDict[key], { from: defaultLang, to: lang })
       .then(res=> {
@@ -32,6 +34,11 @@
 
   function handleUndo() {
     dict[key] = uneditedDict[key]
+    isTranslated = false
+  }
+
+  function resetTranslation() {
+    translation = ''
     isTranslated = false
   }
 

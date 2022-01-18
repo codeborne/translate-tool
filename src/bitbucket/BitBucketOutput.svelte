@@ -53,5 +53,5 @@
 </script>
 
 <button on:click={save} class="btn btn-primary w-auto" disabled={inProgress}>
-  <i class="fas fa-save me-1"></i> Save to <i>{client.branch}</i> branch
+  <i class="fab fa-bitbucket"></i> Save to <i>{client.branch}</i> branch
 </button>

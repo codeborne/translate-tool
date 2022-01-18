@@ -49,7 +49,6 @@ export class BitBucketClient {
     return this.config.url.slice(0, this.config.url.indexOf('/src/')) + '/refs/branches'
   }
 
-
   async getFile(file: string, branch?: string) {
     const url = branch ? this.config.url.replace('/main/', `/${branch}/`) : this.config.url
     const token = (this.config.token) ? await this.getAccessToken() : undefined
@@ -63,6 +62,22 @@ export class BitBucketClient {
   async saveFile(lang: string, dict: Dict, commitMessage: string) {
     const token: BitBucketAuthResponse = await this.getAccessToken()
     await this.createBranchIfNotExists(token.access_token)
+    await this.commit(lang, dict, commitMessage, token.access_token)
+  }
+
+  async commit(lang: string, dict: Dict, commitMessage: string, token: string) {
+    // const form = new FormData()
+    // form.append('message', commitMessage)
+    // form.append('branch', this.branch)
+    // form.append('branch', this.branch)
+    // await fetch(this.getBranchListUrl(), {
+    //   method: 'POST', body: form,
+    //   headers: {
+    //     ...this.tokenHeader(token),
+    //     ...{'Content-Type': 'multipart/form-data'}
+    //   }
+    // }).then(res => res.json())
+    // TODO finish first thing in the morning and then refactor to not use fetch
   }
 
   async createBranchIfNotExists(token: string) {

@@ -57,7 +57,7 @@ export class BitBucketClient {
   }
 
   async fetchFile(url: string,  token: string|undefined, init?: RequestInit,) {
-    return await jsonLoader.request(url, {...init, headers: {...this.tokenHeader(token), ...init?.headers}})
+    return await this.request(url, {...init, headers: {...this.tokenHeader(token), ...init?.headers}})
   }
 
 }

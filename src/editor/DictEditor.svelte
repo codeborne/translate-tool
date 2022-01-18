@@ -11,6 +11,9 @@
   import ChangesCounter from './ChangesCounter.svelte'
   import type {GoogleAuthUser} from '../common/GoogleAuthUser'
   import BranchLoadedFrom from './BranchLoadedFrom.svelte'
+  import BitBucketOutput from '../bitbucket/BitBucketOutput.svelte'
+  import {BitBucketClient} from '../bitbucket/BitBucketClient'
+
 
   export let project: LoadedProject
   export let lang: string
@@ -85,6 +88,8 @@
   <DictClipboardOutput {dict} {lang} indent={project.config.indent} on:copied={onCopied}>
     {#if project.config.url.includes(GitHubClient.host) && project.config.token}
       <GitHubOutput {user} {dict} {lang} config={project.config} on:saved={updateUneditedDict}/>
+    {:else if project.config.url.includes(BitBucketClient.host) && project.config.token}
+      <BitBucketOutput {user} {dict} {lang} config={project.config} on:saved={updateUneditedDict}/>
     {/if}
     <ChangesCounter slot="counter" {dict} {uneditedDict}/>
   </DictClipboardOutput>

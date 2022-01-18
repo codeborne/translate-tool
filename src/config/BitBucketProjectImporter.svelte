@@ -8,10 +8,10 @@
   export let projects: Project[]
 
   let warning: string
-  let username: string = 'dr1nky'
-  let repo: string = 'i18n-public'
-  let path: string = '/i18n/'
-  let title: string = 'BitBucketTest'
+  let username: string = ''
+  let repo: string = ''
+  let path: string = ''
+  let title: string = ''
   let branch = 'translations'
   let project: Project = {url: '', title: '', token: '', indent: 2, branch}
 

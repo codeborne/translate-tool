@@ -1,0 +1,28 @@
+import type {Project} from '../common/Project'
+import {stub} from 'sinon'
+import jsonLoader from '../common/JsonLoader'
+import {expect} from 'chai'
+import {BitBucketClient} from './BitBucketClient'
+
+describe('BitBucketClient', () => {
+  const client = new BitBucketClient({
+    url: 'https://api.bitbucket.org/2.0/repositories/owner/repo/src/main/i18n/',
+    token: '123123:123123'
+  } as Project)
+
+  it('sends Authorization header', async () => {
+    stub(jsonLoader, 'request')
+    stub(client, 'tokenHeader').resolves({Authorization: 'Bearer ACCESS_TOKEN'})
+    await client.request('http://url', {method: 'PUT', headers: {'Authorization': 'Bearer ACCESS_TOKEN'}})
+    expect(jsonLoader.request).called
+  })
+
+  it('fetches access token if token present', async () => {
+    stub(client, 'getAccessToken').resolves({access_token: 'validToken', refresh_token: '', token_type: '', expires_in: 1, scopes: ''})
+    stub(client, 'fetchFile').resolves()
+    stub(client, 'request').resolves()
+    await client.getFile('file.json')
+    expect(client.getAccessToken).called
+    expect(client.fetchFile).calledWith('https://api.bitbucket.org/2.0/repositories/owner/repo/src/main/i18n/file.json', 'validToken')
+  })
+})

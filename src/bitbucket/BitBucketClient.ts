@@ -18,10 +18,6 @@ export class BitBucketClient {
     this.author.email = email
   }
 
-  basicAuthHeader() {
-    return this.config.token ? {Authorization: 'Basic ' + this.config.token} : undefined
-  }
-
   tokenHeader(token: string|undefined) {
     return token ? {Authorization: 'Bearer ' + token} : undefined
   }

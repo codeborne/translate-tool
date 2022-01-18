@@ -45,6 +45,10 @@ export class BitBucketClient {
     return await this.post('https://bitbucket.org/site/oauth2/access_token', body) as BitBucketAuthResponse
   }
 
+  getBranchListUrl() {
+    return this.config.url.slice(0, this.config.url.indexOf('/src/')) + '/refs/branches'
+  }
+
 
   async getFile(file: string, branch?: string) {
     const url = branch ? this.config.url.replace('/main/', `/${branch}/`) : this.config.url
@@ -63,17 +67,11 @@ export class BitBucketClient {
 
   async createBranchIfNotExists(token: string) {
     const branchExists: boolean = await this.checkIfBranchExists(token)
-    if (branchExists) await this.createBranch()
-  }
-
-  async createBranch() {
-
+    if (!branchExists) await this.createBranch(token)
   }
 
   async checkIfBranchExists(token: string): Promise<boolean> {
-    const listBranchesUrl = this.config.url.slice(0, this.config.url.indexOf('/src/')) + '/refs/branches'
-    console.log(listBranchesUrl)
-    const branches = await fetch(listBranchesUrl,{
+    const branches = await fetch(this.getBranchListUrl(),{
       method: 'GET',
       headers: {
         ...this.tokenHeader(token)
@@ -81,6 +79,20 @@ export class BitBucketClient {
     }).then(res => res.json()) as BitBucketBranchListResponse
     return !!(branches.values.find((branch) => branch.name === this.branch))
   }
+
+  async createBranch(token: string) {
+    console.log('im here')
+    const body = JSON.stringify({name: this.branch, target: {hash: 'main'}})
+    await fetch(this.getBranchListUrl(), {
+      method: 'POST', body,
+      headers: {
+        ...this.tokenHeader(token),
+        ...{'Content-Type': 'application/json'}
+      }
+    }).then(res => res.json())
+  }
+
+
 
 }
 

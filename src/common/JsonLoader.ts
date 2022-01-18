@@ -2,6 +2,7 @@ import type {Dict, Project} from './Project'
 import {LoadedProject} from './Project'
 import {getBaseUrl} from './utils'
 import {GitHubClient} from '../github/GitHubClient'
+import {BitBucketClient} from '../bitbucket/BitBucketClient'
 
 class JsonLoader {
   request(url: string, init?: RequestInit) {
@@ -16,9 +17,9 @@ class JsonLoader {
   }
 
   loadFor(project: Project, fileBaseName: string): Promise<any> {
-    return project.url.includes(GitHubClient.host) ?
-      new GitHubClient(project).getFileContent(fileBaseName + '.json') :
-      this.loadJson(getBaseUrl(project.url) + '/' + fileBaseName + '.json')
+    if (project.url.includes(GitHubClient.host)) return new GitHubClient(project).getFileContent(fileBaseName + '.json')
+    else if (project.url.includes(BitBucketClient.host)) return new BitBucketClient(project).getFile(fileBaseName + '.json')
+    else return this.loadJson(getBaseUrl(project.url) + '/' + fileBaseName + '.json')
   }
 
   async loadProject(project: Project): Promise<LoadedProject> {

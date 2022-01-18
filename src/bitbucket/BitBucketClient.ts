@@ -1,4 +1,4 @@
-import type {Project} from '../common/Project'
+import type {Dict, Project} from '../common/Project'
 import jsonLoader from '../common/JsonLoader'
 
 export class BitBucketClient {
@@ -39,7 +39,7 @@ export class BitBucketClient {
     return this.send(url, 'PUT', body)
   }
 
-  async getAccessToken(url: string) {
+  async getAccessToken() {
     const split = this.config.token.split(':')
     const body = 'grant_type=client_credentials&client_id=' + split[0] + '&client_secret=' + split[1]
     return await this.post('https://bitbucket.org/site/oauth2/access_token', body) as BitBucketAuthResponse
@@ -48,12 +48,38 @@ export class BitBucketClient {
 
   async getFile(file: string, branch?: string) {
     const url = branch ? this.config.url.replace('/main/', `/${branch}/`) : this.config.url
-    const token = (this.config.token) ? await this.getAccessToken(url + file) : undefined
+    const token = (this.config.token) ? await this.getAccessToken() : undefined
     return await this.fetchFile(url + file, token?.access_token)
   }
 
   async fetchFile(url: string, token: string | undefined, init?: RequestInit,) {
     return await this.request(url, {...init, headers: {...this.tokenHeader(token), ...init?.headers}})
+  }
+
+  async saveFile(lang: string, dict: Dict, commitMessage: string) {
+    const token: BitBucketAuthResponse = await this.getAccessToken()
+    await this.createBranchIfNotExists(token.access_token)
+  }
+
+  async createBranchIfNotExists(token: string) {
+    const branchExists: boolean = await this.checkIfBranchExists(token)
+    if (branchExists) await this.createBranch()
+  }
+
+  async createBranch() {
+
+  }
+
+  async checkIfBranchExists(token: string): Promise<boolean> {
+    const listBranchesUrl = this.config.url.slice(0, this.config.url.indexOf('/src/')) + '/refs/branches'
+    console.log(listBranchesUrl)
+    const branches = await fetch(listBranchesUrl,{
+      method: 'GET',
+      headers: {
+        ...this.tokenHeader(token)
+      }
+    }).then(res => res.json()) as BitBucketBranchListResponse
+    return !!(branches.values.find((branch) => branch.name === this.branch))
   }
 
 }
@@ -64,5 +90,17 @@ export interface BitBucketAuthResponse {
   refresh_token: string,
   scopes: string,
   token_type: string
+}
+
+export interface BitBucketBranchListResponse {
+  values: BitBucketBranchValue[]
+}
+
+export interface BitBucketBranchValue {
+  name: string,
+  type: string,
+  target: {
+    hash: string
+  }
 }
 

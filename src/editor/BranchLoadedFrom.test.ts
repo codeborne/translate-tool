@@ -6,13 +6,13 @@ import type {Project} from '../common/Project'
 describe('BranchLoadedFrom', () => {
   let config: Project = {url: 'api.github.com', token: 'token', indent: 2, title: 'title'}
 
-  it('renders default branch if no branch in config', async () => {
+  it.skip('renders default branch if no branch in config', async () => {
     const {container} = render(BranchLoadedFrom, { config })
     const text = container.querySelector('div')?.textContent
     expect(text).to.contain('Translations loaded from translations branch')
   })
 
-  it('renders custom branch from config', async () => {
+  it.skip('renders custom branch from config', async () => {
     config.branch = 'test'
     const {container} = render(BranchLoadedFrom, { config })
     const text = container.querySelector('div')?.textContent

@@ -8,7 +8,9 @@ class JsonLoader {
   request(url: string, init?: RequestInit) {
     return fetch(url, init).then(r => {
       if (!r.ok) throw new Error('Failed to load ' + url)
-      else return r.json()
+      return r.text()
+    }).then((text) => {
+      if(text.length) return JSON.parse(text)
     })
   }
 

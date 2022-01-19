@@ -23,9 +23,15 @@
     }
   }
 
+  function isVersionControlUrl() {
+    if (config.url.includes(GitHubClient.host)) return true
+    else if (config.url.includes(BitBucketClient.host)) return true
+    else return false
+  }
+
 </script>
 
-{#if branch}
+{#if branch && isVersionControlUrl()}
   <div class="form-text">
     <i class="fas fa-code-branch"></i>
     Translations loaded from <b>{branch}</b> branch

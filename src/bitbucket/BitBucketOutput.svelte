@@ -38,7 +38,7 @@
       const result = await client.saveFile(lang, dict, commitMessage)
       dispatch('saved')
       if (confirm(`Saved to ${client.branch}, open it for review?`))
-        window.open(result.commit.html_url, '_blank')
+        window.open(client.getCommitsUrl(), '_blank')
     } finally {
       inProgress = false
     }

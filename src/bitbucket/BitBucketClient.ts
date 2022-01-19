@@ -71,7 +71,7 @@ export class BitBucketClient {
     return await this.fetchFile(url + file, token?.access_token)
   }
 
-  async fetchFile(url: string, token: string | undefined, init?: RequestInit,) {
+  async fetchFile(url: string, token: string|undefined, init?: RequestInit,) {
     return await this.request(url, {...init, headers: {...this.tokenHeader(token), ...init?.headers}})
   }
 
@@ -82,17 +82,13 @@ export class BitBucketClient {
   }
 
   async commit(lang: string, dict: Dict, commitMessage: string, token: string) {
-    const form = new FormData()
-    form.append('message', commitMessage)
-    form.append('branch', this.branch)
-    form.append('author', `${this.author.name} <${this.author.email}>`)
-    form.append(`${this.getDirectoryUrl()}${lang}.json`, LoadedProject.prettyFormat(cleanEmptyKeys(dict), this.config.indent))
-    await fetch(this.getSrcUrl(), {
-      method: 'POST', body: form,
-      headers: {
-        ...this.tokenHeader(token)
-      }
-    })
+    const body = new FormData()
+    body.append('message', commitMessage)
+    body.append('branch', this.branch)
+    body.append('author', `${this.author.name} <${this.author.email}>`)
+    body.append(`${this.getDirectoryUrl()}${lang}.json`, LoadedProject.prettyFormat(cleanEmptyKeys(dict), this.config.indent))
+    const headers = {...this.tokenHeader(token)}
+    await this.request(`${this.getSrcUrl()}`, {method: 'POST', body, headers})
   }
 
   async createBranchIfNotExists(token: string) {
@@ -101,24 +97,16 @@ export class BitBucketClient {
   }
 
   async checkIfBranchExists(token: string): Promise<boolean> {
-    const branches = await fetch(this.getBranchListUrl(),{
-      method: 'GET',
-      headers: {
-        ...this.tokenHeader(token)
-      }
-    }).then(res => res.json()) as BitBucketBranchListResponse
+    const branches = await this.request(`${this.getBranchListUrl()}`,
+      {headers: {...this.tokenHeader(token)}}) as BitBucketBranchListResponse
     return !!(branches.values.find((branch) => branch.name === this.branch))
   }
 
   async createBranch(token: string) {
     const body = JSON.stringify({name: this.branch, target: {hash: 'main'}})
-    await fetch(this.getBranchListUrl(), {
-      method: 'POST', body,
-      headers: {
-        ...this.tokenHeader(token),
-        ...{'Content-Type': 'application/json'}
-      }
-    }).then(res => res.json())
+    const headers = {...this.tokenHeader(token), ...{'Content-Type': 'application/json'}}
+    await this.request(`${this.getBranchListUrl()}`, {method: 'POST', body, headers})
+
   }
 
 

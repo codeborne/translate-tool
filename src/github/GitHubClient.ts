@@ -6,7 +6,7 @@ import {cleanEmptyKeys} from '../editor/cleanEmptyKeys'
 
 export class GitHubClient {
   static host = 'api.github.com'
-  branch = 'translations'
+  branch = this.config.branch ?? 'translations'
   author = {name: 'Translate Tool', email: 'translate@codeborne.com'}
   constructor(public config: Project) {
     if (!config.url.includes(GitHubClient.host)) throw new Error('Not a GitHub url: ' + config.url)
@@ -47,6 +47,12 @@ export class GitHubClient {
 
   async getFileContent(file: string) {
     const response = await this.getFile(file, this.branch).catch(() => this.getFile(file))
+    if (response.encoding === 'base64') return JSON.parse(decodeBase64Unicode(response.content))
+    else response.content
+  }
+
+  async getFileContentNoCatch(file: string) {
+    const response = await this.getFile(file, this.branch)
     if (response.encoding === 'base64') return JSON.parse(decodeBase64Unicode(response.content))
     else response.content
   }

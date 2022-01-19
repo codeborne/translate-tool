@@ -69,6 +69,13 @@ export class BitBucketClient {
     const url = branch ? this.config.url.replace('/main/', `/${branch}/`) : this.config.url
     const token = (this.config.token) ? await this.getAccessToken() : undefined
     return await this.fetchFile(url + file, token?.access_token)
+      .catch(() => this.fetchFile(this.config.url + file, token?.access_token))
+  }
+
+  async getFileNoCatch(file: string, branch?: string) {
+    const url = branch ? this.config.url.replace('/main/', `/${branch}/`) : this.config.url
+    const token = (this.config.token) ? await this.getAccessToken() : undefined
+    return await this.fetchFile(url + file, token?.access_token)
   }
 
   async fetchFile(url: string, token: string|undefined, init?: RequestInit,) {
@@ -106,7 +113,6 @@ export class BitBucketClient {
     const body = JSON.stringify({name: this.branch, target: {hash: 'main'}})
     const headers = {...this.tokenHeader(token), ...{'Content-Type': 'application/json'}}
     await this.request(`${this.getBranchListUrl()}`, {method: 'POST', body, headers})
-
   }
 
 

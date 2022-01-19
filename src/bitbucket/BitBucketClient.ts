@@ -1,5 +1,7 @@
 import type {Dict, Project} from '../common/Project'
+import {LoadedProject} from '../common/Project'
 import jsonLoader from '../common/JsonLoader'
+import {cleanEmptyKeys} from '../editor/cleanEmptyKeys'
 
 export class BitBucketClient {
   static host = 'api.bitbucket.org'
@@ -49,6 +51,20 @@ export class BitBucketClient {
     return this.config.url.slice(0, this.config.url.indexOf('/src/')) + '/refs/branches'
   }
 
+  getSrcUrl() {
+    return this.config.url.slice(0, this.config.url.indexOf('/src/')) + '/src'
+  }
+
+  getDirectoryUrl() {
+    return this.config.url.slice(this.config.url.indexOf(`/src/main/`) + 10, this.config.url.length)
+  }
+
+  getCommitsUrl() {
+    return 'https://bitbucket.org'
+      + this.config.url.slice(this.config.url.indexOf('/repositories/') + 13, this.config.url.indexOf('/src/'))
+      + '/commits'
+  }
+
   async getFile(file: string, branch?: string) {
     const url = branch ? this.config.url.replace('/main/', `/${branch}/`) : this.config.url
     const token = (this.config.token) ? await this.getAccessToken() : undefined
@@ -66,18 +82,17 @@ export class BitBucketClient {
   }
 
   async commit(lang: string, dict: Dict, commitMessage: string, token: string) {
-    // const form = new FormData()
-    // form.append('message', commitMessage)
-    // form.append('branch', this.branch)
-    // form.append('branch', this.branch)
-    // await fetch(this.getBranchListUrl(), {
-    //   method: 'POST', body: form,
-    //   headers: {
-    //     ...this.tokenHeader(token),
-    //     ...{'Content-Type': 'multipart/form-data'}
-    //   }
-    // }).then(res => res.json())
-    // TODO finish first thing in the morning and then refactor to not use fetch
+    const form = new FormData()
+    form.append('message', commitMessage)
+    form.append('branch', this.branch)
+    form.append('author', `${this.author.name} <${this.author.email}>`)
+    form.append(`${this.getDirectoryUrl()}${lang}.json`, LoadedProject.prettyFormat(cleanEmptyKeys(dict), this.config.indent))
+    await fetch(this.getSrcUrl(), {
+      method: 'POST', body: form,
+      headers: {
+        ...this.tokenHeader(token)
+      }
+    })
   }
 
   async createBranchIfNotExists(token: string) {
@@ -96,7 +111,6 @@ export class BitBucketClient {
   }
 
   async createBranch(token: string) {
-    console.log('im here')
     const body = JSON.stringify({name: this.branch, target: {hash: 'main'}})
     await fetch(this.getBranchListUrl(), {
       method: 'POST', body,

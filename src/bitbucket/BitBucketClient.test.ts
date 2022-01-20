@@ -31,6 +31,11 @@ describe('BitBucketClient', () => {
     expect(result).to.equal('i18n/')
   })
 
+  it('returns repository root url', async () => {
+    const result: string = client.getRootUrl()
+    expect(result).to.equal('https://api.bitbucket.org/2.0/repositories/owner/repo')
+  })
+
   it('returns commit list url', async () => {
     const result: string = client.getCommitsUrl()
     expect(result).to.equal('https://bitbucket.org/owner/repo/commits')

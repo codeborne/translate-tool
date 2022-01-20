@@ -51,8 +51,8 @@ export class BitBucketClient {
     return this.config.url.slice(0, this.config.url.indexOf('/src/')) + '/refs/branches'
   }
 
-  getSrcUrl() {
-    return this.config.url.slice(0, this.config.url.indexOf('/src/')) + '/src'
+  getRootUrl() {
+    return this.config.url.slice(0, this.config.url.indexOf('/src/'))
   }
 
   getDirectoryUrl() {
@@ -100,7 +100,7 @@ export class BitBucketClient {
     body.append('author', `${this.author.name} <${this.author.email}>`)
     body.append(`${this.getDirectoryUrl()}${lang}.json`, LoadedProject.prettyFormat(cleanEmptyKeys(dict), this.config.indent))
     const headers = {...this.tokenHeader(token)}
-    await this.request(`${this.getSrcUrl()}`, {method: 'POST', body, headers})
+    await this.request(`${this.getRootUrl()}/src`, {method: 'POST', body, headers})
   }
 
   async createBranchIfNotExists(token: string) {

@@ -6,27 +6,32 @@
 
   let branch = config.branch
 
-  $: if (config) isVersionControl()
+  $: if (config) handleBranchCheck()
 
-  async function isVersionControl() {
-    try {
-      let result
-      if (config.url.includes(GitHubClient.host)) result =
-        await new GitHubClient(config).getFileContentNoCatch('langs.json')
-      else if (config.url.includes(BitBucketClient.host)) result =
-        await new BitBucketClient(config).getFileNoCatch('langs.json', config.branch ?? 'translations')
-      if (result) branch = config.branch ?? 'translations'
-      else branch = 'main'
-    } catch (e) {
-      branch = 'main'
-      console.warn(`The project ${config.title} does not have a branch called ${config.branch ?? 'translations'}.`)
+  async function handleBranchCheck() {
+    if (isVersionControlUrl()) {
+      try {
+        const result = await doesBranchExist()
+        branch = (result) ? config.branch ?? 'translations' : 'main'
+      } catch (e) {
+        branch = 'main'
+        console.warn(`The project ${config.title} does not have a branch called ${config.branch ?? 'translations'}.`)
+      }
     }
+  }
+
+  async function doesBranchExist() {
+    let result
+    if (config.url.includes(GitHubClient.host)) result =
+      await new GitHubClient(config).getFileContentNoCatch('langs.json')
+    else if (config.url.includes(BitBucketClient.host)) result =
+      await new BitBucketClient(config).getFileNoCatch('langs.json', config.branch ?? 'translations')
+    return !!result
   }
 
   function isVersionControlUrl() {
     if (config.url.includes(GitHubClient.host)) return true
-    else if (config.url.includes(BitBucketClient.host)) return true
-    else return false
+    else return !!config.url.includes(BitBucketClient.host);
   }
 
 </script>

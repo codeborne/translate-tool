@@ -88,7 +88,7 @@ export class BitBucketClient {
     await this.createBranchIfNotExists(token.access_token)
     await this.commit(lang, dict, commitMessage, token.access_token)
     const hasPullRequest: boolean = await this.checkIfPullRequestExists(token?.access_token)
-    if (hasPullRequest) await this.createPullRequest("Updated translations", token?.access_token)
+    if (!hasPullRequest) await this.createPullRequest("Updated translations", token?.access_token)
   }
 
   async commit(lang: string, dict: Dict, commitMessage: string, token: string) {
@@ -99,7 +99,6 @@ export class BitBucketClient {
     body.append(`${this.getDirectoryUrl()}${lang}.json`, LoadedProject.prettyFormat(cleanEmptyKeys(dict), this.config.indent))
     const headers = {...this.tokenHeader(token)}
     await this.request(`${this.getRootUrl()}/src`, {method: 'POST', body, headers})
-    if (!await this.checkIfPullRequestExists(token)) await this.createPullRequest("Updated translations", token)
   }
 
   async createPullRequest(title: string, token: string) {

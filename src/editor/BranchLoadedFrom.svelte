@@ -33,7 +33,7 @@
 
   async function getDefaultBranch() {
     if (config.url.includes(GitHubClient.host)) return await new GitHubClient(config).findDefaultBranch()
-    else if (config.url.includes(BitBucketClient.host)) return 'main'
+    else if (config.url.includes(BitBucketClient.host)) return new BitBucketClient(config).findDefaultBranch()
   }
 
   function isVersionControlUrl() {

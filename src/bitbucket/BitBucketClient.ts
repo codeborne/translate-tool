@@ -59,6 +59,11 @@ export class BitBucketClient {
     return this.config.url.slice(this.config.url.indexOf(`/src/main/`) + 10, this.config.url.length)
   }
 
+  findDefaultBranch() {
+    const suffix = this.config.url.slice(this.config.url.indexOf(`/src/`) + 5, this.config.url.length)
+    return suffix.slice(0, suffix.indexOf('/'))
+  }
+
   getCommitsUrl() {
     return 'https://bitbucket.org'
       + this.config.url.slice(this.config.url.indexOf('/repositories/') + 13, this.config.url.indexOf('/src/'))

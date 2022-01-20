@@ -4,7 +4,7 @@
 
   export let config
 
-  let branch = config.branch
+  export let defaultBranch
 
   $: if (config) handleBranchCheck()
 
@@ -13,11 +13,11 @@
     if (isVersionControlUrl()) {
       try {
         result = await doesBranchExist()
-        branch = (result) ? config.branch ?? 'translations' : ''
+        defaultBranch = (result) ? config.branch ?? 'translations' : ''
       } catch (e) {
         console.warn(`The project ${config.title} does not have a branch called ${config.branch ?? 'translations'}.`)
       } finally {
-        if (!result) branch = await getDefaultBranch() ?? 'base'
+        if (!result) defaultBranch = await getDefaultBranch() ?? 'base'
       }
     }
   }
@@ -43,9 +43,9 @@
 
 </script>
 
-{#if branch && isVersionControlUrl()}
+{#if defaultBranch && isVersionControlUrl()}
   <div class="form-text">
     <i class="fas fa-code-branch"></i>
-    Translations loaded from <b>{branch}</b> branch
+    Translations loaded from <b>{defaultBranch}</b> branch
   </div>
 {/if}

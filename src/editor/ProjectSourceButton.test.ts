@@ -17,4 +17,11 @@ describe('ProjectSourceButton', () => {
     const button = container.querySelector('.sourceBtn') as HTMLLinkElement
     expect(button.href).to.equal('http://example.com/i18n/et.json')
   })
+
+  it('GitHub project links to root of source branch from where changes were loaded', async () => {
+    let project: Project = {url: 'https://api.github.com/repos/org/repo/contents/path/to/langs/', title: 'title', indent: 2}
+    const {container} = render(ProjectSourceButton, {project, defaultBranch, lang})
+    const button = container.querySelector('.sourceBtn') as HTMLLinkElement
+    expect(button.href).to.equal('https://github.com/org/repo/blob/translations/path/to/langs/et.json')
+  })
 })

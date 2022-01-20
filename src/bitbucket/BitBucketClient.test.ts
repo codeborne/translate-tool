@@ -35,4 +35,9 @@ describe('BitBucketClient', () => {
     const result: string = client.getCommitsUrl()
     expect(result).to.equal('https://bitbucket.org/owner/repo/commits')
   })
+
+  it('returns default branch from the given url in config', async () => {
+    const result: string = client.findDefaultBranch()
+    expect(result).to.equal('main')
+  })
 })

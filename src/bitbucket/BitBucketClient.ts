@@ -102,7 +102,6 @@ export class BitBucketClient {
   }
 
   async createPullRequest(title: string, token: string) {
-    console.log('Create PR')
     const body = JSON.stringify({title, source: {branch: {name: this.branch}}})
     const headers = {...this.tokenHeader(token), ...{'Content-Type': 'application/json'}}
     await this.request(`${this.getRootUrl()}/pullrequests`, {method: 'POST', body, headers})

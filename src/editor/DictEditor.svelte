@@ -93,7 +93,7 @@
     {:else if project.config.url.includes(BitBucketClient.host) && project.config.token}
       <BitBucketOutput {user} {dict} {lang} config={project.config} on:saved={updateUneditedDict}/>
     {/if}
-    <ProjectSourceButton project={project.config} {defaultBranch}/>
+    <ProjectSourceButton project={project.config} {defaultBranch} {lang}/>
     <ChangesCounter slot="counter" {dict} {uneditedDict}/>
   </DictClipboardOutput>
 </div>

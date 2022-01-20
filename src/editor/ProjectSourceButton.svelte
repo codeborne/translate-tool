@@ -1,12 +1,36 @@
 <script lang="ts">
-  export let project
-  export let defaultBranch
+  import type {Project} from '../common/Project'
+  import {GitHubClient} from '../github/GitHubClient'
+  import {BitBucketClient} from '../bitbucket/BitBucketClient'
 
-  function open() {
-    window.open('https://example.com', '_blank')
+  export let project: Project
+  export let defaultBranch
+  export let lang
+
+  let url: string = ''
+
+  $: if (project) setUrl()
+  $: if (lang) setUrl()
+
+  function setUrl() {
+    if (project.url.includes(GitHubClient.host)) parseGithub()
+    else if (project.url.includes(BitBucketClient.host)) parseBitbucket()
+    else parseNormal()
+  }
+
+  function parseGithub() {
+
+  }
+
+  function parseBitbucket() {
+
+  }
+
+  function parseNormal() {
+    url = `${project.url}${lang}.json`
   }
 </script>
 
-<button on:click={open} class="btn btn-primary w-auto">
+<a href={url} target="_blank" class="btn btn-primary w-auto sourceBtn">
   <i class="fas fa-link"></i> Source
-</button>
+</a>

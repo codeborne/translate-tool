@@ -91,6 +91,8 @@ export class BitBucketClient {
     const token: BitBucketAuthResponse = await this.getAccessToken()
     await this.createBranchIfNotExists(token.access_token)
     await this.commit(lang, dict, commitMessage, token.access_token)
+    const hasPullRequest: boolean = await this.checkIfPullRequestExists(token?.access_token)
+    if (hasPullRequest) await this.createPullRequest("Updated translations")
   }
 
   async commit(lang: string, dict: Dict, commitMessage: string, token: string) {
@@ -101,6 +103,18 @@ export class BitBucketClient {
     body.append(`${this.getDirectoryUrl()}${lang}.json`, LoadedProject.prettyFormat(cleanEmptyKeys(dict), this.config.indent))
     const headers = {...this.tokenHeader(token)}
     await this.request(`${this.getRootUrl()}/src`, {method: 'POST', body, headers})
+  }
+
+  async createPullRequest(title: string) {
+    console.log('Create PR')
+  }
+
+  async checkIfPullRequestExists(token: string|undefined): Promise<boolean> {
+    const values: BitBucketPullsResponseValue[] =
+      (await this.request(this.getRootUrl() + '/pullrequests',
+        {headers: {...this.tokenHeader(token)}}) as BitBucketPullsResponse).values
+    if (!values?.length) return false
+    return !!values.find(value => value.source.branch.name === this.branch)
   }
 
   async createBranchIfNotExists(token: string) {
@@ -130,6 +144,19 @@ export interface BitBucketAuthResponse {
   refresh_token: string,
   scopes: string,
   token_type: string
+}
+
+export interface BitBucketPullsResponse {
+  state: string,
+  values: BitBucketPullsResponseValue[]
+}
+
+export interface BitBucketPullsResponseValue {
+  source: {
+    branch: {
+      name: string
+    }
+  }
 }
 
 export interface BitBucketBranchListResponse {

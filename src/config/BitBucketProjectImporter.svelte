@@ -12,6 +12,7 @@
   let repo: string = ''
   let path: string = ''
   let title: string = ''
+  let defaultBranch = ''
   let branch = 'translations'
   let project: Project = {url: '', title: '', token: '', indent: 2, branch}
 
@@ -23,7 +24,7 @@
     project.token = token
     project.indent = 2
     project.branch = branch ?? 'translations'
-    project.url = `https://api.bitbucket.org/2.0/repositories/${username}/${repo}/src/main${path}`
+    project.url = `https://api.bitbucket.org/2.0/repositories/${username}/${repo}/src/${defaultBranch}${path}`
   }
 
   async function submit() {
@@ -69,6 +70,11 @@
     <label class="form-label">Repository name</label>
     <input type="text" bind:value={repo} class="form-control" required>
     <div class="form-text mb-4">eg. <b>myrepo</b> for <i>https://bitbucket.org/account-name/<b>myrepo</b>/</i></div>
+
+    <label class="form-label">Base branch</label>
+    <input type="text" bind:value={defaultBranch} class="form-control" required>
+    <div class="form-text mb-4">Default branch to pull from if no translations branch exists,
+      eg <b>main</b> for <i>https://bitbucket.org/account-name/myrepo/src/<b>main</b>/i18n/langs.json</i></div>
 
     <label class="form-label">Path within repository</label>
     <input type="text" bind:value={path} class="form-control" pattern="/.*/" required>

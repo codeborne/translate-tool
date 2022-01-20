@@ -11,6 +11,7 @@
 
   $: if (project) setUrl()
   $: if (lang) setUrl()
+  $: if (defaultBranch) setUrl()
 
   function setUrl() {
     if (project.url.includes(GitHubClient.host)) parseGithub()
@@ -19,7 +20,9 @@
   }
 
   function parseGithub() {
-
+    const repoInfo = project.url.slice(project.url.indexOf('/repos/') + 7, project.url.indexOf('/contents')).split('/')
+    const path = project.url.slice(project.url.indexOf('/contents/') + 9, project.url.length)
+    url = `https://github.com/${repoInfo[0]}/${repoInfo[1]}/blob/${defaultBranch}${path}${lang}.json`
   }
 
   function parseBitbucket() {

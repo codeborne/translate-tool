@@ -38,7 +38,7 @@ export class BitBucketClient {
   }
 
   async getAccessToken() {
-    const split = this.config.token.split(':')
+    const split = this.config.token!.split(':')
     const body = 'grant_type=client_credentials&client_id=' + split[0] + '&client_secret=' + split[1]
     return await this.post('https://bitbucket.org/site/oauth2/access_token', body) as BitBucketAuthResponse
   }

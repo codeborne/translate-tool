@@ -10,7 +10,7 @@ export class BitBucketClient {
 
   constructor(public config: Project) {
     if (!config.url.includes(BitBucketClient.host)) throw new Error('Not a BitBucket url: ' + config.url)
-    if (config.branch) this.branch = config.branch
+    if (config.branch) this.branch = config.branch ?? 'translations'
   }
 
   setAuthorName(name: string) {
@@ -66,8 +66,8 @@ export class BitBucketClient {
       + '/commits'
   }
 
-  async getFile(file: string, branch?: string) {
-    const url = branch ? this.config.url.replace('/main/', `/${branch}/`) : this.config.url
+  async getFile(file: string) {
+    const url = this.config.url.replace('/main/', `/${this.branch}/`)
     const token = (this.config.token) ? await this.getAccessToken() : undefined
     return await this.fetchFile(url + file, token?.access_token)
       .catch(() => this.fetchFile(this.config.url + file, token?.access_token))
@@ -88,7 +88,7 @@ export class BitBucketClient {
     await this.createBranchIfNotExists(token.access_token)
     await this.commit(lang, dict, commitMessage, token.access_token)
     const hasPullRequest: boolean = await this.checkIfPullRequestExists(token?.access_token)
-    if (hasPullRequest) await this.createPullRequest("Updated translations")
+    if (hasPullRequest) await this.createPullRequest("Updated translations", token?.access_token)
   }
 
   async commit(lang: string, dict: Dict, commitMessage: string, token: string) {
@@ -99,10 +99,14 @@ export class BitBucketClient {
     body.append(`${this.getDirectoryUrl()}${lang}.json`, LoadedProject.prettyFormat(cleanEmptyKeys(dict), this.config.indent))
     const headers = {...this.tokenHeader(token)}
     await this.request(`${this.getRootUrl()}/src`, {method: 'POST', body, headers})
+    if (!await this.checkIfPullRequestExists(token)) await this.createPullRequest("Updated translations", token)
   }
 
-  async createPullRequest(title: string) {
+  async createPullRequest(title: string, token: string) {
     console.log('Create PR')
+    const body = JSON.stringify({title, source: {branch: {name: this.branch}}})
+    const headers = {...this.tokenHeader(token), ...{'Content-Type': 'application/json'}}
+    await this.request(`${this.getRootUrl()}/pullrequests`, {method: 'POST', body, headers})
   }
 
   async checkIfPullRequestExists(token: string|undefined): Promise<boolean> {

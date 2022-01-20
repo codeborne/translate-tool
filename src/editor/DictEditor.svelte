@@ -13,6 +13,7 @@
   import BranchLoadedFrom from './BranchLoadedFrom.svelte'
   import BitBucketOutput from '../bitbucket/BitBucketOutput.svelte'
   import {BitBucketClient} from '../bitbucket/BitBucketClient'
+  import ProjectSourceButton from './ProjectSourceButton.svelte'
 
 
   export let project: LoadedProject
@@ -23,6 +24,7 @@
   let uneditedDict: Dict
   let defaultLang: string
   let defaultDict: Dict
+  let defaultBranch: string = project.config.branch ?? 'translations'
 
   $: initProject(project)
   $: initLang(lang)
@@ -60,7 +62,7 @@
   let filter = new Filter()
 </script>
 
-<BranchLoadedFrom config={project.config} />
+<BranchLoadedFrom config={project.config} bind:defaultBranch/>
 
 <div class="mt-3 card p-3 d-flex flex-column align-items-center">
   <div class="d-flex flex-row justify-content-between w-100">
@@ -91,6 +93,7 @@
     {:else if project.config.url.includes(BitBucketClient.host) && project.config.token}
       <BitBucketOutput {user} {dict} {lang} config={project.config} on:saved={updateUneditedDict}/>
     {/if}
+    <ProjectSourceButton project={project.config} {defaultBranch}/>
     <ChangesCounter slot="counter" {dict} {uneditedDict}/>
   </DictClipboardOutput>
 </div>

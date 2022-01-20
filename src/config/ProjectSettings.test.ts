@@ -32,13 +32,18 @@ describe('ProjectSettings', () => {
   })
 
   it('changes localstorage when editing', async () => {
+    const projectsAfter: Project[] = [
+      {title: 'one', indent: 2, url: 'oneUrl', token: 'oneToken'},
+      {title: 'two', indent: 2, url: 'twoUrl', token: 'twoToken'},
+      {title: 'three', indent: 2, url: 'threeUrl', token: 'threeToken', branch: 'translations'}
+    ]
     const {container} = render(ProjectSettings, {projects, selectedProject})
     const editBtn = container.querySelector('.btn-primary') as HTMLButtonElement
     expect(editBtn).to.exist
     localStorage.clear()
     await fireEvent.click(editBtn)
     await tick()
-    expect(localStorage.getItem('projects')).to.equal(JSON.stringify(projects))
+    expect(localStorage.getItem('projects')).to.equal(JSON.stringify(projectsAfter))
   })
 
   it('prompts user to confirm before deleting', async () => {

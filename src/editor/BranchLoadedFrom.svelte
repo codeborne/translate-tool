@@ -10,7 +10,7 @@
 
   async function handleBranchCheck() {
     let result
-    if (isVersionControlUrl()) {
+    if (isVersionControlUrl(config)) {
       try {
         result = await doesBranchExist()
         defaultBranch = (result) ? config.branch ?? 'translations' : ''
@@ -36,14 +36,14 @@
     else if (config.url.includes(BitBucketClient.host)) return new BitBucketClient(config).findDefaultBranch()
   }
 
-  function isVersionControlUrl() {
-    if (config.url.includes(GitHubClient.host)) return true
-    else return !!config.url.includes(BitBucketClient.host);
+  function isVersionControlUrl(config) {
+    if (config?.url.includes(GitHubClient.host)) return true
+    else return !!config?.url.includes(BitBucketClient.host)
   }
 
 </script>
 
-{#if defaultBranch && isVersionControlUrl()}
+{#if defaultBranch && isVersionControlUrl(config)}
   <div class="form-text">
     <i class="fas fa-code-branch"></i>
     Translations loaded from <b>{defaultBranch}</b> branch

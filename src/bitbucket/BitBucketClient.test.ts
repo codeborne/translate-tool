@@ -23,7 +23,7 @@ describe('BitBucketClient', () => {
     stub(client, 'request').resolves()
     await client.getFile('file.json')
     expect(client.getAccessToken).called
-    expect(client.fetchFile).calledWith('https://api.bitbucket.org/2.0/repositories/owner/repo/src/main/i18n/file.json', 'validToken')
+    expect(client.fetchFile).calledWith('https://api.bitbucket.org/2.0/repositories/owner/repo/src/translations/i18n/file.json', 'validToken')
   })
 
   it('returns directory url', async () => {

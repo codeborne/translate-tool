@@ -53,7 +53,7 @@
     indent = selectedProject.indent
     url = selectedProject.url
     token = selectedProject.token
-    if (selectedProject.branch) branch = selectedProject.branch
+    branch = (selectedProject.branch) ? selectedProject.branch : 'translations'
   }
 
   $: if (selectedProject) setFormInputs()
@@ -62,7 +62,7 @@
 <div class="card p-3 mb-3 d-flex flex-column justify-content-center align-items-center">
   <h5 class="card-title">Manage Project</h5>
   <div class="card-body w-50" >
-    <div class="d-flex flex-column justify-content-center align-items-center">
+    <div class="d-flex flex-column justify-content-center">
       <label class="form-label">Project name</label>
       <input type="text" placeholder="Project name" bind:value={title} class="form-control mb-4 name-input">
 
@@ -77,7 +77,9 @@
 
       {#if selectedProject.url.includes('api.github.com')}
         <label class="form-label">Branch</label>
-        <input type="text" placeholder="Translations branch" bind:value={branch} class="form-control mb-4 branch-input">
+        <input type="text" placeholder="Translations branch" bind:value={branch} class="form-control">
+        <div class="form-text mb-4">Specified branch will be created automatically during commit. Default branch if not set is <b>translations</b></div>
+
       {/if}
     </div>
     <div class="d-flex justify-content-between gap-5 mt-3">

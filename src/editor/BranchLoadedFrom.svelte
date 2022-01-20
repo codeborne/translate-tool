@@ -16,8 +16,9 @@
         branch = (result) ? config.branch ?? 'translations' : ''
       } catch (e) {
         console.warn(`The project ${config.title} does not have a branch called ${config.branch ?? 'translations'}.`)
+      } finally {
+        if (!result) branch = await getDefaultBranch() ?? 'base'
       }
-      if (!result) branch = await getDefaultBranch() ?? 'base'
     }
   }
 

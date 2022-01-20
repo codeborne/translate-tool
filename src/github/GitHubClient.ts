@@ -57,18 +57,39 @@ export class GitHubClient {
     else response.content
   }
 
+  async createPullRequest(title: string) {
+    const base = await this.findDefaultBranch()
+    await this.send(this.getPullsUrl(), 'POST', {base, head: this.branch, title})
+  }
+
+  async checkIfPullRequestExists() {
+    return this.request(this.getPullsUrl())
+  }
+
+  getPullsUrl() {
+    return this.config.url.substring(0, this.config.url.lastIndexOf('/content')) + '/pulls'
+  }
+
+
   async saveFile(lang: string, dict: Dict, commitMessage: string) {
     await this.createBranchIfNeeded()
     const fileName = lang + '.json'
     const content = encodeBase64Unicode(LoadedProject.prettyFormat(cleanEmptyKeys(dict), this.config.indent))
     const previousFileBlobSha = (await this.getFile(fileName + '?ref=' + this.branch)).sha // TODO: store initial loaded file(blob) sha in LoadedProject
-    return await this.put(this.config.url + fileName, {
+    const result = await this.put(this.config.url + fileName, {
       message: commitMessage,
       sha: previousFileBlobSha,
       branch: this.branch,
       content,
       author: this.author
     }) as GitHubSavedFile
+    if (!(await this.checkIfPullRequestExists()).length)  await this.createPullRequest('Updated translations')
+    return result
+  }
+
+  async findDefaultBranch() {
+    return (await this.request(this.config.url
+      .substring(0, this.config.url.lastIndexOf('/content'))) as GitHubRepoInfo).default_branch
   }
 
   private async createBranchIfNeeded() {
@@ -92,6 +113,10 @@ export interface GitHubFile {
 export interface GitHubSavedFile {
   content: {name: string, path: string, sha: string, html_url: string}
   commit: {sha: string, html_url: string}
+}
+
+export interface GitHubRepoInfo {
+  default_branch: string
 }
 
 export interface GitHubRef {

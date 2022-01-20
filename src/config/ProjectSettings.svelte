@@ -56,6 +56,11 @@
     branch = (selectedProject.branch) ? selectedProject.branch : 'translations'
   }
 
+  function isVersionControl(): boolean {
+    return selectedProject.url.includes('api.github.com')
+      || selectedProject.url.includes('api.bitbucket.org')
+  }
+
   $: if (selectedProject) setFormInputs()
 </script>
 
@@ -75,7 +80,7 @@
       <label class="form-label">Access Token</label>
       <input type="text" placeholder="In case a token is required to access the url" bind:value={token} class="form-control mb-4 token-input">
 
-      {#if selectedProject.url.includes('api.github.com')}
+      {#if isVersionControl()}
         <label class="form-label">Branch</label>
         <input type="text" placeholder="Translations branch" bind:value={branch} class="form-control">
         <div class="form-text mb-4">Specified branch will be created automatically during commit. Default branch if not set is <b>translations</b></div>

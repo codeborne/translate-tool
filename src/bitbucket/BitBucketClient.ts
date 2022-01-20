@@ -37,10 +37,6 @@ export class BitBucketClient {
     return this.send(url, 'POST', body)
   }
 
-  put(url: string, body: any) {
-    return this.send(url, 'PUT', body)
-  }
-
   async getAccessToken() {
     const split = this.config.token.split(':')
     const body = 'grant_type=client_credentials&client_id=' + split[0] + '&client_secret=' + split[1]

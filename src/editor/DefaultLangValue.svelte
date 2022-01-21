@@ -8,7 +8,7 @@
 
 
 {#if isHtml(fullKey)}
-  <span>{defaultDict[key]}</span>
+  <span class="overflow-auto">{defaultDict[key]}</span>
 {:else}
-  <span>{defaultDict[key]}</span>
+  <span class="overflow-auto">{defaultDict[key]}</span>
 {/if}

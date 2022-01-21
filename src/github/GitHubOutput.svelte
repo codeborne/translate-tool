@@ -35,10 +35,9 @@
     const commitMessage = prompt('Commit message (what have you changed?)', `Updated ${lang} translations`)
     try {
       if (!commitMessage) return
-      const result = await client.saveFile(lang, dict, commitMessage)
+      await client.saveFile(lang, dict, commitMessage)
       dispatch('saved')
-      if (confirm(`Saved to ${client.branch}, open it for review?`))
-        window.open(result.commit.html_url, '_blank')
+      alert('Saved to GitHub successfully')
     } finally {
       inProgress = false
     }

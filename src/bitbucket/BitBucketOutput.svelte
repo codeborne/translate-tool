@@ -37,6 +37,7 @@
       if (!commitMessage) return
       await client.saveFile(lang, dict, commitMessage)
       dispatch('saved')
+      alert('Saved to BitBucket successfully')
     } finally {
       inProgress = false
     }

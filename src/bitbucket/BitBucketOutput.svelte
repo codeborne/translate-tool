@@ -52,5 +52,10 @@
 </script>
 
 <button on:click={save} class="btn btn-primary w-auto" disabled={inProgress}>
-  <i class="fab fa-bitbucket"></i> Save to <i>{client.branch}</i> branch
+  {#if inProgress}
+    <i class="fas fa-circle-notch fa-spin"></i>
+  {:else}
+    <i class="fab fa-bitbucket"></i>
+  {/if}
+  Save to <i>{client.branch}</i> branch
 </button>

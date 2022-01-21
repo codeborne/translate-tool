@@ -55,6 +55,11 @@
     if (lang == defaultLang) defaultDict = deepCopy(dict)
   }
 
+  function onSaved() {
+    defaultBranch = project.config.branch ?? 'translations'
+    updateUneditedDict()
+  }
+
   window.onbeforeunload = () => {
     if (totalDifferentValues(uneditedDict, dict) > 0) return ''
   }
@@ -89,9 +94,9 @@
 <div id="output" class="mt-3 card p-3">
   <DictClipboardOutput {dict} {lang} indent={project.config.indent} on:copied={onCopied}>
     {#if project.config.url.includes(GitHubClient.host) && project.config.token}
-      <GitHubOutput {user} {dict} {lang} config={project.config} on:saved={updateUneditedDict}/>
+      <GitHubOutput {user} {dict} {lang} config={project.config} on:saved={onSaved}/>
     {:else if project.config.url.includes(BitBucketClient.host) && project.config.token}
-      <BitBucketOutput {user} {dict} {lang} config={project.config} on:saved={updateUneditedDict}/>
+      <BitBucketOutput {user} {dict} {lang} config={project.config} on:saved={onSaved}/>
     {/if}
     <ProjectSourceButton project={project.config} {defaultBranch} {lang}/>
     <ChangesCounter slot="counter" {dict} {uneditedDict}/>

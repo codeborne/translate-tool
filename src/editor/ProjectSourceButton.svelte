@@ -20,13 +20,19 @@
   }
 
   function parseGithub() {
-    const repoInfo = project.url.slice(project.url.indexOf('/repos/') + 7, project.url.indexOf('/contents')).split('/')
-    const path = project.url.slice(project.url.indexOf('/contents/') + 9, project.url.length)
+    const repoInfo: string[] = project.url.slice(project.url.indexOf('/repos/') + 7, project.url.indexOf('/contents')).split('/')
+    const path: string = project.url.slice(project.url.indexOf('/contents/') + 9, project.url.length)
     url = `https://github.com/${repoInfo[0]}/${repoInfo[1]}/blob/${defaultBranch}${path}${lang}.json`
   }
 
   function parseBitbucket() {
-
+    const suffix: string = project.url.slice(project.url.indexOf(`/src/`) + 5, project.url.length)
+    const branchFromUrl: string =  suffix.slice(0, suffix.indexOf('/'))
+    const repoInfo: string[] = project.url
+      .slice(project.url.indexOf('/repositories/') + 14, project.url.indexOf('/src/'))
+      .split('/')
+    const path: string = project.url.slice(project.url.indexOf(`/${branchFromUrl}/`) + branchFromUrl.length + 2)
+    url = `https://bitbucket.org/${repoInfo[0]}/${repoInfo[1]}/src/${defaultBranch}/${path}${lang}.json`
   }
 
   function parseNormal() {

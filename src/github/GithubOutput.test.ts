@@ -16,6 +16,7 @@ describe('GitHubOutput', () => {
     const {container} = render(GitHubOutput, {dict, lang, config, user})
     stub(window, 'prompt').returns(message)
     stub(window, 'confirm').returns(false)
+    stub(window, 'alert').resolves()
     stub(GitHubClient.prototype, 'saveFile').resolves(undefined)
     const save = fake()
     const button = container.querySelector('button')!
@@ -34,10 +35,9 @@ describe('GitHubOutput', () => {
   it('user can change the default commit and save', async () => {
     const save = await clickSaveButton('Custom message')
     expect(save).called
-    expect(prompt).calledWith('Commit message (what have you changed?)', 'Updated en translations')
     expect(GitHubClient.prototype.saveFile).calledWith(lang, dict, 'Custom message')
     await act(GitHubClient.prototype.saveFile)
-    expect(confirm).called
+    expect(alert).called
   })
 
   it('commit button shows default translations branch if no branch in config', async () => {

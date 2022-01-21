@@ -14,13 +14,24 @@
   <div class="overflow-auto align-self-center">{defaultDict[key]}</div>
 {/if}
 
-<div class="row ms-1">
+<div class="d-flex flex-column ms-1 justify-content-start">
   <slot/>
   {#if isHtml(fullKey)}
     <button
-      class="btn float-end text-primary" on:click={() => showHTML = !showHTML}
+      class="btn text-primary" on:click={() => showHTML = !showHTML}
       title={showHTML ? 'Show styled text' : 'Show HTML'}>
-      <i class="fas fa-code"></i>
+      {#if showHTML}
+        <i class="fas fa-eye-slash"></i>
+      {:else}
+        <i class="fas fa-eye"></i>
+      {/if}
     </button>
   {/if}
 </div>
+
+<style>
+  .btn {
+    padding: 0;
+    margin-top: 0.5rem;
+  }
+</style>

@@ -46,8 +46,14 @@
 
 {#if lang !== defaultLang}
   {#if isTranslated}
-    <button on:click={handleUndo} class="btn float-end text-primary" title="Undo translation"><i class="fas fa-undo"></i></button>
+    <button on:click={handleUndo} class="btn text-primary" title="Undo translation"><i class="fas fa-undo"></i></button>
   {:else}
-    <button on:click={handleTranslation} class="btn float-end text-primary" title="Translate"><i class="fas fa-language"></i></button>
+    <button on:click={handleTranslation} class="btn text-primary" title="Translate"><i class="fas fa-language"></i></button>
   {/if}
 {/if}
+
+<style>
+  .btn {
+    padding: 0
+  }
+</style>

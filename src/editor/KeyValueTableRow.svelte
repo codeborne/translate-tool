@@ -12,7 +12,6 @@
   export let defaultLang: string
   export let dict: Dict, defaultDict: Dict, uneditedDict: Dict
   export let keyPrefix = ''
-
   export let filter: Filter
 
   const fullKey = (key: string) => (keyPrefix ? keyPrefix + '.' : '') + key
@@ -33,8 +32,9 @@
         <TextInput bind:dict {key} fullKey={fullKey(key)} {uneditedDict} {lang}/>
       </td>
       <td class="d-flex align-items-center justify-content-between">
-        <DefaultLangValue {defaultDict} {key} fullKey={fullKey(key)}/>
-        <Translator {lang} {defaultLang} bind:dict {key} {defaultDict} {uneditedDict}/>
+        <DefaultLangValue {defaultDict} {key} fullKey={fullKey(key)}>
+          <Translator {lang} {defaultLang} bind:dict {key} {defaultDict} {uneditedDict}/>
+        </DefaultLangValue>
       </td>
     </tr>
   {/if}

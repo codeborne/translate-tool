@@ -6,6 +6,7 @@
   import TextInput from './TextInput.svelte'
   import {getValue} from '../common/utils'
   import Translator from '../translator/Translator.svelte'
+  import DefaultLangValue from './DefaultLangValue.svelte'
 
   export let lang: string
   export let defaultLang: string
@@ -32,7 +33,7 @@
         <TextInput bind:dict {key} fullKey={fullKey(key)} {uneditedDict} {lang}/>
       </td>
       <td class="d-flex align-items-center justify-content-between">
-        <span>{defaultDict[key]}</span>
+        <DefaultLangValue {defaultDict} {key} fullKey={fullKey(key)}/>
         <Translator {lang} {defaultLang} bind:dict {key} {defaultDict} {uneditedDict}/>
       </td>
     </tr>

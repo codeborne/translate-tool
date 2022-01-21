@@ -9,9 +9,9 @@
 
 
 {#if !showHTML}
-  <div contenteditable="false" bind:innerHTML={defaultDict[key]} class="overflow-auto"></div>
+  <div contenteditable="false" bind:innerHTML={defaultDict[key]} class="overflow-auto align-self-center"></div>
 {:else}
-  <span class="overflow-auto">{defaultDict[key]}</span>
+  <div class="overflow-auto align-self-center">{defaultDict[key]}</div>
 {/if}
 
 <div class="row ms-1">

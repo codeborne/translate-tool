@@ -80,7 +80,7 @@
   <table class="mt-3 w-100">
     <thead class="border-bottom">
       <tr>
-        <th>Keys</th>
+        <th>Key</th>
         <th class="w-50">{lang} ({totalKeys(dict)})</th>
         <th>{defaultLang} ({totalKeys(defaultDict)})</th>
       </tr>

@@ -9,16 +9,16 @@
 
 
 {#if !showHTML}
-  <div contenteditable="false" bind:innerHTML={defaultDict[key]} class="overflow-auto align-self-center"></div>
+  <div contenteditable="false" bind:innerHTML={defaultDict[key]} class="overflow-auto align-self-center defaultLangText"></div>
 {:else}
-  <div class="overflow-auto align-self-center">{defaultDict[key]}</div>
+  <div class="overflow-auto align-self-center defaultLangText">{defaultDict[key]}</div>
 {/if}
 
 <div class="d-flex flex-column ms-1 justify-content-start">
   <slot/>
   {#if isHtml(fullKey)}
     <button
-      class="btn text-primary" on:click={() => showHTML = !showHTML}
+      class="btn text-primary toggleShowHtmlBtn" on:click={() => showHTML = !showHTML}
       title={showHTML ? 'Show styled text' : 'Show HTML'}>
       {#if showHTML}
         <i class="fas fa-eye-slash"></i>

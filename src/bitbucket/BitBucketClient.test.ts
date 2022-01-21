@@ -45,4 +45,9 @@ describe('BitBucketClient', () => {
     const result: string = client.findDefaultBranch()
     expect(result).to.equal('main')
   })
+
+  it('returns url with custom branch', async () => {
+    const result: string = client.getUrlWithCustomBranch()
+    expect(result).to.equal('https://api.bitbucket.org/2.0/repositories/owner/repo/src/translations/i18n/')
+  })
 })

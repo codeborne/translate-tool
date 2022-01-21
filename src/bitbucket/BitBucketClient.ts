@@ -66,8 +66,12 @@ export class BitBucketClient {
       + '/commits'
   }
 
+  getUrlWithCustomBranch() {
+    return this.config.url.replace(`/${this.findDefaultBranch()}/`, `/${this.branch}/`)
+  }
+
   async getFile(file: string) {
-    const url = this.config.url.replace('/main/', `/${this.branch}/`)
+    const url = this.getUrlWithCustomBranch()
     const token = (this.config.token) ? await this.getAccessToken() : undefined
     return await this.fetchFile(url + file, token?.access_token)
       .catch(() => this.fetchFile(this.config.url + file, token?.access_token))

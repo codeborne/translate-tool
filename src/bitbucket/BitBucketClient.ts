@@ -52,7 +52,7 @@ export class BitBucketClient {
   }
 
   getDirectoryUrl() {
-    return this.config.url.slice(this.config.url.indexOf(`/src/main/`) + 10, this.config.url.length)
+    return this.config.url.slice(this.config.url.indexOf(`/src/${this.findDefaultBranch()}/`) + 10, this.config.url.length)
   }
 
   findDefaultBranch() {
@@ -78,7 +78,7 @@ export class BitBucketClient {
   }
 
   async getFileNoCatch(file: string, branch?: string) {
-    const url = branch ? this.config.url.replace('/main/', `/${branch}/`) : this.config.url
+    const url = branch ? this.config.url.replace(`/${this.findDefaultBranch()}/`, `/${branch}/`) : this.config.url
     const token = (this.config.token) ? await this.getAccessToken() : undefined
     return await this.fetchFile(url + file, token?.access_token)
   }
@@ -131,7 +131,7 @@ export class BitBucketClient {
   }
 
   async createBranch(token: string) {
-    const body = JSON.stringify({name: this.branch, target: {hash: 'main'}})
+    const body = JSON.stringify({name: this.branch, target: {hash: this.findDefaultBranch()}})
     const headers = {...this.tokenHeader(token), ...{'Content-Type': 'application/json'}}
     await this.request(`${this.getBranchListUrl()}`, {method: 'POST', body, headers})
   }

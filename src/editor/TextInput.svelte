@@ -1,6 +1,6 @@
 <script lang="ts">
 
-  import {getValue} from '../common/utils'
+  import {getValue, isHtml} from '../common/utils'
   import type {Dict} from '../common/Project'
 
   export let lang: string
@@ -11,20 +11,13 @@
 
   let isPreviewing: boolean = false
 
-  function isHtml(fullKey: string): boolean {
-    let result: boolean = false
-    fullKey.split('.').forEach((key: string) => {
-      if (key.endsWith("Html")) result = true
-    })
-    return result
-  }
-
   $: dict[key] = dict[key] ?? ''
   $: uneditedDict[key] = uneditedDict[key] ?? ''
 
 </script>
 
-{#if !isHtml(fullKey)}
+
+  {#if !isHtml(fullKey)}
   <textarea {lang} bind:value={dict[key]} class="form-control"
             class:changed={(getValue(key, dict) ?? '') !== (getValue(key, uneditedDict) ?? '')}></textarea>
 {:else}

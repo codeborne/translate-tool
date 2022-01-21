@@ -32,3 +32,11 @@ export function insertKey(dict: Dict, key: string, afterPos: number) {
 export function getValue(key: string, dict: Dict): string {
   return dict[key] as string
 }
+
+export function isHtml(fullKey: string): boolean {
+  let result: boolean = false
+  fullKey.split('.').forEach((key: string) => {
+    if (key.endsWith("Html")) result = true
+  })
+  return result
+}

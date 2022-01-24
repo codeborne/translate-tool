@@ -4,3 +4,4 @@ node_modules
 public/projects.json
 public/auth.json
 /server/*.js
+/server/auth.env

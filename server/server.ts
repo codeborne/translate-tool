@@ -21,8 +21,6 @@ const googleAuth = {
 interface GoogleProfile {
 
 }
-530758130588-2smj2veadedmqa5eemrjund6aivhr1al.apps.googleusercontent.com
-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
 
 app.get('/', async function (req: Request, res: Response) {
   const provider = googleAuth

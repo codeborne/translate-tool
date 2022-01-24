@@ -69,4 +69,4 @@ app.get('/proxy/**', (req, res) => {
 
 app.use(express.static('build'))
 
-app.listen(port, () => console.log(`Listening on port: ${port}. ${process.env.GOOGLE_CLIENT_ID}`))
+app.listen(port, () => console.log(`Listening on port: ${port}`))

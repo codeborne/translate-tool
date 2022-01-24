@@ -4,8 +4,8 @@
   "exclude": ["e2e"],
   "compilerOptions": {
     "module": "esnext",
+    "target": "esnext",
     "moduleResolution": "node",
-    "jsx": "preserve",
     "baseUrl": "./",
     /* paths - import rewriting/resolving */
     "paths": {

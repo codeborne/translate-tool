@@ -9,6 +9,7 @@ RUN npm ci
 
 COPY . ./
 RUN npm run build
+RUN npm run build:server
 
 ARG PROJECTS_FILE=''
 RUN [ -e "$PROJECTS_FILE" ] && cp -f "$PROJECTS_FILE" build/projects.json || true
@@ -25,8 +26,8 @@ COPY --from=build /app/build build
 COPY *.json ./
 RUN npm ci --production
 
-COPY server.mjs ./
+COPY --from=build server/* ./
 
 EXPOSE 8999
 
-CMD node server.mjs
+CMD node server.js

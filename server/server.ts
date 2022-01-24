@@ -26,6 +26,7 @@ app.get('/', async function (req: Request, res: Response) {
   const provider = googleAuth
 
   if (provider.clientId && provider.clientSecret) {
+    // TODO check if user exists with cookies
     res.redirect(provider.authUrl + `?client_id=${provider.clientId}&scope=${provider.scope}&redirect_uri=${redirectUrl(req)}&response_type=code`)
   } else {
     res.sendFile(__dirname, '/../build/index.html')

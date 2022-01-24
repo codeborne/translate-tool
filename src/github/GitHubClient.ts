@@ -6,7 +6,7 @@ import {cleanEmptyKeys} from '../editor/cleanEmptyKeys'
 
 export class GitHubClient {
   static host = 'api.github.com'
-  branch = this.config.branch ?? 'translations'
+  branch = 'translations'
   author = {name: 'Translate Tool', email: 'translate@codeborne.com'}
   constructor(public config: Project) {
     if (!config.url.includes(GitHubClient.host)) throw new Error('Not a GitHub url: ' + config.url)

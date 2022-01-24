@@ -5,12 +5,12 @@ import {cleanEmptyKeys} from '../editor/cleanEmptyKeys'
 
 export class BitBucketClient {
   static host = 'api.bitbucket.org'
-  branch = this.config.branch ?? 'translations'
+  branch = 'translations'
   author = {name: 'Translate Tool', email: 'translate@codeborne.com'}
 
   constructor(public config: Project) {
     if (!config.url.includes(BitBucketClient.host)) throw new Error('Not a BitBucket url: ' + config.url)
-    if (config.branch) this.branch = config.branch ?? 'translations'
+    if (config.branch) this.branch = config.branch
   }
 
   setAuthorName(name: string) {

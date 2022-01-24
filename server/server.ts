@@ -26,7 +26,7 @@ app.get('/', async function (req: Request, res: Response) {
   const provider = googleAuth
 
   if (provider.clientId && provider.clientSecret) {
-    res.redirect(provider.authUrl + `?client_id=${provider.clientId}&scope=${provider.scope}&redirect_uri=` + redirectUrl(req))
+    res.redirect(provider.authUrl + `?client_id=${provider.clientId}&scope=${provider.scope}&redirect_uri=${redirectUrl(req)}&response_type=code`)
   } else {
     res.sendFile(__dirname, '/../build/index.html')
   }
@@ -34,7 +34,7 @@ app.get('/', async function (req: Request, res: Response) {
 
 function redirectUrl(req: Request) {
   const ownHost = req.header('Host')
-  return (ownHost === 'localhost' ? 'http://' : 'https://') + ownHost + '/auth'
+  return (ownHost!.includes('localhost') ? 'http://' : 'https://') + ownHost + '/auth'
 }
 
 app.get('/auth', async function (req: Request, res: Response) {

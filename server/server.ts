@@ -21,11 +21,17 @@ const googleAuth = {
 interface GoogleProfile {
 
 }
+530758130588-2smj2veadedmqa5eemrjund6aivhr1al.apps.googleusercontent.com
+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
 
 app.get('/', async function (req: Request, res: Response) {
-  // if (not logged in)
   const provider = googleAuth
-  res.redirect(provider.authUrl + `?client_id=${provider.clientId}&scope=${provider.scope}&redirect_uri=` + redirectUrl(req))
+
+  if (provider.clientId && provider.clientSecret) {
+    res.redirect(provider.authUrl + `?client_id=${provider.clientId}&scope=${provider.scope}&redirect_uri=` + redirectUrl(req))
+  } else {
+    res.sendFile(__dirname, '/../build/index.html')
+  }
 })
 
 function redirectUrl(req: Request) {

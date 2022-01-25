@@ -1,13 +1,16 @@
 import express, {Request, Response} from 'express'
 import request from 'request'
 import * as dotenv from 'dotenv'
+import cookieParser from 'cookie-parser'
 import {GOOGLE_OAUTH_PROFILE_URL, GOOGLE_OAUTH_SCOPE, GOOGLE_OAUTH_TOKEN_URL, GOOGLE_OAUTH_URL,} from './config'
 
 dotenv.config({ path: __dirname+'/auth.env' })
 
+const cookieSecret: string = process.env.COOKIE_SECRET ?? 'YourCookieValueHereToDetectTampering'
 const port = process.env.PORT ?? 8999
-
 const app = express()
+app.use(cookieParser(cookieSecret))
+
 
 const googleAuth = {
   authUrl: GOOGLE_OAUTH_URL,
@@ -30,29 +33,28 @@ interface GoogleProfile {
 }
 
 app.get('/', async function (req: Request, res: Response) {
-  const provider = googleAuth
+  const provider: typeof googleAuth = googleAuth
 
-  if (provider.clientId && provider.clientSecret) {
-    // TODO check if user exists with cookies
-    res.redirect(provider.authUrl + `?client_id=${provider.clientId}&scope=${provider.scope}&redirect_uri=${redirectUrl(req)}&response_type=code`)
+  if ((provider.clientId && provider.clientSecret) && req.signedCookies['AUTH']) {
+      res.redirect(provider.authUrl + `?client_id=${provider.clientId}&scope=${provider.scope}&redirect_uri=${redirectUrl(req)}&response_type=code`)
   } else {
     res.sendFile(__dirname, '/../build/index.html')
   }
 })
 
 function redirectUrl(req: Request) {
-  const ownHost = req.header('Host')
-  return (ownHost!.includes('localhost') ? 'http://' : 'https://') + ownHost + '/auth'
+  const ownHost: string = req.header('Host') as string
+  return (ownHost.includes('localhost') ? 'http://' : 'https://') + ownHost + '/auth'
 }
 
 app.get('/auth', async function (req: Request, res: Response) {
-  const token = await fetchToken(googleAuth, req.query.code as string, redirectUrl(req))
-  const profile = await fetchProfile(googleAuth, token)
-  // TODO: remember email/name/etc
+  const token: string = await fetchToken(googleAuth, req.query.code as string, redirectUrl(req))
+  const profile: GoogleProfile = await fetchProfile(googleAuth, token)
+  res.cookie('AUTH', JSON.stringify(profile), {signed: true})
 })
 
 app.get('/logout', function (req, res) {
-  res.cookie('AUTH', '')
+  res.clearCookie('AUTH')
   res.redirect('/')
 })
 
@@ -71,13 +73,13 @@ function fetchProfile(provider: typeof googleAuth, token: string): Promise<Googl
     request(provider.profileUrl, {headers: {'Authorization': 'Bearer ' + token}},(err, res) => {
       console.log(res.body)
       if (err) reject(err)
-      else resolve(JSON.parse(res.body))
+      else resolve(JSON.parse(res.body) as GoogleProfile)
     })
   })
 }
 
 app.get('/proxy/**', (req, res) => {
-  const url = req.url.slice(7, req.url.length)
+  const url: string = req.url.slice(7, req.url.length)
   request(url).pipe(res)
 })
 

@@ -1,6 +1,8 @@
 :root {
   --bs-font-sans-serif: 'Inter', sans-serif;
   --text-color: #060C2D;
+  --primary: #0044FA;
+  --lightest-gray: #F8FAFB;
 }
 
 :global(a) {
@@ -80,7 +82,7 @@ td:last-of-type {
   left:0;
   width: 100%;
   height: 3px;
-  background: dodgerblue;
+  background: var(--primary);
   opacity: 0;
 }
 
@@ -91,4 +93,8 @@ td:last-of-type {
 
 .nav-link.active:after {
   opacity: 1;
+}
+
+.bg-light {
+  background-color: var(--lightest-gray);
 }

@@ -14,10 +14,6 @@ RUN npm run build:server
 ARG PROJECTS_FILE=''
 RUN [ -e "$PROJECTS_FILE" ] && cp -f "$PROJECTS_FILE" build/projects.json || true
 
-ARG AUTH_FILE=''
-RUN [ -e "$AUTH_FILE" ] && cp -f "$AUTH_FILE" build/auth.json || true
-
-
 FROM node:16-alpine
 
 WORKDIR /app

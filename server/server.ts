@@ -19,7 +19,14 @@ const googleAuth = {
 }
 
 interface GoogleProfile {
-
+  id: number,
+  email: string,
+  verified_email: boolean,
+  name: string,
+  given_name: string,
+  family_name: string,
+  picture: string,
+  locale: string
 }
 
 app.get('/', async function (req: Request, res: Response) {
@@ -51,18 +58,20 @@ app.get('/logout', function (req, res) {
 
 function fetchToken(provider: typeof googleAuth, code: string, redirectUrl: string): Promise<string> {
   return new Promise((resolve, reject) => {
-    request(provider.tokenUrl + `?grant_type=autorization_code&code=${code}&redirect_uri=` + redirectUrl,r => {
-      if (r.error) reject(r.error)
-      else resolve(r.body.access_token)
+    request.post(provider.tokenUrl + `?grant_type=authorization_code&code=${code}&redirect_uri=` + redirectUrl +
+      `&client_id=${provider.clientId}&client_secret=${provider.clientSecret}`,(err, res) => {
+      if (err) reject(err)
+      else resolve(JSON.parse(res.body).access_token)
     })
   })
 }
 
 function fetchProfile(provider: typeof googleAuth, token: string): Promise<GoogleProfile> {
   return new Promise((resolve, reject) => {
-    request(provider.profileUrl, {headers: {'Authorization': 'Bearer ' + token}},r => {
-      if (r.error) reject(r.error)
-      else resolve(r.body)
+    request(provider.profileUrl, {headers: {'Authorization': 'Bearer ' + token}},(err, res) => {
+      console.log(res.body)
+      if (err) reject(err)
+      else resolve(JSON.parse(res.body))
     })
   })
 }

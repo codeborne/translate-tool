@@ -35,7 +35,7 @@ interface GoogleProfile {
 app.get('/auth', async function (req: Request, res: Response) {
   const token: string = await fetchToken(googleAuth, req.query.code as string, redirectUrl(req))
   const profile: GoogleProfile = await fetchProfile(googleAuth, token)
-  res.cookie('AUTH', JSON.stringify(profile), {signed: true, httpOnly: true})
+  res.cookie('AUTH', JSON.stringify({email: profile.email, name: profile.name}), {signed: true, httpOnly: true})
   res.redirect('/')
 })
 

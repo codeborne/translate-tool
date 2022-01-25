@@ -5,7 +5,7 @@
   export let filter: Filter
 </script>
 
-<div class="d-flex align-items-center">
+<div class="d-flex align-items-center p-3">
   <input class="form-control" bind:value={filter.search} placeholder="Filter...">
 
   <div class="ms-3 form-check form-switch">

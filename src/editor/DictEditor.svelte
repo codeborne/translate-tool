@@ -91,7 +91,7 @@
   </table>
 </div>
 
-<div id="output" class="mt-3 card p-3">
+<div id="output" class="mt-3 card shadow p-3">
   <DictClipboardOutput {dict} {lang} indent={project.config.indent} on:copied={onCopied}>
     {#if project.config.url.includes(GitHubClient.host) && project.config.token}
       <GitHubOutput {user} {dict} {lang} config={project.config} on:saved={onSaved}/>

@@ -55,7 +55,7 @@
   }
 </script>
 
-<form id="addPrivate" class="card p-3 mb-3 d-flex flex-column justify-content-center align-items-center"
+<form id="addPrivate" class="card shadow p-3 mb-3 d-flex flex-column justify-content-center align-items-center"
       on:submit|preventDefault={submit}>
   <h5 class="card-title">Import a private dictionary from BitBucket repository</h5>
   <div class="card-body w-75">

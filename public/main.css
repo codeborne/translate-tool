@@ -3,6 +3,7 @@
   --text-color: #060C2D;
   --primary: #0044FA;
   --lightest-gray: #F8FAFB;
+  --lightest-yellow: #FFFBF0;
 }
 
 :global(a) {
@@ -53,6 +54,10 @@ td:last-of-type {
   padding: 0.375rem 0.75rem;
 }
 
+.empty {
+  background-color: var(--lightest-yellow);
+}
+
 .card {
   border: none;
 }
@@ -93,4 +98,9 @@ td:last-of-type {
 
 .bg-light {
   background-color: var(--lightest-gray);
+}
+
+.btn-primary {
+  background-color: var(--primary);
+  border-color: var(--primary);
 }

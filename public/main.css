@@ -54,3 +54,7 @@ td {
 td:last-of-type {
   padding: 0.375rem 0.75rem;
 }
+
+.card {
+  border-color: transparent;
+}

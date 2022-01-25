@@ -34,14 +34,10 @@ interface GoogleProfile {
 
 app.get('/', async function (req: Request, res: Response) {
   const provider: typeof googleAuth = googleAuth
-  console.log(req.signedCookies)
-  if (provider.clientId && provider.clientSecret) {
-    if (!req.signedCookies['AUTH']) {
-      return res.redirect(provider.authUrl + `?client_id=${provider.clientId}&scope=${provider.scope}` +
+  if (provider.clientId && provider.clientSecret && !req.signedCookies['AUTH'])
+      res.redirect(provider.authUrl + `?client_id=${provider.clientId}&scope=${provider.scope}` +
         `&redirect_uri=${redirectUrl(req)}&response_type=code`)
-    }
-  }
-  return res.sendFile(__dirname, '/../build/index.html')
+  else res.sendFile(__dirname, '/../build/index.html')
 })
 
 function redirectUrl(req: Request) {

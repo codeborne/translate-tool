@@ -69,7 +69,7 @@
 
 <BranchLoadedFrom config={project.config} bind:defaultBranch/>
 
-<div class="mt-3 card d-flex flex-column align-items-center">
+<div class="mt-3 card shadow d-flex flex-column align-items-center">
   <div class="d-flex flex-row justify-content-between w-100">
     <FilterControls bind:filter/>
     <div class="dl-flex justify-content-center align-items-center p-3">

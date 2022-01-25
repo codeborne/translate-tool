@@ -112,23 +112,3 @@
     <DictEditor project={selectedProject} {lang} {user}/>
   {/if}
 </main>
-
-<style>
-  :global(a) {
-    cursor: pointer;
-  }
-
-  :global(h1, h2, h3, h4, h5, h6) {
-    color: #404142;
-  }
-
-  .nav-responsive {
-    display: flex;
-    gap: 1rem;
-    justify-content: space-between;
-  }
-
-  .container {
-    max-width: 99%;
-  }
-</style>

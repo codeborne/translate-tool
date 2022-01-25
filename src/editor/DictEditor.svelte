@@ -102,27 +102,3 @@
     <ChangesCounter slot="counter" {dict} {uneditedDict}/>
   </DictClipboardOutput>
 </div>
-
-<style>
-  th {
-    padding-bottom: 0.5em;
-    opacity: 0.5;
-    font-size: 0.8rem;
-  }
-
-  tbody :global(td) {
-    padding: 0.2em 0;
-  }
-
-  table {
-    table-layout: fixed
-  }
-
-  th:last-of-type, tbody :global(td:last-of-type) {
-    padding-left: 0.75em;
-  }
-
-  tbody :global(tr:hover) {
-    background: #eee;
-  }
-</style>

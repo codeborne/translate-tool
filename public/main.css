@@ -1,3 +1,16 @@
 :root {
   --bs-font-sans-serif: 'Inter', sans-serif;
+  --text-color: #060C2D;
+}
+
+body,
+h1,
+h2,
+h3,
+h4,
+h5,
+table,
+td,
+.form-control {
+  color: var(--text-color);
 }

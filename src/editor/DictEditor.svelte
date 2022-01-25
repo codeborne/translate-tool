@@ -106,6 +106,8 @@
 <style>
   th {
     padding-bottom: 0.5em;
+    opacity: 0.5;
+    font-size: 0.8rem;
   }
 
   tbody :global(td) {

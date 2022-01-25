@@ -32,19 +32,6 @@ interface GoogleProfile {
   locale: string
 }
 
-app.get('/', async function (req: Request, res: Response) {
-  const provider: typeof googleAuth = googleAuth
-  if (provider.clientId && provider.clientSecret && !req.signedCookies['AUTH'])
-      res.redirect(provider.authUrl + `?client_id=${provider.clientId}&scope=${provider.scope}` +
-        `&redirect_uri=${redirectUrl(req)}&response_type=code`)
-  else res.sendFile(__dirname, '/../build/index.html')
-})
-
-function redirectUrl(req: Request) {
-  const ownHost: string = req.header('Host') as string
-  return (ownHost.includes('localhost') ? 'http://' : 'https://') + ownHost + '/auth'
-}
-
 app.get('/auth', async function (req: Request, res: Response) {
   const token: string = await fetchToken(googleAuth, req.query.code as string, redirectUrl(req))
   const profile: GoogleProfile = await fetchProfile(googleAuth, token)
@@ -56,6 +43,24 @@ app.get('/logout', function (req, res) {
   res.clearCookie('AUTH')
   res.redirect('/')
 })
+
+app.get('/proxy/**', (req, res) => {
+  const url: string = req.url.slice(7, req.url.length)
+  request(url).pipe(res)
+})
+
+app.get('/*', async function (req: Request, res: Response) {
+  const provider: typeof googleAuth = googleAuth
+  if (provider.clientId && provider.clientSecret && !req.signedCookies['AUTH'])
+    res.redirect(provider.authUrl + `?client_id=${provider.clientId}&scope=${provider.scope}` +
+      `&redirect_uri=${redirectUrl(req)}&response_type=code`)
+  else res.sendFile(__dirname, '/../build/index.html')
+})
+
+function redirectUrl(req: Request) {
+  const ownHost: string = req.header('Host') as string
+  return (ownHost.includes('localhost') ? 'http://' : 'https://') + ownHost + '/auth'
+}
 
 function fetchToken(provider: typeof googleAuth, code: string, redirectUrl: string): Promise<string> {
   return new Promise((resolve, reject) => {
@@ -70,17 +75,11 @@ function fetchToken(provider: typeof googleAuth, code: string, redirectUrl: stri
 function fetchProfile(provider: typeof googleAuth, token: string): Promise<GoogleProfile> {
   return new Promise((resolve, reject) => {
     request(provider.profileUrl, {headers: {'Authorization': 'Bearer ' + token}},(err, res) => {
-      console.log(res.body)
       if (err) reject(err)
       else resolve(JSON.parse(res.body) as GoogleProfile)
     })
   })
 }
-
-app.get('/proxy/**', (req, res) => {
-  const url: string = req.url.slice(7, req.url.length)
-  request(url).pipe(res)
-})
 
 app.use(express.static('build'))
 

@@ -56,5 +56,10 @@ td:last-of-type {
 }
 
 .card {
-  border-color: transparent;
+  border: none;
+  box-shadow:
+    0 1.1px 2.7px rgba(0, 0, 0, 0.028),
+    0 3.6px 8.9px rgba(0, 0, 0, 0.042),
+    0 16px 40px rgba(0, 0, 0, 0.07);
+
 }

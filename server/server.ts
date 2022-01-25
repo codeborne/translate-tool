@@ -32,15 +32,16 @@ interface GoogleProfile {
   locale: string
 }
 
-
-
 app.get('/', async function (req: Request, res: Response) {
   const provider: typeof googleAuth = googleAuth
-  if ((provider.clientId && provider.clientSecret) && req.signedCookies['AUTH']) {
-      res.redirect(provider.authUrl + `?client_id=${provider.clientId}&scope=${provider.scope}&redirect_uri=${redirectUrl(req)}&response_type=code`)
-  } else {
-    res.sendFile(__dirname, '/../build/index.html')
+  console.log(req.signedCookies)
+  if (provider.clientId && provider.clientSecret) {
+    if (!req.signedCookies['AUTH']) {
+      return res.redirect(provider.authUrl + `?client_id=${provider.clientId}&scope=${provider.scope}` +
+        `&redirect_uri=${redirectUrl(req)}&response_type=code`)
+    }
   }
+  return res.sendFile(__dirname, '/../build/index.html')
 })
 
 function redirectUrl(req: Request) {
@@ -52,6 +53,7 @@ app.get('/auth', async function (req: Request, res: Response) {
   const token: string = await fetchToken(googleAuth, req.query.code as string, redirectUrl(req))
   const profile: GoogleProfile = await fetchProfile(googleAuth, token)
   res.cookie('AUTH', JSON.stringify(profile), {signed: true, httpOnly: true})
+  res.redirect('/')
 })
 
 app.get('/logout', function (req, res) {

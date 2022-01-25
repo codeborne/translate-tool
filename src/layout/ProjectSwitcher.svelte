@@ -21,7 +21,35 @@
 </ul>
 
 <style>
-  .nav-link.active {
-    border-bottom: 3px solid dodgerblue;
+  .nav-link {
+    position: relative;
+    cursor: pointer;
+  }
+  .nav-link:hover:after {
+    content: '';
+    display: block;
+    position: absolute;
+    bottom: -0.5rem;
+    left:0;
+    width: 100%;
+    height: 3px;
+    opacity: 0.5;
+    background: dodgerblue;
+    transition: opacity 0.25s ease-in;
+  }
+
+  .nav-link:after {
+    content: '';
+    display: block;
+    position: absolute;
+    bottom: -0.5rem;
+    left:0;
+    width: 100%;
+    height: 3px;
+    background: dodgerblue;
+    opacity: 0;
+  }
+  .nav-link.active:after {
+    opacity: 1;
   }
 </style>

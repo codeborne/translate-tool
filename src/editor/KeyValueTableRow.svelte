@@ -39,11 +39,3 @@
     </tr>
   {/if}
 {/each}
-
-<style>
-
-  .empty {
-    background-color: #fbfce1;
-    border-color: #feffe0;
-  }
-</style>

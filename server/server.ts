@@ -4,7 +4,7 @@ import * as dotenv from 'dotenv'
 import cookieParser from 'cookie-parser'
 import config from './config'
 
-dotenv.config({ path: __dirname+'/auth.env' })
+dotenv.config({path: __dirname + '/auth.env'})
 
 const cookieSecret: string = process.env.COOKIE_SECRET ?? 'YourCookieValueHereToDetectTampering'
 const port = process.env.PORT ?? 8999

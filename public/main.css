@@ -58,6 +58,10 @@ td {
   background-color: var(--primary-lightest);
 }
 
+.btn-light {
+  background: white;
+}
+
 .btn, btn-sm {
   border-radius: 0.25rem;
 }

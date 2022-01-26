@@ -40,6 +40,6 @@
   }
 </script>
 
-<a href={url} target="_blank" class="btn btn-primary w-auto sourceBtn">
+<a href={url} target="_blank" class="btn btn-secondary w-auto sourceBtn">
   <i class="fas fa-link"></i> Source
 </a>

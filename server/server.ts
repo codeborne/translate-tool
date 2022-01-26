@@ -38,15 +38,14 @@ app.get('/auth', async function (req: Request, res: Response) {
   if (isEmailVerified(profile.email) || isDomainVerified(profile.email)) {
     res.cookie('AUTH', token, {signed: true, httpOnly: true})
     res.redirect('/')
-  } else {
-    res.sendStatus(403)
-  }
+  } else res.sendStatus(403)
 })
 
 app.get('/user', async function (req, res) {
-  if (!req.signedCookies['AUTH']) return res.sendStatus(400)
+  if (!req.signedCookies['AUTH'] || !googleAuth.clientId || !googleAuth.clientSecret) return res.sendStatus(404)
   const user: GoogleProfile = await fetchProfile(googleAuth, req.signedCookies['AUTH'])
-  res.json(user)
+  if (user && 'error' in user) res.clearCookie('AUTH')
+  else res.json(user)
 })
 
 app.get('/logout', function (req, res) {
@@ -101,6 +100,7 @@ function fetchProfile(provider: typeof googleAuth, token: string): Promise<Googl
     })
   })
 }
+
 
 app.use(express.static('build'))
 

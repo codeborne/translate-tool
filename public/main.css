@@ -2,6 +2,7 @@
   --bs-font-sans-serif: 'Inter', sans-serif;
   --text-color: #060C2D;
   --primary: #0044FA;
+  --primary-dark: #003BD9;
   --primary-accent: #196EFF;
   --primary-lightest: #F0F4FF;
   --gray-lightest: #F8FAFB;
@@ -70,9 +71,43 @@ td {
   background-color: var(--primary);
   border-color: var(--primary);
   box-shadow:
-    0 2px 2px rgba(0, 68, 250, 0.02),
-    0 4px 4px rgba(0, 68, 250, 0.04),
-    0 4px 16px rgba(0, 68, 250, 0.16);
+    0 2px 2px rgba(00, 68, 250, 0.05),
+    0 4px 6px rgba(00, 68, 250, 0.11),
+    0 4px 16px rgba(00, 68, 250, 0.34);
+}
+
+.btn-primary:hover {
+  background-color: var(--primary-dark);
+  border-color: var(--primary-dark);
+  box-shadow:
+    0 2px 2px rgba(00, 68, 250, 0.05),
+    0 2px 6px rgba(00, 68, 250, 0.11),
+    0 2px 16px rgba(00, 68, 250, 0.34);
+}
+
+.btn-primary:active {
+  background-color: var(--primary-dark);
+  border-color: var(--primary-dark);
+  box-shadow:
+    0 2px 2px rgba(00, 68, 250, 0.05);
+}
+
+.btn-primary:active:focus {
+  background-color: var(--primary-dark);
+  border-color: var(--primary-dark);
+  box-shadow:
+    0 2px 2px rgba(00, 68, 250, 0.05);
+}
+.btn-primary:focus,
+.btn-secondary:focus-visible {
+  background-color: var(--primary-dark);
+  border-color: var(--primary-dark);
+  box-shadow: 0 0 0 0.25rem rgb(0, 68, 250, 0.25);
+}
+
+.btn-primary:focus:hover {
+  background-color: var(--primary-dark);
+  border-color: var(--primary-dark);
 }
 
 .btn-secondary {
@@ -83,6 +118,16 @@ td {
     0 2px 2px rgba(0, 0, 0, 0.01),
     0 4px 4px rgba(0, 0, 0, 0.02),
     0 4px 16px rgba(0, 0, 0, 0.08);
+}
+
+.btn-secondary:hover {
+  color: var(--primary-accent);
+  background-color: var(--primary-lightest);
+  border-color: var(--primary-lightest);
+  box-shadow:
+    0 2px 4px rgba(138, 142, 153, 0.035),
+    0 2px 6px rgba(138, 142, 153, 0.065),
+    0 2px 16px rgba(138, 142, 153, 0.185);
 }
 
 .btn-secondary:active {
@@ -114,15 +159,6 @@ td {
   border-color: var(--primary-lightest);
 }
 
-.btn-secondary:hover {
-  color: var(--primary-accent);
-  background-color: var(--primary-lightest);
-  border-color: var(--primary-lightest);
-  box-shadow:
-    0 1px 4px rgba(88, 108, 162, 0.025),
-    0 2px 6px rgba(88, 108, 162, 0.055),
-    0 2px 20px rgba(88, 108, 162, 0.165);
-}
 
 .card {
   border: none;

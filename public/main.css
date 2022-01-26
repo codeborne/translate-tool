@@ -103,4 +103,22 @@ td:last-of-type {
 .btn-primary {
   background-color: var(--primary);
   border-color: var(--primary);
+  box-shadow:
+    0 2px 2px rgba(0, 68, 250, 0.02),
+    0 4px 4px rgba(0, 68, 250, 0.04),
+    0 4px 16px rgba(0, 68, 250, 0.16);
+}
+
+.btn, btn-sm {
+  border-radius: 0.25rem;
+}
+
+.btn-secondary {
+  color: var(--primary);
+  background-color: white;
+  border-color: white;
+  box-shadow:
+    0 2px 2px rgba(0, 0, 0, 0.01),
+    0 4px 4px rgba(0, 0, 0, 0.02),
+    0 4px 16px rgba(0, 0, 0, 0.08);
 }

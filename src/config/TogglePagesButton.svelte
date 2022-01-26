@@ -11,7 +11,7 @@
     </button>
   {/if}
   {#if (showConfig || showAddProject) && showBack}
-    <button id="backToEditorBtn" type="button" class="btn btn-outline-secondary" on:click={() => showConfig = showAddProject = false}>
+    <button id="backToEditorBtn" type="button" class="btn btn-secondary" on:click={() => showConfig = showAddProject = false}>
       <i class="fas fa-arrow-circle-left me-1"></i> Back to Editor
     </button>
   {/if}

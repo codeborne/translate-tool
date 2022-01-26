@@ -58,11 +58,11 @@
 
 {#if clientId}
   {#if user}
-    <button class="btn btn-outline-secondary logout" on:click={handleLogout}>
+    <button class="btn btn-secondary logout" on:click={handleLogout}>
       <i class="fas fa-sign-out-alt"></i> {user.getName()}
     </button>
   {:else}
-    <button class="btn btn-outline-secondary login" on:click={handleLogin}>
+    <button class="btn btn-secondary login" on:click={handleLogin}>
       <i class="fab fa-google"></i> Login
     </button>
   {/if}

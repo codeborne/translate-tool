@@ -24,6 +24,10 @@ td,
   color: var(--text-color);
 }
 
+.text-primary {
+  color: var(--primary) !important;
+}
+
 table {
   table-layout: fixed
 }
@@ -48,6 +52,10 @@ td {
 
 .bg-light {
   background-color: var(--gray-lightest);
+}
+
+.btn:hover {
+  background-color: var(--primary-lightest);
 }
 
 .btn, btn-sm {

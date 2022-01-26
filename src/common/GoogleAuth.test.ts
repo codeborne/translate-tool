@@ -8,19 +8,19 @@ import type {GoogleProfile} from './GoogleTypes'
 describe('GoogleAuth', () => {
   let user: GoogleProfile|undefined = {id:1,email:'m',verified_email:true,name:'m',given_name:'m',family_name:'t',picture:'h',locale:'en'}
 
-  it('does not render button if not found', async () => {
+  it('does not render button if user not found', async () => {
     stub(jsonLoader, 'loadJson').resolves(undefined)
-    const {container} = render(GoogleAuth, {user})
+    const {container} = render(GoogleAuth, {user: undefined})
     expect(jsonLoader.loadJson).called
     await act(jsonLoader.loadJson)
     expect(container.querySelector('.logout')).to.not.exist
   })
 
-  it.skip('renders button if a user is found', async () => {
-    stub(jsonLoader, 'loadJson').resolves()
-    const {container} = render(GoogleAuth, {user})
+  it('renders button if a user is found', async () => {
+    stub(jsonLoader, 'loadJson').resolves(user)
+    const {container} = render(GoogleAuth, {user: undefined})
     expect(jsonLoader.loadJson).called
     await act(jsonLoader.loadJson)
-    expect(container.querySelector('.logout')).to.not.exist
+    expect(container.querySelector('.logout')).to.exist
   })
 })

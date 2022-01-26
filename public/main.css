@@ -2,8 +2,10 @@
   --bs-font-sans-serif: 'Inter', sans-serif;
   --text-color: #060C2D;
   --primary: #0044FA;
-  --lightest-gray: #F8FAFB;
-  --lightest-yellow: #FFFBF0;
+  --primary-accent: #196EFF;
+  --primary-lightest: #F0F4FF;
+  --gray-lightest: #F8FAFB;
+  --yellow-lightest: #FFFBF0;
 }
 
 :global(a) {
@@ -55,7 +57,7 @@ td:last-of-type {
 }
 
 .empty {
-  background-color: var(--lightest-yellow);
+  background-color: var(--yellow-lightest);
 }
 
 .card {
@@ -97,7 +99,7 @@ td:last-of-type {
 }
 
 .bg-light {
-  background-color: var(--lightest-gray);
+  background-color: var(--gray-lightest);
 }
 
 .btn-primary {
@@ -121,4 +123,44 @@ td:last-of-type {
     0 2px 2px rgba(0, 0, 0, 0.01),
     0 4px 4px rgba(0, 0, 0, 0.02),
     0 4px 16px rgba(0, 0, 0, 0.08);
+}
+
+.btn-secondary:hover {
+  color: var(--primary-accent);
+  background-color: var(--primary-lightest);
+  border-color: var(--primary-lightest);
+  box-shadow:
+    0 1px 4px rgba(88, 108, 162, 0.025),
+    0 2px 6px rgba(88, 108, 162, 0.055),
+    0 2px 20px rgba(88, 108, 162, 0.165);
+}
+
+.btn-secondary:focus,
+.btn-secondary:focus-visible {
+  color: var(--primary);
+  background-color: white;
+  border-color: white;
+  box-shadow: 0 0 0 0.25rem rgb(0, 68, 250, 0.25);
+}
+
+.btn-secondary:focus:hover {
+  color: var(--primary-accent);
+  background-color: var(--primary-lightest);
+  border-color: var(--primary-lightest);
+}
+
+.btn-secondary:active {
+  color: var(--primary-accent);
+  background-color: var(--primary-lightest);
+  border-color: var(--primary-lightest);
+  box-shadow:
+    0 1px 4px rgba(88, 108, 162, 0.08);
+}
+
+.btn-secondary:active:focus {
+  color: var(--primary-accent);
+  background-color: var(--primary-lightest);
+  border-color: var(--primary-lightest);
+  box-shadow:
+    0 1px 4px rgba(88, 108, 162, 0.25);
 }

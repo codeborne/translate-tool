@@ -224,3 +224,12 @@ td {
 .form-select {
   cursor: pointer;
 }
+
+.form-switch:hover {
+  color: var(--primary)
+}
+
+.form-check-label,
+.form-check-input {
+  cursor: pointer;
+}

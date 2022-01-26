@@ -52,7 +52,8 @@ export class BitBucketClient {
   }
 
   getDirectoryUrl() {
-    return this.config.url.slice(this.config.url.indexOf(`/src/${this.findDefaultBranch()}/`) + 10, this.config.url.length)
+    const identifier = `/src/${this.findDefaultBranch()}`
+    return this.config.url.slice(this.config.url.indexOf(identifier) + identifier.length + 1, this.config.url.length)
   }
 
   findDefaultBranch() {
@@ -67,7 +68,7 @@ export class BitBucketClient {
   }
 
   getUrlWithCustomBranch() {
-    return this.config.url.replace(`/${this.findDefaultBranch()}/`, `/${this.branch}/`)
+    return this.config.url.replace(`/${this.findDefaultBranch()}/src/`, `/${this.branch}/src/`)
   }
 
   async getFile(file: string) {

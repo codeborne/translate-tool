@@ -3,12 +3,14 @@
   import type {Dict, Project} from '../common/Project'
   import {BitBucketClient} from './BitBucketClient'
   import {createEventDispatcher} from 'svelte'
-  import type GoogleProfile from '../common/GoogleAuth.svelte'
+  import type {GoogleProfile} from '../common/GoogleTypes'
 
   export let dict: Dict
   export let lang: string
   export let config: Project
-  export let user: GoogleProfile
+  export let user: GoogleProfile|undefined
+
+  let client
 
   const dispatch = createEventDispatcher()
 

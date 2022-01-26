@@ -2,8 +2,8 @@
 
   import type {Dict, Project} from '../common/Project'
   import {GitHubClient} from './GitHubClient'
-  import type GoogleProfile from '../common/GoogleAuth'
   import {createEventDispatcher} from 'svelte'
+  import type {GoogleProfile} from '../common/GoogleTypes'
 
   export let dict: Dict
   export let lang: string

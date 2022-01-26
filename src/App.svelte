@@ -14,7 +14,7 @@
   import ProjectSettings from './config/ProjectSettings.svelte'
   import GoogleAuth from './common/GoogleAuth.svelte'
   import {decodeBase64Unicode} from './common/utils'
-  import type GoogleProfile from './common/GoogleAuth'
+  import type {GoogleProfile} from './common/GoogleTypes'
 
   let showConfig = false, showAddProject = false
   let projects: Project[]

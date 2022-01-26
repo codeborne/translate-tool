@@ -35,8 +35,12 @@ interface GoogleProfile {
 app.get('/auth', async function (req: Request, res: Response) {
   const token: string = await fetchToken(googleAuth, req.query.code as string, redirectUrl(req))
   const profile: GoogleProfile = await fetchProfile(googleAuth, token)
-  res.cookie('AUTH', JSON.stringify({email: profile.email, name: profile.name}), {signed: true, httpOnly: true})
-  res.redirect('/')
+  if (isEmailVerified(profile.email)) {
+    res.cookie('AUTH', JSON.stringify({email: profile.email, name: profile.name}), {signed: true, httpOnly: true})
+    res.redirect('/')
+  } else {
+    res.sendStatus(403)
+  }
 })
 
 app.get('/logout', function (req, res) {
@@ -56,6 +60,11 @@ app.get('/*', async function (req: Request, res: Response) {
       `&redirect_uri=${redirectUrl(req)}&response_type=code`)
   else res.sendFile(__dirname, '/../build/index.html')
 })
+
+function isEmailVerified(email: string): boolean {
+  if (!config.ALLOWED_EMAILS) return true
+  return !!config.ALLOWED_EMAILS.includes(email)
+}
 
 function redirectUrl(req: Request) {
   const ownHost: string = req.header('Host') as string

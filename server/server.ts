@@ -2,7 +2,7 @@ import express, {Request, Response} from 'express'
 import request from 'request'
 import * as dotenv from 'dotenv'
 import cookieParser from 'cookie-parser'
-import {GOOGLE_OAUTH_PROFILE_URL, GOOGLE_OAUTH_SCOPE, GOOGLE_OAUTH_TOKEN_URL, GOOGLE_OAUTH_URL,} from './config'
+import config from './config'
 
 dotenv.config({ path: __dirname+'/auth.env' })
 
@@ -13,10 +13,10 @@ app.use(cookieParser(cookieSecret))
 
 
 const googleAuth = {
-  authUrl: GOOGLE_OAUTH_URL,
-  tokenUrl: GOOGLE_OAUTH_TOKEN_URL,
-  profileUrl: GOOGLE_OAUTH_PROFILE_URL,
-  scope: GOOGLE_OAUTH_SCOPE,
+  authUrl: config.GOOGLE_OAUTH_URL,
+  tokenUrl: config.GOOGLE_OAUTH_TOKEN_URL,
+  profileUrl: config.GOOGLE_OAUTH_PROFILE_URL,
+  scope: config.GOOGLE_OAUTH_SCOPE,
   clientId: process.env.GOOGLE_CLIENT_ID,
   clientSecret: process.env.GOOGLE_CLIENT_SECRET,
 }

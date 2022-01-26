@@ -6,7 +6,7 @@
 
 <div>
   {#if !showConfig && !showAddProject}
-    <button id="backToImporterBtn" type="button" class="btn btn-outline-secondary" on:click={() => showConfig = true}>
+    <button id="backToImporterBtn" type="button" class="btn btn-secondary" on:click={() => showConfig = true}>
       <i class="fas fa-wrench me-1"></i> Project Settings
     </button>
   {/if}

@@ -3,7 +3,7 @@
 </script>
 
 {#if !showAddProject}
-  <button on:click={() => showAddProject = !showAddProject} class="btn btn-primary" type="button"
+  <button on:click={() => showAddProject = !showAddProject} class="btn btn-secondary" type="button"
           title="Add a new project">
     <i class="me-2 fas fa-plus-circle"></i>Add a new project
   </button>

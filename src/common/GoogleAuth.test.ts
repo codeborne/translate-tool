@@ -1,12 +1,11 @@
 import {act, render} from '@testing-library/svelte'
 import {expect} from 'chai'
 import GoogleAuth from './GoogleAuth.svelte'
-import type {GoogleAuthUser} from './GoogleAuthUser'
 import {stub} from 'sinon'
 import jsonLoader from './JsonLoader'
 
 describe('GoogleAuth', () => {
-  const user: GoogleAuthUser = undefined
+  const user: GoogleAuth|undefined = undefined
 
   it.skip('renders if a user is found', async () => {
     stub(jsonLoader, 'loadJson').resolves(undefined)

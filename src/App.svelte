@@ -14,14 +14,14 @@
   import ProjectSettings from './config/ProjectSettings.svelte'
   import GoogleAuth from './common/GoogleAuth.svelte'
   import {decodeBase64Unicode} from './common/utils'
-  import type {GoogleAuthUser} from './common/GoogleAuthUser'
+  import type GoogleProfile from './common/GoogleAuth'
 
   let showConfig = false, showAddProject = false
   let projects: Project[]
   let loadedProjects: LoadedProject[]
   let selectedProject: LoadedProject
   let lang: string
-  let user: GoogleAuthUser
+  let user: GoogleProfile|undefined
 
   $: if (!showConfig) showAddProject = false
 
@@ -72,7 +72,7 @@
   }
 
   async function tryLoadPreConfiguredProjects() {
-    return jsonLoader.loadJson('projects.json').catch(() => console.warn('No deployment argument file found.'))
+    return jsonLoader.loadJson('projects.json').catch(() => console.warn('No deployment argument file found.')) as Project[]
   }
 
   function tryInitFromLocalStorage(): Project[] {

@@ -4,13 +4,13 @@ import type {Dict, Project} from '../common/Project'
 import {fake, stub} from 'sinon'
 import GitHubOutput from './GitHubOutput.svelte'
 import {GitHubClient} from './GitHubClient'
-import type {GoogleAuthUser} from '../common/GoogleAuthUser'
+import type GoogleProfile from '../common/GoogleAuth.svelte'
 
 describe('GitHubOutput', () => {
   const dict: Dict = {}
   const lang = 'en'
   let config: Project = {title: '', url: 'api.github.com', token: '', indent: 2}
-  const user: GoogleAuthUser = undefined
+  const user: GoogleProfile|undefined = undefined
 
   async function clickSaveButton(message: string) {
     const {container} = render(GitHubOutput, {dict, lang, config, user})

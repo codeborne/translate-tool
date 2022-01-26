@@ -35,7 +35,7 @@ interface GoogleProfile {
 app.get('/auth', async function (req: Request, res: Response) {
   const token: string = await fetchToken(googleAuth, req.query.code as string, redirectUrl(req))
   const profile: GoogleProfile = await fetchProfile(googleAuth, token)
-  if (isEmailVerified(profile.email)) {
+  if (isEmailVerified(profile.email) || isDomainVerified(profile.email)) {
     res.cookie('AUTH', JSON.stringify({email: profile.email, name: profile.name}), {signed: true, httpOnly: true})
     res.redirect('/')
   } else {
@@ -62,8 +62,14 @@ app.get('/*', async function (req: Request, res: Response) {
 })
 
 function isEmailVerified(email: string): boolean {
-  if (!config.ALLOWED_EMAILS) return true
-  return !!config.ALLOWED_EMAILS.includes(email)
+  if (!config.ALLOWED_EMAILS.length && !config.ALLOWED_DOMAINS.length) return true
+  return !!(config.ALLOWED_EMAILS as string[]).includes(email)
+}
+
+function isDomainVerified(email: string): boolean {
+  if (!config.ALLOWED_EMAILS.length && !config.ALLOWED_DOMAINS.length) return true
+  const domain: string = email.split('@').pop() as string
+  return !!(config.ALLOWED_DOMAINS as string[]).includes(domain)
 }
 
 function redirectUrl(req: Request) {

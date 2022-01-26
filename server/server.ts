@@ -36,11 +36,17 @@ app.get('/auth', async function (req: Request, res: Response) {
   const token: string = await fetchToken(googleAuth, req.query.code as string, redirectUrl(req))
   const profile: GoogleProfile = await fetchProfile(googleAuth, token)
   if (isEmailVerified(profile.email) || isDomainVerified(profile.email)) {
-    res.cookie('AUTH', JSON.stringify({email: profile.email, name: profile.name}), {signed: true, httpOnly: true})
+    res.cookie('AUTH', token, {signed: true, httpOnly: true})
     res.redirect('/')
   } else {
     res.sendStatus(403)
   }
+})
+
+app.get('/user', async function (req, res) {
+  if (!req.signedCookies['AUTH']) return res.sendStatus(400)
+  const user: GoogleProfile = await fetchProfile(googleAuth, req.signedCookies['AUTH'])
+  res.json(user)
 })
 
 app.get('/logout', function (req, res) {

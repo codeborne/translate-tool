@@ -177,7 +177,13 @@ td {
   cursor: pointer;
 }
 
-.nav-link.active:after {
+.nav-link.active:hover {
+  cursor: default;
+  color: var(--text-color) !important;
+}
+
+.nav-link.active:after,
+.nav-link.active:hover:after{
   opacity: 1;
 }
 

@@ -1,8 +1,7 @@
 {
   "scripts": {
     "start": "snowpack dev",
-    "proxy": "node proxy.js",
-    "build": "snowpack build && npm run build:server",
+    "build": "snowpack build",
     "build:server": "tsc -m commonjs --target esnext --esModuleInterop true server/*.ts",
     "run:server": "npm run build:server && node server/server",
     "test": "web-test-runner \"src/**/*.test.ts\""

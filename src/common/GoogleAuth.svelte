@@ -7,7 +7,6 @@
 
   onMount(async () => {
     user = await tryLoadProfile() ?? undefined
-    if (user && 'error' in user) handleLogout()
   })
 
   async function tryLoadProfile() {

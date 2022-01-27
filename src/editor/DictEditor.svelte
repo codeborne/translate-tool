@@ -14,6 +14,7 @@
   import BitBucketOutput from '../bitbucket/BitBucketOutput.svelte'
   import {BitBucketClient} from '../bitbucket/BitBucketClient'
   import ProjectSourceButton from './ProjectSourceButton.svelte'
+  import Icon from '../components/Icon.svelte'
 
 
   export let project: LoadedProject
@@ -72,8 +73,8 @@
 <div class="mt-3 card shadow d-flex flex-column align-items-center">
   <div class="d-flex flex-row justify-content-between w-100">
     <FilterControls bind:filter/>
-    <div class="dl-flex justify-content-center align-items-center p-3">
-      <a class="btn btn-secondary btn-sm" href="#output"><i class="fas fa-arrow-down"></i> Jump to bottom</a>
+    <div class="d-flex justify-content-center align-items-center p-3">
+      <a class="btn btn-secondary btn-icon btn-sm" href="#output"><Icon name="arrowDown"/> Jump to bottom</a>
     </div>
   </div>
 

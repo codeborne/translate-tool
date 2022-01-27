@@ -68,8 +68,20 @@ td {
 }
 
 .btn-icon {
-line-height: 1;
+  line-height: 1;
   min-height:38px;
+}
+
+ .btn-icon.btn-sm {
+  min-height:31px;
+}
+
+.btn-icon.btn-sm svg {
+  vertical-align: middle;
+  margin-left: -0.125rem;
+  margin-right: -0.125rem;
+  height: 20px;
+  width: 20px;
 }
 
 .btn-icon svg{

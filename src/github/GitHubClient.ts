@@ -63,7 +63,9 @@ export class GitHubClient {
   }
 
   async checkIfPullRequestExists() {
-    return this.request(this.getPullsUrl())
+    if (this.config.branch === await this.findDefaultBranch()) return true
+    const result = await this.request(this.getPullsUrl())
+    return !!result.length
   }
 
   getPullsUrl() {
@@ -83,7 +85,7 @@ export class GitHubClient {
       content,
       author: this.author
     }) as GitHubSavedFile
-    if (!(await this.checkIfPullRequestExists()).length)  await this.createPullRequest('Updated translations')
+    if (!(await this.checkIfPullRequestExists()))  await this.createPullRequest('Updated translations')
     return result
   }
 
@@ -93,6 +95,7 @@ export class GitHubClient {
   }
 
   private async createBranchIfNeeded() {
+    if (this.config.branch === await this.findDefaultBranch()) return
     const refsUrl = this.config.url.replace(/contents\/.*$/, 'git/refs')
     const refs = await this.request(refsUrl) as GitHubRef[]
 

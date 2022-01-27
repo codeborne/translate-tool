@@ -113,6 +113,7 @@ export class BitBucketClient {
   }
 
   async checkIfPullRequestExists(token: string|undefined): Promise<boolean> {
+    if (this.config.branch === this.findDefaultBranch()) return true
     const values: BitBucketPullsResponseValue[] =
       (await this.request(this.getRootUrl() + '/pullrequests',
         {headers: {...this.tokenHeader(token)}}) as BitBucketPullsResponse).values
@@ -126,6 +127,7 @@ export class BitBucketClient {
   }
 
   async checkIfBranchExists(token: string): Promise<boolean> {
+    if (this.config.branch === this.findDefaultBranch()) return true
     const branches = await this.request(`${this.getBranchListUrl()}`,
       {headers: {...this.tokenHeader(token)}}) as BitBucketBranchListResponse
     return !!(branches.values.find((branch) => branch.name === this.branch))

@@ -31,10 +31,12 @@
       <td class="w-100">
         <TextInput bind:dict {key} fullKey={fullKey(key)} {uneditedDict} {lang}/>
       </td>
-      <td class="d-flex justify-content-between pe-1">
-        <DefaultLangValue {defaultDict} {key} fullKey={fullKey(key)}>
-          <Translator {lang} {defaultLang} bind:dict {key} {defaultDict} {uneditedDict}/>
-        </DefaultLangValue>
+      <td>
+        <div class="d-flex align-self-stretch justify-content-between pe-1">
+          <DefaultLangValue {defaultDict} {key} fullKey={fullKey(key)}>
+            <Translator {lang} {defaultLang} bind:dict {key} {defaultDict} {uneditedDict}/>
+          </DefaultLangValue>
+        </div>
       </td>
     </tr>
   {/if}

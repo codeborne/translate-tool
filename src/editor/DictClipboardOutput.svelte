@@ -4,6 +4,7 @@
   import {LoadedProject} from '../common/Project'
   import {deepCopy} from '../common/utils'
   import {cleanEmptyKeys} from './cleanEmptyKeys'
+  import Icon from '../components/Icon.svelte'
 
   export let dict: Dict
   export let lang: string
@@ -30,7 +31,7 @@
     <slot/>
     <slot name="counter"/>
   </div>
-  <a class="btn btn-sm btn-secondary" href="#top"><i class="fas fa-arrow-up"></i> Jump to top</a>
+  <a class="btn btn-sm btn-icon btn-secondary" href="#top"><Icon name="arrowTop"/> Jump to top</a>
 </div>
 
 <textarea id="rawOutput" {lang} bind:this={textarea}

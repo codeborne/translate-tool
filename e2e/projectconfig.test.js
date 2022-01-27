@@ -11,7 +11,7 @@ async function fillPublicImport(page) {
 
 test('can edit project config', async ({page}) => {
   await page.goto(url)
-  await expect(page.locator('#top h3')).toContainText('Translation Tool')
+  await expect(page.locator('#top h3')).toContainText('Translate Tool')
   await fillPublicImport(page)
   await expect(page.locator('text=Project Settings')).toBeVisible()
   await page.locator('text=Project Settings').click()

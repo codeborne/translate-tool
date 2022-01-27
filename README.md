@@ -1,4 +1,4 @@
-# Translation Tool
+# Translate Tool
 
 [![Build & Test](https://github.com/codeborne/translate-tool/actions/workflows/ci.yml/badge.svg)](https://github.com/codeborne/translate-tool/actions/workflows/ci.yml)
 
@@ -83,7 +83,7 @@ Alternatively, you may follow this JSON structure:
 
 * `title` is the project name within the tool.
 * `url` is the url where your translation directory resides.
-* `indent` is the space indentation. The default is always 2 when starting a new project via the translation tool.
+* `indent` is the space indentation. The default is always 2 when starting a new project via the tranlate tool.
 * `token` (optional) is the access token to access a protected url, such as a private GitHub repository. More on that below.
 
 ### Integrating with GitHub.
@@ -125,13 +125,13 @@ Private repositories require a **private access token** to view a repository's c
 Settings -> Developer Settings -> Personal access tokens
 ```
 
-To integrate the project with GitHub, simply use the translation tool's **Import via Github** option and fill the necessary fields.
+To integrate the project with GitHub, simply use the translate tool's **Import via Github** option and fill the necessary fields.
 
 ##### Configs with private repositories
 
 The URL structure is different for private GitHub repositories, as the tool accesses GitHub's API to pull the necessary files.
 
-It is generated for you when importing via the translation tool, but in case you'd like to create the url yourself, here's the structure:
+It is generated for you when importing via the translate tool, but in case you'd like to create the url yourself, here's the structure:
 ```
 "url": "https://api.github.com/repos/<Username>/<RepoName>/contents/<LinkToTranslationsDirectory>/"
 

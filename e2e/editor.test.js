@@ -11,7 +11,7 @@ async function fillPublicImport(page) {
 
 test('editor page functionality', async ({page}) => {
   await page.goto(url)
-  await expect(page.locator('#top h3')).toContainText('Translation Tool')
+  await expect(page.locator('#top h3')).toContainText('Translate Tool')
   await fillPublicImport(page)
   await expect(page.locator('.num-changes')).not.toBeVisible()
   await expect(page.locator('nav .nav-link:first-of-type')).toContainText('EditorTest')

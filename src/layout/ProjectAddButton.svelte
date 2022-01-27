@@ -6,7 +6,6 @@
 {#if !showAddProject}
   <button on:click={() => showAddProject = !showAddProject} class="btn btn-icon btn-secondary" type="button"
           title="Add a new project">
-    <Icon name="plus" size="24"/>
-    <span>Add a new project</span>
+    <Icon name="plus" size="24"/>Add a new project
   </button>
 {/if}

@@ -74,6 +74,7 @@ line-height: 1;
 .btn-icon svg{
   vertical-align: middle;
   margin-left: -0.25rem;
+  margin-right: 0.125rem;
 }
 
 .btn-primary {

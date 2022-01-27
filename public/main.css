@@ -63,33 +63,27 @@ td {
   background: white;
 }
 
-.btn, btn-sm {
+.btn, .btn-sm {
   border-radius: 0.25rem;
 }
 
 .btn-icon {
-  line-height: 1;
-  min-height:38px;
+  display: flex;
+  align-items: center;
+  max-height:38px;
 }
 
  .btn-icon.btn-sm {
-  min-height:31px;
+  max-height:31px;
 }
 
-.btn-icon.btn-sm svg {
-  vertical-align: middle;
-  margin-left: -0.125rem;
-  margin-right: -0.125rem;
-  height: 20px;
-  width: 20px;
-}
-
-.btn-icon svg{
+.btn-icon svg {
   vertical-align: middle;
   margin-left: -0.125rem;
   margin-right: 0.125rem;
   height: 20px;
   width: 20px;
+  line-height: 1.5;
 }
 
 .btn-primary {

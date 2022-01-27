@@ -1,7 +1,7 @@
 import sM from './sM'
 import {getCode, isSupported} from './languages'
 
-// TODO: remove semicolons, for project code style to be consistent
+// TODO: remove semicolons & use single quotes, for project code style to be consistent
 
 interface TranslateOptions {
   from: string;
@@ -22,7 +22,7 @@ function token(text: string) {
   });
 }
 
-// Wrap everything into an object/instance (e.g. translator, same way as Jsonloader)
+// TODO: wrap everything into an object/instance (e.g. translator, same way as Jsonloader)
 let CORSService: string = "";
 
 // setup your own cors-anywhere server

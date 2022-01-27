@@ -6,7 +6,7 @@ import {chromeLauncher} from '@web/test-runner'
 export default {
   testsFinishTimeout: 5000,
   plugins: [testRunner()],
-  browsers: [chromeLauncher({launchOptions: {args: process.env.TEST_CHROME_ARGS?.split(' ')}})],
+  browsers: [chromeLauncher({launchOptions: {dumpio: !!process.env.DUMP_CHROME_OUT, args: process.env.TEST_CHROME_ARGS?.split(' ')}})],
   testRunnerHtml: testFramework =>
     `<html>
       <body>

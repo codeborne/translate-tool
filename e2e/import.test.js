@@ -9,7 +9,7 @@ async function fillPublicImport(projectName, page) {
 
 test('import public twice', async ({page}) => {
   await page.goto(url)
-  await expect(page.locator('#top h3')).toContainText('Translation Tool')
+  await expect(page.locator('#top h3')).toContainText('Translate Tool')
   await fillPublicImport("E2E", page)
   await page.locator('.collapsePublic button').click()
   await expect(page.locator('.collapsePublic')).not.toBeVisible()

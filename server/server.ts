@@ -43,7 +43,7 @@ app.get('/auth', async function (req: Request, res: Response) {
 
 app.get('/user', async function (req, res) {
   if (!req.signedCookies['AUTH'] || !googleAuth.clientId || !googleAuth.clientSecret) return res.sendStatus(404)
-  const user: GoogleProfile = await fetchProfile(googleAuth, req.signedCookies['AUTH'])
+  const user = await fetchProfile(googleAuth, req.signedCookies['AUTH'])
   if (user && 'error' in user) res.clearCookie('AUTH')
   else res.json(user)
 })

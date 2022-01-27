@@ -68,7 +68,7 @@ export class BitBucketClient {
   }
 
   getUrlWithCustomBranch() {
-    return this.config.url.replace(`/${this.findDefaultBranch()}/src/`, `/${this.branch}/src/`)
+    return this.config.url.replace(`/src/${this.findDefaultBranch()}/`, `/src/${this.branch}/`)
   }
 
   async getFile(file: string) {

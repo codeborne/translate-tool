@@ -4,7 +4,7 @@
   export let name: string
   export let size = '1.5rem'
   export let focusable = false
-  export let strokeWidth = '1.5'
+  export let strokeWidth = '2'
 
   const icon = icons[name]
 </script>

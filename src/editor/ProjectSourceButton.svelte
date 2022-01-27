@@ -2,6 +2,7 @@
   import type {Project} from '../common/Project'
   import {GitHubClient} from '../github/GitHubClient'
   import {BitBucketClient} from '../bitbucket/BitBucketClient'
+  import Icon from '../components/Icon.svelte'
 
   export let project: Project
   export let defaultBranch
@@ -40,6 +41,6 @@
   }
 </script>
 
-<a href={url} target="_blank" class="btn btn-secondary w-auto sourceBtn">
-  <i class="fas fa-link"></i> Source
+<a href={url} target="_blank" class="btn btn-secondary w-auto btn-icon sourceBtn">
+  <Icon name="link"/> Source
 </a>

@@ -27,7 +27,7 @@
 
 <div class="d-flex align-items-center justify-content-between mb-3">
   <div class="d-flex gap-3">
-    <button on:click={copy} class="btn btn-primary w-auto"><i class="fas fa-copy me-1"></i>Copy json to clipboard</button>
+    <button on:click={copy} class="btn btn-primary btn-icon w-auto"><Icon name="copy"/>Copy json to clipboard</button>
     <slot/>
     <slot name="counter"/>
   </div>

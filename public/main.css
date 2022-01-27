@@ -67,6 +67,15 @@ td {
   border-radius: 0.25rem;
 }
 
+.btn-icon {
+line-height: 1;
+}
+
+.btn-icon svg{
+  vertical-align: middle;
+  margin-left: -0.25rem;
+}
+
 .btn-primary {
   background-color: var(--primary);
   border-color: var(--primary);

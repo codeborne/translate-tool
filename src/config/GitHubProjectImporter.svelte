@@ -57,7 +57,7 @@
 
 <form id="addPrivate" class="card shadow px-3 py-lg-4 mb-3 d-flex flex-column justify-content-center align-items-center"
       on:submit|preventDefault={submit}>
-  <h5 class="card-title">Import a private dictionary from GitHub repository</h5>
+  <h3 class="card-title">Import a private dictionary from GitHub repository</h3>
   <div class="card-body w-75">
     <label class="form-label">Project name</label>
     <input type="text" bind:value={title} class="form-control" required>

@@ -272,6 +272,10 @@ td {
   cursor: pointer;
 }
 
+.accordion-item {
+  border:transparent;
+}
+
 .accordion-button{
   line-height: 1;
 }
@@ -282,4 +286,12 @@ td {
 .accordion-button:not(.collapsed) {
   background: inherit;
   color: inherit;
+}
+
+.rounded-3 {
+  border-radius: 0.5rem !important;
+}
+
+.rounded-4 {
+  border-radius: 1rem;
 }

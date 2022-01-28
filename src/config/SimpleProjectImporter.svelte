@@ -54,7 +54,7 @@
 </script>
 
 <form class="card shadow px-3 py-lg-4 mb-3 d-flex flex-column justify-content-center align-items-center" on:submit|preventDefault={submit}>
-  <h5 class="mb-4">Import a public dictionary</h5>
+  <h3 class="mb-4">Import a public dictionary</h3>
   <div class="mb-3 w-75">
     <label class="form-label">Project name</label>
     <input type="text" bind:value={title} class="form-control" required autofocus>

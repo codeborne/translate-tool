@@ -77,11 +77,15 @@ td {
 .btn-icon {
   display: flex;
   align-items: center;
-  max-height:38px;
+  max-height: 38px;
 }
 
  .btn-icon.btn-sm {
-  max-height:31px;
+  max-height: 31px;
+}
+
+.btn-icon.btn-lg {
+  max-height: 48px;
 }
 
 .btn-icon svg {

@@ -3,6 +3,7 @@
   import type {LoadedProject, Project} from '../common/Project'
   import {createEventDispatcher} from 'svelte'
   import {BitBucketClient} from '../bitbucket/BitBucketClient'
+  import Icon from '../components/Icon.svelte'
 
   export let token: string = ''
   export let projects: Project[]
@@ -55,7 +56,7 @@
   }
 </script>
 
-<form id="addPrivate" class="card shadow p-3 mb-3 d-flex flex-column justify-content-center align-items-center"
+<form id="addPrivate" class="card shadow px-3 py-lg-4 mb-3 d-flex flex-column justify-content-center align-items-center"
       on:submit|preventDefault={submit}>
   <h5 class="card-title">Import a private dictionary from BitBucket repository</h5>
   <div class="card-body w-75">
@@ -90,7 +91,7 @@
     <div class="form-text mb-4">Where the tool will commit changes</div>
   </div>
 
-  <button class="btn btn-primary w-auto">Import</button>
+  <button class="btn btn-primary btn-lg btn-icon w-auto px-lg-5"><Icon class="me-lg-2" name="fileImport"/>Import</button>
   {#if warning}
     <div class="alert alert-warning mt-3">
       {warning}

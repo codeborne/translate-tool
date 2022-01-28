@@ -2,6 +2,7 @@
   import type {Project} from '../common/Project'
   import {createEventDispatcher} from 'svelte'
   import jsonLoader from '../common/JsonLoader'
+  import Icon from '../components/Icon.svelte'
 
   export let projects: Project[]
 
@@ -52,7 +53,7 @@
   }
 </script>
 
-<form class="card shadow p-3 mb-3 d-flex flex-column justify-content-center align-items-center" on:submit|preventDefault={submit}>
+<form class="card shadow px-3 py-lg-4 mb-3 d-flex flex-column justify-content-center align-items-center" on:submit|preventDefault={submit}>
   <h5 class="mb-4">Import a public dictionary</h5>
   <div class="mb-3 w-75">
     <label class="form-label">Project name</label>
@@ -63,7 +64,7 @@
     <input type="url" placeholder="Must end with /" bind:value={url} class="form-control" pattern=".*/" required>
     <div class="form-text mb-4">Should contain <b>langs.json</b> and corresponding language files, e.g. <b>en.json</b></div>
   </div>
-  <button class="btn btn-primary w-auto">Import</button>
+  <button class="btn btn-primary btn-lg btn-icon w-auto px-lg-5"><Icon class="me-lg-2" name="fileImport"/>Import</button>
   {#if warning}
     <div class="alert alert-warning">
       {warning}

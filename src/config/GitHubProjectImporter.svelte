@@ -60,7 +60,7 @@
   <div class="card-body w-75">
     <label class="form-label">Project name</label>
     <input type="text" bind:value={title} class="form-control" required>
-    <div class="form-text mb-4"><i>You can change it at any time.</i></div>
+    <div class="form-text mb-4">You can change it at any time.</div>
 
     <label class="form-label">Repository owner</label>
     <input type="text" bind:value={username} class="form-control" required>

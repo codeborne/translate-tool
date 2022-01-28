@@ -1,6 +1,7 @@
 <script lang="ts">
   import type {Dict} from '../common/Project'
   import {setCORS, translate} from './translate'
+  import Icon from '../components/Icon.svelte'
 
   export let lang: string
   export let defaultLang: string
@@ -46,9 +47,9 @@
 
 {#if lang !== defaultLang}
   {#if isTranslated}
-    <button on:click={handleUndo} class="btn text-primary p-2 me-n2" title="Undo translation"><i class="fas fa-undo"></i></button>
+    <button on:click={handleUndo} class="btn btn-icon text-primary p-2 me-n2" title="Undo translation"><Icon name="arrowBackUp"/></button>
   {:else}
-    <button on:click={handleTranslation} class="btn text-primary p-2 me-n2" title="Translate"><i class="fas fa-language"></i></button>
+    <button on:click={handleTranslation} class="btn btn-icon text-primary p-2 me-n2" title="Translate"><Icon name="language"/></button>
   {/if}
 {/if}
 

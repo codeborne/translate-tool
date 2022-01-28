@@ -73,7 +73,7 @@
 <div class="mt-3 card shadow d-flex flex-column align-items-center">
   <div class="d-flex flex-row justify-content-between w-100">
     <FilterControls bind:filter/>
-    <div class="d-flex justify-content-center align-items-center p-3">
+    <div class="d-flex justify-content-center align-items-center p-3 p-lg-4">
       <a class="btn btn-secondary btn-icon btn-sm" href="#output"><Icon name="arrowDown"/> Jump to bottom</a>
     </div>
   </div>

@@ -5,10 +5,10 @@
   export let filter: Filter
 </script>
 
-<div class="d-flex align-items-center p-3">
+<div class="d-flex align-items-center pt-3 px-4 pt-lg-4 px-lg-4">
   <input class="form-control" bind:value={filter.search} placeholder="Filter...">
 
-  <div class="ms-3 form-check form-switch">
+  <div class="ms-3 ms-lg-4 form-check form-switch">
     <input class="form-check-input" title="Show only empty" type="checkbox" bind:checked={filter.showEmptyValuesOnly} id="show-empty-only">
     <label class="form-check-label text-nowrap" for="show-empty-only">Show only empty</label>
   </div>

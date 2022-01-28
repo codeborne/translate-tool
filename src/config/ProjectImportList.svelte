@@ -8,7 +8,7 @@
 
 </script>
 
-<div class="accordion addNew">
+<div class="accordion addNew mt-3 mt-lg-4">
 
     <div class="accordion-item">
       <h2 class="accordion-header">

@@ -64,8 +64,8 @@
   $: if (selectedProject) setFormInputs()
 </script>
 
-<div class="card p-3 mb-3 d-flex flex-column justify-content-center align-items-center">
-  <h5 class="card-title">Manage Project</h5>
+<div class="card p-3 p-lg-4 my-3 my-lg-4 d-flex flex-column justify-content-center align-items-center shadow rounded-3">
+  <h3 class="card-title">Manage Project</h3>
   <div class="card-body w-50" >
     <div class="d-flex flex-column justify-content-center">
       <label class="form-label">Project name</label>
@@ -88,9 +88,10 @@
       {/if}
     </div>
     <div class="d-flex justify-content-between gap-5 mt-3">
-      <button on:click={editProject} type="button" class="btn btn-primary">Save</button>
-      <button on:click={shareProject} type="button" class="btn btn-light border-secondary">Share</button>
-      <button on:click={deleteProject} type="button" class="btn btn-danger">Delete</button>
+      <button on:click={deleteProject} type="button" class="btn px-lg-4 btn-danger">Delete</button>
+      <button on:click={shareProject} type="button" class="btn px-lg-4 btn-secondary">Share</button>
+      <button on:click={editProject} type="button" class="btn px-lg-4 btn-primary">Save</button>
+
     </div>
   </div>
 </div>

@@ -271,3 +271,15 @@ td {
 .form-check-input {
   cursor: pointer;
 }
+
+.accordion-button{
+  line-height: 1;
+}
+.accordion-button:hover {
+  color: var(--primary);
+  background: var(--primary-lightest);
+}
+.accordion-button:not(.collapsed) {
+  background: inherit;
+  color: inherit;
+}

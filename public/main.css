@@ -7,6 +7,9 @@
   --primary-lightest: #F0F4FF;
   --gray-lightest: #F8FAFB;
   --yellow-lightest: #FFFBF0;
+  --red: #F05C3E;
+  --red-accent: #FF4019;
+  --red-lightest: #FFEAE6;
 }
 
 :global(a) {
@@ -197,6 +200,54 @@ td {
   border-color: var(--primary-lightest);
 }
 
+.btn-danger {
+  color: var(--red);
+  background-color: white;
+  border-color: white;
+  box-shadow:
+    0 2px 2px rgba(0, 0, 0, 0.01),
+    0 4px 4px rgba(0, 0, 0, 0.02),
+    0 4px 16px rgba(0, 0, 0, 0.08);
+}
+
+.btn-danger:hover {
+  color: var(--red-accent);
+  background-color: var(--red-lightest);
+  border-color: var(--red-lightest);
+  box-shadow:
+    0 2px 4px rgba(240, 92, 62, 0.04),
+    0 2px 6px rgba(240, 92, 62, 0.07),
+    0 2px 16px rgba(240, 92, 62, 0.2);
+}
+
+.btn-danger:active {
+  color: var(--red-accent);
+  background-color: var(--red-lightest);
+  border-color: var(--red-lightest);
+  box-shadow:
+    0 1px 4px rgba(240, 92, 62, 0.16);
+}
+
+.btn-danger:active:focus {
+  color: var(--red-accent);
+  background-color: var(--red-lightest);
+  border-color: var(--red-lightest);
+  box-shadow:
+    0 1px 4px rgba(240, 92, 62, 0.25);
+}
+.btn-danger:focus,
+.btn-danger:focus-visible {
+  color: var(--red);
+  background-color: white;
+  border-color: white;
+  box-shadow: 0 0 0 0.25rem rgb(240, 92, 62, 0.25);
+}
+
+.btn-danger:focus:hover {
+  color: var(--red-accent);
+  background-color: var(--red-lightest);
+  border-color: var(--red-lightest);
+}
 
 .card {
   border: none;

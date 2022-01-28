@@ -65,21 +65,21 @@
 
     <label class="form-label">Repository owner</label>
     <input type="text" bind:value={username} class="form-control" required>
-    <div class="form-text mb-4">eg. <b>account-name</b> for <i>https://bitbucket.org/<b>account-name</b>/</i></div>
+    <div class="form-text mb-4">eg. <b>account-name</b> for <b>https://bitbucket.org/<b>account-name</b>/</b></div>
 
     <label class="form-label">Repository name</label>
     <input type="text" bind:value={repo} class="form-control" required>
-    <div class="form-text mb-4">eg. <b>myrepo</b> for <i>https://bitbucket.org/account-name/<b>myrepo</b>/</i></div>
+    <div class="form-text mb-4">eg. <b>myrepo</b> for <b>https://bitbucket.org/account-name/<b>myrepo</b>/</b></div>
 
     <label class="form-label">Base branch</label>
     <input type="text" bind:value={defaultBranch} class="form-control" required>
     <div class="form-text mb-4">Default branch to pull from if no translations branch exists,
-      eg <b>main</b> for <i>https://bitbucket.org/account-name/myrepo/src/<b>main</b>/i18n/langs.json</i></div>
+      eg <b>main</b> for <b>https://bitbucket.org/account-name/myrepo/src/<b>main</b>/i18n/langs.json</b></div>
 
     <label class="form-label">Path within repository</label>
     <input type="text" bind:value={path} class="form-control" pattern="/.*/" required>
     <div class="form-text mb-4">Where the project is located within the root repository,
-      eg <b>/i18n/</b> for <i>https://bitbucket.org/account-name/myrepo/src/main<b>/i18n/</b>langs.json</i></div>
+      eg <b>/i18n/</b> for <b>https://bitbucket.org/account-name/myrepo/src/main<b>/i18n/</b>langs.json</b></div>
 
     <label class="form-label">Personal auth token</label>
     <input type="text" bind:value={token} class="form-control">

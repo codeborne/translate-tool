@@ -61,7 +61,7 @@
 
     <label class="form-label">Translation files URL</label>
     <input type="url" placeholder="Must end with /" bind:value={url} class="form-control" pattern=".*/" required>
-    <div class="form-text mb-4">Should contain <b><i>langs.json</i></b> and corresponding language files, e.g. <b><i>en.json</i></b></div>
+    <div class="form-text mb-4">Should contain <b>langs.json</b> and corresponding language files, e.g. <b>en.json</b></div>
   </div>
   <button class="btn btn-primary w-auto">Import</button>
   {#if warning}

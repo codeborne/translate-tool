@@ -64,11 +64,11 @@
 
     <label class="form-label">Repository owner</label>
     <input type="text" bind:value={username} class="form-control" required>
-    <div class="form-text mb-4">eg. <b>codeborne</b> for <i>https://github.com/<b>codeborne</b></i></div>
+    <div class="form-text mb-4">eg. <b>codeborne</b> for <b>https://github.com/codeborne</b></div>
 
     <label class="form-label">Repository name</label>
     <input type="text" bind:value={repo} class="form-control" required>
-    <div class="form-text mb-4">eg. <b>translate-tool</b> for <i>https://github.com/codeborne/<b>translate-tool</b></i></div>
+    <div class="form-text mb-4">eg. <b>translate-tool</b> for <b>https://github.com/codeborne/<b>translate-tool</b></b></div>
 
     <label class="form-label">Path within repository</label>
     <input type="text" bind:value={path} class="form-control" pattern="/.*/" required>

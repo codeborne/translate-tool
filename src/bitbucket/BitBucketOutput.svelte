@@ -2,13 +2,15 @@
 
   import type {Dict, Project} from '../common/Project'
   import {BitBucketClient} from './BitBucketClient'
-  import type {GoogleAuthUser} from '../common/GoogleAuthUser'
   import {createEventDispatcher} from 'svelte'
+  import type {GoogleProfile} from '../common/GoogleTypes'
 
   export let dict: Dict
   export let lang: string
   export let config: Project
-  export let user: GoogleAuthUser
+  export let user: GoogleProfile|undefined
+
+  let client
 
   const dispatch = createEventDispatcher()
 
@@ -45,8 +47,8 @@
 
   function checkIfUserExistsAndSetAuthor() {
     if (user) {
-      client.setAuthorEmail(user.getEmail())
-      client.setAuthorName(user.getName())
+      client.setAuthorEmail(user.email)
+      client.setAuthorName(user.name)
     }
   }
 </script>

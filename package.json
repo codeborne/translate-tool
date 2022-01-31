@@ -2,10 +2,14 @@
   "scripts": {
     "start": "snowpack dev",
     "proxy": "node proxy.js",
-    "build": "snowpack build",
+    "build": "snowpack build && npm run build:server",
+    "build:server": "tsc -m commonjs --target esnext --esModuleInterop true server/*.ts",
+    "run:server": "npm run build:server && node server/server",
     "test": "web-test-runner \"src/**/*.test.ts\""
   },
   "dependencies": {
+    "cookie-parser": "^1.4.6",
+    "dotenv": "^14.2.0",
     "express": "^4.17.2",
     "request": "^2.88.2"
   },
@@ -18,7 +22,9 @@
     "@testing-library/svelte": "^3.0.3",
     "@tsconfig/svelte": "^1.0.10",
     "@types/chai": "^4.2.17",
+    "@types/cookie-parser": "^1.4.2",
     "@types/mocha": "^8.2.3",
+    "@types/request": "^2.48.8",
     "@types/sinon": "^10.0.6",
     "@types/sinon-chai": "^3.2.5",
     "@types/snowpack-env": "^2.3.3",

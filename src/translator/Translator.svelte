@@ -24,9 +24,9 @@
   $: if (lang) resetTranslation()
 
   async function fetchTranslation() {
-    await translate(defaultDict[key], { from: defaultLang, to: lang })
-      .then(res=> {
-        translation = res as string ?? ''
+    await translate(defaultDict[key].replace(/\./g, '7592302389753425'), { from: defaultLang, to: lang })
+      .then((res: string) => {
+        translation = res.replace(/7592302389753425/g, '.') as string ?? ''
       })
       .catch(err => {
         console.error(err);

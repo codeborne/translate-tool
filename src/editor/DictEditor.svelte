@@ -9,17 +9,17 @@
   import GitHubOutput from '../github/GitHubOutput.svelte'
   import {GitHubClient} from '../github/GitHubClient'
   import ChangesCounter from './ChangesCounter.svelte'
-  import type {GoogleAuthUser} from '../common/GoogleAuthUser'
   import BranchLoadedFrom from './BranchLoadedFrom.svelte'
   import BitBucketOutput from '../bitbucket/BitBucketOutput.svelte'
   import {BitBucketClient} from '../bitbucket/BitBucketClient'
   import ProjectSourceButton from './ProjectSourceButton.svelte'
   import Icon from '../components/Icon.svelte'
+  import type GoogleProfile from '../common/GoogleAuth.svelte'
 
 
   export let project: LoadedProject
   export let lang: string
-  export let user: GoogleAuthUser
+  export let user: GoogleProfile
 
   let dict: Dict
   let uneditedDict: Dict

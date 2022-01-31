@@ -47,9 +47,9 @@
 
 {#if lang !== defaultLang}
   {#if isTranslated}
-    <button on:click={handleUndo} class="btn btn-icon text-primary p-2 me-n2" title="Undo translation"><Icon name="arrowBackUp"/></button>
+    <button on:click={handleUndo} class="btn btn-icon text-primary p-2 btn-icon-only" title="Undo translation"><Icon name="arrowBackUp"/></button>
   {:else}
-    <button on:click={handleTranslation} class="btn btn-icon text-primary p-2 me-n2" title="Translate"><Icon name="language"/></button>
+    <button on:click={handleTranslation} class="btn btn-icon text-primary p-2 btn-icon-only" title="Translate"><Icon name="language"/></button>
   {/if}
 {/if}
 

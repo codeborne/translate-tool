@@ -90,6 +90,14 @@ td {
   align-items: center;
   max-height: 38px;
 }
+.btn-icon-only {
+  min-width: 38px;
+}
+
+.btn-icon-only svg {
+  margin-left: 0 !important;
+  margin-right: 0 !important;
+}
 
  .btn-icon.btn-sm {
   max-height: 31px;

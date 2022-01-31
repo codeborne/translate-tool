@@ -260,7 +260,10 @@ td {
 .empty {
   background-color: var(--yellow-lightest);
 }
-
+.nav-logo {
+  height: 2rem;
+  width: auto;
+}
 .nav-link {
   position: relative;
   cursor: pointer;

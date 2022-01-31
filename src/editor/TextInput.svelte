@@ -82,6 +82,8 @@
   .form-control:focus, textarea:focus {
     box-shadow: none;
     overflow-y: scroll;
+    max-height: inherit !important;
+    transition: max-height 0.5s ease-in-out;
   }
 
   .preview .form-control {
@@ -100,7 +102,6 @@
   }
 
   .changed {
-    background-color: aliceblue;
-    border-color: lightblue;
+    background-color: var(--gray-lightest);
   }
 </style>

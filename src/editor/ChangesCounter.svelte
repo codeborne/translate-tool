@@ -1,6 +1,7 @@
 <script lang="ts">
   import {totalDifferentValues} from './languageStats'
   import type {Dict} from '../common/Project'
+  import Icon from '../components/Icon.svelte'
 
   export let dict: Dict
   export let uneditedDict: Dict
@@ -10,9 +11,9 @@
   $: if (dict) changes = totalDifferentValues(dict, uneditedDict)
 </script>
 
-<div class="num-changes card shadow h-100 flex-row justify-content-center bg-light align-items-center p-1 gap-2 text-secondary"
+<div class="num-changes card h-100 flex-row justify-content-center bg-light align-items-center p-1 px-2 text-secondary rounded-pill"
      class:invisible={!changes}>
-  <i class="fas fa-info-circle text-warning"></i>
+  <Icon name="info" class="me-1 text-warning"/>
   <span>{changes} {changes === 1 ? `change` : `changes`}</span>
 </div>
 

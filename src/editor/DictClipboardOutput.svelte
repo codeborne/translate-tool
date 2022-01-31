@@ -26,7 +26,7 @@
 </script>
 
 <div class="d-flex align-items-center justify-content-between mb-3">
-  <div class="d-flex gap-3">
+  <div class="d-flex gap-3 align-items-center">
     <button on:click={copy} class="btn btn-primary btn-icon w-auto"><Icon name="copy"/>Copy json to clipboard</button>
     <slot/>
     <slot name="counter"/>

@@ -28,13 +28,13 @@
           <DictKeyAdder {dict} {keyPrefix} {key}/>
         {/if}
       </td>
-      <td class="w-100">
-        <TextInput bind:dict {key} fullKey={fullKey(key)} {uneditedDict} {lang}/>
-      </td>
       <td>
         <DefaultLangValue {defaultDict} {key} fullKey={fullKey(key)}>
           <Translator {lang} {defaultLang} bind:dict {key} {defaultDict} {uneditedDict}/>
         </DefaultLangValue>
+      </td>
+      <td class="w-100">
+        <TextInput bind:dict {key} fullKey={fullKey(key)} {uneditedDict} {lang}/>
       </td>
     </tr>
   {/if}

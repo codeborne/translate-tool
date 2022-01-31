@@ -22,7 +22,7 @@
     <svelte:self keyPrefix={fullKey(key)} dict={dict[key] ??= {}} defaultDict={defaultValue} {defaultLang} uneditedDict={uneditedDict[key] ??= {}} {filter} {lang}/>
     {:else if filter.shouldShow(fullKey(key), getValue(key, uneditedDict))}
     <tr class:empty={!dict[key]}>
-      <td class="w-25">
+      <td>
         {fullKey(key)}
         {#if dict === defaultDict}
           <DictKeyAdder {dict} {keyPrefix} {key}/>
@@ -33,7 +33,7 @@
           <Translator {lang} {defaultLang} bind:dict {key} {defaultDict} {uneditedDict}/>
         </DefaultLangValue>
       </td>
-      <td class="w-100">
+      <td>
         <TextInput bind:dict {key} fullKey={fullKey(key)} {uneditedDict} {lang}/>
       </td>
     </tr>

@@ -81,8 +81,8 @@
   <table class="mt-1 w-100">
     <thead class="border-bottom">
       <tr>
-        <th>Key</th>
-        <th class="w-50">{lang} ({totalKeys(dict)})</th>
+        <th class="w-25">Key</th>
+        <th>{lang} ({totalKeys(dict)})</th>
         <th>{defaultLang} ({totalKeys(defaultDict)})</th>
       </tr>
     </thead>

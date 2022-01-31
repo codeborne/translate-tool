@@ -80,7 +80,6 @@
   }
 
   .form-control:focus, textarea:focus {
-    max-height: 12rem;
     box-shadow: none;
     overflow-y: scroll;
   }

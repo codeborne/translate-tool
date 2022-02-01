@@ -55,10 +55,9 @@
   }
 </script>
 
-<form id="addPrivate" class="card shadow px-3 py-lg-4 mb-3 d-flex flex-column justify-content-center align-items-center"
+<form id="addPrivate" class="d-flex flex-column card shadow w-lg-50 mx-lg-auto px-3 px-lg-4 pt-3 pb-4 mb-lg-4"
       on:submit|preventDefault={submit}>
-  <h3 class="card-title">Import a private dictionary from GitHub repository</h3>
-  <div class="card-body w-75">
+  <h3 class="card-title mb-2 mb-lg-4">Import a private dictionary from GitHub repository</h3>
     <label class="form-label">Project name</label>
     <input type="text" bind:value={title} class="form-control" required>
     <div class="form-text mb-4">You can change it at any time.</div>
@@ -82,9 +81,13 @@
     <label class="form-label">Translations branch</label>
     <input type="text" bind:value={branch} class="form-control" required>
     <div class="form-text mb-4">Where the tool will commit changes</div>
-  </div>
 
-  <button class="btn btn-primary btn-lg btn-icon w-auto px-lg-5"><Icon class="me-lg-2" name="fileImport"/>Import</button>
+  <div>
+    <button class="btn btn-primary btn-icon w-auto px-lg-4 justify-content-center">
+      <Icon class="me-lg-2" name="fileImport"/>
+      Import
+    </button>
+  </div>
   {#if warning}
     <div class="alert alert-warning mt-3">
       {warning}

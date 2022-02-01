@@ -67,6 +67,10 @@ td {
   td {
     padding: 1.5rem !important;
   }
+
+  .w-lg-50 {
+    width: 50%;
+  }
 }
 
 .bg-light {

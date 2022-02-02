@@ -301,7 +301,7 @@ td {
 
 .nav-link:after {
   position: absolute;
-  bottom: -1rem;
+  bottom: calc(-1rem - 1px);
   left:0;
   display: block;
   width: 100%;

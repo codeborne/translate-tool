@@ -101,7 +101,7 @@ td {
   display: flex;
   align-items: center;
   justify-content: center;
-  max-height: 38px;
+  min-height: 38px;
 }
 .btn-icon-only {
   min-width: 38px;
@@ -113,11 +113,11 @@ td {
 }
 
  .btn-icon.btn-sm {
-  max-height: 31px;
+  min-height: 31px;
 }
 
 .btn-icon.btn-lg {
-  max-height: 48px;
+  min-height: 48px;
 }
 
 .btn-icon svg {

@@ -9,7 +9,7 @@
 </script>
 
 <div class="accordion addNew fix-width mx-auto">
-
+  <h3 class="mb-3">New project</h3>
   <div class="accordion-item shadow mb-3 rounded-3 overflow-hidden">
     <h2 class="accordion-header">
       <button class="accordion-button p-lg-4 collapsed githubImport" type="button" data-bs-toggle="collapse"

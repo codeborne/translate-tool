@@ -68,6 +68,10 @@ td {
     padding: 1.5rem !important;
   }
 
+  th {
+    padding-bottom: 1rem !important;
+  }
+
   .fix-width {
     width: 600px;
   }

@@ -340,8 +340,9 @@ td {
   border:transparent;
 }
 
-.accordion-button{
+.accordion-button {
   line-height: 1;
+  font-weight: 500;
 }
 .accordion-button:hover {
   color: var(--primary);
@@ -350,6 +351,10 @@ td {
 .accordion-button:not(.collapsed) {
   background: inherit;
   color: inherit;
+}
+.accordion-button:not(.collapsed):hover {
+  color: var(--primary);
+  background: var(--primary-lightest);
 }
 
 .rounded-3 {

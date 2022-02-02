@@ -25,8 +25,8 @@
   }
 </script>
 
-<div class="d-flex align-items-center justify-content-between mb-3">
-  <div class="d-flex gap-3 align-items-center">
+<div class="d-flex align-items-center justify-content-between mb-3 mb-lg-4">
+  <div class="d-flex gap-3 gap-lg-4 align-items-center">
     <button on:click={copy} class="btn btn-primary btn-icon w-auto"><Icon name="copy"/>Copy json to clipboard</button>
     <slot/>
     <slot name="counter"/>
@@ -35,5 +35,5 @@
 </div>
 
 <textarea id="rawOutput" {lang} bind:this={textarea}
-          class="form-control mb-3 bg-light"
+          class="form-control bg-light"
           rows="20">{LoadedProject.prettyFormat(output, indent)}</textarea>

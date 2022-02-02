@@ -11,7 +11,9 @@
   $: if (dict) changes = totalDifferentValues(dict, uneditedDict)
 </script>
 
-<div class="num-changes card h-100 flex-row justify-content-center bg-light align-items-center p-1 px-2 text-secondary rounded-pill order-md-3 me-md-4">
+<div class="num-changes card h-100 flex-row justify-content-center bg-light align-items-center p-1 px-2 text-secondary rounded-pill order-md-3 me-md-4
+{!changes ? `d-md-none` : ``}">
+
   {#if !changes}
     No changes
   {:else}

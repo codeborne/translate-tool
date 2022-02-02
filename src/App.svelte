@@ -101,7 +101,7 @@
   {/if}
 </Navbar>
 
-<main class="container mb-3 mb-lg-4 px-lg-5">
+<main class="container mw-100 p-3 pt-lg-5 px-lg-5 pb-lg-5">
   {#if !loadedProjects && !selectedProject}
     <LoadingSpinner class="my-5"/>
   {:else if showAddProject}

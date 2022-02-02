@@ -265,9 +265,6 @@ td {
   border: none;
 }
 
-.container {
-  max-width: 100%;
-}
 
 .empty {
   background-color: var(--yellow-lightest);

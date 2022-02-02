@@ -68,8 +68,8 @@ td {
     padding: 1.5rem !important;
   }
 
-  .w-lg-50 {
-    width: 50%;
+  .fix-width {
+    width: 600px;
   }
 }
 
@@ -92,6 +92,7 @@ td {
 .btn-icon {
   display: flex;
   align-items: center;
+  justify-content: center;
   max-height: 38px;
 }
 .btn-icon-only {

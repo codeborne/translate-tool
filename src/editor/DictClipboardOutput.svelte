@@ -25,13 +25,13 @@
   }
 </script>
 
-<div class="d-flex flex-column flex-md-row align-items-md-center w-100 mb-3 mb-lg-4 gap-3">
+<div class="d-flex flex-column flex-md-row align-items-md-center w-100 mb-3 mb-lg-4 gap-3 gap-md-0">
   <a class="btn btn-sm btn-icon btn-secondary order-md-last ms-md-auto" href="#top">
     <Icon name="arrowTop"/>
     Jump to top
   </a>
   <slot name="counter"/>
-  <button on:click={copy} class="btn btn-primary btn-icon w-auto order-md-0 me-md-4">
+  <button on:click={copy} class="btn btn-primary btn-icon w-auto order-md-0 me-md-3 me-lg-4">
     <Icon name="copy"/>
     Copy json to clipboard
   </button>

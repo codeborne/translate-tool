@@ -283,6 +283,8 @@ td {
   width: auto;
 }
 .nav-link {
+  font-size: 0.85rem;
+  font-weight: 500;
   position: relative;
   cursor: pointer;
 }

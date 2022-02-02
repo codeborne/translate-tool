@@ -8,7 +8,7 @@
 
 </script>
 
-<div class="accordion addNew mt-3 mt-lg-4">
+<div class="accordion addNew fix-width mx-auto">
 
   <div class="accordion-item shadow mb-3 rounded-3 overflow-hidden">
     <h2 class="accordion-header">

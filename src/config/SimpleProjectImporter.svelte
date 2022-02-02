@@ -53,9 +53,8 @@
   }
 </script>
 
-<form class="d-flex flex-column card shadow w-lg-50 mx-lg-auto px-3 px-lg-4 pt-3 pb-4 mb-lg-4" on:submit|preventDefault={submit}>
-  <div class="mb-3">
-    <h3 class="mb-4">Import a public dictionary</h3>
+<form class="d-flex flex-column" on:submit|preventDefault={submit}>
+    <h5 class="card-title mb-3 mb-lg-4">Import a public dictionary</h5>
     <label class="form-label">Project name</label>
     <input type="text" bind:value={title} class="form-control" required autofocus>
     <div class="form-text mb-4">You can change it at any time</div>
@@ -63,7 +62,6 @@
     <label class="form-label">Translation files URL</label>
     <input type="url" placeholder="Must end with /" bind:value={url} class="form-control" pattern=".*/" required>
     <div class="form-text mb-4">Should contain <b>langs.json</b> and corresponding language files, e.g. <b>en.json</b></div>
-  </div>
   <div>
     <button class="btn btn-primary btn-icon w-auto px-lg-4 justify-content-center">
       <Icon class="me-lg-2" name="fileImport"/>

@@ -25,13 +25,12 @@
   }
 </script>
 
-<div class="d-flex align-items-center justify-content-between mb-3 mb-lg-4">
-  <div class="d-flex gap-3 gap-lg-4 align-items-center">
+<div class="d-flex flex-column w-100 mb-3 mb-lg-4 gap-3 gap-lg-4">
+  <a class="btn btn-sm btn-icon btn-secondary" href="#top"><Icon name="arrowTop"/> Jump to top</a>
+  <hr class="my-1">
+  <slot name="counter"/>
     <button on:click={copy} class="btn btn-primary btn-icon w-auto"><Icon name="copy"/>Copy json to clipboard</button>
     <slot/>
-    <slot name="counter"/>
-  </div>
-  <a class="btn btn-sm btn-icon btn-secondary" href="#top"><Icon name="arrowTop"/> Jump to top</a>
 </div>
 
 <textarea id="rawOutput" {lang} bind:this={textarea}

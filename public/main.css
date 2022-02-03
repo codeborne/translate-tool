@@ -66,6 +66,7 @@ td {
    opacity: 0.1 !important;
  }
 
+
 @media (min-width: 992px) {
   th,
   td {
@@ -374,4 +375,18 @@ td {
 
 .rounded-4 {
   border-radius: 1rem;
+}
+
+@media (max-width: 991px) {
+  .navbar-nav {
+    margin-top: 1rem;
+  }
+  .nav-link {
+    font-size: 1rem;
+    padding-left: 1rem !important;
+  }
+  .nav-link.active {
+    border-radius: 0.5rem;
+    background: var(--primary-lightest);
+  }
 }

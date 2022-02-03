@@ -8,6 +8,7 @@
   import LangSwitcher from './layout/LangSwitcher.svelte'
   import ProjectSwitcher from './layout/ProjectSwitcher.svelte'
   import ToggleConfigButton from './config/TogglePagesButton.svelte'
+  import ToggleBackButton from './config/ToggleBackButton.svelte'
   import DictEditor from './editor/DictEditor.svelte'
   import ProjectAddButton from './layout/ProjectAddButton.svelte'
   import ProjectImportList from './config/ProjectImportList.svelte'
@@ -83,6 +84,7 @@
     console.error(e.reason)
     alert('Error, please reload the page:\n\n' + e.reason?.message ?? '')
   }
+  export let showBack = true
 </script>
 
 <svelte:window on:unhandledrejection={showUnhandledError}/>
@@ -105,8 +107,14 @@
   {#if !loadedProjects && !selectedProject}
     <LoadingSpinner class="my-5"/>
   {:else if showAddProject}
+    <div class="fix-width mx-auto">
+      <ToggleBackButton bind:showAddProject bind:showConfig showBack={loadedProjects.length > 0}/>
+    </div>
     <ProjectImportList bind:projects on:changed={loadAllProjects}/>
   {:else if showConfig}
+    <div class="fix-width mx-auto">
+      <ToggleBackButton bind:showAddProject bind:showConfig showBack={loadedProjects.length > 0}/>
+    </div>
     <ProjectSettings bind:selectedProject={selectedProject.config} bind:projects on:changed={loadAllProjects}/>
   {:else if lang}
     <DictEditor project={selectedProject} {lang} {user}/>

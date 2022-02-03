@@ -43,7 +43,7 @@
         Via Public URL
       </button>
     </h2>
-    <div class="accordion-collapse collapse show m-3 m-lg-4 collapsePublic" aria-labelledby="headingThree"
+    <div class="accordion-collapse collapse m-3 m-lg-4 collapsePublic" aria-labelledby="headingThree"
          data-bs-parent=".addNew">
       <SimpleProjectImporter bind:projects on:changed/>
     </div>

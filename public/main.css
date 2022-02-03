@@ -378,6 +378,13 @@ td {
 }
 
 @media (max-width: 991px) {
+  .nav-responsive {
+    margin-top: 1rem;
+    flex-direction: column;
+    gap: 1.5rem;
+    justify-content: space-between;
+  }
+
   .navbar-nav {
     margin-top: 1rem;
   }

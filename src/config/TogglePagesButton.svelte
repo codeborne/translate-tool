@@ -6,7 +6,6 @@
   export let showBack = true
 </script>
 
-<div>
   {#if !showConfig && !showAddProject}
     <button id="backToImporterBtn" type="button" class="btn btn-icon btn-secondary" on:click={() => showConfig = true}>
       <Icon name="gear"/>Project Settings
@@ -17,4 +16,3 @@
   <!--    <Icon name="arrowLeft"/>Back to Editor-->
   <!--  </button>-->
   <!--{/if}-->
-</div>

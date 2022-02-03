@@ -7,11 +7,9 @@
 </script>
 
 <div>
-  {#if (showConfig || showAddProject) && showBack}
     <button id="backToEditorBtn" type="button" class="btn-circle mb-3 mt-n1" on:click={() => showConfig = showAddProject = false}>
       <Icon name="arrowLeft"/>
     </button>
-  {/if}
 </div>
 
 <style>

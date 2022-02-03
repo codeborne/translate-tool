@@ -293,27 +293,28 @@ td {
   cursor: default;
   color: var(--text-color) !important;
 }
+@media (min-width: 992px) {
+  .nav-link.active:after,
+  .nav-link.active:hover:after {
+    opacity: 1;
+  }
 
-.nav-link.active:after,
-.nav-link.active:hover:after{
-  opacity: 1;
-}
+  .nav-link:after {
+    position: absolute;
+    bottom: calc(-1rem - 1px);
+    left: 0;
+    display: block;
+    width: 100%;
+    height: 3px;
+    background: var(--primary);
+    opacity: 0;
+    content: '';
+  }
 
-.nav-link:after {
-  position: absolute;
-  bottom: calc(-1rem - 1px);
-  left:0;
-  display: block;
-  width: 100%;
-  height: 3px;
-  background: var(--primary);
-  opacity: 0;
-  content: '';
-}
-
-.nav-link:hover:after {
-  opacity: 0.5;
-  transition: opacity 0.25s ease-in;
+  .nav-link:hover:after {
+    opacity: 0.5;
+    transition: opacity 0.25s ease-in;
+  }
 }
 
 .nav-responsive {

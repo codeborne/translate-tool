@@ -379,7 +379,6 @@ td {
 
 @media (max-width: 991px) {
   .nav-responsive {
-    margin-top: 1rem;
     flex-direction: column;
     gap: 1rem;
     justify-content: space-between;

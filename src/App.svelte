@@ -96,7 +96,7 @@
       {#if !showConfig && !showAddProject}
         <LangSwitcher project={selectedProject} bind:lang/>
       {/if}
-      <ProjectAddButton bind:showAddProject/>
+      <ProjectAddButton bind:showAddProject bind:showConfig/>
       <ToggleConfigButton bind:showAddProject bind:showConfig showBack={loadedProjects.length > 0}/>
       <GoogleAuth bind:user/>
     </div>
@@ -104,17 +104,20 @@
 </Navbar>
 
 <main class="container mw-100 p-3 pt-lg-4 px-lg-5 pb-lg-5">
+
+  {#if showAddProject || showConfig}
+    <div class="fix-width mx-auto">
+      <ToggleBackButton bind:showAddProject bind:showConfig showBack={loadedProjects.length > 0}/>
+    </div>
+  {/if}
+
   {#if !loadedProjects && !selectedProject}
     <LoadingSpinner class="my-5"/>
   {:else if showAddProject}
-    <div class="fix-width mx-auto">
-      <ToggleBackButton bind:showAddProject bind:showConfig showBack={loadedProjects.length > 0}/>
-    </div>
+
     <ProjectImportList bind:projects on:changed={loadAllProjects}/>
   {:else if showConfig}
-    <div class="fix-width mx-auto">
-      <ToggleBackButton bind:showAddProject bind:showConfig showBack={loadedProjects.length > 0}/>
-    </div>
+
     <ProjectSettings bind:selectedProject={selectedProject.config} bind:projects on:changed={loadAllProjects}/>
   {:else if lang}
     <DictEditor project={selectedProject} {lang} {user}/>

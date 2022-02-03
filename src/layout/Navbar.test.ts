@@ -5,6 +5,6 @@ import Navbar from './Navbar.svelte'
 describe('Navbar', () => {
   it('renders title', async () => {
     const {container} = render(Navbar)
-    expect(container.querySelector('.navbar-brand')!.textContent).to.contain('Translation Tool')
+    expect(container.querySelector('.navbar-brand')!.textContent).to.contain('Translate Tool')
   })
 })

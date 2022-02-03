@@ -13,7 +13,7 @@
     return await jsonLoader.loadJson('user').catch(() => console.warn('No user profile found.')) as GoogleProfile
   }
 
-  async function handleLogout() {
+  function handleLogout() {
     window.location.replace(`${window.location.protocol}//${window.location.hostname}:${window.location.port}/logout`)
   }
 </script>

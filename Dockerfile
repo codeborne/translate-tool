@@ -1,6 +1,7 @@
 FROM node:16-alpine as build
 RUN apk add --no-cache chromium
-ENV TEST_CHROME_ARGS='--no-sandbox'
+ENV DUMP_CHROME_OUT=true
+ENV TEST_CHROME_ARGS='--no-sandbox --disable-dev-shm-usage --disable-gpu --disable-gpu-compositing --disable-gpu-rasterization'
 
 WORKDIR /app
 
@@ -22,8 +23,8 @@ COPY --from=build /app/build build
 COPY *.json ./
 RUN npm ci --production
 
-COPY --from=build server/* ./
+COPY --from=build /app/server ./server/
 
 EXPOSE 8999
 
-CMD node server.js
+CMD node server/server.js

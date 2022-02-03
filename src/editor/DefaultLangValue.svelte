@@ -9,9 +9,9 @@
 
 <div class="d-flex justify-content-between">
 {#if !showHTML}
-  <div contenteditable="false" bind:innerHTML={defaultDict[key]} class="overflow-auto align-self-center defaultLangText"></div>
+  <div contenteditable="false" bind:innerHTML={defaultDict[key]} class="overflow-auto align-middle defaultLangText"></div>
 {:else}
-  <div class="overflow-auto align-self-center defaultLangText">{defaultDict[key]}</div>
+  <div class="overflow-auto align-middle defaultLangText">{defaultDict[key]}</div>
 {/if}
 
 <div class="d-flex flex-column ms-1 justify-content-start">

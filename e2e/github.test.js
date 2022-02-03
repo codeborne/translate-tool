@@ -8,7 +8,7 @@ async function handlePrompt(dialog) {
 
 test('can commit to github', async ({page}) => {
   await page.goto(`${url}/?shared=${projectGithub}`)
-  await expect(page.locator('#top h3')).toContainText('Translation Tool')
+  await expect(page.locator('#top h3')).toContainText('Translate Tool')
   await expect(page.locator('nav .nav-link:first-of-type')).toContainText('TestProject')
   await expect(page.locator('text=Save to translations branch')).toBeVisible()
   await page.once('dialog', dialog => dialog.accept(`Commit from E2E tests on ${new Date().toLocaleString()}`))

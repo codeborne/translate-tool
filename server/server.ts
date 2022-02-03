@@ -32,20 +32,23 @@ interface GoogleProfile {
   locale: string
 }
 
+interface UserInfoResponse {
+  name: string,
+  email: string
+}
+
 app.get('/auth', async function (req: Request, res: Response) {
   const token: string = await fetchToken(googleAuth, req.query.code as string, redirectUrl(req))
   const profile: GoogleProfile = await fetchProfile(googleAuth, token)
   if (isEmailVerified(profile.email) || isDomainVerified(profile.email)) {
-    res.cookie('AUTH', token, {signed: true, httpOnly: true})
+    res.cookie('AUTH', {token, name: profile.name, email: profile.email}, {signed: true, httpOnly: true})
     res.redirect('/')
-  } else {
-    res.sendStatus(403)
-  }
+  } else res.sendStatus(403)
 })
 
 app.get('/user', async function (req, res) {
-  if (!req.signedCookies['AUTH']) return res.sendStatus(400)
-  const user: GoogleProfile = await fetchProfile(googleAuth, req.signedCookies['AUTH'])
+  if (!req.signedCookies['AUTH'] || !googleAuth.clientId || !googleAuth.clientSecret) return res.sendStatus(404)
+  const user: UserInfoResponse = {name: req.signedCookies['AUTH'].name, email: req.signedCookies['AUTH'].email}
   res.json(user)
 })
 
@@ -101,6 +104,7 @@ function fetchProfile(provider: typeof googleAuth, token: string): Promise<Googl
     })
   })
 }
+
 
 app.use(express.static('build'))
 

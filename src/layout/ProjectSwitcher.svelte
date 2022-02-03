@@ -19,7 +19,3 @@
     </a>
   {/each}
 </ul>
-
-<style>
-
-</style>

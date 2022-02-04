@@ -7,16 +7,20 @@
 </script>
 
 <div>
-    <button id="backToEditorBtn" type="button" class="btn-circle mb-3 mt-n1" on:click={() => showConfig = showAddProject = false}>
+    <button id="backToEditorBtn" type="button" class="btn-circle mb-3 mt-md-n1" on:click={() => showConfig = showAddProject = false}>
       <Icon name="arrowLeft"/>
     </button>
 </div>
 
 <style>
 
-  .mt-n1 {
-    margin-top: -0.5rem;
+  @media (min-width: 992px) {
+
+    .mt-md-n1 {
+      margin-top: -0.5rem;
+    }
   }
+
   .btn-circle {
     color: var(--primary);
     padding: 0.7rem;

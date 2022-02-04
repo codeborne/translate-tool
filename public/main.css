@@ -6,6 +6,7 @@
   --primary-accent: #196EFF;
   --primary-lightest: #F0F4FF;
   --gray-lightest: #F8FAFB;
+  --gray:#C6C7CC;
   --yellow-lightest: #FFFBF0;
   --red: #F05C3E;
   --red-accent: #FF4019;
@@ -395,4 +396,93 @@ td {
     border-radius: 0.5rem;
     background: var(--primary-lightest);
   }
+}
+
+.navbar-toggler {
+  padding: 8px 14px;
+  box-shadow:
+    0 1px 4px rgba(88, 108, 162, 0.08);
+}
+
+.navbar-toggler.collapsed {
+  box-shadow:
+    2px 2px rgb(0 0 0 / 1%),
+    0 4px 4px rgb(0 0 0 / 2%),
+    0 4px 16px rgb(0 0 0 / 8%);
+}
+
+
+
+.navbar-toggler:focus {
+  box-shadow:
+    0 1px 4px rgba(88, 108, 162, 0.08);
+}
+
+.animated-icon {
+  width: 24px;
+  height: 24px;
+  position: relative;
+  margin: 0;
+  transform: rotate(0deg);
+  transition: .5s ease-in-out;
+  cursor: pointer;
+}
+
+.animated-icon span {
+  display: block;
+  position: absolute;
+  height: 2px;
+  width: 100%;
+  border-radius: 9px;
+  opacity: 1;
+  left: 0;
+  background: var(--gray);
+  transition: .25s ease-in-out;
+  transform: rotate(0deg);
+}
+
+.collapsed > .animated-icon > span {
+  background: var(--primary);
+}
+
+.navbar-toggler > .animated-icon > span:nth-child(1) {
+  top: 11px;
+  left: 50%;
+  width: 0;
+}
+
+.collapsed > .animated-icon > span:nth-child(1) {
+  top: 4px;
+  left: 0;
+  width: 100%;
+}
+
+.animated-icon span:nth-child(2),
+.animated-icon span:nth-child(3) {
+  top: 11px;
+}
+
+.navbar-toggler > .animated-icon > span:nth-child(2) {
+  transform: rotate(45deg);
+}
+
+.navbar-toggler > .animated-icon > span:nth-child(3) {
+    transform: rotate(-45deg);
+}
+
+.collapsed > .animated-icon > span:nth-child(2),
+.collapsed > .animated-icon > span:nth-child(3) {
+  transform: rotate(0deg);
+}
+
+.navbar-toggler > .animated-icon > span:nth-child(4) {
+  top: 11px;
+  left: 50%;
+  width: 0;
+}
+
+.collapsed > .animated-icon > span:nth-child(4) {
+  top: 18px;
+  left: 0;
+  width: 100%;
 }

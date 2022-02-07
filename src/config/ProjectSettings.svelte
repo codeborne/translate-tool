@@ -10,7 +10,7 @@
   let title: string
   let indent: number
   let url: string
-  let token: string
+  let token: string|undefined
   let branch: string
 
   const dispatch = createEventDispatcher()
@@ -87,9 +87,9 @@
 
       {/if}
     <div class="d-grid d-md-flex flex-column flex-md-row justify-content-md-between gap-4 mt-md-3">
-      <button on:click={deleteProject} type="button" class="btn btn-danger btn-icon order-3 order-md-1"><Icon class="me-2" name="trashBin"/>Delete project</button>
-      <button on:click={shareProject} type="button" class="btn btn-secondary btn-icon order-1"><Icon class="me-2" name="share"/>Share</button>
-      <button on:click={editProject} type="button" class="btn btn-primary btn-icon order-2 mt-3 mt-md-0"><Icon class="me-2" name="floppyDisk"/>Save changes</button>
+      <button on:click={deleteProject} type="button" class="btn btn-danger btn-icon order-3 order-md-1 deleteBtn"><Icon class="me-2" name="trashBin"/>Delete project</button>
+      <button on:click={shareProject} type="button" class="btn btn-secondary btn-icon order-1 shareBtn"><Icon class="me-2" name="share"/>Share</button>
+      <button on:click={editProject} type="button" class="btn btn-primary btn-icon order-2 mt-3 mt-md-0 editBtn"><Icon class="me-2" name="floppyDisk"/>Save changes</button>
     </div>
   </div>
 </div>

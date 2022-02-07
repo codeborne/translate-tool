@@ -7,7 +7,7 @@
   import jsonLoader from './common/JsonLoader'
   import LangSwitcher from './layout/LangSwitcher.svelte'
   import ProjectSwitcher from './layout/ProjectSwitcher.svelte'
-  import ToggleConfigButton from './config/TogglePagesButton.svelte'
+  import ProjectSettingsButton from './layout/ProjectSettingsButton.svelte'
   import ToggleBackButton from './config/ToggleBackButton.svelte'
   import DictEditor from './editor/DictEditor.svelte'
   import ProjectAddButton from './layout/ProjectAddButton.svelte'
@@ -84,7 +84,6 @@
     console.error(e.reason)
     alert('Error, please reload the page:\n\n' + e.reason?.message ?? '')
   }
-  export let showBack = true
 </script>
 
 <svelte:window on:unhandledrejection={showUnhandledError}/>
@@ -96,8 +95,8 @@
       {#if !showConfig && !showAddProject}
         <LangSwitcher project={selectedProject} bind:lang/>
       {/if}
-      <ProjectAddButton bind:showAddProject bind:showConfig/>
-      <ToggleConfigButton bind:showAddProject bind:showConfig showBack={loadedProjects.length > 0}/>
+      <ProjectAddButton bind:showAddProject/>
+      <ProjectSettingsButton bind:showAddProject bind:showConfig showBack={loadedProjects.length > 0}/>
       <GoogleAuth bind:user/>
     </div>
   {/if}

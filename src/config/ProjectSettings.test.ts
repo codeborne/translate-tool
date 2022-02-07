@@ -24,7 +24,7 @@ describe('ProjectSettings', () => {
 
   it('gives prompt when clicking share button', async () => {
     const {container} = render(ProjectSettings, {projects, selectedProject})
-    const shareBtn = container.querySelector('.btn-light') as HTMLButtonElement
+    const shareBtn = container.querySelector('.shareBtn') as HTMLButtonElement
     expect(shareBtn).to.exist
     let prompt = stub(window, 'prompt')
     await fireEvent.click(shareBtn)
@@ -38,7 +38,7 @@ describe('ProjectSettings', () => {
       {title: 'three', indent: 2, url: 'threeUrl', token: 'threeToken', branch: 'translations'}
     ]
     const {container} = render(ProjectSettings, {projects, selectedProject})
-    const editBtn = container.querySelector('.btn-primary') as HTMLButtonElement
+    const editBtn = container.querySelector('.editBtn') as HTMLButtonElement
     expect(editBtn).to.exist
     localStorage.clear()
     await fireEvent.click(editBtn)
@@ -48,7 +48,7 @@ describe('ProjectSettings', () => {
 
   it('prompts user to confirm before deleting', async () => {
     const {container} = render(ProjectSettings, {projects, selectedProject})
-    const deleteBtn = container.querySelector('.btn-danger') as HTMLButtonElement
+    const deleteBtn = container.querySelector('.deleteBtn') as HTMLButtonElement
     expect(deleteBtn).to.exist
     let confirm = stub(window, 'confirm')
     await fireEvent.click(deleteBtn)

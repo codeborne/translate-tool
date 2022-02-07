@@ -3,11 +3,10 @@
 
   export let showConfig: boolean
   export let showAddProject: boolean
-  export let showBack = true
 </script>
 
 <div>
-    <button id="backToEditorBtn" type="button" class="btn-circle mb-3 mt-md-n1" on:click={() => showConfig = showAddProject = false}>
+    <button type="button" class="btn-circle mb-3 mt-md-n1 backBtn" on:click={() => showConfig = showAddProject = false}>
       <Icon name="arrowLeft"/>
     </button>
 </div>

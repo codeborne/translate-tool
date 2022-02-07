@@ -26,7 +26,7 @@ pipeline {
     }
     stage('Deploy') {
       steps {
-        sh 'docker-compose -p $REPO_NAME up -d --remove-orphans'
+        sh 'docker-compose -f docker-compose.yml -p $REPO_NAME up -d --remove-orphans'
       }
     }
   }

@@ -102,7 +102,7 @@
   {/if}
 </Navbar>
 
-<main class="container mw-100 p-3 pt-lg-4 px-lg-5 pb-lg-5">
+<main class="container mw-100 p-3">
 
   {#if showAddProject || showConfig}
     <div class="fix-width mx-auto">

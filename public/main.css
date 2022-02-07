@@ -60,7 +60,7 @@ th {
 
 th,
 td {
-  padding: 0.75rem 1rem !important;
+  padding: 0.3rem 0.3rem !important;
 }
  hr {
    background-color: var(--text-color) !important;
@@ -69,15 +69,6 @@ td {
 
 
 @media (min-width: 992px) {
-  th,
-  td {
-    padding: 1.5rem !important;
-  }
-
-  th {
-    padding-bottom: 1rem !important;
-  }
-
   .fix-width {
     width: 600px;
   }

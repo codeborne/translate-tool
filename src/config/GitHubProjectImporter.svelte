@@ -3,6 +3,7 @@
   import type {LoadedProject, Project} from '../common/Project'
   import {createEventDispatcher} from 'svelte'
   import {GitHubClient} from '../github/GitHubClient'
+  import Icon from '../components/Icon.svelte'
 
   export let token: string = ''
   export let projects: Project[]
@@ -54,21 +55,20 @@
   }
 </script>
 
-<form id="addPrivate" class="card p-3 mb-3 d-flex flex-column justify-content-center align-items-center"
+<form id="addPrivate" class="d-flex flex-column"
       on:submit|preventDefault={submit}>
-  <h5 class="card-title">Import a private dictionary from GitHub repository</h5>
-  <div class="card-body w-75">
+  <h5 class="card-title mb-3 mb-lg-4">Import a private dictionary from GitHub repository</h5>
     <label class="form-label">Project name</label>
     <input type="text" bind:value={title} class="form-control" required>
-    <div class="form-text mb-4"><i>You can change it at any time.</i></div>
+    <div class="form-text mb-4">You can change it at any time.</div>
 
     <label class="form-label">Repository owner</label>
     <input type="text" bind:value={username} class="form-control" required>
-    <div class="form-text mb-4">eg. <b>codeborne</b> for <i>https://github.com/<b>codeborne</b></i></div>
+    <div class="form-text mb-4">eg. <b>codeborne</b> for <b>https://github.com/codeborne</b></div>
 
     <label class="form-label">Repository name</label>
     <input type="text" bind:value={repo} class="form-control" required>
-    <div class="form-text mb-4">eg. <b>translate-tool</b> for <i>https://github.com/codeborne/<b>translate-tool</b></i></div>
+    <div class="form-text mb-4">eg. <b>translate-tool</b> for <b>https://github.com/codeborne/<b>translate-tool</b></b></div>
 
     <label class="form-label">Path within repository</label>
     <input type="text" bind:value={path} class="form-control" pattern="/.*/" required>
@@ -81,9 +81,13 @@
     <label class="form-label">Translations branch</label>
     <input type="text" bind:value={branch} class="form-control" required>
     <div class="form-text mb-4">Where the tool will commit changes</div>
-  </div>
 
-  <button class="btn btn-primary w-auto">Import</button>
+  <div>
+    <button class="btn btn-primary btn-icon w-auto px-lg-4 justify-content-center">
+      <Icon class="me-lg-2" name="fileImport"/>
+      Import
+    </button>
+  </div>
   {#if warning}
     <div class="alert alert-warning mt-3">
       {warning}

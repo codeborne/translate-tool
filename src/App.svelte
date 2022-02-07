@@ -8,6 +8,7 @@
   import LangSwitcher from './layout/LangSwitcher.svelte'
   import ProjectSwitcher from './layout/ProjectSwitcher.svelte'
   import ToggleConfigButton from './config/TogglePagesButton.svelte'
+  import ToggleBackButton from './config/ToggleBackButton.svelte'
   import DictEditor from './editor/DictEditor.svelte'
   import ProjectAddButton from './layout/ProjectAddButton.svelte'
   import ProjectImportList from './config/ProjectImportList.svelte'
@@ -83,6 +84,7 @@
     console.error(e.reason)
     alert('Error, please reload the page:\n\n' + e.reason?.message ?? '')
   }
+  export let showBack = true
 </script>
 
 <svelte:window on:unhandledrejection={showUnhandledError}/>
@@ -94,41 +96,30 @@
       {#if !showConfig && !showAddProject}
         <LangSwitcher project={selectedProject} bind:lang/>
       {/if}
-      <ProjectAddButton bind:showAddProject/>
+      <ProjectAddButton bind:showAddProject bind:showConfig/>
       <ToggleConfigButton bind:showAddProject bind:showConfig showBack={loadedProjects.length > 0}/>
       <GoogleAuth bind:user/>
     </div>
   {/if}
 </Navbar>
 
-<main class="my-3 container">
+<main class="container mw-100 p-3 pt-lg-4 px-lg-5 pb-lg-5">
+
+  {#if showAddProject || showConfig}
+    <div class="fix-width mx-auto">
+      <ToggleBackButton bind:showAddProject bind:showConfig showBack={loadedProjects.length > 0}/>
+    </div>
+  {/if}
+
   {#if !loadedProjects && !selectedProject}
     <LoadingSpinner class="my-5"/>
   {:else if showAddProject}
+
     <ProjectImportList bind:projects on:changed={loadAllProjects}/>
   {:else if showConfig}
+
     <ProjectSettings bind:selectedProject={selectedProject.config} bind:projects on:changed={loadAllProjects}/>
   {:else if lang}
     <DictEditor project={selectedProject} {lang} {user}/>
   {/if}
 </main>
-
-<style>
-  :global(a) {
-    cursor: pointer;
-  }
-
-  :global(h1, h2, h3, h4, h5, h6) {
-    color: #404142;
-  }
-
-  .nav-responsive {
-    display: flex;
-    gap: 1rem;
-    justify-content: space-between;
-  }
-
-  .container {
-    max-width: 99%;
-  }
-</style>

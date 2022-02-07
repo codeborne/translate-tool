@@ -13,6 +13,7 @@
   import BitBucketOutput from '../bitbucket/BitBucketOutput.svelte'
   import {BitBucketClient} from '../bitbucket/BitBucketClient'
   import ProjectSourceButton from './ProjectSourceButton.svelte'
+  import Icon from '../components/Icon.svelte'
   import type GoogleProfile from '../common/GoogleAuth.svelte'
 
 
@@ -67,22 +68,21 @@
   let filter = new Filter()
 </script>
 
-
-<div class="mt-3 card p-3 d-flex flex-column align-items-center">
-  <div class="d-flex flex-row justify-content-between w-100">
+<div class="card shadow d-flex flex-column align-items-center overflow-hidden">
+  <div class="d-flex flex-row w-100 justify-content-between px-3 px-lg-4 pt-3 pt-lg-4">
     <FilterControls bind:filter>
       <BranchLoadedFrom config={project.config} bind:defaultBranch/>
     </FilterControls>
-    <div class="dl-flex justify-content-center align-items-center">
-      <a class="btn btn-primary" href="#output"><i class="fas fa-arrow-down"></i> Jump to bottom</a>
+    <div class="d-flex justify-content-center align-items-center">
+      <a class="btn btn-secondary btn-icon btn-sm" href="#output"><Icon name="arrowDown"/> Jump to bottom</a>
     </div>
   </div>
 
-  <table class="mt-3 w-100">
+  <table class="mt-1 w-100">
     <thead class="border-bottom">
       <tr>
-        <th>Key</th>
-        <th class="w-50">{lang} ({totalKeys(dict)})</th>
+        <th class="w-25">Key</th>
+        <th>{lang} ({totalKeys(dict)})</th>
         <th>{defaultLang} ({totalKeys(defaultDict)})</th>
       </tr>
     </thead>
@@ -92,7 +92,7 @@
   </table>
 </div>
 
-<div id="output" class="mt-3 card p-3">
+<div id="output" class="mt-3 card shadow p-3 p-lg-4">
   <DictClipboardOutput {dict} {lang} indent={project.config.indent} on:copied={onCopied}>
     {#if project.config.url.includes(GitHubClient.host) && project.config.token}
       <GitHubOutput {user} {dict} {lang} config={project.config} on:saved={onSaved}/>
@@ -103,25 +103,3 @@
     <ChangesCounter slot="counter" {dict} {uneditedDict}/>
   </DictClipboardOutput>
 </div>
-
-<style>
-  th {
-    padding-bottom: 0.5em;
-  }
-
-  tbody :global(td) {
-    padding: 0.2em 0;
-  }
-
-  table {
-    table-layout: fixed
-  }
-
-  th:last-of-type, tbody :global(td:last-of-type) {
-    padding-left: 0.75em;
-  }
-
-  tbody :global(tr:hover) {
-    background: #eee;
-  }
-</style>

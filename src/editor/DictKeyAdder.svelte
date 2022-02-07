@@ -1,6 +1,7 @@
 <script lang="ts">
   import type {Dict} from '../common/Project'
   import {insertKey} from '../common/utils'
+  import Icon from '../components/Icon.svelte'
 
   export let dict: Dict
   export let keyPrefix: string
@@ -16,7 +17,7 @@
   }
 </script>
 
-<button bind:this={button} class="key-adder border-0" title="Add new key here" on:click={add}>+</button>
+<button bind:this={button} class="key-adder border-0" title="Add new key here" on:click={add}><Icon name="plus"/></button>
 
 <style>
   :global(tr td) {
@@ -25,17 +26,23 @@
 
   :global(tr) .key-adder {
     position: absolute;
-    display: none;
+    display: flex;
     left: -0.5em;
-    bottom: -0.5em;
     background: transparent;
+    bottom: -0.5em;
     font-size: 2em;
     line-height: 1;
+    color: var(--primary);
     padding: 5px;
-    color: var(--bs-primary);
+    opacity: 0;
+    transition: opacity 0.25s ease;
+  }
+
+  :global(tr) .key-adder:hover {
+    color: var(--primary-accent);
   }
 
   :global(tr:hover) .key-adder {
-    display: block;
+    opacity: 1;
   }
 </style>

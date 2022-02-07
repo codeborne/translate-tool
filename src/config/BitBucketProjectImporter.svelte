@@ -3,6 +3,7 @@
   import type {LoadedProject, Project} from '../common/Project'
   import {createEventDispatcher} from 'svelte'
   import {BitBucketClient} from '../bitbucket/BitBucketClient'
+  import Icon from '../components/Icon.svelte'
 
   export let token: string = ''
   export let projects: Project[]
@@ -55,31 +56,30 @@
   }
 </script>
 
-<form id="addPrivate" class="card p-3 mb-3 d-flex flex-column justify-content-center align-items-center"
+<form id="addPrivate" class="d-flex flex-column"
       on:submit|preventDefault={submit}>
-  <h5 class="card-title">Import a private dictionary from BitBucket repository</h5>
-  <div class="card-body w-75">
+    <h5 class="card-title mb-3 mb-lg-4">Import a private dictionary from BitBucket repository</h5>
     <label class="form-label">Project name</label>
     <input type="text" bind:value={title} class="form-control" required>
-    <div class="form-text mb-4"><i>You can change it at any time.</i></div>
+    <div class="form-text mb-4">You can change it at any time.</div>
 
     <label class="form-label">Repository owner</label>
     <input type="text" bind:value={username} class="form-control" required>
-    <div class="form-text mb-4">eg. <b>account-name</b> for <i>https://bitbucket.org/<b>account-name</b>/</i></div>
+    <div class="form-text mb-4">eg. <b>account-name</b> for <b>https://bitbucket.org/<b>account-name</b>/</b></div>
 
     <label class="form-label">Repository name</label>
     <input type="text" bind:value={repo} class="form-control" required>
-    <div class="form-text mb-4">eg. <b>myrepo</b> for <i>https://bitbucket.org/account-name/<b>myrepo</b>/</i></div>
+    <div class="form-text mb-4">eg. <b>myrepo</b> for <b>https://bitbucket.org/account-name/<b>myrepo</b>/</b></div>
 
     <label class="form-label">Base branch</label>
     <input type="text" bind:value={defaultBranch} class="form-control" required>
     <div class="form-text mb-4">Default branch to pull from if no translations branch exists,
-      eg <b>main</b> for <i>https://bitbucket.org/account-name/myrepo/src/<b>main</b>/i18n/langs.json</i></div>
+      eg <b>main</b> for <b>https://bitbucket.org/account-name/myrepo/src/<b>main</b>/i18n/langs.json</b></div>
 
     <label class="form-label">Path within repository</label>
     <input type="text" bind:value={path} class="form-control" pattern="/.*/" required>
     <div class="form-text mb-4">Where the project is located within the root repository,
-      eg <b>/i18n/</b> for <i>https://bitbucket.org/account-name/myrepo/src/main<b>/i18n/</b>langs.json</i></div>
+      eg <b>/i18n/</b> for <b>https://bitbucket.org/account-name/myrepo/src/main<b>/i18n/</b>langs.json</b></div>
 
     <label class="form-label">Personal auth token</label>
     <input type="text" bind:value={token} class="form-control">
@@ -88,9 +88,12 @@
     <label class="form-label">Translations branch</label>
     <input type="text" bind:value={branch} class="form-control" required>
     <div class="form-text mb-4">Where the tool will commit changes</div>
+  <div>
+    <button class="btn btn-primary btn-icon w-auto px-lg-4 justify-content-center">
+      <Icon class="me-lg-2" name="fileImport"/>
+      Import
+    </button>
   </div>
-
-  <button class="btn btn-primary w-auto">Import</button>
   {#if warning}
     <div class="alert alert-warning mt-3">
       {warning}

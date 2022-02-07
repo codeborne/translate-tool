@@ -57,5 +57,5 @@
   {:else}
     <i class="fab fa-github"></i>
   {/if}
-  Save to <i>{client.branch}</i> branch
+  Save to <b>{client.branch}</b> branch
 </button>

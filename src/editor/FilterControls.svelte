@@ -12,5 +12,6 @@
     <input class="form-check-input" title="Show only empty" type="checkbox" bind:checked={filter.showEmptyValuesOnly} id="show-empty-only">
     <label class="form-check-label text-nowrap" for="show-empty-only">Show only empty</label>
   </div>
+  <slot/>
 </div>
 

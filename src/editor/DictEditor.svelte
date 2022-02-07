@@ -67,11 +67,12 @@
   let filter = new Filter()
 </script>
 
-<BranchLoadedFrom config={project.config} bind:defaultBranch/>
 
 <div class="mt-3 card p-3 d-flex flex-column align-items-center">
   <div class="d-flex flex-row justify-content-between w-100">
-    <FilterControls bind:filter/>
+    <FilterControls bind:filter>
+      <BranchLoadedFrom config={project.config} bind:defaultBranch/>
+    </FilterControls>
     <div class="dl-flex justify-content-center align-items-center">
       <a class="btn btn-primary" href="#output"><i class="fas fa-arrow-down"></i> Jump to bottom</a>
     </div>

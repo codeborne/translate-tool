@@ -44,8 +44,8 @@
 </script>
 
 {#if defaultBranch && isVersionControlUrl(config)}
-  <div class="form-text">
-    <i class="fas fa-code-branch"></i>
-    Translations loaded from <b>{defaultBranch}</b> branch
+  <div class="ms-3 w-100">
+    <i class="fas fa-code-branch" title='Loaded from {defaultBranch} branch'></i>
+    Loaded from <b>{defaultBranch}</b> branch
   </div>
 {/if}

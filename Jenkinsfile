@@ -3,6 +3,9 @@ pipeline {
 
   environment {
     REPO_NAME = "${env.JOB_NAME.split('/')[1]}"
+    GOOGLE_CLIENT_ID = credentials('GOOGLE_CLIENT_ID')
+    GOOGLE_CLIENT_SECRET = credentials('GOOGLE_CLIENT_SECRET')
+    COOKIE_SECRET = credentials('COOKIE_SECRET')
   }
 
   stages {

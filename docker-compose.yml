@@ -6,6 +6,9 @@ services:
     restart: always
     environment:
       - TZ=Europe/Tallinn
+      - GOOGLE_CLIENT_ID
+      - GOOGLE_CLIENT_SECRET
+      - COOKIE_SECRET
     networks:
       - proxy
 

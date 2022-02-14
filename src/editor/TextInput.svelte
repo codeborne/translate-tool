@@ -17,9 +17,9 @@
 </script>
 
 
-  {#if !isHtml(fullKey)}
-  <textarea {lang} bind:value={dict[key]} class="form-control"
-            class:changed={(getValue(key, dict) ?? '') !== (getValue(key, uneditedDict) ?? '')}></textarea>
+{#if !isHtml(fullKey)}
+  <div contenteditable="true" {lang} bind:textContent={dict[key]} class="form-control"
+            class:changed={(getValue(key, dict) ?? '') !== (getValue(key, uneditedDict) ?? '')}></div>
 {:else}
   <div class="d-flex html-input">
     {#if !isPreviewing}
@@ -69,6 +69,7 @@
 
   .preview .form-control {
     border-top-left-radius: 0;
+    max-height: 12rem;
   }
 
   .html-input .form-control {
@@ -77,8 +78,7 @@
   }
 
   .form-control {
-    min-height: 38px;
-    max-height: 38px;
+    max-height: 12rem;
     overflow-y: hidden;
     transition: max-height 0.5s ease-in-out;
     resize: none;
@@ -91,9 +91,7 @@
     transition: max-height 0.5s ease-in-out;
   }
 
-  .preview .form-control {
-    max-height: 12rem;
-  }
+
 
   .btn {
     box-shadow: none;

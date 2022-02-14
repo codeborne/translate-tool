@@ -38,12 +38,12 @@
 
   <div class="accordion-item shadow rounded-3 overflow-hidden">
     <h2 class="accordion-header">
-      <button class="accordion-button p-lg-4 collapsed publicImport" type="button" data-bs-toggle="collapse"
+      <button class="accordion-button p-lg-4 publicImport" type="button" data-bs-toggle="collapse"
               data-bs-target=".collapsePublic" aria-expanded="false" aria-controls="collapseThree">
         Via Public URL
       </button>
     </h2>
-    <div class="accordion-collapse collapse m-3 m-lg-4 collapsePublic" aria-labelledby="headingThree"
+    <div class="accordion-collapse collapse m-3 m-lg-4 collapsePublic show" aria-labelledby="headingThree"
          data-bs-parent=".addNew">
       <SimpleProjectImporter bind:projects on:changed/>
     </div>

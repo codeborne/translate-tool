@@ -73,7 +73,7 @@
   }
 
   async function tryLoadPreConfiguredProjects() {
-    return jsonLoader.loadJson('project.json').catch(() => console.warn('No deployment argument file found.')) as Project[]
+    return jsonLoader.loadJson('projects.json').catch(() => console.warn('No deployment argument file found.')) as Project[]
   }
 
   function tryInitFromLocalStorage(): Project[] {

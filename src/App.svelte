@@ -73,7 +73,7 @@
   }
 
   async function tryLoadPreConfiguredProjects() {
-    return jsonLoader.loadJson('projects.json').catch(() => console.warn('No deployment argument file found.')) as Project[]
+    return jsonLoader.loadJson('project.json').catch(() => console.warn('No deployment argument file found.')) as Project[]
   }
 
   function tryInitFromLocalStorage(): Project[] {
@@ -96,7 +96,7 @@
         <LangSwitcher project={selectedProject} bind:lang/>
       {/if}
       <ProjectAddButton bind:showAddProject/>
-      <ProjectSettingsButton bind:showAddProject bind:showConfig showBack={loadedProjects.length > 0}/>
+      <ProjectSettingsButton bind:showAddProject bind:showConfig showBack={loadedProjects && loadedProjects.length > 0}/>
       <GoogleAuth bind:user/>
     </div>
   {/if}
@@ -106,7 +106,7 @@
 
   {#if showAddProject || showConfig}
     <div class="fix-width mx-auto">
-      <ToggleBackButton bind:showAddProject bind:showConfig showBack={loadedProjects.length > 0}/>
+      <ToggleBackButton bind:showAddProject bind:showConfig showBack={loadedProjects && loadedProjects.length > 0}/>
     </div>
   {/if}
 

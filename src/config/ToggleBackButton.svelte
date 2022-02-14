@@ -3,13 +3,16 @@
 
   export let showConfig: boolean
   export let showAddProject: boolean
+  export let showBack: boolean
 </script>
 
-<div>
-    <button type="button" class="btn-circle mb-3 mt-md-n1 backBtn" on:click={() => showConfig = showAddProject = false}>
-      <Icon name="arrowLeft"/>
-    </button>
-</div>
+{#if showBack}
+  <div>
+      <button type="button" class="btn-circle mb-3 mt-md-n1 backBtn" on:click={() => showConfig = showAddProject = false}>
+        <Icon name="arrowLeft"/>
+      </button>
+  </div>
+{/if}
 
 <style>
 

@@ -81,9 +81,9 @@
   <table class="mt-1 w-100">
     <thead class="border-bottom">
       <tr>
-        <th class="w-25">Key</th>
-        <th>{defaultLang} ({totalKeys(defaultDict)})</th>
-        <th>{lang} ({totalKeys(dict)})</th>
+        <th>Key</th>
+        <th class="w-50">{lang} ({totalKeys(defaultDict)})</th>
+        <th>{defaultLang} ({totalKeys(dict)})</th>
       </tr>
     </thead>
     <tbody on:focusout={onChange}>
@@ -104,6 +104,22 @@
   </DictClipboardOutput>
 </div>
 <style>
+  th {
+    padding-bottom: 0.5em;
+  }
+
+  tbody :global(td) {
+    padding: 0.2em 0;
+  }
+
+  table {
+    table-layout: fixed
+  }
+
+  th:last-of-type, tbody :global(td:last-of-type) {
+    padding-left: 0.75em;
+  }
+
   tbody :global(tr:hover) {
     background: #eee;
   }

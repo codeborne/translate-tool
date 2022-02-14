@@ -29,12 +29,14 @@
         {/if}
       </td>
       <td>
-        <DefaultLangValue {defaultDict} {key} fullKey={fullKey(key)}>
-          <Translator {lang} {defaultLang} bind:dict {key} {defaultDict} {uneditedDict}/>
-        </DefaultLangValue>
+        <TextInput bind:dict {key} fullKey={fullKey(key)} {uneditedDict} {lang}/>
       </td>
       <td>
-        <TextInput bind:dict {key} fullKey={fullKey(key)} {uneditedDict} {lang}/>
+        <div class="d-flex align-items-center justify-content-between">
+          <DefaultLangValue {defaultDict} {key} fullKey={fullKey(key)}>
+            <Translator {lang} {defaultLang} bind:dict {key} {defaultDict} {uneditedDict}/>
+          </DefaultLangValue>
+        </div>
       </td>
     </tr>
   {/if}

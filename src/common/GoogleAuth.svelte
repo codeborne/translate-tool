@@ -19,7 +19,7 @@
 </script>
 
 {#if user}
-  <button class="btn btn-outline-secondary logout" on:click={handleLogout}>
+  <button class="btn btn-primary logout" on:click={handleLogout}>
     <i class="fas fa-sign-out-alt"></i> {user.name ?? 'Log out'}
   </button>
 {/if}

@@ -29,6 +29,10 @@ td,
   color: var(--text-color);
 }
 
+body, div, button, textarea {
+  font-size: 0.925rem !important;
+}
+
 h1,
 h2,
 h3,
@@ -43,19 +47,6 @@ h5 {
 
 table {
   table-layout: fixed
-}
-
-tbody :global(tr:hover) {
-  background: #eee;
-}
-
-td:last-of-type {
-  padding: 0.375rem 0.75rem;
-}
-
-th {
-  opacity: 0.5;
-  font-size: 0.875rem;
 }
 
 th,

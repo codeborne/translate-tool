@@ -30,12 +30,14 @@
     <Icon name="arrowTop"/>
     Jump to top
   </a>
-  <slot name="counter"/>
   <button on:click={copy} class="btn btn-primary btn-icon w-auto order-md-0 me-md-3 me-lg-4">
     <Icon name="copy"/>
     Copy json to clipboard
   </button>
-  <slot/>
+  <div class="d-flex gap-2">
+    <slot/>
+    <slot name="counter"/>
+  </div>
 </div>
 
 <textarea id="rawOutput" {lang} bind:this={textarea}

@@ -41,6 +41,6 @@
   }
 </script>
 
-<a href={url} target="_blank" class="btn btn-secondary w-auto btn-icon sourceBtn me-md-3 me-lg-4">
+<a href={url} target="_blank" class="btn btn-secondary w-auto btn-icon sourceBtn">
   <Icon name="link"/> Source
 </a>

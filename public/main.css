@@ -29,7 +29,7 @@ td,
   color: var(--text-color);
 }
 
-body, div, button, textarea {
+body, div, button, textarea, a {
   font-size: 0.925rem !important;
 }
 

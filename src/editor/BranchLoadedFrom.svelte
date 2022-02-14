@@ -3,7 +3,6 @@
   import {BitBucketClient} from '../bitbucket/BitBucketClient'
 
   export let config
-
   export let defaultBranch
 
   $: if (config) handleBranchCheck()

@@ -78,7 +78,7 @@
     </div>
   </div>
 
-  <table class="mt-1 w-100">
+  <table class="m-2 w-100">
     <thead class="border-bottom">
       <tr>
         <th>Key</th>

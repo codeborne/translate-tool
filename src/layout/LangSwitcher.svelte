@@ -13,7 +13,7 @@
 
 </script>
 
-<select bind:value={lang} class="form-select w-auto">
+<select bind:value={lang} class="form-select w-auto shadow-sm">
   {#each project.langs as l}
     <option>{l}</option>
   {/each}

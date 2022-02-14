@@ -41,7 +41,11 @@
     {/if}
     <button class="btn btn-sm btn-light text-primary" title={isPreviewing ? 'Show styled text' : 'Show HTML'}
             on:click={() => isPreviewing = !isPreviewing}>
-      <i class="fas fa-code"></i>
+      {#if isPreviewing}
+        <i class="fa-solid fa-eye-slash"></i>
+      {:else}
+        <i class="fa-solid fa-eye"></i>
+      {/if}
     </button>
   </div>
 {/if}
@@ -60,6 +64,7 @@
     border: 1px solid #ced4da;
     border-bottom: 0;
     border-top-left-radius: 0.25rem;
+    font-size: 0.7rem !important;
   }
 
   .preview .form-control {

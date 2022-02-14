@@ -32,7 +32,7 @@
         <TextInput bind:dict {key} fullKey={fullKey(key)} {uneditedDict} {lang}/>
       </td>
       <td>
-        <div class="d-flex align-items-center justify-content-between">
+        <div class="d-flex justify-content-between">
           <DefaultLangValue {defaultDict} {key} fullKey={fullKey(key)}>
             <Translator {lang} {defaultLang} bind:dict {key} {defaultDict} {uneditedDict}/>
           </DefaultLangValue>

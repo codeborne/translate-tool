@@ -8,12 +8,12 @@
 </script>
 
 {#if !showHTML}
-  <div contenteditable="false" bind:innerHTML={defaultDict[key]} class="overflow-auto align-middle defaultLangText"></div>
+  <div contenteditable="false" bind:innerHTML={defaultDict[key]} class="overflow-auto align-self-center defaultLangText"></div>
 {:else}
-  <div class="overflow-auto align-middle defaultLangText">{defaultDict[key]}</div>
+  <div class="overflow-auto align-self-center defaultLangText">{defaultDict[key]}</div>
 {/if}
 
-<div class="d-flex flex-column ms-1 justify-content-start">
+<div class="d-flex flex-column justify-content-start">
   <slot/>
   {#if isHtml(fullKey)}
     <button

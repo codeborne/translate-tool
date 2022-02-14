@@ -102,6 +102,6 @@
   }
 
   .changed {
-    background-color: var(--gray-lightest);
+    background-color: aliceblue;
   }
 </style>

@@ -48,3 +48,10 @@
     Loaded from <b>{defaultBranch}</b> branch
   </div>
 {/if}
+
+<style>
+  .branch {
+    opacity: 0.6;
+    font-size: 0.835rem !important;
+  }
+</style>

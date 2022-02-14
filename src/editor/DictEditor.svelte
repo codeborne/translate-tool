@@ -103,3 +103,8 @@
     <ChangesCounter slot="counter" {dict} {uneditedDict}/>
   </DictClipboardOutput>
 </div>
+<style>
+  tbody :global(tr:hover) {
+    background: #eee;
+  }
+</style>

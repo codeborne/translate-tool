@@ -105,16 +105,14 @@
 </div>
 <style>
   th {
-    padding-bottom: 0.5em;
+    padding: 0.2em 1em !important;
+    opacity: 0.5;
   }
 
   tbody :global(td) {
-    padding: 0.2em 0;
+    padding: 0.2em 1em !important;
   }
 
-  table {
-    table-layout: fixed
-  }
 
   th:last-of-type, tbody :global(td:last-of-type) {
     padding-left: 0.75em;

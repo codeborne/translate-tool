@@ -2,17 +2,17 @@ import {expect, test} from '@playwright/test'
 import {url} from './config.js'
 
 async function fillPublicImport(projectName, page) {
-  await expect(page.locator('.collapsePublic')).toBeVisible()
+  await page.locator('.addNew').click()
+  await page.locator('.publicImport').click()
   await page.locator('.collapsePublic input:nth-of-type(1)').fill(projectName)
   await page.locator('.collapsePublic input:nth-of-type(2)').fill(url + '/i18n/')
+  await page.locator('.collapsePublic button').click()
 }
 
 test('import public twice', async ({page}) => {
   await page.goto(url)
-  await expect(page.locator('#top h3')).toContainText('Translate Tool')
+  await expect(page.locator('.nav-logo')).toBeVisible()
   await fillPublicImport("E2E", page)
-  await page.locator('.collapsePublic button').click()
-  await expect(page.locator('.collapsePublic')).not.toBeVisible()
 
   await expect(page.locator('#output')).toBeVisible()
   await expect(page.locator('#backToImporterBtn')).toBeVisible()
@@ -25,7 +25,6 @@ test('import public twice', async ({page}) => {
   await page.locator('[title="Add a new project"]').click()
   await expect(page.locator('.collapsePublic')).toBeVisible()
   await fillPublicImport("OtherDict", page)
-  await page.locator('.collapsePublic button').click()
   await expect(page.locator('.collapsePublic')).not.toBeVisible()
   await expect(page.locator('#output')).toBeVisible()
   await expect(page.locator('nav .nav-link:nth-of-type(1)')).toContainText('E2E')

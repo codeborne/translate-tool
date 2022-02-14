@@ -2,7 +2,6 @@ import {expect, test} from '@playwright/test'
 import {url} from './config.js'
 
 async function fillPublicImport(page) {
-  await expect(page.locator('.collapsePublic')).toBeVisible()
   await page.locator('.collapsePublic input:nth-of-type(1)').fill('ConfigTest')
   await page.locator('.collapsePublic input:nth-of-type(2)').fill(url + '/i18n/')
   await page.locator('.collapsePublic button').click()
@@ -11,14 +10,14 @@ async function fillPublicImport(page) {
 
 test('can edit project config', async ({page}) => {
   await page.goto(url)
-  await expect(page.locator('#top h3')).toContainText('Translate Tool')
+  await expect(page.locator('.nav-logo')).toBeVisible()
   await fillPublicImport(page)
   await expect(page.locator('text=Project Settings')).toBeVisible()
   await page.locator('text=Project Settings').click()
-  await expect(page.locator('text=Back to Editor')).toBeVisible()
+  await expect(page.locator('.backBtn')).toBeVisible()
   await expect(page.locator('#rawOutput')).not.toBeVisible()
 
-  await page.locator('text=Back to Editor').click()
+  await page.locator('.backBtn').click()
   await expect(page.locator('#rawOutput')).toBeVisible()
   await page.locator('text=Project Settings').click()
   await expect(page.locator('#rawOutput')).not.toBeVisible()

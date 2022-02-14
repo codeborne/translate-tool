@@ -2,16 +2,16 @@ import {expect, test} from '@playwright/test'
 import {url} from './config.js'
 
 async function fillPublicImport(page) {
-  await expect(page.locator('.collapsePublic')).toBeVisible()
+  await page.locator('.addNew').click()
+  await page.locator('.publicImport').click()
   await page.locator('.collapsePublic input:nth-of-type(1)').fill('EditorTest')
   await page.locator('.collapsePublic input:nth-of-type(2)').fill(url + '/i18n/')
   await page.locator('.collapsePublic button').click()
-  await expect(page.locator('.collapsePublic')).not.toBeVisible()
 }
 
 test('editor page functionality', async ({page}) => {
   await page.goto(url)
-  await expect(page.locator('#top h3')).toContainText('Translate Tool')
+  await expect(page.locator('.nav-logo')).toBeVisible()
   await fillPublicImport(page)
   await expect(page.locator('.num-changes')).not.toBeVisible()
   await expect(page.locator('nav .nav-link:first-of-type')).toContainText('EditorTest')
@@ -45,7 +45,8 @@ test('editor page functionality', async ({page}) => {
   await page.locator('table .form-control').first().fill('Will stay after changing language')
   await page.locator('nav .form-select').selectOption({label: 'de'})
   await page.locator('body').click()
-  await expect(page.locator('thead th:nth-of-type(2)')).toContainText('de')
+  await expect(page.locator('thead th:nth-of-type(2)')).toContainText('en')
+  await expect(page.locator('thead th:nth-of-type(3)')).toContainText('de')
   expect(await page.inputValue('#rawOutput')).not.toContain('Will stay after changing language')
   await page.locator('nav .form-select').selectOption({label: 'en'})
   await page.locator('body').click()

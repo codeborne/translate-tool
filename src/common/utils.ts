@@ -40,3 +40,7 @@ export function isHtml(fullKey: string): boolean {
   })
   return result
 }
+
+export function containsHTMLTags(html: string): boolean {
+  return /(<([^>]+)>)/gi.test(html)
+}

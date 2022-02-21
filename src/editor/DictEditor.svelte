@@ -15,6 +15,7 @@
   import ProjectSourceButton from './ProjectSourceButton.svelte'
   import Icon from '../components/Icon.svelte'
   import type GoogleProfile from '../common/GoogleAuth.svelte'
+  import MissingKeys from './MissingKeys.svelte'
 
 
   export let project: LoadedProject
@@ -67,6 +68,8 @@
 
   let filter = new Filter()
 </script>
+
+<MissingKeys {uneditedDict} {defaultDict}/>
 
 <div class="card shadow d-flex flex-column align-items-center overflow-hidden">
   <div class="d-flex flex-row w-100 justify-content-between px-3 px-lg-4 pt-3 pt-lg-4">

@@ -83,7 +83,9 @@
 
     <label class="form-label">Personal auth token</label>
     <input type="text" bind:value={token} class="form-control">
-    <div class="form-text mb-4">This token will be used to access the private repository</div>
+  <div class="form-text mb-4">This token will be used to access the private repository. Create one under BitBucket's <b>Workspace settings > OAuth Consumers</b>
+      and combine the <b>Key</b> and <b>Secret</b> to be <b>Key:Secret</b>, eg <i>KB42ebc8rt64b0k9MV:kud7Nsklf93JK2lsKnNs2kNfgXA2n</i>
+    </div>
 
     <label class="form-label">Translations branch</label>
     <input type="text" bind:value={branch} class="form-control" required>

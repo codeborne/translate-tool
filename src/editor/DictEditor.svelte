@@ -85,8 +85,8 @@
     <thead class="border-bottom">
       <tr>
         <th>Key</th>
-        <th class="w-50">{lang} ({totalKeys(defaultDict)})</th>
-        <th>{defaultLang} ({totalKeys(dict)})</th>
+        <th class="w-50">{lang} ({totalKeys(dict)})</th>
+        <th>{defaultLang} ({totalKeys(defaultDict)})</th>
       </tr>
     </thead>
     <tbody on:focusout={onChange}>

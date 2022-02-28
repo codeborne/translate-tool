@@ -17,9 +17,9 @@
 </script>
 
 
-  {#if !isHtml(fullKey)}
+{#if !isHtml(fullKey)}
   <textarea {lang} bind:value={dict[key]} class="form-control"
-            class:changed={(getValue(key, dict) ?? '') !== (getValue(key, uneditedDict) ?? '')}></textarea>
+          class:changed={(getValue(key, dict) ?? '') !== (getValue(key, uneditedDict) ?? '')}></textarea>
 {:else}
   <div class="d-flex html-input">
     {#if !isPreviewing}

@@ -15,6 +15,7 @@
   import ProjectSourceButton from './ProjectSourceButton.svelte'
   import Icon from '../components/Icon.svelte'
   import type GoogleProfile from '../common/GoogleAuth.svelte'
+  import MissingKeys from './MissingKeys.svelte'
 
 
   export let project: LoadedProject
@@ -68,6 +69,8 @@
   let filter = new Filter()
 </script>
 
+<MissingKeys {uneditedDict} {defaultDict}/>
+
 <div class="card shadow d-flex flex-column align-items-center overflow-hidden">
   <div class="d-flex flex-row w-100 justify-content-between px-3 px-lg-4 pt-3 pt-lg-4">
     <FilterControls bind:filter>
@@ -82,8 +85,8 @@
     <thead class="border-bottom">
       <tr>
         <th>Key</th>
-        <th class="w-50">{lang} ({totalKeys(defaultDict)})</th>
-        <th>{defaultLang} ({totalKeys(dict)})</th>
+        <th class="w-50">{lang} ({totalKeys(dict)})</th>
+        <th>{defaultLang} ({totalKeys(defaultDict)})</th>
       </tr>
     </thead>
     <tbody on:focusout={onChange}>

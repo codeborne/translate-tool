@@ -1,17 +1,28 @@
 <script lang="ts">
   import {isHtml} from '../common/utils'
+  import {containsHTMLTags} from '../common/utils'
 
   export let defaultDict
   export let key
   export let fullKey
   let showHTML: boolean = false
+
 </script>
 
-{#if !showHTML}
-  <div contenteditable="false" bind:innerHTML={defaultDict[key]} class="overflow-auto align-self-center defaultLangText"></div>
-{:else}
-  <div class="overflow-auto align-self-center defaultLangText">{defaultDict[key]}</div>
-{/if}
+<div>
+  {#if !showHTML}
+    <div contenteditable="false" bind:innerHTML={defaultDict[key]} class="overflow-auto align-self-center defaultLangText"></div>
+  {:else}
+    <div class="overflow-auto align-self-center defaultLangText">{defaultDict[key]}</div>
+  {/if}
+
+    {#if !isHtml(fullKey) && containsHTMLTags(defaultDict[key])}
+    <span class="text-danger">
+      <i class="fa-solid fa-triangle-exclamation"></i> Contains HTML tags, but key does not end with <b>Html</b>
+    </span>
+  {/if}
+</div>
+
 
 <div class="d-flex flex-column justify-content-start">
   <slot/>

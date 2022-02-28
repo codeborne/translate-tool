@@ -67,7 +67,7 @@ app.get('/*', async function (req: Request, res: Response) {
   const provider: typeof googleAuth = googleAuth
   if (provider.clientId && provider.clientSecret && !req.signedCookies['AUTH'])
     res.redirect(provider.authUrl + `?client_id=${provider.clientId}&scope=${provider.scope}` +
-      `&redirect_uri=${redirectUrl(req)}&response_type=code`)
+      `&redirect_uri=${redirectUrl(req)}&response_type=code&prompt=select_account`)
   else res.sendFile(__dirname, '/../build/index.html')
 })
 

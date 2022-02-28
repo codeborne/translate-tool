@@ -34,6 +34,10 @@ interface UserInfoResponse {
   email: string
 }
 
+app.get('/health', async function (req, res) {
+  return res.sendStatus(204)
+})
+
 app.get('/auth', async function (req: Request, res: Response) {
   const token: string = await fetchToken(googleAuth, req.query.code as string, redirectUrl(req))
   const profile: GoogleProfile = await fetchProfile(googleAuth, token)

@@ -1,6 +1,5 @@
 <script lang="ts">
-  import {isHtml} from '../common/utils'
-  import {containsHTMLTags} from '../common/utils'
+  import {containsHTMLTags, isHtml} from '../common/utils'
 
   export let defaultDict
   export let key
@@ -17,7 +16,7 @@
   {/if}
 
     {#if !isHtml(fullKey) && containsHTMLTags(defaultDict[key])}
-    <span class="text-danger">
+    <span class="text-danger html-warning">
       <i class="fa-solid fa-triangle-exclamation"></i> Contains HTML tags, but key does not end with <b>Html</b>
     </span>
   {/if}
@@ -43,5 +42,8 @@
   .btn {
     padding: 0;
     margin-top: 0.5rem;
+  }
+  .html-warning {
+    font-size: small;
   }
 </style>

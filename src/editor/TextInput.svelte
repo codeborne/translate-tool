@@ -15,12 +15,12 @@
   $: uneditedDict[key] = uneditedDict[key] ?? ''
 
   function grow(e) {
-    e.target.style.height = 'auto'
+    e.target.style.height = '38px'
     e.target.style.height = (e.target.scrollHeight + 20) + 'px'
   }
 
   function shrink(e) {
-    e.target.style.height = 'auto'
+    e.target.style.height = '38px'
   }
 
 </script>
@@ -92,13 +92,11 @@
     overflow: hidden;
     min-height: 38px;
     max-height: 38px;
-    transition: max-height 0.5s ease-in-out;
   }
 
   .form-control:focus, textarea:focus {
     box-shadow: none;
     max-height: inherit !important;
-    transition: max-height 0.5s ease-in-out;
   }
 
   .btn {

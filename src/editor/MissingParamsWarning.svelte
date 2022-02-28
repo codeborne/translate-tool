@@ -11,7 +11,7 @@
   onMount(() => init())
 
   $: if (dict[key]) missing = findMissingParams()
-  $: if (defaultDict[key]) params = extractParams()
+  $: if (defaultDict[key]) init()
 
   function init() {
     params = extractParams()
@@ -30,7 +30,7 @@
 
 </script>
 
-{#if params && missing.length}
+{#if params && missing && missing.length}
   <span class="text-secondary placeholder-warning">
     <i class="fa-solid fa-triangle-exclamation"></i> <b>Missing placeholders:</b> {missing.join(', ')}
   </span>

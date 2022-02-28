@@ -6,3 +6,4 @@ public/auth.json
 /server/*.js
 /server/auth.env
 /.env
+/e2e/test-results/

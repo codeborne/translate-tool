@@ -18,7 +18,7 @@
     missing = findMissingParams()
   }
 
-  export function findMissingParams() {
+  function findMissingParams() {
     missing = []
     if (params && params.length) params.forEach((param) => {
       if (!dict[key].includes(param)) missing.push(param)
@@ -26,7 +26,7 @@
     return missing
   }
 
-  export const extractParams = () => defaultDict[key].match(/{(.*?)}/g)
+  const extractParams = () => defaultDict[key].match(/{(.*?)}/g)
 
 </script>
 

@@ -18,7 +18,7 @@
     missing = findMissingParams()
   }
 
-  function findMissingParams() {
+  export function findMissingParams() {
     missing = []
     if (params && params.length) params.forEach((param) => {
       if (!dict[key].includes(param)) missing.push(param)
@@ -26,12 +26,12 @@
     return missing
   }
 
-  const extractParams = () => defaultDict[key].match(/{(.*?)}/g)
+  export const extractParams = () => defaultDict[key].match(/{(.*?)}/g)
 
 </script>
 
 {#if params && missing.length}
-  <span class="text-secondary">
+  <span class="text-secondary placeholder-warning">
     <i class="fa-solid fa-triangle-exclamation"></i> <b>Missing placeholders:</b> {missing.join(', ')}
   </span>
 {/if}

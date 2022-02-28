@@ -57,7 +57,7 @@
 
 <form id="addPrivate" class="d-flex flex-column"
       on:submit|preventDefault={submit}>
-  <h5 class="card-title mb-3 mb-lg-4">Import a private dictionary from GitHub repository</h5>
+  <h5 class="card-title mb-3 mb-lg-4">Import dictionary from GitHub</h5>
     <label class="form-label">Project name</label>
     <input type="text" bind:value={title} class="form-control" required>
     <div class="form-text mb-4">You can change it at any time.</div>

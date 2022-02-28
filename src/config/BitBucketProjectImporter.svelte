@@ -58,7 +58,7 @@
 
 <form id="addPrivate" class="d-flex flex-column"
       on:submit|preventDefault={submit}>
-    <h5 class="card-title mb-3 mb-lg-4">Import a private dictionary from BitBucket repository</h5>
+    <h5 class="card-title mb-3 mb-lg-4">Import dictionary from BitBucket</h5>
     <label class="form-label">Project name</label>
     <input type="text" bind:value={title} class="form-control" required>
     <div class="form-text mb-4">You can change it at any time.</div>
@@ -83,7 +83,7 @@
 
     <label class="form-label">Personal auth token</label>
     <input type="text" bind:value={token} pattern=".+:.+" class="form-control">
-    <div class="form-text mb-4">This token will be used to access the private repository. Create one under BitBucket's <b>Workspace settings > OAuth Consumers</b>
+    <div class="form-text mb-4">This token will be used to access or create commits. Create one under BitBucket's <b>Workspace settings > OAuth Consumers</b>
       and combine the <b>Key</b> and <b>Secret</b> to be <b>Key:Secret</b>, eg <i>KB42ebc8rt64b0k9MV:kud7Nsklf93JK2lsKnNs2kNfgXA2n</i>
     </div>
 

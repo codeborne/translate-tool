@@ -7,6 +7,7 @@
   import {getValue} from '../common/utils'
   import Translator from '../translator/Translator.svelte'
   import DefaultLangValue from './DefaultLangValue.svelte'
+  import MissingParamsWarning from './MissingParamsWarning.svelte'
 
   export let lang: string
   export let defaultLang: string
@@ -30,6 +31,7 @@
       </td>
       <td>
         <TextInput bind:dict {key} fullKey={fullKey(key)} {uneditedDict} {lang}/>
+        <MissingParamsWarning {dict} {defaultDict} {key}/>
       </td>
       <td>
         <div class="d-flex justify-content-between">

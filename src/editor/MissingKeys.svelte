@@ -27,7 +27,7 @@
 {#if missingKeys && missingKeys.length}
   <div class="d-flex flex-row justify-content-between mb-3 p-3 gap-5 alert card shadow">
     <div>
-      <h5 class="card-title mb-3 mb-lg-4"><i class="fa-solid fa-triangle-exclamation"></i> Redundant keys found</h5>
+      <h5 class="card-title mb-3 mb-lg-4"><i class="fa-solid fa-circle-info"></i> Redundant keys found</h5>
 
       <p>This current file contains some keys that are not present in the default language.
         It does not necessarily mean something is broken, but this warning can help find mistakes, typos or forgotten unused keys.

@@ -40,6 +40,6 @@
   </div>
 </div>
 
-<textarea id="rawOutput" {lang} bind:this={textarea}
+<textarea readonly id="rawOutput" {lang} bind:this={textarea}
           class="form-control bg-light"
           rows="20">{LoadedProject.prettyFormat(output, indent)}</textarea>

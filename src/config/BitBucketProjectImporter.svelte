@@ -65,25 +65,27 @@
 
     <label class="form-label">Repository owner</label>
     <input type="text" bind:value={username} class="form-control" required>
-    <div class="form-text mb-4">eg. <b>account-name</b> for <b>https://bitbucket.org/<b>account-name</b>/</b></div>
+    <div class="form-text mb-4">eg. <b>account-name</b> for <i>https://bitbucket.org/<b>account-name</b>/</i></div>
 
     <label class="form-label">Repository name</label>
     <input type="text" bind:value={repo} class="form-control" required>
-    <div class="form-text mb-4">eg. <b>myrepo</b> for <b>https://bitbucket.org/account-name/<b>myrepo</b>/</b></div>
+    <div class="form-text mb-4">eg. <b>myrepo</b> for <i>https://bitbucket.org/account-name/<b>myrepo</b>/</i></div>
 
     <label class="form-label">Base branch</label>
     <input type="text" bind:value={defaultBranch} class="form-control" required>
     <div class="form-text mb-4">Default branch to pull from if no translations branch exists,
-      eg <b>main</b> for <b>https://bitbucket.org/account-name/myrepo/src/<b>main</b>/i18n/langs.json</b></div>
+      eg <b>main</b> for <i>https://bitbucket.org/account-name/myrepo/src/<b>main</b>/i18n/langs.json</i></div>
 
     <label class="form-label">Path within repository</label>
     <input type="text" bind:value={path} class="form-control" pattern="/.*/" required>
     <div class="form-text mb-4">Where the project is located within the root repository,
-      eg <b>/i18n/</b> for <b>https://bitbucket.org/account-name/myrepo/src/main<b>/i18n/</b>langs.json</b></div>
+      eg <b>/i18n/</b> for <i>https://bitbucket.org/account-name/myrepo/src/main<b>/i18n/</b>langs.json</i></div>
 
     <label class="form-label">Personal auth token</label>
-    <input type="text" bind:value={token} class="form-control">
-    <div class="form-text mb-4">This token will be used to access the private repository</div>
+    <input type="text" bind:value={token} pattern=".+:.+" class="form-control">
+    <div class="form-text mb-4">This token will be used to access the private repository. Create one under BitBucket's <b>Workspace settings > OAuth Consumers</b>
+      and combine the <b>Key</b> and <b>Secret</b> to be <b>Key:Secret</b>, eg <i>KB42ebc8rt64b0k9MV:kud7Nsklf93JK2lsKnNs2kNfgXA2n</i>
+    </div>
 
     <label class="form-label">Translations branch</label>
     <input type="text" bind:value={branch} class="form-control" required>

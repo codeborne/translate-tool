@@ -1,4 +1,4 @@
-import {decodeBase64Unicode, deepEqual, encodeBase64Unicode, insertKey} from './utils'
+import {containsHTMLTags, decodeBase64Unicode, deepEqual, encodeBase64Unicode, insertKey} from './utils'
 import {expect} from 'chai'
 
 describe('areObjectsEqual', () => {
@@ -43,5 +43,26 @@ describe('insertKey', () => {
     const dict = {x: '1', aa: '10', v: '3'}
     insertKey(dict, 'z', 1)
     expect(JSON.stringify(dict)).to.eq(`{"x":"1","aa":"10","z":"","v":"3"}`)
+  })
+})
+
+describe('containsHTMLTags', () => {
+  it('given strings do not contain HTML', () => {
+    let html = 'this is a test'
+    expect(containsHTMLTags(html)).to.be.false
+    html = 'this is a test ////'
+    expect(containsHTMLTags(html)).to.be.false
+    html = 'with {url} now'
+    expect(containsHTMLTags(html)).to.be.false
+  })
+  it('given strings contain HTML', () => {
+    let html = 'this is a <p>test</p>'
+    expect(containsHTMLTags(html)).to.be.true
+    html = 'this is a <br> test'
+    expect(containsHTMLTags(html)).to.be.true
+    html = 'this is a <a href="someurl"> test>'
+    expect(containsHTMLTags(html)).to.be.true
+    html = '<div>broken html'
+    expect(containsHTMLTags(html)).to.be.true
   })
 })

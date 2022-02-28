@@ -64,11 +64,11 @@
 
     <label class="form-label">Repository owner</label>
     <input type="text" bind:value={username} class="form-control" required>
-    <div class="form-text mb-4">eg. <b>codeborne</b> for <b>https://github.com/codeborne</b></div>
+    <div class="form-text mb-4">eg. <b>codeborne</b> for <i>https://github.com/<b>codeborne</b></i></div>
 
     <label class="form-label">Repository name</label>
     <input type="text" bind:value={repo} class="form-control" required>
-    <div class="form-text mb-4">eg. <b>translate-tool</b> for <b>https://github.com/codeborne/<b>translate-tool</b></b></div>
+    <div class="form-text mb-4">eg. <b>translate-tool</b> for <i>https://github.com/codeborne/<b>translate-tool</b></i></div>
 
     <label class="form-label">Path within repository</label>
     <input type="text" bind:value={path} class="form-control" pattern="/.*/" required>
@@ -76,7 +76,7 @@
 
     <label class="form-label">Personal auth token</label>
     <input type="text" bind:value={token} class="form-control">
-    <div class="form-text mb-4">This token will be used to access the private repository</div>
+    <div class="form-text mb-4">This token will be used to access or create commits. Create one under the GitHub account which owns the repository.</div>
 
     <label class="form-label">Translations branch</label>
     <input type="text" bind:value={branch} class="form-control" required>

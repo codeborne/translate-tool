@@ -35,3 +35,9 @@
     <i class="fa-solid fa-triangle-exclamation"></i> <b>Missing placeholders:</b> {missing.join(', ')}
   </span>
 {/if}
+
+<style>
+  .placeholder-warning {
+    font-size: small;
+  }
+</style>

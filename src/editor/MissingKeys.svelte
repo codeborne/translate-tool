@@ -14,7 +14,7 @@
     for (let [key, value] of Object.entries(source)) {
       const isObject = typeof value === 'object'
       if (isObject) missingKeys.push(...compareDictKeys(target[key], source[key], fullKey ? `${fullKey}.${key}` : key))
-      if (target[key] === undefined || target[key] === null) missingKeys.push(fullKey ? `${fullKey}.${key}` : key)
+      if (target && (target[key] === undefined || target[key] === null)) missingKeys.push(fullKey ? `${fullKey}.${key}` : key)
     }
     return missingKeys
   }

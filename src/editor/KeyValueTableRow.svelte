@@ -34,7 +34,7 @@
         <MissingParamsWarning {dict} {defaultDict} {key}/>
       </td>
       <td>
-        <div class="d-flex justify-content-between">
+        <div class="d-flex justify-content-between align-items-center">
           <DefaultLangValue {defaultDict} {key} fullKey={fullKey(key)}>
             <Translator {lang} {defaultLang} bind:dict {key} {defaultDict} {uneditedDict}/>
           </DefaultLangValue>

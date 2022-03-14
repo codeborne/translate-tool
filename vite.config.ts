@@ -9,5 +9,11 @@ export default defineConfig({
       'src': path.resolve(__dirname, './src'),
     }
   },
-  plugins: [svelte()]
+  plugins: [svelte()],
+  server: {
+    port: 8080,
+  },
+  build: {
+    outDir: 'build'
+  }
 })

@@ -109,4 +109,8 @@ function fetchProfile(provider: typeof googleAuth, token: string): Promise<Googl
 
 app.use(express.static('build'))
 
-app.listen(port, () => console.log(`Listening on port: ${port}`))
+app.listen(port, () => {
+  console.log(`Listening on port: ${port}`)
+  if (!googleAuth.clientId || !googleAuth.clientSecret) console.log('Running without authentication\n' +
+    'Set up GOOGLE_CLIENT_ID and GOOGLE_CLIENT_SECRET environment variables if you wish to protect your app.')
+})

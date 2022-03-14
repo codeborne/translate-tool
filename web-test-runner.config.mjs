@@ -1,17 +1,29 @@
 process.env.NODE_ENV = 'test'
 
-import testRunner from '@snowpack/web-test-runner-plugin'
+import vite from 'vite-web-test-runner-plugin'
 import {chromeLauncher} from '@web/test-runner'
+
+const ignoredBrowserLogs = [
+  '[vite] connecting...',
+  '[vite] connected.',
+]
 
 export default {
   testsFinishTimeout: 5000,
-  plugins: [testRunner()],
+  plugins: [vite()],
   browsers: [chromeLauncher({launchOptions: {dumpio: !!process.env.DUMP_CHROME_OUT, args: process.env.TEST_CHROME_ARGS?.split(' ')}})],
   testRunnerHtml: testFramework =>
     `<html>
       <body>
-        <script type="module" src="/dist/setup-tests.js"></script>
+        <script type="module">
+          window.global = window
+          window.process = { env: {NODE_ENV: 'test'} }
+        </script>
+        <script type="module" src="/src/setup-tests.ts"></script>
         <script type="module" src="${testFramework}"></script>
       </body>
-    </html>`
+    </html>`,
+  filterBrowserLogs: ({args}) => {
+    return !args.some((arg) => ignoredBrowserLogs.includes(arg))
+  }
 }

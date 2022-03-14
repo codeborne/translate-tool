@@ -31,13 +31,13 @@
 </script>
 
 {#if params && missing && missing.length}
-  <span class="text-secondary placeholder-warning">
+  <div class="text-secondary placeholder-warning">
     <i class="fa-solid fa-triangle-exclamation"></i> <b>Missing placeholders:</b> {missing.join(', ')}
-  </span>
+  </div>
 {/if}
 
 <style>
   .placeholder-warning {
-    font-size: small;
+    font-size: small !important;
   }
 </style>

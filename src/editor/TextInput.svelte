@@ -1,7 +1,8 @@
 <script lang="ts">
 
-  import {getValue, isHtml} from '../common/utils'
+  import {containsHTMLTags, getValue, isHtml} from '../common/utils'
   import type {Dict} from '../common/Project'
+
 
   export let lang: string
   export let key: string
@@ -32,6 +33,12 @@
             {lang} bind:value={dict[key]}
             class="form-control"
             class:changed={(getValue(key, dict) ?? '') !== (getValue(key, uneditedDict) ?? '')}></textarea>
+
+    {#if containsHTMLTags(dict[key])}
+      <div class="text-secondary text-small">
+        <i class="fa-solid fa-triangle-exclamation"></i> Contains HTML tags, but key does not end with <b>Html</b>
+      </div>
+    {/if}
 {:else}
   <div class="d-flex html-input">
     {#if !isPreviewing}
@@ -112,5 +119,9 @@
 
   .changed {
     background-color: aliceblue;
+  }
+
+  .text-small {
+    font-size: small !important;
   }
 </style>

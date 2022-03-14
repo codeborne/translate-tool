@@ -9,7 +9,8 @@ const ignoredBrowserLogs = [
 ]
 
 export default {
-  testsFinishTimeout: 5000,
+  browserStartTimeout: 20000,
+  testsFinishTimeout: 10000,
   plugins: [vite()],
   browsers: [chromeLauncher({launchOptions: {dumpio: !!process.env.DUMP_CHROME_OUT, args: process.env.TEST_CHROME_ARGS?.split(' ')}})],
   testRunnerHtml: testFramework =>

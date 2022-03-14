@@ -129,20 +129,11 @@ Settings -> Developer Settings -> Personal access tokens
 
 To integrate the project with GitHub, simply use the translate tool's **Import via Github** option and fill the necessary fields.
 
-##### Configs with private repositories
+Same concept applies to BitBucket
 
-The URL structure is different for private GitHub repositories, as the tool accesses GitHub's API to pull the necessary files.
-
-It is generated for you when importing via the translate tool, but in case you'd like to create the url yourself, here's the structure:
 ```
-"url": "https://api.github.com/repos/<Username>/<RepoName>/contents/<LinkToTranslationsDirectory>/"
-
-for example:
-
-"url": "https://api.github.com/repos/someuser5/my-cool-project/contents/config/i18n/common/"
+BitBucket's Workspace settings > OAuth Consumers and combine the Key and Secret to be Key:Secret, eg KB42ebc8rt64b0k9MV:kud7Nsklf93JK2lsKnNs2kNfgXA2n
 ```
-
----
 #### Public repositories
 
 For public repositories, you can simply use the **Import via public url** option give the RAW file GitHub URL

@@ -4,6 +4,8 @@
 
 This tool allows translators to quickly and conveniently translate JSON language files.
 
+Built with Svelte, TypeScript, Vite & Express
+
 ---
 ## Using the tool
 
@@ -86,9 +88,9 @@ Alternatively, you may follow this JSON structure:
 * `indent` is the space indentation. The default is always 2 when starting a new project via the tranlate tool.
 * `token` (optional) is the access token to access a protected url, such as a private GitHub repository. More on that below.
 
-### Integrating with GitHub.
+### Integrating with GitHub/BitBucket.
 
-This tool supports using a GitHub repository to fetch and then commit the changes when you're done.
+This tool supports using a GitHub and BitBucket repositories to fetch and then commit the changes when you're done.
 
 Various projects usually have a defined file structure where all translations are stored in JSON.
 
@@ -155,39 +157,48 @@ https://raw.githubusercontent.com/<User>/<Repo>/main/translations/
 
 Requires **node**, **docker** and **docker-compose** to be installed.
 
-### Local installation
-Open a terminal/CLI in the project root after cloning and run the following commands:
+### Running it
 
-```
-npm install
-```
-
-```
-npm run build
-```
-
-The tool is now located in the `build/` directory and can be served with a static server of your choice, such as `vercel`, `serve`, `http-server` or any other host.
-
-### Docker
+Navigate to the root directory.
 
 Build the project
 ```
 docker-compose build
 ```
 
-Start it on port 8080
+Start it on port 8999
 ```
-docker-compose run --publish 8080:80 translate
+docker-compose up
 ```
 
-Open http://localhost:8080 to use the tool.
+Open http://localhost:8999 to use the tool.
+
+### Deployment environment variables & optional features
+
+#### Environment variables
+
+You can create a dotfile named `.env` and docker-compose will automatically pick it up. Alternatively, you can use any other method of your choice (eg during CI/CD)
+
+`GOOGLE_CLIENT_ID` - Google OAuth client ID, used for optional authentication
+
+`GOOGLE_CLIENT_SECRET` - Google OAuth client secret, used for optional authentication
+
+`COOKIE_SECRET` - Secret for cookie signing, used for optional authentication
+
+#### Predefined projects
+
+You can create a predefined project config and use it to always load them by default. Note that this will always override any other projects saved.
+
+`docker build --build-arg PROJECTS_FILE=your/projects/location/projects.json .`
 
 ## Available Scripts
+
+Make sure to `npm install` to install the required dependencies
 
 ### npm start
 
 Runs the app in the development mode.
-Open http://localhost:8080 to view it in the browser.
+Open http://localhost:8999 to view it in the browser.
 
 The page will reload if you make edits.
 You will also see any lint errors in the console.

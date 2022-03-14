@@ -197,6 +197,24 @@ http://localhost:8999/auth/
 
 Replace localhost/port with your actual domain host. Can take some time after applying the changes!
 
+#### Whitelisted emails and email domains
+
+*Requires Google Authentication to be set up
+
+In `server/config.ts`, there are two fields which let you add emails
+
+```
+  ALLOWED_DOMAINS: [],
+  ALLOWED_EMAILS: []
+```
+
+Adding just a single email/domain will restrict everybody else not included here. Here's an example:
+
+```
+  ALLOWED_DOMAINS: ['codeborne.com'],
+  ALLOWED_EMAILS: ['hello@example.com','world@example.com']
+```
+
 #### Predefined projects
 
 You can create a predefined project config and use it to always load them by default. Note that this will always override any other projects saved.

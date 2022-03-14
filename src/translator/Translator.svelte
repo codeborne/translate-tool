@@ -57,8 +57,4 @@
   .btn {
     padding: 0
   }
-
-  .me-n2 {
-    margin-right: -0.5rem
-  }
 </style>

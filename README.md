@@ -173,17 +173,29 @@ docker-compose up
 
 Open http://localhost:8999 to use the tool.
 
-### Deployment environment variables & optional features
+### Optional features
 
-#### Environment variables
+#### Google Authentication
 
-You can create a dotfile named `.env` and docker-compose will automatically pick it up. Alternatively, you can use any other method of your choice (eg during CI/CD)
+You can make it so only logged in users can access the app, or whitelist individual emails and email domains.
 
-`GOOGLE_CLIENT_ID` - Google OAuth client ID, used for optional authentication
+To do so, create a dotfile named `.env` with the following environment variables and docker-compose will automatically pick it up. Alternatively, you can use any other method of your choice (eg during CI/CD)
 
-`GOOGLE_CLIENT_SECRET` - Google OAuth client secret, used for optional authentication
+```
+GOOGLE_CLIENT_ID=Google OAuth client ID, used for optional authentication
+GOOGLE_CLIENT_SECRET=Google OAuth client secret, used for optional authentication
+COOKIE_SECRET=Secret for cookie signing, create your own, used for optional authentication
+```
 
-`COOKIE_SECRET` - Secret for cookie signing, used for optional authentication
+Use your existing or create new Google Cloud Platform credentials (API & Services -> Create Credentials -> OAuth Client ID -> Web Application) to fill the variables
+
+Then add these addresses as *Authorized redirect URI's* in Google Cloud Platform.
+```
+http://localhost:8999/K
+http://localhost:8999/auth/
+```
+
+Replace localhost/port with your actual domain host. Can take some time after applying the changes!
 
 #### Predefined projects
 

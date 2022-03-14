@@ -17,5 +17,8 @@ export default defineConfig({
   },
   build: {
     outDir: 'build'
+  },
+  optimizeDeps: {
+    include: isTest ? ['@testing-library/svelte', 'chai', 'sinon', 'sinon-chai'] : undefined
   }
 })

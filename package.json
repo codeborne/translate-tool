@@ -1,7 +1,7 @@
 {
   "scripts": {
-    "start": "snowpack dev",
-    "build": "snowpack build",
+    "start": "vite",
+    "build": "vite build",
     "build:server": "tsc -m commonjs --target esnext --esModuleInterop true server/*.ts",
     "run:server": "npm run build:server && node server/server",
     "test": "web-test-runner \"src/**/*.test.ts\""
@@ -33,6 +33,9 @@
     "snowpack": "^3.8.7",
     "svelte": "^3.37.0",
     "svelte-preprocess": "^4.7.2",
-    "typescript": "^4.3.4"
+    "typescript": "^4.3.4",
+    "vite": "^2.8.6",
+    "vite-web-test-runner-plugin": "^0.1.0",
+    "@sveltejs/vite-plugin-svelte": "^1.0.0-next.39"
   }
 }

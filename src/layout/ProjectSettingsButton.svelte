@@ -3,7 +3,6 @@
 
   export let showConfig: boolean
   export let showAddProject: boolean
-  export let showBack = true
 </script>
 
   {#if !showConfig && !showAddProject}

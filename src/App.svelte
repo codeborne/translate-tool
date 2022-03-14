@@ -96,7 +96,7 @@
         <LangSwitcher project={selectedProject} bind:lang/>
       {/if}
       <ProjectAddButton bind:showAddProject/>
-      <ProjectSettingsButton bind:showAddProject bind:showConfig showBack={loadedProjects && loadedProjects.length > 0}/>
+      <ProjectSettingsButton bind:showAddProject bind:showConfig/>
       <GoogleAuth bind:user/>
     </div>
   {/if}

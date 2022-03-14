@@ -194,7 +194,7 @@ Use your existing or create new Google Cloud Platform credentials (API & Service
 
 Then add these addresses as *Authorized redirect URI's* in Google Cloud Platform.
 ```
-http://localhost:8999/K
+http://localhost:8999/
 http://localhost:8999/auth/
 ```
 

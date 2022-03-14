@@ -4,6 +4,18 @@
 
 This tool allows translators to quickly and conveniently translate JSON language files.
 
+- Add translation files from any public URL
+- BitBucket and GitHub support (reading, pulls, commits, pull requests & branches)
+- Google Translate support
+- Optional Google authentication (can see commit author)
+- Add new keys in the same order as in the UI
+- Whitelisted email domains
+- Warnings if key is not in default language file
+- Warnings if {placeholders} are missing
+- Detect HTML tags within text
+- Raw HTML/styled previews
+- Multiple project tabs & project sharing via link
+
 Built with Svelte, TypeScript, Vite & Express
 
 ---
@@ -211,6 +223,12 @@ Adding just a single email/domain will restrict everybody else not included here
 You can create a predefined project config and use it to always load them by default. Note that this will always override any other projects saved.
 
 `docker build --build-arg PROJECTS_FILE=your/projects/location/projects.json .`
+
+#### Tag as HTML
+
+End a key with `Html` to be able to switch between HTML and styled text within the UI.
+
+eg `main.aboutHtml` or `main.contentHtml.support`
 
 ## Available Scripts
 

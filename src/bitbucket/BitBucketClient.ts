@@ -74,9 +74,8 @@ export class BitBucketClient {
   async getFileContent(file: string) {
     const url = this.getUrlWithCustomBranch()
     const token = (this.config.token) ? await this.getAccessToken() : undefined
-    const fileContent = await this.fetchFile(url + file, token?.access_token)
+    return await this.fetchFile(url + file, token?.access_token)
       .catch(() => this.fetchFile(this.config.url + file, token?.access_token))
-    return fileContent
   }
 
   async getFileContentNoCatch(file: string, branch?: string) {

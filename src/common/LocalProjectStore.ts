@@ -44,4 +44,4 @@ class LocalProjectStore {
 }
 
 const localProjectStore = new LocalProjectStore()
-export default  localProjectStore
+export default localProjectStore

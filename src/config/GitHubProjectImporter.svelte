@@ -29,9 +29,9 @@
 
   async function submit() {
     setProjectKeys()
-    let githubClient = new GitHubClient(project)
-    let langs: LoadedProject = await githubClient.getFileContent('langs.json')
-    if (!langs)  warning = 'Could not load project'
+    const githubClient = new GitHubClient(project)
+    const langs: LoadedProject = await githubClient.getFileContent('langs.json')
+    if (!langs) warning = 'Could not load project'
     else validate(langs)
     if (warning == '') save()
   }
@@ -43,7 +43,7 @@
     }
     if (!localStorage.getItem('selectedProject')) localStorage.setItem('selectedProject', title)
 
-    let newProjects: any[] = JSON.parse(localStorage.getItem('projects') as string)
+    const newProjects: any[] = JSON.parse(localStorage.getItem('projects') as string)
     newProjects.push(project)
     localStorage.setItem('projects', JSON.stringify(newProjects))
     projects = newProjects

@@ -5,35 +5,24 @@
   import {BitBucketClient} from '../bitbucket/BitBucketClient'
   import Icon from '../components/Icon.svelte'
 
-  let token: string = ''
   let warning: string
-  let username: string = ''
-  let repo: string = ''
-  let path: string = ''
-  let title: string = ''
+  let username = ''
+  let repo = ''
+  let path = ''
   let defaultBranch = ''
   let branch = 'translations'
   let project: Project = {url: '', title: '', token: '', indent: 2, branch}
 
   const dispatch = createEventDispatcher()
 
-  function setProjectKeys() {
+  async function submit() {
     warning = ''
-    // TODO: simplify
-    project.title = title
-    project.token = token
-    project.indent = 2
     project.branch = branch ?? 'translations'
     project.url = `https://api.bitbucket.org/2.0/repositories/${username}/${repo}/src/${defaultBranch}${path}`
-  }
-
-  async function submit() {
-    setProjectKeys()
     let bitbucketClient = new BitBucketClient(project)
     let langs: string[] = await bitbucketClient.getFileContent('langs.json') as string[]
     if (!langs) warning = 'Could not load project'
-    else validate(langs)
-    if (warning == '') dispatch('imported', project)
+    else if (validate(langs)) dispatch('imported', project)
   }
 
   function validate(arr: string[]) {
@@ -46,7 +35,7 @@
       on:submit|preventDefault={submit}>
     <h5 class="card-title mb-3 mb-lg-4">Import dictionary from BitBucket</h5>
     <label class="form-label">Project name</label>
-    <input type="text" bind:value={title} class="form-control" required>
+    <input type="text" bind:value={project.title} class="form-control" required>
     <div class="form-text mb-4">You can change it at any time.</div>
 
     <label class="form-label">Repository owner</label>
@@ -68,7 +57,7 @@
       eg <b>/i18n/</b> for <i>https://bitbucket.org/account-name/myrepo/src/main<b>/i18n/</b>langs.json</i></div>
 
     <label class="form-label">Personal auth token</label>
-    <input type="text" bind:value={token} pattern=".+:.+" class="form-control">
+    <input type="text" bind:value={project.token} pattern=".+:.+" class="form-control">
     <div class="form-text mb-4">This token will be used to access or create commits. Create one under BitBucket's <b>Workspace settings > OAuth Consumers</b>
       and combine the <b>Key</b> and <b>Secret</b> to be <b>Key:Secret</b>, eg <i>KB42ebc8rt64b0k9MV:kud7Nsklf93JK2lsKnNs2kNfgXA2n</i>
     </div>

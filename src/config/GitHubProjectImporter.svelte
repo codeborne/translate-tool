@@ -20,7 +20,7 @@
     warning = ''
     project.url = `https://api.github.com/repos/${username}/${repo}/contents${path}`
     const githubClient = new GitHubClient(project)
-    const langs: string[] = await githubClient.getFileContent('langs.json')
+    const langs: string[] = await githubClient.getFileContent('langs.json') as string[]
     if (!langs) warning = 'Could not load project'
     else if (validate(langs)) dispatch('imported', project)
   }

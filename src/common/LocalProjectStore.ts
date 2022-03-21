@@ -3,6 +3,7 @@ import type {Project} from './Project'
 class LocalProjectStore {
   public _projects?: Project[] = []
   public _selectedProject?: Project|undefined
+
   constructor() {
     this.init()
   }
@@ -10,6 +11,14 @@ class LocalProjectStore {
   private init() {
     this.loadProjectsFromLocalStorage()
     this.loadSelectedProject()
+  }
+
+  public add(project: Project) {
+    this._projects?.push(project)
+  }
+
+  public remove(title: string) {
+    this._projects = this._projects?.filter(p => p.title !== title)
   }
 
   public set projects(projects: Project[]) {

@@ -1,17 +1,16 @@
 <script lang="ts">
 
-  import type {LoadedProject, Project} from '../common/Project'
+  import type {Project} from '../common/Project'
   import {createEventDispatcher} from 'svelte'
   import {GitHubClient} from '../github/GitHubClient'
   import Icon from '../components/Icon.svelte'
-
-  export let projects: Project[]
 
   let warning: string
   let username = ''
   let repo = ''
   let path = '/i18n/'
   let branch = 'translations'
+
   let project: Project = {url: '', title: '', token: '', indent: 2, branch}
 
   const dispatch = createEventDispatcher()
@@ -20,27 +19,12 @@
     warning = ''
     project.url = `https://api.github.com/repos/${username}/${repo}/contents${path}`
     const githubClient = new GitHubClient(project)
-    const langs: LoadedProject = await githubClient.getFileContent('langs.json')
+    const langs: string[] = await githubClient.getFileContent('langs.json')
     if (!langs) warning = 'Could not load project'
-    else validate(langs)
-    if (warning == '') save()
+    else if (validate(langs)) dispatch('imported', project)
   }
 
-  function save() {
-    if (!localStorage.getItem('projects')) {
-      localStorage.clear()
-      localStorage.setItem('projects', JSON.stringify([]))
-    }
-    if (!localStorage.getItem('selectedProject')) localStorage.setItem('selectedProject', project.title)
-
-    const newProjects: any[] = JSON.parse(localStorage.getItem('projects') as string)
-    newProjects.push(project)
-    localStorage.setItem('projects', JSON.stringify(newProjects))
-    projects = newProjects
-    dispatch('changed')
-  }
-
-  function validate(arr: any) {
+  function validate(arr: string[]) {
     return !arr ? warning = 'Invalid file' : !Array.isArray(arr) ? warning = 'Must be an array' : warning = ''
   }
 </script>

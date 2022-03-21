@@ -1,13 +1,11 @@
 <script lang="ts">
 
-  import type {LoadedProject, Project} from '../common/Project'
+  import type {Project} from '../common/Project'
   import {createEventDispatcher} from 'svelte'
   import {BitBucketClient} from '../bitbucket/BitBucketClient'
   import Icon from '../components/Icon.svelte'
 
-  export let token: string = ''
-  export let projects: Project[]
-
+  let token: string = ''
   let warning: string
   let username: string = ''
   let repo: string = ''
@@ -21,6 +19,7 @@
 
   function setProjectKeys() {
     warning = ''
+    // TODO: simplify
     project.title = title
     project.token = token
     project.indent = 2
@@ -31,24 +30,11 @@
   async function submit() {
     setProjectKeys()
     let bitbucketClient = new BitBucketClient(project)
-    let langs: LoadedProject = await bitbucketClient.getFile('langs.json')
-    if (!langs)  warning = 'Could not load project'
+    // TODO: use getFileContent() that already parses json
+    let langs: string[] = JSON.parse(await bitbucketClient.getFile('langs.json'))
+    if (!langs) warning = 'Could not load project'
     else validate(langs)
-    if (warning == '') save()
-  }
-
-  function save() {
-    if (!localStorage.getItem('projects')) {
-      localStorage.clear()
-      localStorage.setItem('projects', JSON.stringify([]))
-    }
-    if (!localStorage.getItem('selectedProject')) localStorage.setItem('selectedProject', title)
-
-    let newProjects: any[] = JSON.parse(localStorage.getItem('projects') as string)
-    newProjects.push(project)
-    localStorage.setItem('projects', JSON.stringify(newProjects))
-    projects = newProjects
-    dispatch('changed')
+    if (warning == '') dispatch('imported', project)
   }
 
   function validate(arr: any) {

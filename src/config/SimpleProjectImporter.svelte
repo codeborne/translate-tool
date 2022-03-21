@@ -4,8 +4,6 @@
   import jsonLoader from '../common/JsonLoader'
   import Icon from '../components/Icon.svelte'
 
-  export let projects: Project[]
-
   let url: string = ''
   let title: string = ''
   let indent: number = 2
@@ -22,21 +20,8 @@
   }
 
   function save(dictUrl: string) {
-    if (!localStorage.getItem('projects')) {
-      localStorage.clear()
-      localStorage.setItem('projects', JSON.stringify([]))
-    }
-    if (!localStorage.getItem('selectedProject')) localStorage.setItem('selectedProject', title)
-    let newProject = {
-      title,
-      url: dictUrl,
-      indent,
-    }
-    let newProjects: any[] = JSON.parse(localStorage.getItem('projects') as string)
-    newProjects.push(newProject)
-    localStorage.setItem('projects', JSON.stringify(newProjects))
-    projects = newProjects
-    dispatch('changed')
+    const project: Project = {title, url: dictUrl, indent}
+    dispatch('imported', project)
   }
 
   function validate(arr: any) {

@@ -31,7 +31,7 @@
     if (!projects) projects = tryInitFromLocalStorage()
     await handleSharedUrl()
     if (projects) localStorage.setItem('projects', JSON.stringify(projects))
-    !projects.length ? setupNewProjectIfNotExists() : await refreshProjects()
+    !projects.length ? setupNewProjectIfNotExists() : await loadProjects()
   })
 
   async function handleSharedUrl() {
@@ -58,18 +58,27 @@
   }
 
   async function loadAllProjects() {
-    if (projects.length) await refreshProjects()
+    if (projects.length) await loadProjects()
     else {
       setupNewProjectIfNotExists()
       loadedProjects = []
     }
   }
 
-  async function refreshProjects() {
+  async function loadProjects() {
     loadedProjects = await jsonLoader.loadProjects(projects)
     const lastTitle = localStorage.getItem('selectedProject')
     selectedProject = (loadedProjects.find(p => p.title == lastTitle) ?? loadedProjects[0])
     showAddProject = !selectedProject
+  }
+
+  function projectImported(e: CustomEvent) {
+    const project = e.detail
+    projects = projects.concat(project)
+    // TODO: create LocalProjectStore (the only class that should know about localStorage)
+    localStorage.setItem('projects', JSON.stringify(projects))
+    localStorage.setItem('selectedProject', project.title)
+    loadProjects()
   }
 
   async function tryLoadPreConfiguredProjects() {
@@ -113,8 +122,7 @@
   {#if !loadedProjects && !selectedProject}
     <LoadingSpinner class="my-5"/>
   {:else if showAddProject}
-
-    <ProjectImportList bind:projects on:changed={loadAllProjects}/>
+    <ProjectImportList on:imported={projectImported}/>
   {:else if showConfig}
 
     <ProjectSettings bind:selectedProject={selectedProject.config} bind:projects on:changed={loadAllProjects}/>

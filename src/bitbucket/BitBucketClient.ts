@@ -74,7 +74,7 @@ export class BitBucketClient {
   async getFile(file: string) {
     const url = this.getUrlWithCustomBranch()
     const token = (this.config.token) ? await this.getAccessToken() : undefined
-    return await this.fetchFile(url + file, token?.access_token)
+    return this.fetchFile(url + file, token?.access_token)
       .catch(() => this.fetchFile(this.config.url + file, token?.access_token))
   }
 
@@ -84,7 +84,7 @@ export class BitBucketClient {
     return await this.fetchFile(url + file, token?.access_token)
   }
 
-  async fetchFile(url: string, token: string|undefined, init?: RequestInit,) {
+  async fetchFile(url: string, token: string|undefined, init?: RequestInit) {
     return await this.request(url, {...init, headers: {...this.tokenHeader(token), ...init?.headers}})
   }
 
@@ -138,9 +138,6 @@ export class BitBucketClient {
     const headers = {...this.tokenHeader(token), ...{'Content-Type': 'application/json'}}
     await this.request(`${this.getBranchListUrl()}`, {method: 'POST', body, headers})
   }
-
-
-
 }
 
 export interface BitBucketAuthResponse {

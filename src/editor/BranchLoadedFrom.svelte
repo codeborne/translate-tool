@@ -26,7 +26,7 @@
     if (config.url.includes(GitHubClient.host)) result =
       await new GitHubClient(config).getFileContentNoCatch('langs.json')
     else if (config.url.includes(BitBucketClient.host)) result =
-      await new BitBucketClient(config).getFileNoCatch('langs.json', config.branch ?? 'translations')
+      await new BitBucketClient(config).getFileContentNoCatch('langs.json', config.branch ?? 'translations')
     return !!result
   }
 

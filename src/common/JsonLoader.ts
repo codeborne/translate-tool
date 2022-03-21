@@ -20,7 +20,7 @@ class JsonLoader {
 
   loadFor(project: Project, fileBaseName: string): Promise<any> {
     if (project.url.includes(GitHubClient.host)) return new GitHubClient(project).getFileContent(fileBaseName + '.json')
-    else if (project.url.includes(BitBucketClient.host)) return new BitBucketClient(project).getFile(fileBaseName + '.json')
+    else if (project.url.includes(BitBucketClient.host)) return new BitBucketClient(project).getFileContent(fileBaseName + '.json')
     else return this.loadJson(getBaseUrl(project.url) + '/' + fileBaseName + '.json')
   }
 

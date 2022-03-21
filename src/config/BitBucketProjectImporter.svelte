@@ -30,15 +30,15 @@
   async function submit() {
     setProjectKeys()
     let bitbucketClient = new BitBucketClient(project)
-    // TODO: use getFileContent() that already parses json
-    let langs: string[] = JSON.parse(await bitbucketClient.getFile('langs.json'))
+    let langs: string[] = await bitbucketClient.getFileContent('langs.json') as string[]
     if (!langs) warning = 'Could not load project'
     else validate(langs)
     if (warning == '') dispatch('imported', project)
   }
 
-  function validate(arr: any) {
-    return !arr ? warning = 'Invalid file' : !Array.isArray(arr) ? warning = 'Must be an array' : warning = ''
+  function validate(arr: string[]) {
+    warning = !arr ? 'Invalid file' : !Array.isArray(arr) ? 'Must be an array' : ''
+    return !warning
   }
 </script>
 

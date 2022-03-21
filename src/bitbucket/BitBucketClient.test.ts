@@ -33,7 +33,7 @@ describe('BitBucketClient', () => {
     stub(client, 'getAccessToken').resolves({access_token: 'validToken', refresh_token: '', token_type: '', expires_in: 1, scopes: ''})
     stub(client, 'fetchFile').resolves()
     stub(client, 'request').resolves()
-    await client.getFile('file.json')
+    await client.getFileContent('file.json')
     expect(client.getAccessToken).called
     expect(client.fetchFile).calledWith('https://api.bitbucket.org/2.0/repositories/owner/repo/src/main/i18n/file.json', 'validToken')
   })

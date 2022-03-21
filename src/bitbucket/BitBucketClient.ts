@@ -71,14 +71,15 @@ export class BitBucketClient {
     return this.config.url.replace(`/src/${this.findDefaultBranch()}/`, `/src/${this.branch}/`)
   }
 
-  async getFile(file: string) {
+  async getFileContent(file: string) {
     const url = this.getUrlWithCustomBranch()
     const token = (this.config.token) ? await this.getAccessToken() : undefined
-    return this.fetchFile(url + file, token?.access_token)
+    const fileContent = await this.fetchFile(url + file, token?.access_token)
       .catch(() => this.fetchFile(this.config.url + file, token?.access_token))
+    return fileContent
   }
 
-  async getFileNoCatch(file: string, branch?: string) {
+  async getFileContentNoCatch(file: string, branch?: string) {
     const url = branch ? this.config.url.replace(`/${this.findDefaultBranch()}/`, `/${branch}/`) : this.config.url
     const token = (this.config.token) ? await this.getAccessToken() : undefined
     return await this.fetchFile(url + file, token?.access_token)

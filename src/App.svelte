@@ -44,8 +44,8 @@
   async function tryLoadSharedUrl(encoded: string) {
     try {
       const sharedProject: Project = JSON.parse(decodeBase64Unicode(encoded))
-      if (projects.find((p) => p.title === sharedProject.title)) sharedProject.title = `${sharedProject.title} (Duplicate)`
-      projects.push(sharedProject)
+      if (projects.find((p) => p.title === sharedProject.title)) console.warn(`Project named ${sharedProject.title} already exists - did not add shared project`)
+      else projects.push(sharedProject)
     } catch (e: any) {
       if (e.message) alert(`Something went wrong while parsing the shared link and the project was not added.\n\nError message:\n${e.message}`)
     }

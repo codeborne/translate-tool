@@ -1,7 +1,7 @@
 import type {Project} from './Project'
 
 class LocalProjectStore {
-  public _projects?: Project[] = []
+  public _projects: Project[] = []
   public _selectedProject?: Project|undefined
 
   constructor() {

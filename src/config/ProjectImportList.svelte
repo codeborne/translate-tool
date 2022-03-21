@@ -21,7 +21,8 @@
 
   <div class="accordion-item shadow mb-3 rounded-3 overflow-hidden">
     <h2 class="accordion-header">
-      <button class="accordion-button p-lg-4 collapsed bitbucketImport" type="button">
+      <button class="accordion-button p-lg-4 collapsed bitbucketImport" type="button" data-bs-toggle="collapse"
+              data-bs-target=".collapseBitbucket" aria-expanded="false" aria-controls="collapseThree">
         Via BitBucket
       </button>
     </h2>
@@ -33,7 +34,7 @@
 
   <div class="accordion-item shadow rounded-3 overflow-hidden">
     <h2 class="accordion-header">
-      <button class="accordion-button p-lg-4 publicImport" type="button"
+      <button class="accordion-button p-lg-4 publicImport" type="button" data-bs-toggle="collapse"
               data-bs-target=".collapsePublic" aria-expanded="false" aria-controls="collapseThree">
         Via Public URL
       </button>

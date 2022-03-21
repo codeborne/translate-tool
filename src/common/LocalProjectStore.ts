@@ -2,7 +2,7 @@ import type {Project} from './Project'
 
 class LocalProjectStore {
   public _projects?: Project[] = []
-  public _selectedProject?: Project
+  public _selectedProject?: Project|undefined
   constructor() {
     this.init()
   }
@@ -28,8 +28,9 @@ class LocalProjectStore {
 
   private loadSelectedProject() {
     const title = localStorage.getItem('selectedProject')
-    const existingProject: Project|undefined = this._projects?.find((p) => p.title === title)
-    if (existingProject) this._selectedProject = existingProject
+    const projectExists: Project|undefined = this._projects?.find((p) => p.title === title)
+    if (projectExists) this._selectedProject = projectExists
+    else this._selectedProject = this._projects?.length ? this._projects[0] : undefined
   }
 }
 

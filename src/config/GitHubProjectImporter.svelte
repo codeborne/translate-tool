@@ -1,3 +1,4 @@
+<svelte:options accessors/>
 <script lang="ts">
 
   import type {Project} from '../common/Project'
@@ -11,7 +12,7 @@
   let path = '/i18n/'
   let branch = 'translations'
 
-  let project: Project = {url: '', title: '', token: '', indent: 2, branch}
+  export let project: Project = {url: '', title: '', token: '', indent: 2, branch}
 
   const dispatch = createEventDispatcher()
 
@@ -25,7 +26,8 @@
   }
 
   function validate(arr: string[]) {
-    return !arr ? warning = 'Invalid file' : !Array.isArray(arr) ? warning = 'Must be an array' : warning = ''
+    warning = !arr ? 'Invalid file' : !Array.isArray(arr) ? 'Must be an array' : ''
+    return !warning
   }
 </script>
 
@@ -63,8 +65,6 @@
     </button>
   </div>
   {#if warning}
-    <div class="alert alert-warning mt-3">
-      {warning}
-    </div>
+    <div class="alert alert-warning mt-3">{warning}</div>
   {/if}
 </form>

@@ -5,14 +5,14 @@
   import {GitHubClient} from '../github/GitHubClient'
   import Icon from '../components/Icon.svelte'
 
-  export let token: string = ''
+  export let token = ''
   export let projects: Project[]
 
   let warning: string
-  let username: string = ''
-  let repo: string = ''
-  let path: string = '/i18n/'
-  let title: string = ''
+  let username = ''
+  let repo = ''
+  let path = '/i18n/'
+  let title = ''
   let branch = 'translations'
   let project: Project = {url: '', title: '', token: '', indent: 2, branch}
 

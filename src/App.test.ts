@@ -6,6 +6,7 @@ import {tick} from 'svelte'
 import jsonLoader from './common/JsonLoader'
 import type {Project} from './common/Project'
 import {LoadedProject} from './common/Project'
+import localProjectStore from './common/LocalProjectStore'
 
 const project = {
   title: 'TestTitle',
@@ -21,21 +22,25 @@ describe('<App>', () => {
   beforeEach(() => {
     loadJson = stub(jsonLoader, 'loadJson').resolves(undefined)
     stub(jsonLoader, 'loadProjects').resolves([loadedProject])
-    localStorage.clear()
+    localProjectStore.clear()
   })
 
   it('renders language importer with no config file or localstorage', async () => {
+    stub(localProjectStore, 'getProjects').returns([])
     const {container} = render(App)
     expect(jsonLoader.loadJson).calledWith('projects.json')
     await act(jsonLoader.loadJson)
+    expect(localProjectStore.getProjects).called
     await tick()
     expect(container.querySelector('.addNew')).to.exist
   })
 
   it('renders editor if localStorage exists, but no deployed projects', async () => {
-    localStorage['projects'] = JSON.stringify([project])
+    stub(localProjectStore, 'getProjects').returns([project])
+    localProjectStore.setProjects([project])
     const {container} = render(App)
     await act(jsonLoader.loadJson)
+    expect(localProjectStore.getProjects).called
 
     expect(jsonLoader.loadProjects).calledWith([project])
     await act(jsonLoader.loadProjects)

@@ -3,6 +3,7 @@
   import {createEventDispatcher} from 'svelte'
   import {encodeBase64Unicode} from '../common/utils'
   import Icon from '../components/Icon.svelte'
+  import localProjectStore from '../common/LocalProjectStore'
 
   export let projects: Project[]
   export let selectedProject: Project
@@ -18,7 +19,7 @@
   function deleteProject() {
     if (!confirm(`Are you sure you want to delete the project: ${selectedProject.title}?`)) return
     projects = projects.filter(obj => obj.title !== selectedProject.title)
-    localStorage.setItem('projects', JSON.stringify(projects))
+    localProjectStore.setProjects(projects)
     dispatch('changed')
   }
 
@@ -38,7 +39,7 @@
 
   function rewriteProjectLists(filteredStorage: Project[]) {
     filteredStorage.push(selectedProject)
-    localStorage.setItem('projects', JSON.stringify(filteredStorage))
+    localProjectStore.setProjects(filteredStorage)
     projects = filteredStorage
     dispatch('changed')
   }

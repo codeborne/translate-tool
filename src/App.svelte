@@ -16,6 +16,7 @@
   import GoogleAuth from './common/GoogleAuth.svelte'
   import {decodeBase64Unicode} from './common/utils'
   import type {GoogleProfile} from './common/GoogleTypes'
+  import localProjectStore from './common/LocalProjectStore'
 
   let showConfig = false, showAddProject = false
   let projects: Project[]
@@ -28,9 +29,9 @@
 
   onMount(async () => {
     projects = await tryLoadPreConfiguredProjects()
-    if (!projects) projects = tryInitFromLocalStorage()
+    if (!projects) projects = localProjectStore.getProjects()
     await handleSharedUrl()
-    if (projects) localStorage.setItem('projects', JSON.stringify(projects))
+    if (projects) localProjectStore.setProjects(projects)
     !projects.length ? setupNewProjectIfNotExists() : await loadProjects()
   })
 
@@ -67,7 +68,7 @@
 
   async function loadProjects() {
     loadedProjects = await jsonLoader.loadProjects(projects)
-    const lastTitle = localStorage.getItem('selectedProject')
+    const lastTitle = localProjectStore.getSelectedProject()
     selectedProject = (loadedProjects.find(p => p.title == lastTitle) ?? loadedProjects[0])
     showAddProject = !selectedProject
   }
@@ -76,17 +77,13 @@
     const project = e.detail
     projects = projects.concat(project)
     // TODO: create LocalProjectStore (the only class that should know about localStorage)
-    localStorage.setItem('projects', JSON.stringify(projects))
-    localStorage.setItem('selectedProject', project.title)
+    localProjectStore.setProjects(projects)
+    localProjectStore.setSelectedProject(project)
     loadProjects()
   }
 
   async function tryLoadPreConfiguredProjects() {
     return jsonLoader.loadJson('projects.json').catch(() => console.warn('No deployment argument file found.')) as Project[]
-  }
-
-  function tryInitFromLocalStorage(): Project[] {
-    return JSON.parse(localStorage.getItem('projects') ?? '[]')
   }
 
   function showUnhandledError(e: PromiseRejectionEvent) {

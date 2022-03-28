@@ -1,13 +1,14 @@
 <script lang="ts">
 
   import type {LoadedProject} from '../common/Project'
+  import localProjectStore from '../common/LocalProjectStore'
 
   export let projects: LoadedProject[]
   export let selectedProject: LoadedProject
 
   function handleProjectSelect(project: LoadedProject) {
     selectedProject = project
-    localStorage.setItem('selectedProject', selectedProject.title)
+    localProjectStore.setSelectedProject(selectedProject.config)
   }
 
 </script>

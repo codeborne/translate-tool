@@ -1,15 +1,16 @@
 <script lang="ts">
   import type {LoadedProject} from '../common/Project'
+  import localProjectStore from '../common/LocalProjectStore'
 
   export let project: LoadedProject
-  export let lang: string = localStorage.getItem('selectedLanguage') ?? project.langs[0]
+  export let lang: string = localProjectStore.getLang() ?? project.langs[0]
 
   $: if (!project.dicts[lang]) {
     lang = project.langs[0]
-    localStorage.setItem('selectedLanguage', lang)
+    localProjectStore.setLang(lang)
   }
 
-  $: if (lang) localStorage.setItem('selectedLanguage', lang)
+  $: if (lang) localProjectStore.setLang(lang)
 
 </script>
 

@@ -1,3 +1,4 @@
+<svelte:options accessors/>
 <script lang="ts">
 
   import type {Project} from '../common/Project'
@@ -11,7 +12,7 @@
   let path = ''
   let defaultBranch = ''
   let branch = 'translations'
-  let project: Project = {url: '', title: '', token: '', indent: 2, branch}
+  export let project: Project = {url: '', title: '', token: '', indent: 2, branch}
 
   const dispatch = createEventDispatcher()
 

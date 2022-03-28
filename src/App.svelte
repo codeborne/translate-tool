@@ -76,7 +76,6 @@
   function projectImported(e: CustomEvent) {
     const project = e.detail
     projects = projects.concat(project)
-    // TODO: create LocalProjectStore (the only class that should know about localStorage)
     localProjectStore.setProjects(projects)
     localProjectStore.setSelectedProject(project)
     loadProjects()

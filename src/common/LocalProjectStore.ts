@@ -1,45 +1,47 @@
 import type {Project} from './Project'
 
 class LocalProjectStore {
-  public _projects: Project[] = []
-  public _selectedProject?: Project|undefined
+  public projects: Project[] = []
+  public selectedProject?: Project|undefined
 
   constructor() {
     this.init()
   }
 
-  private init() {
-    this.loadProjectsFromLocalStorage()
+  public init() {
+    this.loadProjects()
     this.loadSelectedProject()
   }
 
   public add(project: Project) {
-    this._projects?.push(project)
+    this.projects?.push(project)
+    localStorage.setItem('projects', JSON.stringify(this.projects))
   }
 
   public remove(title: string) {
-    this._projects = this._projects?.filter(p => p.title !== title)
+    this.projects = this.projects?.filter(p => p.title !== title)
+    if (title == this.selectedProject?.title) this.setSelectedProject(this.projects[0])
   }
 
-  public set projects(projects: Project[]) {
-    this._projects = projects
+  public setProjects(projects: Project[]) {
+    this.projects = projects
     localStorage.setItem('projects', JSON.stringify(projects))
   }
 
-  public set selectedProject(project: Project) {
-    this._selectedProject = project
+  public setSelectedProject(project: Project) {
+    this.selectedProject = project
     localStorage.setItem('selectedProject', project.title)
   }
 
-  private loadProjectsFromLocalStorage() {
-    this._projects = JSON.parse(localStorage.getItem('projects') ?? '[]')
+  private loadProjects() {
+    this.projects = JSON.parse(localStorage.getItem('projects') ?? '[]')
   }
 
   private loadSelectedProject() {
     const title = localStorage.getItem('selectedProject')
-    const projectExists: Project|undefined = this._projects?.find((p) => p.title === title)
-    if (projectExists) this._selectedProject = projectExists
-    else this._selectedProject = this._projects?.length ? this._projects[0] : undefined
+    const projectExists: Project|undefined = this.projects?.find((p) => p.title === title)
+    if (projectExists) this.selectedProject = projectExists
+    else this.selectedProject = this.projects?.length ? this.projects[0] : undefined
   }
 }
 

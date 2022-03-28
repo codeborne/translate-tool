@@ -25,4 +25,10 @@ describe('MissingParamsWarning', () => {
     const {container} = render(MissingParamsWarning, {defaultDict, key, dict})
     expect(container.querySelector('.placeholder-warning')).to.not.exist
   })
+
+  it('shows nothing if placeholders missing, but input has no text', async () => {
+    dict = {key: ''}
+    const {container} = render(MissingParamsWarning, {defaultDict, key, dict})
+    expect(container.querySelector('.placeholder-warning')).to.not.exist
+  })
 })

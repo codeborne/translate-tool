@@ -30,7 +30,7 @@
 
 </script>
 
-{#if params && missing && missing.length}
+{#if params && missing && missing.length && dict[key]}
   <div class="text-secondary placeholder-warning">
     <i class="fa-solid fa-triangle-exclamation"></i> <b>Missing placeholders:</b> {missing.join(', ')}
   </div>

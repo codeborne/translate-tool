@@ -4,6 +4,7 @@ import ProjectSettings from './ProjectSettings.svelte'
 import type {Project} from '../common/Project'
 import {stub} from 'sinon'
 import {tick} from 'svelte'
+import localProjectStore from '../common/LocalProjectStore'
 
 describe('ProjectSettings', () => {
 
@@ -40,10 +41,10 @@ describe('ProjectSettings', () => {
     const {container} = render(ProjectSettings, {projects, selectedProject})
     const editBtn = container.querySelector('.editBtn') as HTMLButtonElement
     expect(editBtn).to.exist
-    localStorage.clear()
+    localProjectStore.clear()
     await fireEvent.click(editBtn)
     await tick()
-    expect(localStorage.getItem('projects')).to.equal(JSON.stringify(projectsAfter))
+    expect(localProjectStore.getProjects()).to.deep.equal(projectsAfter)
   })
 
   it('prompts user to confirm before deleting', async () => {

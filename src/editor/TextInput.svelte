@@ -1,8 +1,6 @@
 <script lang="ts">
-
   import {containsHTMLTags, getValue, isHtml} from '../common/utils'
   import type {Dict} from '../common/Project'
-  import {onMount} from 'svelte'
 
 
   export let lang: string
@@ -12,40 +10,26 @@
   export let uneditedDict: Dict
 
   let isPreviewing: boolean = false
-  let textarea: HTMLTextAreaElement
-
-  onMount(() => {
-    grow(textarea)
-  })
 
   $: dict[key] = dict[key] ?? ''
   $: uneditedDict[key] = uneditedDict[key] ?? ''
 
-  function grow(e: HTMLTextAreaElement) {
-    if (e) {
-      e.style.height = '38px'
-      e.style.height = (e.scrollHeight) + 'px'
-    }
-  }
-
 </script>
 
 {#if !isHtml(fullKey)}
-  <textarea bind:this={textarea}
-            on:input={() => grow(textarea)}
-            {lang} bind:value={dict[key]}
-            class="form-control"
-            class:changed={(getValue(key, dict) ?? '') !== (getValue(key, uneditedDict) ?? '')}></textarea>
-
-    {#if containsHTMLTags(dict[key])}
-      <div class="text-secondary text-small">
-        <i class="fa-solid fa-triangle-exclamation"></i> Contains HTML tags, but key does not end with <b>Html</b>
-      </div>
-    {/if}
+  <div bind:textContent={dict[key]} class="form-control not-html"
+       contenteditable="true"
+       class:changed={(getValue(key, dict) ?? '') !== (getValue(key, uneditedDict) ?? '')}>
+  </div>
+  {#if containsHTMLTags(dict[key])}
+    <div class="text-secondary text-small">
+      <i class="fa-solid fa-triangle-exclamation"></i> Contains HTML tags, but key does not end with <b>Html</b>
+    </div>
+  {/if}
 {:else}
   <div class="d-flex html-input">
     {#if !isPreviewing}
-      <div bind:innerHTML={dict[key]} class="form-control"
+      <div bind:innerHTML={dict[key]} class="form-control is-html"
            contenteditable="true"
            class:changed={(getValue(key, dict) ?? '') !== (getValue(key, uneditedDict) ?? '')}>
       </div>
@@ -107,7 +91,7 @@
     height: 100%;
   }
 
-  .form-control:focus, textarea:focus {
+  .form-control:focus {
     box-shadow: none;
   }
 

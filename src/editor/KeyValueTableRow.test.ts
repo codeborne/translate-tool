@@ -46,9 +46,9 @@ describe('<KeyValueTableRow>', () => {
   it('shows only filtered inputs', () => {
     filter.search = 'nested'
     const {container} = render(KeyValueTableRow, {defaultLang, dict, defaultDict, uneditedDict, filter, lang})
-    const inputs = container.querySelectorAll('textarea')
+    const inputs = container.querySelectorAll('.not-html')
     expect(inputs).to.have.length(3)
-    expect(inputs[0].value).to.contain('worlddd')
+    expect(inputs[0].textContent).to.contain('worlddd')
     expect(container.textContent).to.not.contain('hello')
   })
 })

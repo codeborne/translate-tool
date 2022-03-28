@@ -43,11 +43,11 @@ describe('TextInput', () => {
     key = 'something'
     fullKey = 'someKey.' + key
     const {container} = render(TextInput, {uneditedDict:dict, dict, key, lang, fullKey})
-    const element = container.querySelector('textarea')
+    const element = container.querySelector('.not-html')
     expect(element).to.exist
-    expect(element!.value).to.contain('html')
-    element!.value = 'edited'
-    expect(element!.value).to.contain('edited')
+    expect(element!.textContent).to.contain('html')
+    element!.textContent = 'edited'
+    expect(element!.textContent).to.contain('edited')
     expect(container.querySelector('.btn')).to.not.exist
   })
 })

@@ -10,6 +10,10 @@ describe('LocalProjectStore', () => {
     url: 'someurl'
   }
 
+  beforeEach(() => {
+    localStorage.clear()
+  })
+
   it('sets and retrieves language', async () => {
     localProjectStore.setLang('en')
     expect(localProjectStore.getLang()).to.equal('en')
@@ -24,5 +28,14 @@ describe('LocalProjectStore', () => {
     localProjectStore.setProjects([project])
     expect(localProjectStore.getProjects()).to.deep.equal([project])
     expect(localProjectStore.getProjects()[0]).to.deep.equal(project)
+  })
+
+  it('clears everything in localStorage', async () => {
+    expect(localStorage.length).to.equal(0)
+    localProjectStore.setLang('en')
+    localProjectStore.setSelectedProject(project)
+    expect(localStorage.length).to.equal(2)
+    localProjectStore.clear()
+    expect(localStorage.length).to.equal(0)
   })
 })

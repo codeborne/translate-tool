@@ -2,6 +2,10 @@ import type {Project} from './Project'
 
 class LocalProjectStore {
 
+  public clear() {
+    localStorage.clear()
+  }
+
   public setProjects(projects: Project[]) {
     localStorage.setItem('projects', JSON.stringify(projects))
   }

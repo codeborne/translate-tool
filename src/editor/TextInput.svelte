@@ -2,6 +2,7 @@
 
   import {containsHTMLTags, getValue, isHtml} from '../common/utils'
   import type {Dict} from '../common/Project'
+  import {onMount} from 'svelte'
 
 
   export let lang: string
@@ -11,25 +12,27 @@
   export let uneditedDict: Dict
 
   let isPreviewing: boolean = false
+  let textarea: HTMLTextAreaElement
+
+  onMount(() => {
+    grow(textarea)
+  })
 
   $: dict[key] = dict[key] ?? ''
   $: uneditedDict[key] = uneditedDict[key] ?? ''
 
-  function grow(e) {
-    e.target.style.height = '38px'
-    e.target.style.height = (e.target.scrollHeight + 20) + 'px'
-  }
-
-  function shrink(e) {
-    e.target.style.height = '38px'
+  function grow(e: HTMLTextAreaElement) {
+    if (e) {
+      e.style.height = '38px'
+      e.style.height = (e.scrollHeight) + 'px'
+    }
   }
 
 </script>
 
 {#if !isHtml(fullKey)}
-  <textarea on:input={grow}
-            on:focus={grow}
-            on:focusout={shrink}
+  <textarea bind:this={textarea}
+            on:input={() => grow(textarea)}
             {lang} bind:value={dict[key]}
             class="form-control"
             class:changed={(getValue(key, dict) ?? '') !== (getValue(key, uneditedDict) ?? '')}></textarea>
@@ -76,6 +79,10 @@
     flex-direction: column;
   }
 
+  div .form-control {
+    height: 100%;
+  }
+
   .preview .form-text {
     padding: 1px 5px;
     margin: 0;
@@ -97,13 +104,11 @@
   .form-control {
     resize: none;
     overflow: hidden;
-    min-height: 38px;
-    max-height: 38px;
+    height: 100%;
   }
 
   .form-control:focus, textarea:focus {
     box-shadow: none;
-    max-height: inherit !important;
   }
 
   .btn {

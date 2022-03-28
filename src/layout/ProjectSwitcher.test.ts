@@ -3,6 +3,7 @@ import {expect} from 'chai'
 import ProjectSwitcher from './ProjectSwitcher.svelte'
 import {LoadedProject, Project} from '../common/Project'
 import {tick} from 'svelte'
+import localProjectStore from '../common/LocalProjectStore'
 
 let projects: LoadedProject[] = [
   new LoadedProject({url: 'url', indent: 2, token: 'token', title: 'test'} as Project, {de: {}, et: {}, es: {}}),
@@ -26,7 +27,7 @@ describe('ProjectSwitcher', () => {
     await tick()
     expect(tabs[0].classList.contains('active')).to.be.false
     expect(tabs[1].classList.contains('active')).to.be.true
-    expect(localStorage.getItem('selectedProject')).to.equal('title2')
+    expect(localProjectStore.getSelectedProject()).to.equal('title2')
 
   })
 })

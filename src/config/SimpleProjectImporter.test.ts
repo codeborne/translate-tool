@@ -10,7 +10,7 @@ describe('SimpleProjectImporter', () => {
     {title:'project', url:'someurl', indent: 2, token:'123123'}
   ]
   it('shows error if invalid url', async () => {
-    const {container} = render(SimpleProjectImporter, {projects})
+    const {container} = render(SimpleProjectImporter)
     const button = container.querySelector('button') as HTMLButtonElement
     expect(button.textContent).to.contain('Import')
     expect(container.querySelector('.alert')).to.not.exist
@@ -23,7 +23,7 @@ describe('SimpleProjectImporter', () => {
   })
 
   it('saves project on valid submit', async () => {
-    const {container} = render(SimpleProjectImporter, {projects})
+    const {container} = render(SimpleProjectImporter)
     const button = container.querySelector('button') as HTMLButtonElement
     expect(button.textContent).to.contain('Import')
     const inputs = container.querySelectorAll('input')

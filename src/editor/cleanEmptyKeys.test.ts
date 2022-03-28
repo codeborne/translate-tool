@@ -98,7 +98,7 @@ describe('rebuild', () => {
     }
   }
 
-  it.skip('creates dict with the same order as default dict', () => {
+  it.skip('creates dict with the same order as default dict with cleaned keys', () => {
     const rebuiltDict = rebuild(obj, defaultObj)
     expect(rebuiltDict).to.deep.equal(expected)
   })

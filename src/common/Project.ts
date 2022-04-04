@@ -11,7 +11,8 @@ export type Dict = Record<string, any | string>
 export class LoadedProject {
   constructor(
     public config: Project,
-    public dicts: Record<string, Dict>
+    public dicts: Record<string, Dict>,
+    public excluded: string[] = []
   ) {}
 
   get title() {

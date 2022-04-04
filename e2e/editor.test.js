@@ -15,12 +15,12 @@ test('editor page functionality', async ({page}) => {
   await fillPublicImport(page)
   await expect(page.locator('.num-changes')).not.toBeVisible()
   await expect(page.locator('nav .nav-link:first-of-type')).toContainText('EditorTest')
-  await expect(page.locator('table .form-control:first-of-type')).toContainText('Public Testing')
+  await expect(page.locator('table .form-control').first()).toContainText('Public Testing')
   expect(await page.inputValue('#rawOutput')).toContain('Public Testing')
 
   await page.locator('table .form-control').first().fill('Changed! Abcdefghijklmnopqrstuvwxyz')
   await page.locator('body').click()
-  await expect(page.locator('table .form-control:first-of-type')).toContainText('Changed! Abcdefghijklmnopqrstuvwxyz')
+  await expect(page.locator('table .form-control').first()).toContainText('Changed! Abcdefghijklmnopqrstuvwxyz')
   expect(await page.inputValue('#rawOutput')).toContain('Changed! Abcdefghijklmnopqrstuvwxyz')
   expect(await page.inputValue('#rawOutput')).not.toContain('Public Testing')
 

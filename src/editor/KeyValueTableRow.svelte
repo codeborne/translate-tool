@@ -9,6 +9,7 @@
   import DefaultLangValue from './DefaultLangValue.svelte'
   import MissingParamsWarning from './MissingParamsWarning.svelte'
 
+  export let excluded: string[]
   export let lang: string
   export let defaultLang: string
   export let dict: Dict, defaultDict: Dict, uneditedDict: Dict
@@ -20,8 +21,8 @@
 
 {#each Object.entries(defaultDict) as [key, defaultValue]}
   {#if typeof defaultValue === 'object'}
-    <svelte:self keyPrefix={fullKey(key)} dict={dict[key] ??= {}} defaultDict={defaultValue} {defaultLang} uneditedDict={uneditedDict[key] ??= {}} {filter} {lang}/>
-    {:else if filter.shouldShow(fullKey(key), getValue(key, uneditedDict))}
+    <svelte:self keyPrefix={fullKey(key)} dict={dict[key] ??= {}} defaultDict={defaultValue} {excluded} {defaultLang} uneditedDict={uneditedDict[key] ??= {}} {filter} {lang}/>
+    {:else if !(excluded.includes(fullKey(key)) && lang !== defaultLang) && filter.shouldShow(fullKey(key), getValue(key, uneditedDict))}
     <tr class:empty={!dict[key]}>
       <td>
         {fullKey(key)}

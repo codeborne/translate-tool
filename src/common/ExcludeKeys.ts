@@ -13,17 +13,17 @@ class ExcludeKeys {
   }
 
   async fetchPublic(url: string) {
-    return await jsonLoader.loadJson(url + this.fileName)
+    return await jsonLoader.loadJson(url + this.fileName) ?? []
   }
 
   fetchGithub(project: Project) {
     const client = new GitHubClient(project)
-    return client.getFileContent(this.fileName)
+    return client.getFileContent(this.fileName) ?? []
   }
 
   fetchBitBucket(project: Project) {
     const client = new BitBucketClient(project)
-    return client.getFileContent(this.fileName)
+    return client.getFileContent(this.fileName) ?? []
   }
 
 }

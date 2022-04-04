@@ -17,14 +17,15 @@ describe('<KeyValueTableRow>', () => {
     }
   }
 
-  const lang = 'en'
+  let excluded: string[] = []
+  let lang = 'en'
   const defaultLang: string = 'en'
   const filter = new Filter()
   const defaultDict: Dict = dict
   const uneditedDict: Dict = dict
 
   it('renders all inputs', () => {
-    const {container} = render(KeyValueTableRow, {defaultLang, dict, defaultDict, uneditedDict, filter, lang})
+    const {container} = render(KeyValueTableRow, {defaultLang, dict, defaultDict, uneditedDict, filter, lang, excluded})
     // expect(container.querySelectorAll('textarea')).to.have.length(5)
     const rows = container.querySelectorAll('tr')
     const firstRow = rows[0].querySelectorAll('td')
@@ -45,10 +46,23 @@ describe('<KeyValueTableRow>', () => {
 
   it('shows only filtered inputs', () => {
     filter.search = 'nested'
-    const {container} = render(KeyValueTableRow, {defaultLang, dict, defaultDict, uneditedDict, filter, lang})
+    const {container} = render(KeyValueTableRow, {defaultLang, dict, defaultDict, uneditedDict, filter, lang, excluded})
     const inputs = container.querySelectorAll('.not-html')
     expect(inputs).to.have.length(3)
     expect(inputs[0].textContent).to.contain('worlddd')
     expect(container.textContent).to.not.contain('hello')
+  })
+
+  it('does not contain keys that are not supposed to be translated (excluded)', () => {
+    filter.search = ''
+    lang = 'de'
+    excluded = ['nested.ping']
+    const {container} = render(KeyValueTableRow, {defaultLang, dict, defaultDict, uneditedDict, filter, lang, excluded})
+    const inputs = container.querySelectorAll('.not-html')
+    expect(inputs).to.have.length(4)
+    expect(container.textContent).to.not.contain('nested.ping')
+    expect(container.textContent).to.not.contain('pong')
+    expect(container.textContent).to.contain('nested.another')
+
   })
 })

@@ -26,7 +26,7 @@
       <td>
         {fullKey(key)}
         {#if dict === defaultDict}
-          <DictKeyAdder {dict} {keyPrefix} {key}/>
+          <DictKeyAdder dict={defaultDict} {keyPrefix} {key}/>
         {/if}
       </td>
       <td>

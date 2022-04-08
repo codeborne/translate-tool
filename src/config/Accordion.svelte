@@ -16,7 +16,7 @@
 <div class="shadow mb-3 rounded-3 overflow-hidden">
 
   <h2 class="accordion-header">
-    <button on:click={open} class:collapsed={!isOpen} class="accordion-button p-lg-4 collapsed {className}" type="button">
+    <button on:click={open} class:collapsed={!isOpen} class="accordion-button p-lg-4 {className}" type="button">
       {message}
     </button>
   </h2>

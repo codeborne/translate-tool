@@ -1,7 +1,7 @@
 <script lang="ts">
   import type {Dict} from '../common/Project'
   import Icon from '../components/Icon.svelte'
-  import translator from './Translator'
+  import googleTranslate from './GoogleTranslate'
 
   export let lang: string
   export let defaultLang: string
@@ -13,7 +13,7 @@
   let translation: string = ''
   let isTranslated: boolean = false
 
-  translator.setCORS(`${window.location.protocol}//${window.location.hostname}:${window.location.port}/proxy/`)
+  googleTranslate.setCORS(`${window.location.protocol}//${window.location.hostname}:${window.location.port}/proxy/`)
 
   async function handleTranslation() {
     if (!translation) await fetchTranslation()
@@ -24,13 +24,9 @@
   $: if (lang) resetTranslation()
 
   async function fetchTranslation() {
-    await translator.translate(defaultDict[key].replace(/\./g, '7592302389753425'), { from: defaultLang, to: lang })
-      .then((res: string) => {
-        translation = res.replace(/7592302389753425/g, '.') as string ?? ''
-      })
-      .catch(err => {
-        console.error(err);
-      });
+    const periodSubstitution = '7592302389753425' // Google Translate stops translating at first period otherwise
+    const res = await googleTranslate.translate(defaultDict[key].replace(/\./g, periodSubstitution), { from: defaultLang, to: lang })
+    translation = res.replace(new RegExp(periodSubstitution, 'g'), '.') ?? ''
   }
 
   function handleUndo() {
@@ -42,7 +38,6 @@
     translation = ''
     isTranslated = false
   }
-
 </script>
 
 {#if lang !== defaultLang}

@@ -31,7 +31,7 @@ class Translator {
   public translate(
     text: string,
     opts_: { from?: string; to?: string; hl?: string; tld?: string; raw?: boolean } = {}
-  ) {
+  ): Promise<string> {
     const opts: TranslateOptions = {
       from: opts_.from || 'auto',
       to: opts_.to || 'en',
@@ -100,5 +100,4 @@ class Translator {
   }
 }
 
-const translator = new Translator()
-export default translator
+export default new Translator()

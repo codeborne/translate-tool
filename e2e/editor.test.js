@@ -3,10 +3,9 @@ import {url} from './config.js'
 
 async function fillPublicImport(page) {
   await page.locator('.addNew').click()
-  await page.locator('.publicImport').click()
-  await page.locator('.collapsePublic input:nth-of-type(1)').fill('EditorTest')
-  await page.locator('.collapsePublic input:nth-of-type(2)').fill(url + '/i18n/')
-  await page.locator('.collapsePublic button').click()
+  await page.locator('.publicImport input:nth-of-type(1)').fill('EditorTest')
+  await page.locator('.publicImport input:nth-of-type(2)').fill(url + '/i18n/')
+  await page.locator('[title="Import"]').click()
 }
 
 test('editor page functionality', async ({page}) => {

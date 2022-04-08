@@ -2,10 +2,10 @@ import {expect, test} from '@playwright/test'
 import {url} from './config.js'
 
 async function fillPublicImport(page) {
-  await page.locator('.collapsePublic input:nth-of-type(1)').fill('ConfigTest')
-  await page.locator('.collapsePublic input:nth-of-type(2)').fill(url + '/i18n/')
-  await page.locator('.collapsePublic button').click()
-  await expect(page.locator('.collapsePublic')).not.toBeVisible()
+  await page.locator('.publicImport input:nth-of-type(1)').fill('ConfigTest')
+  await page.locator('.publicImport input:nth-of-type(2)').fill(url + '/i18n/')
+  await page.locator('[title="Import"]').click()
+  await expect(page.locator('.publicImport')).not.toBeVisible()
 }
 
 test('can edit project config', async ({page}) => {

@@ -5,7 +5,7 @@ async function fillPublicImport(page) {
   await page.locator('.addNew').click()
   await page.locator('.publicImport input:nth-of-type(1)').fill('EditorTest')
   await page.locator('.publicImport input:nth-of-type(2)').fill(url + '/i18n/')
-  await page.locator('[title="Import"]').click()
+  await page.locator('.publicImport .btn').click()
 }
 
 test('editor page functionality', async ({page}) => {

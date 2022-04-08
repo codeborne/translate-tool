@@ -32,7 +32,6 @@ class JsonLoader {
       r[langs[i]] = dict; return r
     }, {} as Record<string, Dict>)
     const excludedKeys: string[] = await excluded.fetch(project) ?? []
-    console.log(excludedKeys)
     return new LoadedProject(project, dicts, excludedKeys)
   }
 

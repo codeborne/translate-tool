@@ -230,6 +230,15 @@ End a key with `Html` to be able to switch between HTML and styled text within t
 
 eg `main.aboutHtml` or `main.contentHtml.support`
 
+#### Marking keys that should not be translated
+
+You can mark certain keys to not be available for translation. They can still in the default language file, but will not show up in other languages.
+
+Create a `dont-translate-keys.json` file in the root folder and add the full keys like so:
+```json
+["companyName", "dont.translate.this.title"]
+```
+
 ## Available Scripts
 
 Make sure to `npm install` to install the required dependencies

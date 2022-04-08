@@ -7,5 +7,6 @@ describe('ProjectImportList', () => {
     const {container} = render(ProjectImportList)
     expect(container.querySelector('.githubImport')!.textContent).to.contain('Via GitHub')
     expect(container.querySelector('.publicImport')!.textContent).to.contain('Via Public URL')
+    expect(container.querySelector('.bitbucketImport')!.textContent).to.contain('Via BitBucket')
   })
 })

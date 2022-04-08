@@ -21,7 +21,7 @@
   </h2>
 
   {#if isOpen}
-    <div class:collapse={!isOpen} transition:slide class="collapsed accordion-content m-3 m-lg-4">
+    <div class:collapse={!isOpen} transition:slide|local class="collapsed accordion-content m-3 m-lg-4">
       <slot />
     </div>
   {/if}

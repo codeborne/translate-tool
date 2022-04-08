@@ -28,14 +28,18 @@ describe('Accordion', () => {
     const {container} = render(Accordion, {message, className, isOpen: true})
     expect(container.querySelector('.accordion-content')).to.exist
     expect(container.querySelector('button.collapsed')).to.not.exist
-
   })
 
-  it('opens content on click', async () => {
-    const {container} = render(Accordion, {message, className})
+  it('fires toggle event with class name on click', async () => {
+    const {container, component} = render(Accordion, {message, className})
     expect(container.querySelector('.accordion-content')).to.not.exist
     const accordion = container.querySelector('.accordion-button')!
+    let result
+    component.$on('toggle', e => {
+      result = e.detail
+    })
     await fireEvent.click(accordion)
-    expect(container.querySelector('.accordion-content')).to.exist
+    expect(result).to.equal('accordionClass')
+
   })
 })

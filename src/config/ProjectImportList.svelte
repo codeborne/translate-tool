@@ -31,7 +31,7 @@
   {#each importers as importer}
     <Accordion on:toggle={toggle}
       heading={importer.heading} className={importer.className} isOpen={importer.isOpen}>
-      <svelte:component this={importer.slot} />
+      <svelte:component this={importer.slot} on:imported />
     </Accordion>
   {/each}
 

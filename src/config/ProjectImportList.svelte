@@ -6,16 +6,16 @@
   import {SvelteComponent} from 'svelte'
 
   interface Accordion {
-    message: string,
+    heading: string,
     className: string,
     slot: SvelteComponent,
     isOpen?: boolean
   }
 
   let importers: Accordion[] = [
-    { message: 'Via GitHub', className: 'githubImport', slot: GitHubProjectImporter },
-    { message: 'Via BitBucket', className: 'bitbucketImport', slot: BitBucketProjectImporter },
-    { message: 'Via Public URL', className: 'publicImport', isOpen: true, slot: SimpleProjectImporter },
+    { heading: 'Via GitHub', className: 'githubImport', slot: GitHubProjectImporter },
+    { heading: 'Via BitBucket', className: 'bitbucketImport', slot: BitBucketProjectImporter },
+    { heading: 'Via Public URL', className: 'publicImport', isOpen: true, slot: SimpleProjectImporter },
   ] as Accordion[]
 
   function toggle(e) {
@@ -30,7 +30,7 @@
 
   {#each importers as importer}
     <Accordion on:toggle={toggle}
-      message={importer.message} className={importer.className} isOpen={importer.isOpen}>
+      heading={importer.heading} className={importer.className} isOpen={importer.isOpen}>
       <svelte:component this={importer.slot} />
     </Accordion>
   {/each}

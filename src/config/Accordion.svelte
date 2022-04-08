@@ -2,7 +2,7 @@
   import {createEventDispatcher} from 'svelte'
   import {slide} from 'svelte/transition'
 
-  export let message
+  export let heading
   export let className
   export let isOpen = false
 
@@ -16,7 +16,7 @@
 
   <h2 class="accordion-header">
     <button on:click={toggle} class:collapsed={!isOpen} class="accordion-button p-lg-4" type="button">
-      {message}
+      {heading}
     </button>
   </h2>
 

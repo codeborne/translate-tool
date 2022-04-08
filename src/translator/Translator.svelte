@@ -1,7 +1,7 @@
 <script lang="ts">
   import type {Dict} from '../common/Project'
-  import {setCORS, translate} from './translate'
   import Icon from '../components/Icon.svelte'
+  import translator from './Translator'
 
   export let lang: string
   export let defaultLang: string
@@ -13,7 +13,7 @@
   let translation: string = ''
   let isTranslated: boolean = false
 
-  setCORS(`${window.location.protocol}//${window.location.hostname}:${window.location.port}/proxy/`)
+  translator.setCORS(`${window.location.protocol}//${window.location.hostname}:${window.location.port}/proxy/`)
 
   async function handleTranslation() {
     if (!translation) await fetchTranslation()
@@ -24,7 +24,7 @@
   $: if (lang) resetTranslation()
 
   async function fetchTranslation() {
-    await translate(defaultDict[key].replace(/\./g, '7592302389753425'), { from: defaultLang, to: lang })
+    await translator.translate(defaultDict[key].replace(/\./g, '7592302389753425'), { from: defaultLang, to: lang })
       .then((res: string) => {
         translation = res.replace(/7592302389753425/g, '.') as string ?? ''
       })
@@ -47,9 +47,9 @@
 
 {#if lang !== defaultLang}
   {#if isTranslated}
-    <button on:click={handleUndo} class="btn btn-icon text-primary p-2 btn-icon-only" title="Undo translation"><Icon name="arrowBackUp"/></button>
+    <button on:click={handleUndo} class="btn translate-undo btn-icon text-primary p-2 btn-icon-only" title="Undo translation"><Icon name="arrowBackUp"/></button>
   {:else}
-    <button on:click={handleTranslation} class="btn btn-icon text-primary p-2 btn-icon-only" title="Translate"><Icon name="language"/></button>
+    <button on:click={handleTranslation} class="btn translate btn-icon text-primary p-2 btn-icon-only" title="Translate"><Icon name="language"/></button>
   {/if}
 {/if}
 

@@ -20,10 +20,6 @@
     }
     return missingKeys
   }
-
-  function isEmpty(value: object) {
-    return !Object.keys(value).length
-  }
 </script>
 
 {#if missingKeys && missingKeys.length}

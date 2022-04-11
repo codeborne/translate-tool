@@ -11,7 +11,6 @@ class ExcludedKeysLoader {
     } catch (e) {
       excludedKeys = []
     }
-    console.log(excludedKeys)
     return new Set(excludedKeys)
   }
 }

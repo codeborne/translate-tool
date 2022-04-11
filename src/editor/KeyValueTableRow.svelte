@@ -26,8 +26,11 @@
     <tr class:empty={!dict[key]}>
       <td>
         {fullKey(key)}
+        {#if excluded.includes(fullKey(key))}
+          <div class="text-secondary placeholder-warning">Marked as untranslatable</div>
+        {/if}
         {#if dict === defaultDict}
-          <DictKeyAdder dict={defaultDict} {keyPrefix} {key}/>
+          <DictKeyAdder bind:dict={defaultDict} {keyPrefix} {key}/>
         {/if}
       </td>
       <td>

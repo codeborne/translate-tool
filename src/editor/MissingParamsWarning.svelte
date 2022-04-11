@@ -37,7 +37,7 @@
 {/if}
 
 <style>
-  .placeholder-warning {
+  :global.placeholder-warning {
     font-size: small !important;
   }
 </style>

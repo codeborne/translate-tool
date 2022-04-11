@@ -2,16 +2,16 @@
   import {createEventDispatcher} from 'svelte'
   import type {Dict} from '../common/Project'
   import {LoadedProject} from '../common/Project'
-  import {deepCopy} from '../common/utils'
-  import {cleanEmptyKeys} from './cleanEmptyKeys'
+  import {rebuildDictInOrder} from './rebuildDictInOrder'
   import Icon from '../components/Icon.svelte'
 
   export let dict: Dict
+  export let defaultDict: Dict
   export let lang: string
   export let indent: number
 
   let output: Dict
-  $: if (dict) output = cleanEmptyKeys(deepCopy(dict))
+  $: if (dict) output = rebuildDictInOrder(dict, defaultDict)
 
   let textarea: HTMLTextAreaElement
 

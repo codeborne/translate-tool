@@ -1,7 +1,7 @@
 import type {Dict, Project} from '../common/Project'
 import {LoadedProject} from '../common/Project'
 import jsonLoader from '../common/JsonLoader'
-import {cleanEmptyKeys} from '../editor/cleanEmptyKeys'
+import {rebuildDictInOrder} from '../editor/rebuildDictInOrder'
 
 export class BitBucketClient {
   static host = 'api.bitbucket.org'
@@ -88,20 +88,20 @@ export class BitBucketClient {
     return await this.request(url, {...init, headers: {...this.tokenHeader(token), ...init?.headers}})
   }
 
-  async saveFile(lang: string, dict: Dict, commitMessage: string) {
+  async saveFile(lang: string, dict: Dict, defaultDict: Dict, commitMessage: string) {
     const token: BitBucketAuthResponse = await this.getAccessToken()
     await this.createBranchIfNotExists(token.access_token)
-    await this.commit(lang, dict, commitMessage, token.access_token)
+    await this.commit(lang, dict, defaultDict, commitMessage, token.access_token)
     const hasPullRequest: boolean = await this.checkIfPullRequestExists(token?.access_token)
     if (!hasPullRequest) await this.createPullRequest("Updated translations", token?.access_token)
   }
 
-  async commit(lang: string, dict: Dict, commitMessage: string, token: string) {
+  async commit(lang: string, dict: Dict, defaultDict: Dict, commitMessage: string, token: string) {
     const body = new FormData()
     body.append('message', commitMessage)
     body.append('branch', this.branch)
     body.append('author', `${this.author.name} <${this.author.email}>`)
-    body.append(`${this.getDirectoryUrl()}${lang}.json`, LoadedProject.prettyFormat(cleanEmptyKeys(dict), this.config.indent))
+    body.append(`${this.getDirectoryUrl()}${lang}.json`, LoadedProject.prettyFormat(rebuildDictInOrder(dict, defaultDict), this.config.indent))
     const headers = {...this.tokenHeader(token)}
     await this.request(`${this.getRootUrl()}/src`, {method: 'POST', body, headers})
   }

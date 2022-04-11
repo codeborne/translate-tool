@@ -2,7 +2,7 @@ import type {Dict, Project} from '../common/Project'
 import {LoadedProject} from '../common/Project'
 import {decodeBase64Unicode, encodeBase64Unicode} from '../common/utils'
 import jsonLoader from '../common/JsonLoader'
-import {cleanEmptyKeys} from '../editor/cleanEmptyKeys'
+import {rebuildDictInOrder} from '../editor/rebuildDictInOrder'
 
 export class GitHubClient {
   static host = 'api.github.com'
@@ -73,10 +73,10 @@ export class GitHubClient {
   }
 
 
-  async saveFile(lang: string, dict: Dict, commitMessage: string) {
+  async saveFile(lang: string, dict: Dict, defaultDict: Dict, commitMessage: string) {
     await this.createBranchIfNeeded()
     const fileName = lang + '.json'
-    const content = encodeBase64Unicode(LoadedProject.prettyFormat(cleanEmptyKeys(dict), this.config.indent))
+    const content = encodeBase64Unicode(LoadedProject.prettyFormat(rebuildDictInOrder(dict, defaultDict), this.config.indent))
     const previousFileBlobSha = (await this.getFile(fileName + '?ref=' + this.branch)).sha // TODO: store initial loaded file(blob) sha in LoadedProject
     const result = await this.put(this.config.url + fileName, {
       message: commitMessage,

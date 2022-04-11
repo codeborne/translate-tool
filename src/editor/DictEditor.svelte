@@ -96,11 +96,11 @@
 </div>
 
 <div id="output" class="mt-3 card shadow p-3 p-lg-4">
-  <DictClipboardOutput {dict} {lang} indent={project.config.indent} on:copied={onCopied}>
+  <DictClipboardOutput {dict} {defaultDict} {lang} indent={project.config.indent} on:copied={onCopied}>
     {#if project.config.url.includes(GitHubClient.host) && project.config.token}
-      <GitHubOutput {user} {dict} {lang} config={project.config} on:saved={onSaved}/>
+      <GitHubOutput {user} {dict} {defaultDict} {lang} config={project.config} on:saved={onSaved}/>
     {:else if project.config.url.includes(BitBucketClient.host) && project.config.token}
-      <BitBucketOutput {user} {dict} {lang} config={project.config} on:saved={onSaved}/>
+      <BitBucketOutput {user} {dict} {defaultDict} {lang} config={project.config} on:saved={onSaved}/>
     {/if}
     <ProjectSourceButton project={project.config} {defaultBranch} {lang}/>
     <ChangesCounter slot="counter" {dict} {uneditedDict}/>

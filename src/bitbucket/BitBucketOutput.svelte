@@ -6,6 +6,7 @@
   import type {GoogleProfile} from '../common/GoogleTypes'
 
   export let dict: Dict
+  export let defaultDict: Dict
   export let lang: string
   export let config: Project
   export let user: GoogleProfile|undefined
@@ -37,7 +38,7 @@
     const commitMessage = prompt('Commit message (what have you changed?)', `Updated ${lang} translations`)
     try {
       if (!commitMessage) return
-      await client.saveFile(lang, dict, commitMessage)
+      await client.saveFile(lang, dict, defaultDict, commitMessage)
       dispatch('saved')
       alert('Saved to BitBucket successfully')
     } finally {

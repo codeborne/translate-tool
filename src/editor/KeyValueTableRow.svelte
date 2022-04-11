@@ -18,14 +18,14 @@
   const fullKey = (key: string) => (keyPrefix ? keyPrefix + '.' : '') + key
 </script>
 
-{#each Object.entries(defaultDict).filter(([key]) => lang === defaultLang || !excludedKeys.has(fullKey(key))) as [key, defaultValue]}
+{#each Object.entries(defaultDict).map(e => [fullKey(e[0]), ...e]).filter(([fullKey]) => lang === defaultLang || !excludedKeys.has(fullKey)) as [fullKey, key, defaultValue]}
   {#if typeof defaultValue === 'object'}
-    <svelte:self keyPrefix={fullKey(key)} dict={dict[key] ??= {}} defaultDict={defaultValue} {excludedKeys} {defaultLang} uneditedDict={uneditedDict[key] ??= {}} {filter} {lang}/>
-  {:else if filter.shouldShow(fullKey(key), getValue(key, uneditedDict))}
+    <svelte:self keyPrefix={fullKey} dict={dict[key] ??= {}} defaultDict={defaultValue} {excludedKeys} {defaultLang} uneditedDict={uneditedDict[key] ??= {}} {filter} {lang}/>
+  {:else if filter.shouldShow(fullKey, getValue(key, uneditedDict))}
     <tr class:empty={!dict[key]}>
       <td>
-        {fullKey(key)}
-        {#if excludedKeys.has(fullKey(key)) || excludedKeys.has(keyPrefix)}
+        {fullKey}
+        {#if excludedKeys.has(fullKey) || excludedKeys.has(keyPrefix)}
           <div class="text-secondary placeholder-warning">Marked as untranslatable</div>
         {/if}
         {#if dict === defaultDict}
@@ -33,12 +33,12 @@
         {/if}
       </td>
       <td>
-        <TextInput bind:dict {key} fullKey={fullKey(key)} {uneditedDict} {lang}/>
+        <TextInput bind:dict {key} fullKey={fullKey} {uneditedDict} {lang}/>
         <MissingParamsWarning {dict} {defaultDict} {key}/>
       </td>
       <td>
         <div class="d-flex justify-content-between align-items-center">
-          <DefaultLangValue {defaultDict} {key} fullKey={fullKey(key)}>
+          <DefaultLangValue {defaultDict} {key} fullKey={fullKey}>
             <Translator {lang} {defaultLang} bind:dict {key} {defaultDict} {uneditedDict}/>
           </DefaultLangValue>
         </div>

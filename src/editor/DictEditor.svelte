@@ -90,7 +90,7 @@
       </tr>
     </thead>
     <tbody on:focusout={onChange}>
-      <KeyValueTableRow excluded={project.excluded} {lang} {dict} {defaultDict} {uneditedDict} {filter} {defaultLang}/>
+      <KeyValueTableRow excludedKeys={project.excluded} {lang} {dict} {defaultDict} {uneditedDict} {filter} {defaultLang}/>
     </tbody>
   </table>
 </div>

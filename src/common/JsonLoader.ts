@@ -3,7 +3,7 @@ import {LoadedProject} from './Project'
 import {getBaseUrl} from './utils'
 import {GitHubClient} from '../github/GitHubClient'
 import {BitBucketClient} from '../bitbucket/BitBucketClient'
-import {excluded} from './ExcludeKeys'
+import {excludedKeysLoader} from './ExcludeKeysLoader'
 
 class JsonLoader {
   request(url: string, init?: RequestInit) {
@@ -31,7 +31,7 @@ class JsonLoader {
     const dicts = loadedDicts.reduce((r, dict, i) => {
       r[langs[i]] = dict; return r
     }, {} as Record<string, Dict>)
-    const excludedKeys: string[] = await excluded.fetch(project) ?? []
+    const excludedKeys = await excludedKeysLoader.fetch(project) ?? []
     return new LoadedProject(project, dicts, excludedKeys)
   }
 

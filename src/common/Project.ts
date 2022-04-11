@@ -12,7 +12,7 @@ export class LoadedProject {
   constructor(
     public config: Project,
     public dicts: Record<string, Dict>,
-    public excluded: string[] = []
+    public excluded: Set<string> = new Set()
   ) {}
 
   get title() {

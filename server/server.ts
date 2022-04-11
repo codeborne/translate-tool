@@ -106,7 +106,6 @@ function fetchProfile(provider: typeof googleAuth, token: string): Promise<Googl
   })
 }
 
-
 app.use(express.static('build'))
 
 app.listen(port, () => {

@@ -34,7 +34,7 @@
       <p>Ensure the keys found are actually in use, and delete or add them to the default language.</p>
     </div>
     <div class="w-50">
-      <b class="text-center">Missing keys</b>
+      <b class="text-center">Missing keys in default lang</b>
       <ul class="list-group list-group-flush mt-3">
         {#each missingKeys as key}
           <li class="list-group-item list-group-item-light px-0 py-1">{key}</li>

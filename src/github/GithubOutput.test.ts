@@ -8,12 +8,13 @@ import type GoogleProfile from '../common/GoogleAuth.svelte'
 
 describe('GitHubOutput', () => {
   const dict: Dict = {}
+  const defaultDict: Dict = {}
   const lang = 'en'
   let config: Project = {title: '', url: 'api.github.com', token: '', indent: 2}
   const user: GoogleProfile|undefined = undefined
 
   async function clickSaveButton(message: string) {
-    const {container} = render(GitHubOutput, {dict, lang, config, user})
+    const {container} = render(GitHubOutput, {dict, lang, config, user, defaultDict})
     stub(window, 'prompt').returns(message)
     stub(window, 'confirm').returns(false)
     stub(window, 'alert').resolves()
@@ -35,20 +36,20 @@ describe('GitHubOutput', () => {
   it('user can change the default commit and save', async () => {
     const save = await clickSaveButton('Custom message')
     expect(save).called
-    expect(GitHubClient.prototype.saveFile).calledWith(lang, dict, 'Custom message')
+    expect(GitHubClient.prototype.saveFile).calledWith(lang, dict, defaultDict, 'Custom message')
     await act(GitHubClient.prototype.saveFile)
     expect(alert).called
   })
 
   it('commit button shows default translations branch if no branch in config', async () => {
-    const {container} = render(GitHubOutput, {dict, lang, config, user})
+    const {container} = render(GitHubOutput, {dict, lang, config, user, defaultDict})
     const btn = container.querySelector('button')
     expect(btn?.textContent).to.contain('Save to translations branch')
   })
 
   it('commit button shows config branch', async () => {
     config.branch = 'test'
-    const {container} = render(GitHubOutput, {dict, lang, config, user})
+    const {container} = render(GitHubOutput, {dict, lang, config, user, defaultDict})
     const btn = container.querySelector('button')
     expect(btn?.textContent).to.contain('Save to test branch')
   })

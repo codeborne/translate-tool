@@ -6,16 +6,13 @@
   import Filter from './Filter'
   import FilterControls from './FilterControls.svelte'
   import {totalDifferentValues, totalKeys} from './languageStats'
-  import GitHubOutput from '../github/GitHubOutput.svelte'
-  import {GitHubClient} from '../github/GitHubClient'
   import ChangesCounter from './ChangesCounter.svelte'
   import BranchLoadedFrom from './BranchLoadedFrom.svelte'
-  import BitBucketOutput from '../bitbucket/BitBucketOutput.svelte'
-  import {BitBucketClient} from '../bitbucket/BitBucketClient'
   import ProjectSourceButton from './ProjectSourceButton.svelte'
   import Icon from '../components/Icon.svelte'
   import type GoogleProfile from '../common/GoogleAuth.svelte'
   import MissingKeys from './MissingKeys.svelte'
+  import ProjectSaver from './ProjectSaver.svelte'
 
 
   export let project: LoadedProject
@@ -97,10 +94,8 @@
 
 <div id="output" class="mt-3 card shadow p-3 p-lg-4">
   <DictClipboardOutput {dict} {defaultDict} {lang} indent={project.config.indent} on:copied={onCopied}>
-    {#if project.config.url.includes(GitHubClient.host) && project.config.token}
-      <GitHubOutput {user} {dict} {defaultDict} {lang} config={project.config} on:saved={onSaved}/>
-    {:else if project.config.url.includes(BitBucketClient.host) && project.config.token}
-      <BitBucketOutput {user} {dict} {defaultDict} {lang} config={project.config} on:saved={onSaved}/>
+    {#if project.config.token}
+      <ProjectSaver {user} {dict} {defaultDict} {lang} config={project.config} on:saved={onSaved}/>
     {/if}
     <ProjectSourceButton project={project.config} {defaultBranch} {lang}/>
     <ChangesCounter slot="counter" {dict} {uneditedDict}/>

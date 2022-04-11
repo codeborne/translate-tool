@@ -6,6 +6,8 @@ import {rebuildDictInOrder} from '../editor/rebuildDictInOrder'
 export class BitBucketClient {
   static host = 'api.bitbucket.org'
   branch = 'translations'
+  icon = 'fab fa-bitbucket'
+  label = 'BitBucket'
   author = {name: 'Translate Tool', email: 'translate@codeborne.com'}
 
   constructor(public config: Project) {

@@ -7,6 +7,8 @@ import {rebuildDictInOrder} from '../editor/rebuildDictInOrder'
 export class GitHubClient {
   static host = 'api.github.com'
   branch = 'translations'
+  icon = 'fab fa-github'
+  label = 'GitHub'
   author = {name: 'Translate Tool', email: 'translate@codeborne.com'}
   constructor(public config: Project) {
     if (!config.url.includes(GitHubClient.host)) throw new Error('Not a GitHub url: ' + config.url)

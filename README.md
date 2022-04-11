@@ -234,10 +234,13 @@ eg `main.aboutHtml` or `main.contentHtml.support`
 
 You can mark certain keys to not be available for translation. They can still in the default language file, but will not show up in other languages.
 
-Create a `dont-translate-keys.json` file in the root folder and add the full keys like so:
+Create a `dont-translate-keys.json` file in the root folder and add the full keys with double quotes like so:
 ```json
-["companyName", "dont.translate.this.title"]
+["companyInfo", "dont.translate.this.title"]
 ```
+
+This will also exclude objects. If `companyInfo` was an object that contained multiple keys, such as
+`companyInfo.phone`, `companyInfo.mail` etc, it would also mark them as untranslatable. 
 
 ## Available Scripts
 

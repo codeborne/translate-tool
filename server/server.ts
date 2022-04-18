@@ -64,13 +64,13 @@ app.get('/*', async function (req: Request, res: Response) {
 
 function isEmailVerified(email: string): boolean {
   if (allowAll) return true
-  return !!(config.ALLOWED_EMAILS as string[]).includes(email)
+  return (config.ALLOWED_EMAILS as string[]).includes(email)
 }
 
 function isDomainVerified(email: string): boolean {
   if (allowAll) return true
   const domain: string = email.split('@').pop() as string
-  return !!(config.ALLOWED_DOMAINS as string[]).includes(domain)
+  return (config.ALLOWED_DOMAINS as string[]).includes(domain)
 }
 
 function redirectUrl(req: Request) {

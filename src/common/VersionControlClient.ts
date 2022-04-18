@@ -2,18 +2,20 @@ import type {Dict, Project} from './Project'
 import {GitHubClient} from '../github/GitHubClient'
 import {BitBucketClient} from '../bitbucket/BitBucketClient'
 
+export interface Author {
+  email: string
+  name: string
+}
+
 export interface VersionControlClient {
   branch: string
   icon: string
   label: string
-  author: {
-    name: string
-    email: string
-  }
+  author: Author
 
   getFileContent(file: string): any
   saveFile(lang: string, dict: Dict, defaultDict: Dict, commitMessage: string): any
-  setAuthor(email: string, name: string): void
+  setAuthor(author: Author): void
 }
 
 export function clientFor(config: Project): VersionControlClient {

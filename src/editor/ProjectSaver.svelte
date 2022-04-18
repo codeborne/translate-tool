@@ -44,9 +44,7 @@
   }
 
   function checkIfUserExistsAndSetAuthor() {
-    if (user) {
-      client.setAuthor(user.email, user.name)
-    }
+    if (user) client.setAuthor(user)
   }
 </script>
 

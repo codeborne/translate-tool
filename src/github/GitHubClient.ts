@@ -3,22 +3,22 @@ import {LoadedProject} from '../common/Project'
 import {decodeBase64Unicode, encodeBase64Unicode} from '../common/utils'
 import jsonLoader from '../common/JsonLoader'
 import {rebuildDictInOrder} from '../editor/rebuildDictInOrder'
-import type {VersionControlClient} from '../common/VersionControlClient'
+import type {Author, VersionControlClient} from '../common/VersionControlClient'
 
 export class GitHubClient implements VersionControlClient {
   static host = 'api.github.com'
   branch = 'translations'
   icon = 'fab fa-github'
   label = 'GitHub'
-  author = {name: 'Translate Tool', email: 'translate@codeborne.com'}
+  author: Author = {name: 'Translate Tool', email: 'translate@codeborne.com'}
+
   constructor(public config: Project) {
     if (!config.url.includes(GitHubClient.host)) throw new Error('Not a GitHub url: ' + config.url)
     if (config.branch) this.branch = config.branch
   }
 
-  setAuthor(email: string, name: string) {
-    this.author.email = email
-    this.author.name = name
+  setAuthor(author: Author) {
+    this.author = author
   }
 
   authHeader() {

@@ -2,23 +2,22 @@ import type {Dict, Project} from '../common/Project'
 import {LoadedProject} from '../common/Project'
 import jsonLoader from '../common/JsonLoader'
 import {rebuildDictInOrder} from '../editor/rebuildDictInOrder'
-import type {VersionControlClient} from '../common/VersionControlClient'
+import type {Author, VersionControlClient} from '../common/VersionControlClient'
 
 export class BitBucketClient implements VersionControlClient {
   static host = 'api.bitbucket.org'
   branch = 'translations'
   icon = 'fab fa-bitbucket'
   label = 'BitBucket'
-  author = {name: 'Translate Tool', email: 'translate@codeborne.com'}
+  author: Author = {name: 'Translate Tool', email: 'translate@codeborne.com'}
 
   constructor(public config: Project) {
     if (!config.url.includes(BitBucketClient.host)) throw new Error('Not a BitBucket url: ' + config.url)
     if (config.branch) this.branch = config.branch
   }
 
-  setAuthor(email: string, name: string) {
-    this.author.email = email
-    this.author.name = name
+  setAuthor(author: Author) {
+    this.author = author
   }
 
   tokenHeader(token: string | undefined) {

@@ -224,6 +224,8 @@ You can create a predefined project config and use it to always load them by def
 
 `docker build --build-arg PROJECTS_FILE=your/projects/location/projects.json .`
 
+_**NB!**_ As a security measure, the server will not run if there are predefined projects present with no authentication set up. 
+
 #### Tag as HTML
 
 End a key with `Html` to be able to switch between HTML and styled text within the UI.

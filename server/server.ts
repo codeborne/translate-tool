@@ -40,6 +40,7 @@ app.get('/auth', async function (req: Request, res: Response) {
 app.get('/user', async function (req, res) {
   if (!req.signedCookies['AUTH'] || !isSecure) return res.sendStatus(404)
   const user: UserInfoResponse = {name: req.signedCookies['AUTH'].name, email: req.signedCookies['AUTH'].email}
+  logger.log(`${user.email} has logged in`)
   res.json(user)
 })
 
@@ -55,7 +56,7 @@ app.get('/proxy/**', (req, res) => {
 
 app.get('/*', async function (req: Request, res: Response) {
   const provider: typeof googleAuth = googleAuth
-  if (provider.clientId && provider.clientSecret && !req.signedCookies['AUTH'])
+  if (isSecure && !req.signedCookies['AUTH'])
     res.redirect(provider.authUrl + `?client_id=${provider.clientId}&scope=${provider.scope}` +
       `&redirect_uri=${redirectUrl(req)}&response_type=code&prompt=select_account`)
   else res.sendFile(__dirname, '/../build/index.html')

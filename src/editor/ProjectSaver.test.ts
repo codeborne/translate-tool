@@ -2,11 +2,11 @@ import {act, fireEvent, render} from '@testing-library/svelte'
 import {expect} from 'chai'
 import type {Dict, Project} from '../common/Project'
 import {fake, stub} from 'sinon'
-import GitHubOutput from './GitHubOutput.svelte'
-import {GitHubClient} from './GitHubClient'
-import type GoogleProfile from '../common/GoogleAuth.svelte'
+import ProjectSaver from './ProjectSaver.svelte'
+import {GitHubClient} from '../github/GitHubClient'
+import type {GoogleProfile} from '../common/GoogleTypes'
 
-describe('GitHubOutput', () => {
+describe('ProjectSaver', () => {
   const dict: Dict = {}
   const defaultDict: Dict = {}
   const lang = 'en'
@@ -14,7 +14,7 @@ describe('GitHubOutput', () => {
   const user: GoogleProfile|undefined = undefined
 
   async function clickSaveButton(message: string) {
-    const {container} = render(GitHubOutput, {dict, lang, config, user, defaultDict})
+    const {container} = render(ProjectSaver, {dict, lang, config, user, defaultDict})
     stub(window, 'prompt').returns(message)
     stub(window, 'confirm').returns(false)
     stub(window, 'alert').resolves()
@@ -42,14 +42,14 @@ describe('GitHubOutput', () => {
   })
 
   it('commit button shows default translations branch if no branch in config', async () => {
-    const {container} = render(GitHubOutput, {dict, lang, config, user, defaultDict})
+    const {container} = render(ProjectSaver, {dict, lang, config, user, defaultDict})
     const btn = container.querySelector('button')
     expect(btn?.textContent).to.contain('Save to translations branch')
   })
 
   it('commit button shows config branch', async () => {
     config.branch = 'test'
-    const {container} = render(GitHubOutput, {dict, lang, config, user, defaultDict})
+    const {container} = render(ProjectSaver, {dict, lang, config, user, defaultDict})
     const btn = container.querySelector('button')
     expect(btn?.textContent).to.contain('Save to test branch')
   })

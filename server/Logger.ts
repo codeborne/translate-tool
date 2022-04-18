@@ -15,7 +15,8 @@ class Logger {
     const date = new Date(Date.now())
     return `[${date.getFullYear()}-` +
       `${(date.getMonth() + 1) >= 10 ? date.getMonth() + 1 : `0${date.getMonth() + 1}`}-` +
-      `${date.getDate()} ${date.getHours()}:` +
+      `${(date.getDate() >= 10) ? date.getDate() : `0${date.getDate()}` } ` +
+      `${date.getHours()}:` +
       `${(date.getMinutes() >= 10) ? date.getMinutes() : `0${date.getMinutes()}`}]`
   }
 }

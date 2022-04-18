@@ -23,7 +23,7 @@ COPY --from=build /app/build build
 COPY *.json ./
 RUN npm ci --production
 
-COPY --from=build /app/server ./server/
+COPY --from=build /app/server/build ./server/
 
 EXPOSE 8999
 

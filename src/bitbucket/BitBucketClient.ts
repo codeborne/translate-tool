@@ -2,8 +2,9 @@ import type {Dict, Project} from '../common/Project'
 import {LoadedProject} from '../common/Project'
 import jsonLoader from '../common/JsonLoader'
 import {rebuildDictInOrder} from '../editor/rebuildDictInOrder'
+import type {VersionControlClient} from '../common/VersionControlClient'
 
-export class BitBucketClient {
+export class BitBucketClient implements VersionControlClient {
   static host = 'api.bitbucket.org'
   branch = 'translations'
   icon = 'fab fa-bitbucket'

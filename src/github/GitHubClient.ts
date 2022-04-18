@@ -3,8 +3,9 @@ import {LoadedProject} from '../common/Project'
 import {decodeBase64Unicode, encodeBase64Unicode} from '../common/utils'
 import jsonLoader from '../common/JsonLoader'
 import {rebuildDictInOrder} from '../editor/rebuildDictInOrder'
+import type {VersionControlClient} from '../common/VersionControlClient'
 
-export class GitHubClient {
+export class GitHubClient implements VersionControlClient {
   static host = 'api.github.com'
   branch = 'translations'
   icon = 'fab fa-github'
@@ -73,7 +74,6 @@ export class GitHubClient {
   getPullsUrl() {
     return this.config.url.substring(0, this.config.url.lastIndexOf('/content')) + '/pulls'
   }
-
 
   async saveFile(lang: string, dict: Dict, defaultDict: Dict, commitMessage: string) {
     await this.createBranchIfNeeded()

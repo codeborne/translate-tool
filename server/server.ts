@@ -2,12 +2,13 @@ import express, {Request, Response} from 'express'
 import request from 'request'
 import cookieParser from 'cookie-parser'
 import config from './config'
+import {hasProjectsFile} from './FileChecker'
+import logger from './Logger'
 
 const cookieSecret: string = process.env.COOKIE_SECRET ?? 'YourCookieValueHereToDetectTampering'
 const port = process.env.PORT ?? 8999
 const app = express()
 app.use(cookieParser(cookieSecret))
-
 
 const googleAuth = {
   authUrl: config.GOOGLE_OAUTH_URL,
@@ -17,22 +18,11 @@ const googleAuth = {
   clientId: process.env.GOOGLE_CLIENT_ID,
   clientSecret: process.env.GOOGLE_CLIENT_SECRET,
 }
+const allowAll = !config.ALLOWED_EMAILS.length && !config.ALLOWED_DOMAINS.length
 
-interface GoogleProfile {
-  id: number,
-  email: string,
-  verified_email: boolean,
-  name: string,
-  given_name: string,
-  family_name: string,
-  picture: string,
-  locale: string
-}
+const canLogin = (profile: GoogleProfile) => isEmailVerified(profile.email) || isDomainVerified(profile.email)
 
-interface UserInfoResponse {
-  name: string,
-  email: string
-}
+const isSecure = googleAuth.clientId && googleAuth.clientSecret
 
 app.get('/health', async function (req, res) {
   return res.sendStatus(204)
@@ -41,14 +31,14 @@ app.get('/health', async function (req, res) {
 app.get('/auth', async function (req: Request, res: Response) {
   const token: string = await fetchToken(googleAuth, req.query.code as string, redirectUrl(req))
   const profile: GoogleProfile = await fetchProfile(googleAuth, token)
-  if (isEmailVerified(profile.email) || isDomainVerified(profile.email)) {
+  if (canLogin(profile)) {
     res.cookie('AUTH', {token, name: profile.name, email: profile.email}, {signed: true, httpOnly: true})
     res.redirect('/')
   } else res.sendStatus(403)
 })
 
 app.get('/user', async function (req, res) {
-  if (!req.signedCookies['AUTH'] || !googleAuth.clientId || !googleAuth.clientSecret) return res.sendStatus(404)
+  if (!req.signedCookies['AUTH'] || !isSecure) return res.sendStatus(404)
   const user: UserInfoResponse = {name: req.signedCookies['AUTH'].name, email: req.signedCookies['AUTH'].email}
   res.json(user)
 })
@@ -72,12 +62,12 @@ app.get('/*', async function (req: Request, res: Response) {
 })
 
 function isEmailVerified(email: string): boolean {
-  if (!config.ALLOWED_EMAILS.length && !config.ALLOWED_DOMAINS.length) return true
+  if (allowAll) return true
   return !!(config.ALLOWED_EMAILS as string[]).includes(email)
 }
 
 function isDomainVerified(email: string): boolean {
-  if (!config.ALLOWED_EMAILS.length && !config.ALLOWED_DOMAINS.length) return true
+  if (allowAll) return true
   const domain: string = email.split('@').pop() as string
   return !!(config.ALLOWED_DOMAINS as string[]).includes(domain)
 }
@@ -106,10 +96,39 @@ function fetchProfile(provider: typeof googleAuth, token: string): Promise<Googl
   })
 }
 
+function initVerbose() {
+  console.log(`Listening on port: ${port}`)
+
+  if (!isSecure) {
+    logger.info('Running without authentication')
+    logger.info('Set up GOOGLE_CLIENT_ID and GOOGLE_CLIENT_SECRET environment variables if you wish to protect your app.')
+
+    if (hasProjectsFile()) {
+      logger.error('Default project exists, but no authentication to protect it present')
+      logger.error('Aborting...')
+      process.exit()
+    }
+  }
+}
+
 app.use(express.static('build'))
 
 app.listen(port, () => {
-  console.log(`Listening on port: ${port}`)
-  if (!googleAuth.clientId || !googleAuth.clientSecret) console.log('Running without authentication\n' +
-    'Set up GOOGLE_CLIENT_ID and GOOGLE_CLIENT_SECRET environment variables if you wish to protect your app.')
+  initVerbose()
 })
+
+interface GoogleProfile {
+  id: number,
+  email: string,
+  verified_email: boolean,
+  name: string,
+  given_name: string,
+  family_name: string,
+  picture: string,
+  locale: string
+}
+
+interface UserInfoResponse {
+  name: string,
+  email: string
+}

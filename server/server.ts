@@ -97,7 +97,7 @@ function fetchProfile(provider: typeof googleAuth, token: string): Promise<Googl
 }
 
 function initVerbose() {
-  console.log(`Listening on port: ${port}`)
+  logger.log(`Listening on port: ${port}`)
 
   if (!isSecure) {
     logger.info('Running without authentication')

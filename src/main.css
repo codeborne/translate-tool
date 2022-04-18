@@ -33,6 +33,10 @@ body, div, button, textarea, a {
   font-size: 0.925rem !important;
 }
 
+tr {
+  transition: background-color 0.3s;
+}
+
 h1,
 h2,
 h3,

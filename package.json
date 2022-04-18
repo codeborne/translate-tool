@@ -4,7 +4,8 @@
     "build": "vite build",
     "build:server": "tsc -m commonjs --target esnext --esModuleInterop true server/*.ts",
     "run:server": "npm run build:server && node server/server",
-    "test": "web-test-runner \"src/**/*.test.ts\""
+    "test": "web-test-runner \"src/**/*.test.ts\"",
+    "test:server": "web-test-runner \"server/**/*.test.ts\""
   },
   "dependencies": {
     "cookie-parser": "^1.4.6",

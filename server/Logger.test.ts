@@ -6,6 +6,6 @@ describe('Logger', () => {
   it('outputs error', async () => {
     const log = sinon.spy(console, 'error')
     logger.error('an error')
-    expect(log.calledWithMatch('outputs error')).to.be.true
+    expect(log.calledWithMatch('[ERROR] an error')).to.be.true
   })
 })

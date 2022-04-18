@@ -16,12 +16,9 @@ export class GitHubClient implements VersionControlClient {
     if (config.branch) this.branch = config.branch
   }
 
-  setAuthorName(name: string) {
-    this.author.name = name
-  }
-
-  setAuthorEmail(email: string) {
+  setAuthor(email: string, name: string) {
     this.author.email = email
+    this.author.name = name
   }
 
   authHeader() {

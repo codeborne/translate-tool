@@ -3,8 +3,7 @@
   import type {Dict, Project} from '../common/Project'
   import {createEventDispatcher} from 'svelte'
   import type {GoogleProfile} from '../common/GoogleTypes'
-  import {BitBucketClient} from '../bitbucket/BitBucketClient'
-  import {GitHubClient} from '../github/GitHubClient'
+  import {clientFor, VersionControlClient} from '../common/VersionControlClient'
 
   export let dict: Dict
   export let defaultDict: Dict
@@ -12,18 +11,10 @@
   export let config: Project
   export let user: GoogleProfile|undefined
 
-  function setClient(config: Project): GitHubClient|BitBucketClient {
-    if (config.url.includes(GitHubClient.host)) return new GitHubClient(config)
-    else if (config.url.includes(BitBucketClient.host)) return new BitBucketClient(config)
-  }
-
-  let client: GitHubClient|BitBucketClient
-
   const dispatch = createEventDispatcher()
 
-  $: client = setClient(config)
-
-  $: if (user) client = setClient(config)
+  let client: VersionControlClient
+  $: client = clientFor(config)
 
   $: if (config.branch) setBranchIfConfigured()
 
@@ -54,8 +45,7 @@
 
   function checkIfUserExistsAndSetAuthor() {
     if (user) {
-      client.setAuthorEmail(user.email)
-      client.setAuthorName(user.name)
+      client.setAuthor(user.email, user.name)
     }
   }
 </script>

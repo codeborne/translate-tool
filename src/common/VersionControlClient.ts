@@ -1,5 +1,8 @@
+import type {Dict, Project} from './Project'
+import {GitHubClient} from '../github/GitHubClient'
+import {BitBucketClient} from '../bitbucket/BitBucketClient'
+
 export interface VersionControlClient {
-  // static host: string TODO Is defining static properties in TS possible?
   branch: string
   icon: string
   label: string
@@ -8,6 +11,13 @@ export interface VersionControlClient {
     email: string
   }
 
-  setAuthorEmail: (email: string) => void
-  setAuthorName: (name: string) => void
+  getFileContent(file: string): any
+  saveFile(lang: string, dict: Dict, defaultDict: Dict, commitMessage: string): any
+  setAuthor(email: string, name: string): void
+}
+
+export function clientFor(config: Project): VersionControlClient {
+  if (config.url.includes(GitHubClient.host)) return new GitHubClient(config)
+  else if (config.url.includes(BitBucketClient.host)) return new BitBucketClient(config)
+  else throw Error('Unsupported project')
 }

@@ -88,6 +88,7 @@
   .form-control {
     resize: none;
     overflow: hidden;
+    min-height: 36px;
     height: 100%;
   }
 

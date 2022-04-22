@@ -51,4 +51,16 @@ describe('TextInput', () => {
     expect(element!.textContent).to.contain('edited')
     expect(container.querySelector('.btn')).to.not.exist
   })
+
+  it('uses contenteditable=plaintext-only when using browsers other than firefox', async () => {
+    const {container} = render(TextInput, {uneditedDict:dict, dict, key, isFirefox, lang, fullKey})
+    const plaintextElement = container.querySelector('[contenteditable="plaintext-only"]')
+    expect(plaintextElement).to.exist
+  })
+
+  it('uses contenteditable=true when using firefox', async () => {
+    const {container} = render(TextInput, {uneditedDict:dict, dict, key, isFirefox:true, lang, fullKey})
+    const element = container.querySelector('[contenteditable="true"]')
+    expect(element).to.exist
+  })
 })

@@ -24,9 +24,10 @@ describe('<KeyValueTableRow>', () => {
   const filter = new Filter()
   const defaultDict: Dict = dict
   const uneditedDict: Dict = dict
+  const isFirefox = false
 
   it('renders all inputs', () => {
-    const {container} = render(KeyValueTableRow, {defaultLang, dict, defaultDict, uneditedDict, filter, lang, excludedKeys})
+    const {container} = render(KeyValueTableRow, {defaultLang, isFirefox, dict, defaultDict, uneditedDict, filter, lang, excludedKeys})
     const rows = container.querySelectorAll('tr')
     const firstRow = rows[0].querySelectorAll('td')
     const lastRow = rows[rows.length - 1].querySelectorAll('td')
@@ -40,7 +41,7 @@ describe('<KeyValueTableRow>', () => {
 
   it('shows only filtered inputs', () => {
     filter.search = 'nested'
-    const {container} = render(KeyValueTableRow, {defaultLang, dict, defaultDict, uneditedDict, filter, lang, excludedKeys})
+    const {container} = render(KeyValueTableRow, {defaultLang, isFirefox, dict, defaultDict, uneditedDict, filter, lang, excludedKeys})
     const inputs = container.querySelectorAll('.not-html')
     expect(inputs).to.have.length(4)
     expect(inputs[0].textContent).to.contain('worlddd')
@@ -51,7 +52,7 @@ describe('<KeyValueTableRow>', () => {
     filter.search = ''
     lang = 'de'
     excludedKeys = new Set(['nested.ping'])
-    const {container} = render(KeyValueTableRow, {defaultLang, dict, defaultDict, uneditedDict, filter, lang, excludedKeys})
+    const {container} = render(KeyValueTableRow, {defaultLang, dict, isFirefox, defaultDict, uneditedDict, filter, lang, excludedKeys})
     const inputs = container.querySelectorAll('.not-html')
     expect(inputs).to.have.length(5)
     expect(container.textContent).to.not.contain('nested.ping')
@@ -63,7 +64,7 @@ describe('<KeyValueTableRow>', () => {
     filter.search = ''
     lang = 'de'
     excludedKeys = new Set(['nested.more_nested'])
-    const {container} = render(KeyValueTableRow, {defaultLang, dict, defaultDict, uneditedDict, filter, lang, excludedKeys})
+    const {container} = render(KeyValueTableRow, {defaultLang, dict, defaultDict, isFirefox, uneditedDict, filter, lang, excludedKeys})
     const inputs = container.querySelectorAll('.not-html')
     expect(inputs).to.have.length(4)
     expect(container.textContent).to.not.contain('nested.more_nested.foo')
@@ -77,7 +78,7 @@ describe('<KeyValueTableRow>', () => {
     filter.search = ''
     lang = 'en'
     excludedKeys = new Set(['nested.more_nested', 'nested.another'])
-    const {container} = render(KeyValueTableRow, {defaultLang, dict, defaultDict, uneditedDict, filter, lang, excludedKeys})
+    const {container} = render(KeyValueTableRow, {defaultLang, dict, defaultDict, isFirefox, uneditedDict, filter, lang, excludedKeys})
     const rows = container.querySelectorAll('tr')
     expect(rows).to.have.length(6)
     expect(rows[0].querySelectorAll('td')[0].textContent).to.not.contain(untranslatableLabel)

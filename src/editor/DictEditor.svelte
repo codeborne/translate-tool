@@ -24,6 +24,7 @@
   let defaultLang: string
   let defaultDict: Dict
   let defaultBranch: string = project.config.branch ?? 'translations'
+  const isFirefox: boolean = !!navigator.userAgent.match(/firefox|fxios/i)
 
   $: initProject(project)
   $: initLang(lang)
@@ -87,7 +88,7 @@
       </tr>
     </thead>
     <tbody on:focusout={onChange}>
-      <KeyValueTableRow excludedKeys={project.excluded} {lang} {dict} {defaultDict} {uneditedDict} {filter} {defaultLang}/>
+      <KeyValueTableRow excludedKeys={project.excluded} {isFirefox} {lang} {dict} {defaultDict} {uneditedDict} {filter} {defaultLang}/>
     </tbody>
   </table>
 </div>

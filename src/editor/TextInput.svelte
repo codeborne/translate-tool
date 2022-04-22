@@ -8,6 +8,7 @@
   export let fullKey: string
   export let dict: Dict
   export let uneditedDict: Dict
+  export let isFirefox: boolean
 
   let isPreviewing: boolean = false
 
@@ -17,10 +18,17 @@
 </script>
 
 {#if !isHtml(fullKey)}
-  <div bind:textContent={dict[key]} class="form-control not-html"
-       contenteditable="true"
-       class:changed={(getValue(key, dict) ?? '') !== (getValue(key, uneditedDict) ?? '')}>
-  </div>
+  {#if isFirefox}
+    <div bind:textContent={dict[key]} class="form-control not-html"
+         contenteditable="true"
+         class:changed={(getValue(key, dict) ?? '') !== (getValue(key, uneditedDict) ?? '')}>
+    </div>
+  {:else}
+    <div bind:textContent={dict[key]} class="form-control not-html"
+         contenteditable="plaintext-only"
+         class:changed={(getValue(key, dict) ?? '') !== (getValue(key, uneditedDict) ?? '')}>
+    </div>
+  {/if}
   {#if containsHTMLTags(dict[key])}
     <div class="text-secondary text-small">
       <i class="fa-solid fa-triangle-exclamation"></i> Contains HTML tags, but key does not end with <b>Html</b>

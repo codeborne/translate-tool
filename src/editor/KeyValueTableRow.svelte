@@ -14,13 +14,14 @@
   export let dict: Dict, defaultDict: Dict, uneditedDict: Dict
   export let keyPrefix = ''
   export let filter: Filter
+  export let isFirefox: boolean
 
   const fullKey = (key: string) => (keyPrefix ? keyPrefix + '.' : '') + key
 </script>
 
 {#each Object.entries(defaultDict).map(e => [fullKey(e[0]), ...e]).filter(([fullKey]) => lang === defaultLang || !excludedKeys.has(fullKey)) as [fullKey, key, defaultValue]}
   {#if typeof defaultValue === 'object'}
-    <svelte:self keyPrefix={fullKey} dict={dict[key] ??= {}} defaultDict={defaultValue} {excludedKeys} {defaultLang} uneditedDict={uneditedDict[key] ??= {}} {filter} {lang}/>
+    <svelte:self keyPrefix={fullKey} dict={dict[key] ??= {}} defaultDict={defaultValue} {isFirefox} {excludedKeys} {defaultLang} uneditedDict={uneditedDict[key] ??= {}} {filter} {lang}/>
   {:else if filter.shouldShow(fullKey, getValue(key, uneditedDict))}
     <tr class:empty={!dict[key]}>
       <td>
@@ -33,7 +34,7 @@
         {/if}
       </td>
       <td>
-        <TextInput bind:dict {key} fullKey={fullKey} {uneditedDict} {lang}/>
+        <TextInput bind:dict {key} {isFirefox} fullKey={fullKey} {uneditedDict} {lang}/>
         <MissingParamsWarning {dict} {defaultDict} {key}/>
       </td>
       <td>

@@ -17,6 +17,7 @@
   import {decodeBase64Unicode} from './common/utils'
   import type {GoogleProfile} from './common/GoogleTypes'
   import localProjectStore from './common/LocalProjectStore'
+  import Error from './common/Error.svelte'
 
   let showConfig = false, showAddProject = false
   let projects: Project[]
@@ -97,7 +98,7 @@
   {#if loadedProjects && loadedProjects.length}
     <ProjectSwitcher projects={loadedProjects} bind:selectedProject/>
     <div class="nav-responsive">
-      {#if !showConfig && !showAddProject}
+      {#if !showConfig && !showAddProject && selectedProject.langs.length}
         <LangSwitcher project={selectedProject} bind:lang/>
       {/if}
       <ProjectAddButton bind:showAddProject/>
@@ -122,7 +123,11 @@
   {:else if showConfig}
 
     <ProjectSettings bind:selectedProject={selectedProject.config} bind:projects on:changed={loadAllProjects}/>
-  {:else if lang}
+  {:else if lang && Object.entries(selectedProject.dicts).length}
     <DictEditor project={selectedProject} {lang} {user}/>
+  {:else}
+    <Error
+      title={`Could not load project: ${selectedProject.title}`}
+      text="Ensure that the link is correct or the tool has the correct credentials to access the resource"/>
   {/if}
 </main>

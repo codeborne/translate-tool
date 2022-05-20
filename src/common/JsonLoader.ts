@@ -11,7 +11,7 @@ class JsonLoader {
       if (!r.ok) throw new Error('Failed to load ' + url)
       return r.text()
     }).then((text) => {
-      if(text.length) return JSON.parse(text)
+      if (text.length) return JSON.parse(text)
     })
   }
 
@@ -26,14 +26,19 @@ class JsonLoader {
   }
 
   async loadProject(project: Project): Promise<LoadedProject> {
-    const langs = await this.loadFor(project, 'langs') as string[]
-    const loadedDicts = await Promise.all(langs.map(lang => this.loadFor(project, lang)))
-    const dicts = loadedDicts.reduce((r, dict, i) => {
-      r[langs[i]] = dict; return r
-    }, {} as Record<string, Dict>)
-    const excludedKeys = await excludedKeysLoader.fetch(project) ?? []
-    return new LoadedProject(project, dicts, excludedKeys)
-  }
+    try {
+      const langs = await this.loadFor(project, 'langs') as string[]
+      const loadedDicts = await Promise.all(langs.map(lang => this.loadFor(project, lang)))
+      const dicts = loadedDicts.reduce((r, dict, i) => {
+        r[langs[i]] = dict;
+        return r
+      }, {} as Record<string, Dict>)
+      const excludedKeys = await excludedKeysLoader.fetch(project) ?? []
+      return new LoadedProject(project, dicts, excludedKeys)
+    } catch (e) {
+      return new LoadedProject(project, {})
+    }
+}
 
   loadProjects(projects: Project[]) {
     return Promise.all(projects.map(p => this.loadProject(p)))

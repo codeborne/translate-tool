@@ -6,6 +6,7 @@
   import {BitBucketClient} from '../bitbucket/BitBucketClient'
   import Icon from '../components/Icon.svelte'
   import SpinnerIcon from '../components/SpinnerIcon.svelte'
+  import {ensureInputIsArray} from '../common/utils'
 
   let warning: string
   let username = ''
@@ -29,16 +30,11 @@
       let bitbucketClient = new BitBucketClient(project)
       const langs: string[] = await bitbucketClient.getFileContent('langs.json') as string[]
       if (!langs) throw Error('Could not load project')
-      else if (validate(langs)) dispatch('imported', project)
+      else if (ensureInputIsArray(langs)) dispatch('imported', project)
     } catch (e) {
       warning = 'Could not import: ' + e.message
       loading = false
     }
-  }
-
-  function validate(arr: string[]) {
-    warning = !arr ? 'Invalid file' : !Array.isArray(arr) ? 'Must be an array' : ''
-    return !warning
   }
 </script>
 

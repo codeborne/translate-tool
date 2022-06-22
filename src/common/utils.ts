@@ -29,6 +29,12 @@ export function insertKey(dict: Dict, key: string, afterPos: number) {
   }, {}))
 }
 
+export function ensureInputIsArray(arr: unknown): boolean {
+  let error = !arr ? 'Invalid file' : !Array.isArray(arr) ? 'Must be an array' : ''
+  if (error) throw Error(error)
+  return true
+}
+
 export function getValue(key: string, dict: Dict): string {
   return dict[key] as string
 }

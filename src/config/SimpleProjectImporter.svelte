@@ -4,6 +4,7 @@
   import jsonLoader from '../common/JsonLoader'
   import Icon from '../components/Icon.svelte'
   import SpinnerIcon from '../components/SpinnerIcon.svelte'
+  import {ensureInputIsArray} from '../common/utils'
 
   let url: string = ''
   let title: string = ''
@@ -18,9 +19,8 @@
       loading = true
       warning = ''
       if (url) {
-        console.log(url)
         let dict = await jsonLoader.loadJson(url + 'langs.json')
-        if (validate(dict)) save(url)
+        if (ensureInputIsArray(dict)) save(url)
       } else throw Error('Input must not be empty')
     } catch (e: Error) {
       warning = 'Could not import: ' + e.message
@@ -31,19 +31,6 @@
   function save(dictUrl: string) {
     const project: Project = {title, url: dictUrl, indent}
     dispatch('imported', project)
-  }
-
-  function validate(arr: any) {
-    if (arr) {
-      if (!Array.isArray(arr)) {
-        warning = 'Language list file must be an array'
-        return false
-      }
-      return true
-    } else {
-      warning = 'Invalid file'
-      return false
-    }
   }
 </script>
 

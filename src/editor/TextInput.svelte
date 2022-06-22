@@ -19,12 +19,12 @@
 
 {#if !isHtml(fullKey)}
   {#if isFirefox}
-    <div bind:textContent={dict[key]} class="form-control not-html"
+    <div bind:textContent={dict[key]} class="text-input not-html"
          contenteditable="true"
          class:changed={(getValue(key, dict) ?? '') !== (getValue(key, uneditedDict) ?? '')}>
     </div>
   {:else}
-    <div bind:textContent={dict[key]} class="form-control not-html"
+    <div bind:textContent={dict[key]} class="text-input not-html"
          contenteditable="plaintext-only"
          class:changed={(getValue(key, dict) ?? '') !== (getValue(key, uneditedDict) ?? '')}>
     </div>
@@ -37,7 +37,7 @@
 {:else}
   <div class="d-flex html-input">
     {#if !isPreviewing}
-      <div bind:innerHTML={dict[key]} class="form-control is-html"
+      <div bind:innerHTML={dict[key]} class="text-input w-100 is-html"
            contenteditable="true"
            class:changed={(getValue(key, dict) ?? '') !== (getValue(key, uneditedDict) ?? '')}>
       </div>
@@ -46,7 +46,7 @@
         <div class="form-text bg-light ">
           <i class="fab fa-html5"></i> HTML
         </div>
-        <div class="form-control"
+        <div class="text-input"
              contenteditable="true"
              bind:textContent={dict[key]}
              class:changed={(getValue(key, dict) ?? '') !== (getValue(key, uneditedDict) ?? '')}>
@@ -84,23 +84,23 @@
     font-size: 0.7rem !important;
   }
 
-  .preview .form-control {
+  .preview .text-input {
     border-top-left-radius: 0;
   }
 
-  .html-input .form-control {
+  .html-input .text-input {
     border-bottom-right-radius: 0;
     border-top-right-radius: 0;
   }
 
-  .form-control {
+  .text-input {
     resize: none;
     overflow: hidden;
     min-height: 36px;
     height: 100%;
   }
 
-  .form-control:focus {
+  .text-input:focus {
     box-shadow: none;
   }
 
@@ -116,10 +116,18 @@
   }
 
   .changed {
-    background-color: aliceblue;
+    background-color: aliceblue !important;
   }
 
   .text-small {
     font-size: small !important;
+  }
+
+  .text-input {
+    border: 1px solid rgba(155, 155, 155, 0.35);
+    border-radius: 5px;
+    padding: 5px 5px;
+    background-color: white;
+    font-size: 16px !important;
   }
 </style>

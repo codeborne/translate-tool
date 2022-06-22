@@ -3,7 +3,6 @@
   import type {Dict} from '../common/Project'
 
 
-  export let lang: string
   export let key: string
   export let fullKey: string
   export let dict: Dict

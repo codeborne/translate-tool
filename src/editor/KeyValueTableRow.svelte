@@ -34,7 +34,7 @@
         {/if}
       </td>
       <td>
-        <TextInput bind:dict {key} {isFirefox} fullKey={fullKey} {uneditedDict} {lang}/>
+        <TextInput bind:dict {key} {isFirefox} fullKey={fullKey} {uneditedDict}/>
         <MissingParamsWarning {dict} {defaultDict} {key}/>
       </td>
       <td>

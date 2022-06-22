@@ -3,20 +3,29 @@
   import {createEventDispatcher} from 'svelte'
   import jsonLoader from '../common/JsonLoader'
   import Icon from '../components/Icon.svelte'
+  import SpinnerIcon from '../components/SpinnerIcon.svelte'
 
   let url: string = ''
   let title: string = ''
   let indent: number = 2
+  let loading = false
 
   const dispatch = createEventDispatcher()
 
   let warning = ''
   async function submit() {
-    warning = ''
-    if (url) {
-      let dict = await jsonLoader.loadJson(url + 'langs.json')
-      if (validate(dict)) save(url)
-    } else warning = 'Input must not be empty'
+    try {
+      loading = true
+      warning = ''
+      if (url) {
+        console.log(url)
+        let dict = await jsonLoader.loadJson(url + 'langs.json')
+        if (validate(dict)) save(url)
+      } else throw Error('Input must not be empty')
+    } catch (e: Error) {
+      warning = 'Could not import: ' + e.message
+      loading = false
+    }
   }
 
   function save(dictUrl: string) {
@@ -48,13 +57,12 @@
     <input type="url" placeholder="Must end with /" bind:value={url} class="form-control" pattern=".*/" required>
     <div class="form-text mb-4">Should contain <b>langs.json</b> and corresponding language files, e.g. <b>en.json</b></div>
   <div>
-    <button class="btn btn-primary btn-icon w-auto px-lg-4 justify-content-center">
-      <Icon class="me-lg-2" name="fileImport"/>
-      Import
+    <button disabled={loading} class="btn btn-primary btn-icon w-auto px-lg-4 justify-content-center">
+      {#if loading} <SpinnerIcon/> {:else} <Icon class="me-lg-2" name="fileImport"/>{/if} Import
     </button>
   </div>
   {#if warning}
-    <div class="alert alert-warning">
+    <div class="alert alert-warning mt-2">
       {warning}
     </div>
   {/if}

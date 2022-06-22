@@ -5,24 +5,32 @@
   import {createEventDispatcher} from 'svelte'
   import {GitHubClient} from '../github/GitHubClient'
   import Icon from '../components/Icon.svelte'
+  import SpinnerIcon from '../components/SpinnerIcon.svelte'
 
   let warning: string
   let username = ''
   let repo = ''
   let path = '/i18n/'
   let branch = 'translations'
+  let loading = false
 
   export let project: Project = {url: '', title: '', token: '', indent: 2, branch}
 
   const dispatch = createEventDispatcher()
 
   async function submit() {
-    warning = ''
-    project.url = `https://api.github.com/repos/${username}/${repo}/contents${path}`
-    const githubClient = new GitHubClient(project)
-    const langs: string[] = await githubClient.getFileContent('langs.json') as string[]
-    if (!langs) warning = 'Could not load project'
-    else if (validate(langs)) dispatch('imported', project)
+    try {
+      loading = true
+      warning = ''
+      project.url = `https://api.github.com/repos/${username}/${repo}/contents${path}`
+      const githubClient = new GitHubClient(project)
+      const langs: string[] = await githubClient.getFileContent('langs.json') as string[]
+      if (!langs) throw Error('Could not load project')
+      else if (validate(langs)) await dispatch('imported', project)
+    } catch (e) {
+      warning = 'Could not import: ' + e.message
+      loading = false
+    }
   }
 
   function validate(arr: string[]) {
@@ -59,8 +67,8 @@
     <div class="form-text mb-4">Where the tool will commit changes</div>
 
   <div>
-    <button class="btn btn-primary btn-icon w-auto px-lg-4 justify-content-center">
-      <Icon class="me-lg-2" name="fileImport"/>
+    <button disabled={loading} class="btn btn-primary btn-icon w-auto px-lg-4 justify-content-center">
+      {#if loading} <SpinnerIcon/> {:else} <Icon class="me-lg-2" name="fileImport"/> {/if}
       Import
     </button>
   </div>

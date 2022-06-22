@@ -75,6 +75,7 @@
   }
 
   function projectImported(e: CustomEvent) {
+    showConfig = false
     const project = e.detail
     projects = projects.concat(project)
     localProjectStore.setProjects(projects)

@@ -13,6 +13,7 @@
   import type GoogleProfile from '../common/GoogleAuth.svelte'
   import MissingKeys from './MissingKeys.svelte'
   import ProjectSaver from './ProjectSaver.svelte'
+  import {onMount} from 'svelte'
 
 
   export let project: LoadedProject
@@ -29,6 +30,8 @@
   $: initProject(project)
   $: initLang(lang)
 
+  onMount(() => inactivityReload())
+
   function initProject(project: LoadedProject) {
     defaultLang = project.langs[0]
     defaultDict = project.dicts[defaultLang]
@@ -43,6 +46,13 @@
   function onChange() {
     dict = dict
     if (dict === defaultDict) defaultDict = defaultDict
+  }
+
+  function inactivityReload() {
+    const tenMinutes = 600000
+    setInterval(() => {
+      if (totalDifferentValues(uneditedDict, dict) === 0) location.reload()
+    }, tenMinutes)
   }
 
   function onCopied() {

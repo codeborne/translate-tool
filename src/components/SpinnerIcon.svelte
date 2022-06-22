@@ -1,0 +1,1 @@
+<i class="fas fa-circle-notch fa-spin me-1"></i>

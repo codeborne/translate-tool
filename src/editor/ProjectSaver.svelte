@@ -4,6 +4,7 @@
   import {createEventDispatcher} from 'svelte'
   import type {GoogleProfile} from '../common/GoogleTypes'
   import {clientFor, VersionControlClient} from '../common/VersionControlClient'
+  import SpinnerIcon from '../components/SpinnerIcon.svelte'
 
   export let dict: Dict
   export let defaultDict: Dict
@@ -50,7 +51,7 @@
 
 <button on:click={save} class="btn btn-primary w-auto" disabled={inProgress}>
   {#if inProgress}
-    <i class="fas fa-circle-notch fa-spin"></i>
+    <SpinnerIcon/>
   {:else}
     <i class="{client.icon}"></i>
   {/if}

@@ -109,7 +109,7 @@
       <ProjectSaver {user} {dict} {defaultDict} {lang} config={project.config} on:saved={onSaved}/>
     {/if}
     <ProjectSourceButton project={project.config} {defaultBranch} {lang}/>
-    <ChangesCounter slot="counter" {dict} {uneditedDict}/>
+    <ChangesCounter {dict} {uneditedDict}/>
   </DictClipboardOutput>
 </div>
 <style>

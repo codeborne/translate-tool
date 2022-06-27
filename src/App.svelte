@@ -46,8 +46,9 @@
   async function tryLoadSharedUrl(encoded: string) {
     try {
       const sharedProject: Project = JSON.parse(decodeBase64Unicode(encoded))
-      if (projects.find((p) => p.title === sharedProject.title)) console.warn(`Project named ${sharedProject.title} already exists - did not add shared project`)
-      else projects.push(sharedProject)
+      if (projects.find((p) => p.title === sharedProject.title))
+      projects = projects.filter(p => p.title !== sharedProject.title)
+      projects.push(sharedProject)
     } catch (e: any) {
       if (e.message) alert(`Something went wrong while parsing the shared link and the project was not added.\n\nError message:\n${e.message}`)
     }
@@ -84,7 +85,7 @@
   }
 
   async function tryLoadPreConfiguredProjects() {
-    return jsonLoader.loadJson('projects.json').catch(() => console.warn('No deployment argument file found.')) as Project[]
+    return jsonLoader.loadJson('project.json').catch(() => console.warn('No deployment argument file found.')) as Project[]
   }
 
   function showUnhandledError(e: PromiseRejectionEvent) {

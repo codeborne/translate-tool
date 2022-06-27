@@ -46,7 +46,6 @@
   async function tryLoadSharedUrl(encoded: string) {
     try {
       const sharedProject: Project = JSON.parse(decodeBase64Unicode(encoded))
-      if (projects.find((p) => p.title === sharedProject.title))
       projects = projects.filter(p => p.title !== sharedProject.title)
       projects.push(sharedProject)
     } catch (e: any) {
@@ -85,7 +84,7 @@
   }
 
   async function tryLoadPreConfiguredProjects() {
-    return jsonLoader.loadJson('project.json').catch(() => console.warn('No deployment argument file found.')) as Project[]
+    return jsonLoader.loadJson('projects.json').catch(() => console.warn('No deployment argument file found.')) as Project[]
   }
 
   function showUnhandledError(e: PromiseRejectionEvent) {

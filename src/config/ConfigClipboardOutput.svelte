@@ -11,7 +11,7 @@
 </script>
 
 <div class="copy-textarea w-100">
-  <textarea readonly id="rawOutput" bind:this={textarea}
+  <textarea readonly bind:this={textarea}
             class="form-control bg-light text-secondary form-text"
             rows="8">{JSON.stringify(config, null, 2)}</textarea>
 

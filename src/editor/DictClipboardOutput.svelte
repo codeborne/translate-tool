@@ -4,6 +4,7 @@
   import {LoadedProject} from '../common/Project'
   import {rebuildDictInOrder} from './rebuildDictInOrder'
   import Icon from '../components/Icon.svelte'
+  import {copyToClipboard} from '../common/utils'
 
   export let dict: Dict
   export let defaultDict: Dict
@@ -18,9 +19,7 @@
   const dispatch = createEventDispatcher()
 
   function copy() {
-    textarea.focus()
-    textarea.select()
-    document.execCommand('copy')
+    copyToClipboard(textarea)
     dispatch('copied')
   }
 </script>
@@ -36,7 +35,7 @@
   </button>
   <div class="d-flex gap-2">
     <slot/>
-    <slot name="counter"/>
+
   </div>
 </div>
 

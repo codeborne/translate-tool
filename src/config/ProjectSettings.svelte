@@ -4,6 +4,8 @@
   import {encodeBase64Unicode} from '../common/utils'
   import Icon from '../components/Icon.svelte'
   import localProjectStore from '../common/LocalProjectStore'
+  import ConfigClipboardOutput from './ConfigClipboardOutput.svelte'
+  import Card from '../components/Card.svelte'
 
   export let projects: Project[]
   export let selectedProject: Project
@@ -66,31 +68,36 @@
   $: if (selectedProject) setFormInputs()
 </script>
 
-<div class="d-flex flex-column justify-content-center align-items-center fix-width card shadow rounded-3 mx-auto p-3 pb-4 pt-lg-4 pb-lg-5 px-lg-5">
+<Card>
   <h3 class="card-title">Manage Project</h3>
-    <div class="d-flex flex-column justify-content-center w-100">
-      <label class="form-label">Project name</label>
-      <input type="text" placeholder="Project name" bind:value={title} class="form-control mb-3 mb-md-4 name-input">
+  <div class="d-flex flex-column justify-content-center w-100">
+    <label class="form-label">Project name</label>
+    <input type="text" placeholder="Project name" bind:value={title} class="form-control mb-3 mb-md-4 name-input">
 
-      <label class="form-label">Indent spaces</label>
-      <input type="number" placeholder="Space indent" bind:value={indent} class="form-control mb-3 mb-md-4 indent-input">
+    <label class="form-label">Indent spaces</label>
+    <input type="number" placeholder="Space indent" bind:value={indent} class="form-control mb-3 mb-md-4 indent-input">
 
-      <label class="form-label">URL</label>
-      <input type="text" placeholder="Project url" bind:value={url} class="form-control mb-3 mb-md-4 url-input">
+    <label class="form-label">URL</label>
+    <input type="text" placeholder="Project url" bind:value={url} class="form-control mb-3 mb-md-4 url-input">
 
-      <label class="form-label">Access Token</label>
-      <input type="text" placeholder="In case a token is required to access the url" bind:value={token} class="form-control mb-4 token-input">
+    <label class="form-label">Access Token</label>
+    <input type="text" placeholder="In case a token is required to access the url" bind:value={token} class="form-control mb-4 token-input">
 
-      {#if isVersionControl()}
-        <label class="form-label">Branch</label>
-        <input type="text" placeholder="Translations branch" bind:value={branch} class="form-control">
-        <div class="form-text mb-4">Specified branch will be created automatically during commit. Default branch if not set is <b>translations</b></div>
-
-      {/if}
+    {#if isVersionControl()}
+      <label class="form-label">Branch</label>
+      <input type="text" placeholder="Translations branch" bind:value={branch} class="form-control">
+      <div class="form-text mb-4">Specified branch will be created automatically during commit. Default branch if not set is <b>translations</b></div>
+    {/if}
     <div class="d-grid d-md-flex flex-column flex-md-row justify-content-md-between gap-4 mt-md-3">
       <button on:click={deleteProject} type="button" class="btn btn-danger btn-icon order-3 order-md-1 deleteBtn"><Icon class="me-2" name="trashBin"/>Delete project</button>
       <button on:click={shareProject} type="button" class="btn btn-secondary btn-icon order-1 shareBtn"><Icon class="me-2" name="share"/>Share</button>
       <button on:click={editProject} type="button" class="btn btn-primary btn-icon order-2 mt-3 mt-md-0 editBtn"><Icon class="me-2" name="floppyDisk"/>Save changes</button>
     </div>
   </div>
-</div>
+</Card>
+
+{#if selectedProject}
+  <Card class="mt-4">
+    <ConfigClipboardOutput config={selectedProject} class="mt-3"/>
+  </Card>
+{/if}

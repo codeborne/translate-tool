@@ -35,6 +35,12 @@ export function ensureInputIsArray(arr: unknown): boolean {
   return true
 }
 
+export function copyToClipboard(textarea: HTMLTextAreaElement) {
+  textarea.focus()
+  textarea.select()
+  document.execCommand('copy')
+}
+
 export function getValue(key: string, dict: Dict): string {
   return dict[key] as string
 }

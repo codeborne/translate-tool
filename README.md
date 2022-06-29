@@ -23,6 +23,8 @@ Built with Svelte, TypeScript, Vite & Express
 
 ### File structure
 
+The same structure is supported by [@codeborne/i18n-json](https://github.com/codeborne/i18n-json) npm package, which can be used by your application.
+
 #### langs.json
 
 Your translation directory must contain a `langs.json` file with an array of languages, such as:

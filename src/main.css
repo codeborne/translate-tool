@@ -29,10 +29,6 @@ td,
   color: var(--text-color);
 }
 
-body, div, button, textarea, a {
-  font-size: 0.925rem !important;
-}
-
 tr {
   transition: background-color 0.2s;
 }

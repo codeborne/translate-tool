@@ -127,6 +127,5 @@
     border-radius: 5px;
     padding: 5px 5px;
     background-color: white;
-    font-size: 16px !important;
   }
 </style>

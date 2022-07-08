@@ -7,6 +7,7 @@
   --primary-lightest: #F0F4FF;
   --gray-lightest: #F8FAFB;
   --gray:#C6C7CC;
+  --orange-lightest: #f6f3d7;
   --yellow-lightest: #fbfce1;
   --red: #F05C3E;
   --red-accent: #FF4019;
@@ -266,6 +267,13 @@ td {
 .empty {
   background-color: var(--yellow-lightest) !important;
 }
+
+.empty:nth-of-type(2n) {
+  background-color: var(--orange-lightest) !important;
+  border: solid floralwhite !important;
+  border-width: 1px 0 !important;
+}
+
 .nav-logo {
   height: 1rem;
   width: auto;

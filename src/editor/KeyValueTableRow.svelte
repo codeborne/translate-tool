@@ -23,7 +23,7 @@
   {#if typeof defaultValue === 'object'}
     <svelte:self keyPrefix={fullKey} dict={dict[key] ??= {}} defaultDict={defaultValue} {isFirefox} {excludedKeys} {defaultLang} uneditedDict={uneditedDict[key] ??= {}} {filter} {lang}/>
   {:else if filter.shouldShow(fullKey, getValue(key, uneditedDict))}
-    <tr class:empty={!dict[key]}>
+    <tr class="dict-key" class:empty={!dict[key]}>
       <td>
         {fullKey}
         {#if excludedKeys.has(fullKey) || excludedKeys.has(keyPrefix)}
@@ -47,3 +47,11 @@
     </tr>
   {/if}
 {/each}
+
+<style>
+  .dict-key:nth-of-type(2n) {
+    background-color: rgba(248, 248, 248, 0.4);
+    border: #f1f1f1 solid;
+    border-width: 1px 0;
+  }
+</style>

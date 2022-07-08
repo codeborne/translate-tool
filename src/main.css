@@ -264,7 +264,7 @@ td {
 
 
 .empty {
-  background-color: var(--yellow-lightest);
+  background-color: var(--yellow-lightest) !important;
 }
 .nav-logo {
   height: 1rem;

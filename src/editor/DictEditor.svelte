@@ -128,6 +128,6 @@
   }
 
   tbody :global(tr:hover) {
-    background: #eee;
+    background: #eee !important;
   }
 </style>

@@ -55,4 +55,9 @@
     border: #f1f1f1 solid;
     border-width: 1px 0;
   }
+
+  .dict-key td:nth-of-type(2) {
+    border: #f1f1f1 solid;
+    border-width: 0 1px;
+  }
 </style>

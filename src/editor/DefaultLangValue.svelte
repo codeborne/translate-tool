@@ -22,7 +22,7 @@
 </div>
 
 
-<div class="d-flex flex-column justify-content-start">
+<div class="buttons d-flex flex-column justify-content-start gap-1">
   <slot/>
   {#if isHtml(fullKey)}
     <button
@@ -34,8 +34,7 @@
 </div>
 
 <style>
-  .btn {
+  button {
     padding: 0;
-    margin-top: 0.5rem;
   }
 </style>

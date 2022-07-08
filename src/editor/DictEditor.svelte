@@ -119,7 +119,7 @@
   }
 
   tbody :global(td) {
-    padding: 0.2em 1em !important;
+    padding: 0.2em 0.6em !important;
   }
 
 

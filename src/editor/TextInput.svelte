@@ -70,10 +70,6 @@
     flex-direction: column;
   }
 
-  div .form-control {
-    height: 100%;
-  }
-
   .preview .form-text {
     padding: 1px 5px;
     margin: 0;

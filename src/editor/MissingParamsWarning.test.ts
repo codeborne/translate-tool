@@ -9,26 +9,26 @@ describe('MissingParamsWarning', () => {
 
   it('shows warning if all placeholders missing', async () => {
     const {container} = render(MissingParamsWarning, {defaultDict, key, dict})
-    expect(container.querySelector('.placeholder-warning')!.textContent)
+    expect(container.querySelector('.text-small')!.textContent)
       .to.contain('Missing placeholders: {url}, {number}, {value}')
   })
 
   it('shows warning if one placeholder is missing', async () => {
     dict = {key: '{url}, {number} and an unclosed {value'}
     const {container} = render(MissingParamsWarning, {defaultDict, key, dict})
-    expect(container.querySelector('.placeholder-warning')!.textContent)
+    expect(container.querySelector('.text-small')!.textContent)
       .to.contain('Missing placeholders: {value}')
   })
 
   it('shows nothing if all placeholders present', async () => {
     dict = {key: '{url}, {number} and {value}'}
     const {container} = render(MissingParamsWarning, {defaultDict, key, dict})
-    expect(container.querySelector('.placeholder-warning')).to.not.exist
+    expect(container.querySelector('.text-small')).to.not.exist
   })
 
   it('shows nothing if placeholders missing, but input has no text', async () => {
     dict = {key: ''}
     const {container} = render(MissingParamsWarning, {defaultDict, key, dict})
-    expect(container.querySelector('.placeholder-warning')).to.not.exist
+    expect(container.querySelector('.text-small')).to.not.exist
   })
 })

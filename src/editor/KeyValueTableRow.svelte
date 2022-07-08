@@ -27,7 +27,7 @@
       <td>
         {fullKey}
         {#if excludedKeys.has(fullKey) || excludedKeys.has(keyPrefix)}
-          <div class="text-secondary placeholder-warning">Marked as untranslatable</div>
+          <div class="text-secondary text-small">Marked as untranslatable</div>
         {/if}
         {#if dict === defaultDict}
           <DictKeyAdder bind:dict={defaultDict} {keyPrefix} {key}/>

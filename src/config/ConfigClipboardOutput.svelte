@@ -26,7 +26,7 @@
   .copy-textarea button {
     position: absolute;
     bottom: 10px;
-    right: 10px;
+    right: 15px;
   }
 </style>
 

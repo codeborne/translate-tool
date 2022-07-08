@@ -66,6 +66,10 @@ td {
   }
 }
 
+.text-small {
+  font-size: small !important;
+}
+
 .bg-light {
   background-color: var(--gray-lightest);
 }

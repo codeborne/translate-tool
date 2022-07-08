@@ -31,13 +31,7 @@
 </script>
 
 {#if params && missing && missing.length && dict[key]}
-  <div class="text-secondary placeholder-warning">
+  <div class="text-secondary text-small">
     <i class="fa-solid fa-triangle-exclamation"></i> <b>Missing placeholders:</b> {missing.join(', ')}
   </div>
 {/if}
-
-<style>
-  :global.placeholder-warning {
-    font-size: small !important;
-  }
-</style>

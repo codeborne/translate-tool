@@ -73,6 +73,10 @@ td {
   background-color: var(--primary-lightest);
 }
 
+.btn {
+  font-size: 0.925rem;
+}
+
 .btn-light {
   background: white;
 }

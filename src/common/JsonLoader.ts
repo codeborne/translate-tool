@@ -26,14 +26,19 @@ type ErrorResponse = BitbucketErrorResponse & BitBucketAuthErrorResponse & Githu
 class JsonLoader {
   request(url: string, init?: RequestInit) {
     return fetch(url, init).then(async (r) => {
+      const defaultError = `Failed to load ${url}`
       let error: string|undefined
-      if (!r.ok) error = await r.json().then((msg: ErrorResponse) => {
-        if (msg.message) return msg.message
-        if (msg.type && msg.type == 'error') return msg.error.message
-        if (msg.error_description) return msg.error_description
-      }).catch(() => `Failed to load: ${url}`)
-      if (error) throw new Error(error)
+      if (!r.ok) {
+        error = await r.json().then((msg: ErrorResponse) => {
+          if (msg.message) return msg.message
+          if (msg.type && msg.type == 'error') return msg.error.message
+          if (msg.error_description) return msg.error_description
+          throw new Error(defaultError)
+        }).catch(() => defaultError)
+        throw new Error(error)
+      }
       return r.text()
+
     }).then((text) => {
       if (text.length) return JSON.parse(text)
     })

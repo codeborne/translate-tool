@@ -4,6 +4,7 @@
   import BitBucketProjectImporter from './BitBucketProjectImporter.svelte'
   import Accordion from './Accordion.svelte'
   import {SvelteComponent} from 'svelte'
+  import {fly} from 'svelte/transition'
 
   interface Accordion {
     heading: string,
@@ -25,7 +26,7 @@
 
 </script>
 
-<div class="accordion addNew fix-width mx-auto">
+<div class="accordion addNew fix-width mx-auto" in:fly={{x: -200, duration: 200}}>
   <h3 class="mb-3">New project</h3>
 
   {#each importers as importer}

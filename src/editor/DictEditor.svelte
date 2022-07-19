@@ -93,8 +93,8 @@
     <thead class="border-bottom">
       <tr>
         <th>Key</th>
-        <th class="w-50">{lang} ({totalKeys(dict)})</th>
-        <th>{defaultLang} ({totalKeys(defaultDict)})</th>
+        <th style="width: 40%">{lang} ({totalKeys(dict)})</th>
+        <th style="width: 38%">{defaultLang} ({totalKeys(defaultDict)})</th>
       </tr>
     </thead>
     <tbody on:focusout={onChange}>
@@ -119,7 +119,7 @@
   }
 
   tbody :global(td) {
-    padding: 0.2em 1em !important;
+    padding: 0.2em 0.6em !important;
   }
 
   th:last-of-type, tbody :global(td:last-of-type) {
@@ -127,6 +127,6 @@
   }
 
   tbody :global(tr:hover) {
-    background: #eee;
+    background: #f1f5fa !important;
   }
 </style>

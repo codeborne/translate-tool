@@ -18,10 +18,18 @@ This tool allows translators to quickly and conveniently translate JSON language
 
 Built with Svelte, TypeScript, Vite & Express
 
+## Demo
+
+Here's a [demo project](https://translate.codeborne.com/?shared=eyJ0aXRsZSI6IkRlbW8iLCJ1cmwiOiJodHRwczovL3Jhdy5naXRodWJ1c2VyY29udGVudC5jb20vVXB0YWtlci9pMThuLXB1YmxpYy9tYWluL2kxOG4vIiwiaW5kZW50IjoyfQ==). Signing in with any Gmail account is required, so you may have to paste the link again after logging in.
+
+The project is saved to your local storage, so you no longer require the shareable link to access it.
+
 ---
 ## Using the tool
 
 ### File structure
+
+The same structure is supported by [@codeborne/i18n-json](https://github.com/codeborne/i18n-json) npm package, which can be used by your application.
 
 #### langs.json
 

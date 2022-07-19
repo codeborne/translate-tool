@@ -98,6 +98,6 @@
 
 {#if selectedProject}
   <Card class="mt-4">
-    <ConfigClipboardOutput config={selectedProject} class="mt-3"/>
+    <ConfigClipboardOutput config={selectedProject}/>
   </Card>
 {/if}

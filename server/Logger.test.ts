@@ -11,8 +11,8 @@ describe('Logger', () => {
 
   it('outputs error', async () => {
     const log = spy(console, 'error')
-    logger.error('an error')
-    expect(log).calledWith('[2020-04-09 16:30] [ERROR] an error')
+    logger.error('a test error')
+    expect(log).calledWith('[2020-04-09 16:30] [ERROR] a test error')
   })
 
   it('outputs info log', async () => {
@@ -23,7 +23,7 @@ describe('Logger', () => {
 
   it('outputs regular log', async () => {
     const log = spy(console, 'log')
-    logger.log('some kind of log')
-    expect(log).calledWith('[2020-04-09 16:30] some kind of log')
+    logger.log('some kind of intended log')
+    expect(log).calledWith('[2020-04-09 16:30] some kind of intended log')
   })
 })

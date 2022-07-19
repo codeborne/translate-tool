@@ -7,6 +7,7 @@
   --primary-lightest: #F0F4FF;
   --gray-lightest: #F8FAFB;
   --gray:#C6C7CC;
+  --orange-lightest: #f6f3d7;
   --yellow-lightest: #fbfce1;
   --red: #F05C3E;
   --red-accent: #FF4019;
@@ -27,10 +28,6 @@ table,
 td,
 .form-control {
   color: var(--text-color);
-}
-
-body, div, button, textarea, a {
-  font-size: 0.925rem !important;
 }
 
 tr {
@@ -69,12 +66,20 @@ td {
   }
 }
 
+.text-small {
+  font-size: small !important;
+}
+
 .bg-light {
   background-color: var(--gray-lightest);
 }
 
 .btn:hover {
   background-color: var(--primary-lightest);
+}
+
+.btn {
+  font-size: 0.925rem;
 }
 
 .btn-light {
@@ -264,8 +269,15 @@ td {
 
 
 .empty {
-  background-color: var(--yellow-lightest);
+  background-color: var(--yellow-lightest) !important;
 }
+
+.empty:nth-of-type(2n) {
+  background-color: var(--orange-lightest) !important;
+  border: solid floralwhite !important;
+  border-width: 1px 0 !important;
+}
+
 .nav-logo {
   height: 1rem;
   width: auto;

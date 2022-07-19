@@ -3,7 +3,7 @@
   import jsonLoader from './JsonLoader'
   import type {GoogleProfile} from './GoogleTypes'
 
-  export let user: GoogleProfile|undefined
+  export let user: GoogleProfile|undefined = undefined
 
   onMount(async () => {
     user = await tryLoadProfile() ?? undefined

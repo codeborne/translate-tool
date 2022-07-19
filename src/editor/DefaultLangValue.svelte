@@ -1,5 +1,6 @@
 <script lang="ts">
   import {containsHTMLTags, isHtml} from '../common/utils'
+  import ContainsHTMLWarning from './ContainsHTMLWarning.svelte'
 
   export let defaultDict
   export let key
@@ -15,35 +16,25 @@
     <div class="overflow-auto align-self-center defaultLangText">{defaultDict[key]}</div>
   {/if}
 
-    {#if !isHtml(fullKey) && containsHTMLTags(defaultDict[key])}
-    <span class="text-danger html-warning">
-      <i class="fa-solid fa-triangle-exclamation"></i> Contains HTML tags, but key does not end with <b>Html</b>
-    </span>
+  {#if !isHtml(fullKey) && containsHTMLTags(defaultDict[key])}
+    <ContainsHTMLWarning/>
   {/if}
 </div>
 
 
-<div class="d-flex flex-column justify-content-start">
+<div class="buttons d-flex flex-column justify-content-start gap-1">
   <slot/>
   {#if isHtml(fullKey)}
     <button
       class="btn text-primary toggleShowHtmlBtn" on:click={() => showHTML = !showHTML}
       title={showHTML ? 'Show styled text' : 'Show HTML'}>
-      {#if showHTML}
-        <i class="fas fa-eye-slash"></i>
-      {:else}
-        <i class="fas fa-eye"></i>
-      {/if}
+      <i class="fas fa-eye{showHTML ? '-slash' : ''}"></i>
     </button>
   {/if}
 </div>
 
 <style>
-  .btn {
+  button {
     padding: 0;
-    margin-top: 0.5rem;
-  }
-  .html-warning {
-    font-size: small;
   }
 </style>

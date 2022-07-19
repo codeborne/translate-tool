@@ -7,6 +7,7 @@
   import Translator from '../translator/Translator.svelte'
   import DefaultLangValue from './DefaultLangValue.svelte'
   import MissingParamsWarning from './MissingParamsWarning.svelte'
+  import {fade} from 'svelte/transition'
 
   export let excludedKeys: Set<string>
   export let lang: string
@@ -23,11 +24,11 @@
   {#if typeof defaultValue === 'object'}
     <svelte:self keyPrefix={fullKey} dict={dict[key] ??= {}} defaultDict={defaultValue} {isFirefox} {excludedKeys} {defaultLang} uneditedDict={uneditedDict[key] ??= {}} {filter} {lang}/>
   {:else if filter.shouldShow(fullKey, getValue(key, uneditedDict))}
-    <tr class:empty={!dict[key]}>
+    <tr class="dict-key" class:empty={!dict[key]} transition:fade|local>
       <td>
         {fullKey}
         {#if excludedKeys.has(fullKey) || excludedKeys.has(keyPrefix)}
-          <div class="text-secondary placeholder-warning">Marked as untranslatable</div>
+          <div class="text-secondary text-small">Marked as untranslatable</div>
         {/if}
         {#if dict === defaultDict}
           <DictKeyAdder bind:dict={defaultDict} {keyPrefix} {key}/>
@@ -47,3 +48,16 @@
     </tr>
   {/if}
 {/each}
+
+<style>
+  .dict-key:nth-of-type(2n) {
+    background-color: rgba(248, 248, 248, 0.4);
+    border: #f1f1f1 solid;
+    border-width: 1px 0;
+  }
+
+  .dict-key td:nth-of-type(2) {
+    border: #f1f1f1 solid;
+    border-width: 0 1px;
+  }
+</style>

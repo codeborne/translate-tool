@@ -43,15 +43,8 @@
 </script>
 
 {#if defaultBranch && isVersionControlUrl(config)}
-  <div class="ms-3 w-100 branch">
+  <div class="ms-3 w-100 branch text-secondary text-small">
     <i class="fas fa-code-branch" title='Loaded from {defaultBranch} branch'></i>
     Loaded from <b>{defaultBranch}</b> branch
   </div>
 {/if}
-
-<style>
-  .branch {
-    opacity: 0.6;
-    font-size: 0.835rem !important;
-  }
-</style>

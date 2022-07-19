@@ -122,7 +122,6 @@
     padding: 0.2em 1em !important;
   }
 
-
   th:last-of-type, tbody :global(td:last-of-type) {
     padding-left: 0.75em;
   }

@@ -94,13 +94,13 @@ export class GitHubClient implements VersionControlClient {
   }
 
   private async createBranchIfNeeded() {
-    if (this.config.branch === await this.findDefaultBranch()) return
+    const defaultBranch = await this.findDefaultBranch()
+    if (this.config.branch === defaultBranch ) return
     const refsUrl = this.config.url.replace(/contents\/.*$/, 'git/refs')
     const refs = await this.request(refsUrl) as GitHubRef[]
-
     let branchSha = refs.find(r => r.ref == 'refs/heads/' + this.branch)?.object.sha
     if (!branchSha) {
-      branchSha = refs[0].object.sha
+      branchSha = refs.find(r => r.ref == 'refs/heads/' + defaultBranch)?.object.sha
       await this.post(refsUrl, {ref: 'refs/heads/' + this.branch, sha: branchSha})
     }
   }

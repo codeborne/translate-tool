@@ -109,7 +109,6 @@
     const existingLoadedProject = loadedProjects.find(lp => lp.title === newProject.title)
     if (existingLoadedProject) {
       selectedProject = existingLoadedProject
-      console.log(selectedProject)
       localProjectStore.setSelectedProject(selectedProject.config)
     }
     else await loadProject(newProject)

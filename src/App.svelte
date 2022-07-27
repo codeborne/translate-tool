@@ -1,6 +1,6 @@
 <script lang="ts">
   import Navbar from './layout/Navbar.svelte'
-  import {onMount} from 'svelte'
+  import {afterUpdate, onMount, tick} from 'svelte'
   import type {Project} from './common/Project'
   import {LoadedProject} from './common/Project'
   import LoadingSpinner from './common/LoadingSpinner.svelte'
@@ -77,15 +77,13 @@
   async function loadProjects() {
     loadedProjects = await jsonLoader.loadProjects(projects)
     selectedProject = (loadedProjects.find(p => p.title == localProjectStore.getSelectedProject()) ?? loadedProjects[0])
-    showAddProject = !selectedProject
+    showConfig = false
   }
 
   async function loadProject(project: Project) {
-    loading = true
     selectedProject = await jsonLoader.loadProject(project)
     if (!loadedProjects) loadedProjects = []
     loadedProjects = [...loadedProjects, selectedProject]
-    loading = false
   }
 
   async function tryLoadPreConfiguredProjects() {
@@ -98,10 +96,13 @@
   }
 
   function switchProject(e: CustomEvent) {
+    loading = true
     const newProject: Project = e.detail
     const existingLoadedProject = loadedProjects.find(lp => lp.title === newProject.title)
     if (existingLoadedProject) selectedProject = existingLoadedProject
     else loadProject(newProject)
+    localProjectStore.setSelectedProject(selectedProject.config)
+    setTimeout(() => loading = false) // setTimeout keeps loading the state in correct order in Svelte's lifecycle
   }
 </script>
 
@@ -128,7 +129,7 @@
     </div>
   {/if}
 
-  {#if (!loadedProjects && !selectedProject) || loading}
+  {#if loading || (!loadedProjects && !selectedProject)}
     <LoadingSpinner class="my-5"/>
   {:else if showAddProject}
     <ProjectImportList on:imported={projectImported}/>

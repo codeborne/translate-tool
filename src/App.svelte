@@ -139,6 +139,6 @@
   {:else}
     <Error
       title={`Could not load project: ${selectedProject.title}`}
-      text={`Ensure that the link is correct or the tool has the correct credentials to access the resource ${selectedProject.langs}`}/>
+      text={`Ensure that the link is correct or the tool has the correct credentials to access the resource`}/>
   {/if}
 </main>

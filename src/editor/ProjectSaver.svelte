@@ -25,17 +25,17 @@
     client.branch = (config.branch) ? config.branch : 'translations'
   }
 
-  async function save() {
+  function save() {
     inProgress = true
     checkIfUserExistsAndSetAuthor()
     setBranchIfConfigured()
-    await tryCommit()
+    tryCommit()
   }
 
   async function tryCommit() {
     const commitMessage = prompt('Commit message (what have you changed?)', `Updated ${lang} translations`)
+    if (!commitMessage) return
     try {
-      if (!commitMessage) return
       await client.saveFile(lang, dict, defaultDict, commitMessage)
       dispatch('saved')
       alert(`Saved to ${client.label} successfully`)
@@ -50,10 +50,6 @@
 </script>
 
 <button on:click={save} class="btn btn-primary w-auto" disabled={inProgress}>
-  {#if inProgress}
-    <SpinnerIcon/>
-  {:else}
-    <i class="{client.icon}"></i>
-  {/if}
+  {#if inProgress}<SpinnerIcon/>{:else}<i class="{client.icon}"></i>{/if}
   Save to <b>{client.branch}</b> branch
 </button>

@@ -5,11 +5,40 @@ import {GitHubClient} from '../github/GitHubClient'
 import {BitBucketClient} from '../bitbucket/BitBucketClient'
 import {excludedKeysLoader} from './ExcludeKeysLoader'
 
+interface GithubErrorResponse {
+  message: string
+}
+
+interface BitbucketErrorResponse {
+  type: string
+  error: {
+    message: string
+  }
+}
+
+interface BitBucketAuthErrorResponse {
+  error: string,
+  error_description: string
+}
+
+type ErrorResponse = BitbucketErrorResponse & BitBucketAuthErrorResponse & GithubErrorResponse
+
 class JsonLoader {
   request(url: string, init?: RequestInit) {
-    return fetch(url, init).then(r => {
-      if (!r.ok) throw new Error('Failed to load ' + url)
+    return fetch(url, init).then(async (r) => {
+      const defaultError = `Failed to load ${url}`
+      let error: string|undefined
+      if (!r.ok) {
+        error = await r.json().then((msg: ErrorResponse) => {
+          if (msg.message) return msg.message
+          if (msg.type && msg.type == 'error') return msg.error.message
+          if (msg.error_description) return msg.error_description
+          throw new Error(defaultError)
+        }).catch(() => defaultError)
+        throw new Error(error)
+      }
       return r.text()
+
     }).then((text) => {
       if (text.length) return JSON.parse(text)
     })

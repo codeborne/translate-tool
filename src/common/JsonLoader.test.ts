@@ -20,7 +20,7 @@ describe('JsonLoader', () => {
 
   it('returns error if fetch fails', async () => {
     try {
-      stub(window, 'fetch').resolves({ok: false} as Response)
+      stub(window, 'fetch').resolves({ok: false, json: () => Promise.resolve("{}")} as Response)
       await jsonLoader.loadJson(project.url)
       throw 'expecting failure'
       // @ts-ignore

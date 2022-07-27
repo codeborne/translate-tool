@@ -4,6 +4,8 @@
   import BitBucketProjectImporter from './BitBucketProjectImporter.svelte'
   import Accordion from './Accordion.svelte'
   import {SvelteComponent} from 'svelte'
+  import {fly} from 'svelte/transition'
+  import Card from '../components/Card.svelte'
 
   interface Accordion {
     heading: string,
@@ -24,9 +26,16 @@
   }
 
 </script>
+<div class="accordion addNew fix-width mx-auto" in:fly={{x: -200, duration: 200}}>
 
-<div class="accordion addNew fix-width mx-auto">
   <h3 class="mb-3">New project</h3>
+  <Card flex padding="px-4 py-3" class="mb-3">
+    <div>
+      <h5><i class="fa-solid fa-circle-info mb-3 me-2"></i>Quickstart</h5>
+      <p>Make sure to acquaint yourself with the desired <a target="_blank" href="https://github.com/codeborne/translate-tool#using-the-tool">file structure</a></p>
+      <p>A working example project can be found <a target="_blank" href="https://github.com/codeborne/translate-tool/tree/master/e2e/i18n">here</a></p>
+    </div>
+  </Card>
 
   {#each importers as importer}
     <Accordion on:toggle={toggle}
@@ -34,5 +43,4 @@
       <svelte:component this={importer.slot} on:imported />
     </Accordion>
   {/each}
-
 </div>

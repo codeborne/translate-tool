@@ -14,6 +14,7 @@
   import MissingKeys from './MissingKeys.svelte'
   import ProjectSaver from './ProjectSaver.svelte'
   import {onMount} from 'svelte'
+  import Card from '../components/Card.svelte'
 
 
   export let project: LoadedProject
@@ -79,7 +80,7 @@
 
 <MissingKeys {uneditedDict} {defaultDict}/>
 
-<div class="card shadow d-flex flex-column align-items-center overflow-hidden">
+<Card fullWidth padding>
   <div class="d-flex flex-row w-100 justify-content-between px-3 px-lg-4 pt-3 pt-lg-4">
     <FilterControls bind:filter>
       <BranchLoadedFrom config={project.config} bind:defaultBranch/>
@@ -101,7 +102,7 @@
       <KeyValueTableRow excludedKeys={project.excluded} {isFirefox} {lang} {dict} {defaultDict} {uneditedDict} {filter} {defaultLang}/>
     </tbody>
   </table>
-</div>
+</Card>
 
 <div id="output" class="mt-3 card shadow p-3 p-lg-4">
   <DictClipboardOutput {dict} {defaultDict} {lang} indent={project.config.indent} on:copied={onCopied}>
@@ -121,7 +122,6 @@
   tbody :global(td) {
     padding: 0.2em 0.6em !important;
   }
-
 
   th:last-of-type, tbody :global(td:last-of-type) {
     padding-left: 0.75em;

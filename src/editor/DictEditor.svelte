@@ -83,7 +83,7 @@
 <Card fullWidth padding>
   <div class="d-flex flex-row w-100 justify-content-between px-3 px-lg-4 pt-3 pt-lg-4">
     <FilterControls bind:filter>
-      <BranchLoadedFrom config={project.config} defaultBranch={project.meta?.branchLoadedFrom}/>
+      <BranchLoadedFrom config={project.config} bind:projectMeta={project.meta}/>
     </FilterControls>
     <div class="d-flex justify-content-center align-items-center">
       <a class="btn btn-secondary btn-icon btn-sm" href="#output"><Icon name="arrowDown"/> Jump to bottom</a>

@@ -19,22 +19,29 @@ class JsonLoader {
     return this.request(url, init)
   }
 
-  loadFor(project: Project, fileBaseName: string): Promise<any> {
-    if (project.url.includes(GitHubClient.host)) return new GitHubClient(project).getFileContent(fileBaseName + '.json')
+  loadFor(project: Project, fileBaseName: string, branch: string): Promise<any> {
+    if (project.url.includes(GitHubClient.host)) return new GitHubClient(project).getFileContent(fileBaseName + '.json', branch)
     else if (project.url.includes(BitBucketClient.host)) return new BitBucketClient(project).getFileContent(fileBaseName + '.json')
     else return this.loadJson(getBaseUrl(project.url) + '/' + fileBaseName + '.json')
   }
 
   async loadProject(project: Project): Promise<LoadedProject> {
     try {
-      const langs = await this.loadFor(project, 'langs') as string[]
-      const loadedDicts = await Promise.all(langs.map(lang => this.loadFor(project, lang)))
+      let branch = project.branch ?? ''
+      let langs: string[]
+      try {
+        langs = await this.loadFor(project, 'langs', branch)
+      } catch (e) {
+        branch = ''
+        langs = await this.loadFor(project, 'langs', branch)
+      }
+      const loadedDicts = await Promise.all(langs!.map(lang => this.loadFor(project, lang, branch)))
       const dicts = loadedDicts.reduce((r, dict, i) => {
         r[langs[i]] = dict;
         return r
       }, {} as Record<string, Dict>)
       const excludedKeys = await excludedKeysLoader.fetch(project) ?? []
-      return new LoadedProject(project, dicts, excludedKeys)
+      return new LoadedProject(project, dicts, excludedKeys, {branchLoadedFrom: branch})
     } catch (e) {
       return new LoadedProject(project, {})
     }

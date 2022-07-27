@@ -45,8 +45,8 @@ export class GitHubClient implements VersionControlClient {
     return this.request(this.config.url + file + (branch ? '?ref=' + branch : '')) as Promise<GitHubFile>
   }
 
-  async getFileContent(file: string) {
-    const response = await this.getFile(file, this.branch).catch(() => this.getFile(file))
+  async getFileContent(file: string, branch: string) {
+    const response = await this.getFile(file, branch)
     if (response.encoding === 'base64') return JSON.parse(decodeBase64Unicode(response.content))
     else response.content
   }

@@ -1,14 +1,17 @@
 <script lang="ts">
 
-  import type {LoadedProject} from '../common/Project'
+  import type {LoadedProject, Project} from '../common/Project'
   import localProjectStore from '../common/LocalProjectStore'
+  import {createEventDispatcher} from 'svelte'
 
-  export let projects: LoadedProject[]
-  export let selectedProject: LoadedProject
+  export let projects: Project[]
+  export let selectedProject: Project
 
-  function handleProjectSelect(project: LoadedProject) {
-    selectedProject = project
-    localProjectStore.setSelectedProject(selectedProject.config)
+  const dispatch = createEventDispatcher()
+
+  function handleProjectSelect(project: Project) {
+    localProjectStore.setSelectedProject(selectedProject)
+    dispatch('selected', project)
   }
 
 </script>

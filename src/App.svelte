@@ -25,6 +25,7 @@
   let selectedProject: LoadedProject
   let lang: string
   let user: GoogleProfile|undefined
+  let loading = false
 
   $: if (!showConfig) showAddProject = false
 
@@ -33,7 +34,7 @@
     if (!projects) projects = localProjectStore.getProjects()
     await handleSharedUrl()
     if (projects) localProjectStore.setProjects(projects)
-    !projects.length ? setupNewProjectIfNotExists() : await loadProjects()
+    !projects.length ? setupNewProjectIfNotExists() : await loadLastProject()
   })
 
   async function handleSharedUrl() {
@@ -59,18 +60,8 @@
     showAddProject = true
   }
 
-  async function loadAllProjects() {
-    if (projects.length) await loadProjects()
-    else {
-      setupNewProjectIfNotExists()
-      loadedProjects = []
-    }
-  }
-
-  async function loadProjects() {
-    loadedProjects = await jsonLoader.loadProjects(projects)
-    const lastTitle = localProjectStore.getSelectedProject()
-    selectedProject = (loadedProjects.find(p => p.title == lastTitle) ?? loadedProjects[0])
+  async function loadLastProject() {
+    await loadProject(projects.find(p => p.title === localProjectStore.getSelectedProject()) ?? projects[0])
     showAddProject = !selectedProject
   }
 
@@ -80,7 +71,21 @@
     projects = projects.concat(project)
     localProjectStore.setProjects(projects)
     localProjectStore.setSelectedProject(project)
-    loadProjects()
+    loadProject(project)
+  }
+
+  async function loadProjects() {
+    loadedProjects = await jsonLoader.loadProjects(projects)
+    selectedProject = (loadedProjects.find(p => p.title == localProjectStore.getSelectedProject()) ?? loadedProjects[0])
+    showAddProject = !selectedProject
+  }
+
+  async function loadProject(project: Project) {
+    loading = true
+    selectedProject = await jsonLoader.loadProject(project)
+    if (!loadedProjects) loadedProjects = []
+    loadedProjects = [...loadedProjects, selectedProject]
+    loading = false
   }
 
   async function tryLoadPreConfiguredProjects() {
@@ -91,13 +96,20 @@
     console.error(e.reason)
     alert('Error, please reload the page:\n\n' + e.reason?.message ?? '')
   }
+
+  function switchProject(e: CustomEvent) {
+    const newProject: Project = e.detail
+    const existingLoadedProject = loadedProjects.find(lp => lp.title === newProject.title)
+    if (existingLoadedProject) selectedProject = existingLoadedProject
+    else loadProject(newProject)
+  }
 </script>
 
 <svelte:window on:unhandledrejection={showUnhandledError}/>
 
 <Navbar>
   {#if loadedProjects && loadedProjects.length}
-    <ProjectSwitcher projects={loadedProjects} bind:selectedProject/>
+    <ProjectSwitcher projects={projects} selectedProject={selectedProject.config} on:selected={switchProject}/>
     <div class="nav-responsive">
       {#if !showConfig && !showAddProject && selectedProject.langs.length}
         <LangSwitcher project={selectedProject} bind:lang/>
@@ -116,17 +128,17 @@
     </div>
   {/if}
 
-  {#if !loadedProjects && !selectedProject}
+  {#if (!loadedProjects && !selectedProject) || loading}
     <LoadingSpinner class="my-5"/>
   {:else if showAddProject}
     <ProjectImportList on:imported={projectImported}/>
   {:else if showConfig}
-    <ProjectSettings bind:selectedProject={selectedProject.config} bind:projects on:changed={loadAllProjects}/>
+    <ProjectSettings bind:selectedProject={selectedProject.config} bind:projects on:changed={loadProjects}/>
   {:else if lang && Object.entries(selectedProject.dicts).length}
     <DictEditor project={selectedProject} {lang} {user}/>
   {:else}
     <Error
       title={`Could not load project: ${selectedProject.title}`}
-      text="Ensure that the link is correct or the tool has the correct credentials to access the resource"/>
+      text={`Ensure that the link is correct or the tool has the correct credentials to access the resource ${selectedProject.langs}`}/>
   {/if}
 </main>

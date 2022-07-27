@@ -13,7 +13,7 @@
   import type GoogleProfile from '../common/GoogleAuth.svelte'
   import MissingKeys from './MissingKeys.svelte'
   import ProjectSaver from './ProjectSaver.svelte'
-  import {onMount} from 'svelte'
+  import {onMount, tick} from 'svelte'
   import Card from '../components/Card.svelte'
 
 
@@ -33,7 +33,7 @@
 
   onMount(() => inactivityReload())
 
-  function initProject(project: LoadedProject) {
+  async function initProject(project: LoadedProject) {
     defaultLang = project.langs[0]
     defaultDict = project.dicts[defaultLang]
     if (dict) initLang(lang)

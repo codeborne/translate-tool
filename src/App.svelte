@@ -91,7 +91,8 @@
   async function loadProject(project: Project) {
     selectedProject = await jsonLoader.loadProject(project)
     if (!loadedProjects) loadedProjects = []
-    loadedProjects = [...loadedProjects.filter(p => p.config.title !== selectedProject.config.title), selectedProject]
+    loadedProjects = [...loadedProjects.filter(p => p.title !== selectedProject.title), selectedProject]
+    localProjectStore.setSelectedProject(selectedProject.config)
   }
 
   async function tryLoadPreConfiguredProjects() {
@@ -106,14 +107,16 @@
   async function switchProject(newProject: Project) {
     loading = true
     const existingLoadedProject = loadedProjects.find(lp => lp.title === newProject.title)
-    if (existingLoadedProject) selectedProject = existingLoadedProject
+    if (existingLoadedProject) {
+      selectedProject = existingLoadedProject
+      localProjectStore.setSelectedProject(selectedProject.config)
+    }
     else await loadProject(newProject)
-    localProjectStore.setSelectedProject(selectedProject.config)
     setTimeout(() => loading = false) // setTimeout keeps loading the state in correct order in Svelte's lifecycle
   }
 
-  function switchProjectEvent(e: CustomEvent) {
-    switchProject(e.detail)
+  async function switchProjectEvent(e: CustomEvent) {
+    await switchProject(e.detail)
   }
 </script>
 
@@ -140,17 +143,20 @@
     </div>
   {/if}
 
-  {#if loading || (!loadedProjects && !selectedProject)}
-    <LoadingSpinner class="my-5"/>
-  {:else if showAddProject}
-    <ProjectImportList on:imported={projectImported}/>
-  {:else if showConfig}
-    <ProjectSettings bind:selectedProject={selectedProject.config} bind:projects on:changed={updateProject} on:deleted={deleteProject}/>
-  {:else if lang && Object.entries(selectedProject.dicts).length}
-    <DictEditor project={selectedProject} {lang} {user}/>
-  {:else}
-    <Error
-      title={`Could not load project: ${selectedProject.title}`}
-      text={`Ensure that the link is correct or the tool has the correct credentials to access the resource`}/>
-  {/if}
+  {#key selectedProject}
+    {#if loading || (!loadedProjects && !selectedProject)}
+      <LoadingSpinner class="my-5"/>
+    {:else if showAddProject}
+      <ProjectImportList on:imported={projectImported}/>
+    {:else if showConfig}
+      <ProjectSettings bind:selectedProject={selectedProject.config} bind:projects on:changed={updateProject} on:deleted={deleteProject}/>
+    {:else if lang && Object.entries(selectedProject?.dicts)?.length}
+        <DictEditor project={selectedProject} {lang} {user}/>
+    {:else}
+      <Error
+        title={`Could not load project: ${selectedProject.title}`}
+        text={`Ensure that the link is correct or the tool has the correct credentials to access the resource`}/>
+    {/if}
+  {/key}
+
 </main>

@@ -109,6 +109,7 @@
     const existingLoadedProject = loadedProjects.find(lp => lp.title === newProject.title)
     if (existingLoadedProject) {
       selectedProject = existingLoadedProject
+      console.log(selectedProject)
       localProjectStore.setSelectedProject(selectedProject.config)
     }
     else await loadProject(newProject)
@@ -124,9 +125,9 @@
 
 <Navbar>
   {#if loadedProjects && loadedProjects.length}
-    <ProjectSwitcher projects={projects} selectedProject={selectedProject.config} on:selected={switchProjectEvent}/>
+    <ProjectSwitcher projects={projects} selectedProject={selectedProject?.config} on:selected={switchProjectEvent}/>
     <div class="nav-responsive">
-      {#if !showConfig && !showAddProject && selectedProject.langs.length}
+      {#if !showConfig && !showAddProject && selectedProject?.langs?.length}
         <LangSwitcher project={selectedProject} bind:lang/>
       {/if}
       <ProjectAddButton bind:showAddProject/>
@@ -143,7 +144,7 @@
     </div>
   {/if}
 
-  {#key selectedProject}
+  {#key loading || loadedProjects}
     {#if loading || (!loadedProjects && !selectedProject)}
       <LoadingSpinner class="my-5"/>
     {:else if showAddProject}
@@ -151,7 +152,9 @@
     {:else if showConfig}
       <ProjectSettings bind:selectedProject={selectedProject.config} bind:projects on:changed={updateProject} on:deleted={deleteProject}/>
     {:else if lang && Object.entries(selectedProject?.dicts)?.length}
+      {#key selectedProject}
         <DictEditor project={selectedProject} {lang} {user}/>
+      {/key}
     {:else}
       <Error
         title={`Could not load project: ${selectedProject.title}`}

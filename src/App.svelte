@@ -72,19 +72,20 @@
     localProjectStore.setProjects(projects)
     localProjectStore.setSelectedProject(project)
     loadProject(project)
+    showAddProject = false
   }
 
-  async function updateProject() {
-    await loadProject(selectedProject.config)
+  async function updateProject(e: CustomEvent) {
+    await loadProject(e.detail)
     showConfig = false
   }
 
   async function deleteProject() {
     loading = true
+    showConfig = false
     if (loadedProjects?.length) selectedProject = loadedProjects[0]
     if (projects?.length) await loadProject(projects[0])
     else setupNewProjectIfNotExists()
-    showConfig = false
     setTimeout(() => loading = false)
   }
 
@@ -143,17 +144,15 @@
     </div>
   {/if}
 
-  {#key loading || loadedProjects}
+  {#key selectedProject}
     {#if loading || (!loadedProjects && !selectedProject)}
       <LoadingSpinner class="my-5"/>
     {:else if showAddProject}
       <ProjectImportList on:imported={projectImported}/>
     {:else if showConfig}
-      <ProjectSettings bind:selectedProject={selectedProject.config} bind:projects on:changed={updateProject} on:deleted={deleteProject}/>
+      <ProjectSettings selectedProject={selectedProject.config} bind:projects on:changed={updateProject} on:deleted={deleteProject}/>
     {:else if lang && Object.entries(selectedProject?.dicts)?.length}
-      {#key selectedProject}
-        <DictEditor project={selectedProject} {lang} {user}/>
-      {/key}
+      <DictEditor project={selectedProject} {lang} {user}/>
     {:else}
       <Error
         title={`Could not load project: ${selectedProject.title}`}

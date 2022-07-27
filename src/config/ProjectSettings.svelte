@@ -43,7 +43,7 @@
     filteredStorage.push(selectedProject)
     localProjectStore.setProjects(filteredStorage)
     projects = filteredStorage
-    dispatch('changed')
+    dispatch('changed', selectedProject)
   }
 
   function shareProject() {

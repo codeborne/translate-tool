@@ -110,7 +110,6 @@
 </Navbar>
 
 <main class="container mw-100 p-3">
-
   {#if showAddProject || showConfig}
     <div class="fix-width mx-auto">
       <ToggleBackButton bind:showAddProject bind:showConfig showBack={loadedProjects && loadedProjects.length > 0}/>
@@ -122,7 +121,6 @@
   {:else if showAddProject}
     <ProjectImportList on:imported={projectImported}/>
   {:else if showConfig}
-
     <ProjectSettings bind:selectedProject={selectedProject.config} bind:projects on:changed={loadAllProjects}/>
   {:else if lang && Object.entries(selectedProject.dicts).length}
     <DictEditor project={selectedProject} {lang} {user}/>

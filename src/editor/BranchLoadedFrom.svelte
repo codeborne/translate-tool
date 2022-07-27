@@ -8,26 +8,7 @@
   $: if (config) handleBranchCheck()
 
   async function handleBranchCheck() {
-    let result
-    if (isVersionControlUrl(config)) {
-      try {
-        result = await doesBranchExist()
-        defaultBranch = (result) ? config.branch ?? 'translations' : ''
-      } catch (e) {
-        console.warn(`The project ${config.title} does not have a branch called ${config.branch ?? 'translations'}.`)
-      } finally {
-        if (!result) defaultBranch = await getDefaultBranch() ?? 'base'
-      }
-    }
-  }
-
-  async function doesBranchExist() {
-    let result
-    if (config.url.includes(GitHubClient.host)) result =
-      await new GitHubClient(config).getFileContentNoCatch('langs.json')
-    else if (config.url.includes(BitBucketClient.host)) result =
-      await new BitBucketClient(config).getFileContentNoCatch('langs.json', config.branch ?? 'translations')
-    return !!result
+    if (isVersionControlUrl(config) && !defaultBranch) defaultBranch = await getDefaultBranch() ?? 'base'
   }
 
   async function getDefaultBranch() {

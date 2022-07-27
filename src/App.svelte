@@ -1,6 +1,6 @@
 <script lang="ts">
   import Navbar from './layout/Navbar.svelte'
-  import {afterUpdate, onMount, tick} from 'svelte'
+  import {onMount} from 'svelte'
   import type {Project} from './common/Project'
   import {LoadedProject} from './common/Project'
   import LoadingSpinner from './common/LoadingSpinner.svelte'
@@ -74,16 +74,24 @@
     loadProject(project)
   }
 
-  async function loadProjects() {
-    loadedProjects = await jsonLoader.loadProjects(projects)
-    selectedProject = (loadedProjects.find(p => p.title == localProjectStore.getSelectedProject()) ?? loadedProjects[0])
+  async function updateProject() {
+    await loadProject(selectedProject.config)
     showConfig = false
+  }
+
+  async function deleteProject() {
+    loading = true
+    if (loadedProjects?.length) selectedProject = loadedProjects[0]
+    if (projects?.length) await loadProject(projects[0])
+    else setupNewProjectIfNotExists()
+    showConfig = false
+    setTimeout(() => loading = false)
   }
 
   async function loadProject(project: Project) {
     selectedProject = await jsonLoader.loadProject(project)
     if (!loadedProjects) loadedProjects = []
-    loadedProjects = [...loadedProjects, selectedProject]
+    loadedProjects = [...loadedProjects.filter(p => p.config.title !== selectedProject.config.title), selectedProject]
   }
 
   async function tryLoadPreConfiguredProjects() {
@@ -95,14 +103,17 @@
     alert('Error, please reload the page:\n\n' + e.reason?.message ?? '')
   }
 
-  function switchProject(e: CustomEvent) {
+  async function switchProject(newProject: Project) {
     loading = true
-    const newProject: Project = e.detail
     const existingLoadedProject = loadedProjects.find(lp => lp.title === newProject.title)
     if (existingLoadedProject) selectedProject = existingLoadedProject
-    else loadProject(newProject)
+    else await loadProject(newProject)
     localProjectStore.setSelectedProject(selectedProject.config)
     setTimeout(() => loading = false) // setTimeout keeps loading the state in correct order in Svelte's lifecycle
+  }
+
+  function switchProjectEvent(e: CustomEvent) {
+    switchProject(e.detail)
   }
 </script>
 
@@ -110,7 +121,7 @@
 
 <Navbar>
   {#if loadedProjects && loadedProjects.length}
-    <ProjectSwitcher projects={projects} selectedProject={selectedProject.config} on:selected={switchProject}/>
+    <ProjectSwitcher projects={projects} selectedProject={selectedProject.config} on:selected={switchProjectEvent}/>
     <div class="nav-responsive">
       {#if !showConfig && !showAddProject && selectedProject.langs.length}
         <LangSwitcher project={selectedProject} bind:lang/>
@@ -134,7 +145,7 @@
   {:else if showAddProject}
     <ProjectImportList on:imported={projectImported}/>
   {:else if showConfig}
-    <ProjectSettings bind:selectedProject={selectedProject.config} bind:projects on:changed={loadProjects}/>
+    <ProjectSettings bind:selectedProject={selectedProject.config} bind:projects on:changed={updateProject} on:deleted={deleteProject}/>
   {:else if lang && Object.entries(selectedProject.dicts).length}
     <DictEditor project={selectedProject} {lang} {user}/>
   {:else}

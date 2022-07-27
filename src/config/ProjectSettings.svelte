@@ -22,7 +22,7 @@
     if (!confirm(`Are you sure you want to delete the project: ${selectedProject.title}?`)) return
     projects = projects.filter(obj => obj.title !== selectedProject.title)
     localProjectStore.setProjects(projects)
-    dispatch('changed')
+    dispatch('deleted')
   }
 
   function setSelectedProjectValues() {

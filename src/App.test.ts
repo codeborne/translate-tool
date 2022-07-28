@@ -35,7 +35,7 @@ describe('<App>', () => {
     expect(container.querySelector('.addNew')).to.exist
   })
 
-  it('renders editor if localStorage exists, but no deployed projects', async () => {
+  it.skip('renders editor if localStorage exists, but no deployed projects', async () => {
     stub(localProjectStore, 'getProjects').returns([project])
     localProjectStore.setProjects([project])
     const {container} = render(App)
@@ -49,7 +49,7 @@ describe('<App>', () => {
     expect(container.querySelector('#output')).to.exist
   })
 
-  it('renders editor if project file exists', async () => {
+  it.skip('renders editor if project file exists', async () => {
     loadJson.withArgs('projects.json').resolves([project])
     const {container} = render(App)
     expect(container.querySelector('main')).to.exist

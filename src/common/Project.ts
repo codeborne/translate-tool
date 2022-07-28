@@ -6,13 +6,19 @@ export interface Project {
   branch?: string
 }
 
+export interface ProjectMeta {
+  branchLoadedFrom?: string
+  errors?: string
+}
+
 export type Dict = Record<string, any | string>
 
 export class LoadedProject {
   constructor(
     public config: Project,
     public dicts: Record<string, Dict>,
-    public excluded: Set<string> = new Set()
+    public excluded: Set<string> = new Set(),
+    public meta: ProjectMeta = {}
   ) {}
 
   get title() {

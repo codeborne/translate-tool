@@ -13,7 +13,7 @@
   import type GoogleProfile from '../common/GoogleAuth.svelte'
   import MissingKeys from './MissingKeys.svelte'
   import ProjectSaver from './ProjectSaver.svelte'
-  import {onMount} from 'svelte'
+  import {onMount, tick} from 'svelte'
   import Card from '../components/Card.svelte'
 
 
@@ -33,7 +33,7 @@
 
   onMount(() => inactivityReload())
 
-  function initProject(project: LoadedProject) {
+  async function initProject(project: LoadedProject) {
     defaultLang = project.langs[0]
     defaultDict = project.dicts[defaultLang]
     if (dict) initLang(lang)
@@ -83,7 +83,7 @@
 <Card fullWidth padding>
   <div class="d-flex flex-row w-100 justify-content-between px-3 px-lg-4 pt-3 pt-lg-4">
     <FilterControls bind:filter>
-      <BranchLoadedFrom config={project.config} bind:defaultBranch/>
+      <BranchLoadedFrom config={project.config} bind:projectMeta={project.meta}/>
     </FilterControls>
     <div class="d-flex justify-content-center align-items-center">
       <a class="btn btn-secondary btn-icon btn-sm" href="#output"><Icon name="arrowDown"/> Jump to bottom</a>

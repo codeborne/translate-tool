@@ -13,7 +13,7 @@ export interface VersionControlClient {
   label: string
   author: Author
 
-  getFileContent(file: string): any
+  getFileContent(file: string, branch: string): any
   saveFile(lang: string, dict: Dict, defaultDict: Dict, commitMessage: string): any
   setAuthor(author: Author): void
 }

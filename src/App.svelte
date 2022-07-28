@@ -25,6 +25,7 @@
   let selectedProject: LoadedProject
   let lang: string
   let user: GoogleProfile|undefined
+  let loading = false
 
   $: if (!showConfig) showAddProject = false
 
@@ -33,7 +34,7 @@
     if (!projects) projects = localProjectStore.getProjects()
     await handleSharedUrl()
     if (projects) localProjectStore.setProjects(projects)
-    !projects.length ? setupNewProjectIfNotExists() : await loadProjects()
+    !projects.length ? setupNewProjectIfNotExists() : await loadLastProject()
   })
 
   async function handleSharedUrl() {
@@ -59,18 +60,8 @@
     showAddProject = true
   }
 
-  async function loadAllProjects() {
-    if (projects.length) await loadProjects()
-    else {
-      setupNewProjectIfNotExists()
-      loadedProjects = []
-    }
-  }
-
-  async function loadProjects() {
-    loadedProjects = await jsonLoader.loadProjects(projects)
-    const lastTitle = localProjectStore.getSelectedProject()
-    selectedProject = (loadedProjects.find(p => p.title == lastTitle) ?? loadedProjects[0])
+  async function loadLastProject() {
+    await loadProject(projects.find(p => p.title === localProjectStore.getSelectedProject()) ?? projects[0])
     showAddProject = !selectedProject
   }
 
@@ -80,7 +71,29 @@
     projects = projects.concat(project)
     localProjectStore.setProjects(projects)
     localProjectStore.setSelectedProject(project)
-    loadProjects()
+    loadProject(project)
+    showAddProject = false
+  }
+
+  async function updateProject(e: CustomEvent) {
+    await loadProject(e.detail)
+    showConfig = false
+  }
+
+  async function deleteProject() {
+    loading = true
+    showConfig = false
+    if (loadedProjects?.length) selectedProject = loadedProjects[0]
+    if (projects?.length) await loadProject(projects[0])
+    else setupNewProjectIfNotExists()
+    setTimeout(() => loading = false)
+  }
+
+  async function loadProject(project: Project) {
+    selectedProject = await jsonLoader.loadProject(project)
+    if (!loadedProjects) loadedProjects = []
+    loadedProjects = [...loadedProjects.filter(p => p.title !== selectedProject.title), selectedProject]
+    localProjectStore.setSelectedProject(selectedProject.config)
   }
 
   async function tryLoadPreConfiguredProjects() {
@@ -91,15 +104,30 @@
     console.error(e.reason)
     alert('Error, please reload the page:\n\n' + e.reason?.message ?? '')
   }
+
+  async function switchProject(newProject: Project) {
+    loading = true
+    const existingLoadedProject = loadedProjects.find(lp => lp.title === newProject.title)
+    if (existingLoadedProject) {
+      selectedProject = existingLoadedProject
+      localProjectStore.setSelectedProject(selectedProject.config)
+    }
+    else await loadProject(newProject)
+    setTimeout(() => loading = false) // setTimeout keeps loading the state in correct order in Svelte's lifecycle
+  }
+
+  async function switchProjectEvent(e: CustomEvent) {
+    await switchProject(e.detail)
+  }
 </script>
 
 <svelte:window on:unhandledrejection={showUnhandledError}/>
 
 <Navbar>
   {#if loadedProjects && loadedProjects.length}
-    <ProjectSwitcher projects={loadedProjects} bind:selectedProject/>
+    <ProjectSwitcher projects={projects} selectedProject={selectedProject?.config} on:selected={switchProjectEvent}/>
     <div class="nav-responsive">
-      {#if !showConfig && !showAddProject && selectedProject.langs.length}
+      {#if !showConfig && !showAddProject && selectedProject?.langs?.length}
         <LangSwitcher project={selectedProject} bind:lang/>
       {/if}
       <ProjectAddButton bind:showAddProject/>
@@ -110,25 +138,26 @@
 </Navbar>
 
 <main class="container mw-100 p-3">
-
   {#if showAddProject || showConfig}
     <div class="fix-width mx-auto">
       <ToggleBackButton bind:showAddProject bind:showConfig showBack={loadedProjects && loadedProjects.length > 0}/>
     </div>
   {/if}
 
-  {#if !loadedProjects && !selectedProject}
-    <LoadingSpinner class="my-5"/>
-  {:else if showAddProject}
-    <ProjectImportList on:imported={projectImported}/>
-  {:else if showConfig}
+  {#key selectedProject}
+    {#if loading || (!loadedProjects && !selectedProject)}
+      <LoadingSpinner class="my-5"/>
+    {:else if showAddProject}
+      <ProjectImportList on:imported={projectImported}/>
+    {:else if showConfig}
+      <ProjectSettings selectedProject={selectedProject.config} bind:projects on:changed={updateProject} on:deleted={deleteProject}/>
+    {:else if lang && Object.entries(selectedProject?.dicts)?.length}
+      <DictEditor project={selectedProject} {lang} {user}/>
+    {:else}
+      <Error
+        title={`Could not load project: ${selectedProject.title}`}
+        text={`Ensure that the link is correct or the tool has the correct credentials to access the resource`}/>
+    {/if}
+  {/key}
 
-    <ProjectSettings bind:selectedProject={selectedProject.config} bind:projects on:changed={loadAllProjects}/>
-  {:else if lang && Object.entries(selectedProject.dicts).length}
-    <DictEditor project={selectedProject} {lang} {user}/>
-  {:else}
-    <Error
-      title={`Could not load project: ${selectedProject.title}`}
-      text="Ensure that the link is correct or the tool has the correct credentials to access the resource"/>
-  {/if}
 </main>

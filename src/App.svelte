@@ -1,6 +1,6 @@
 <script lang="ts">
   import Navbar from './layout/Navbar.svelte'
-  import {onMount} from 'svelte'
+  import {onMount, tick} from 'svelte'
   import type {Project} from './common/Project'
   import {LoadedProject} from './common/Project'
   import LoadingSpinner from './common/LoadingSpinner.svelte'
@@ -25,7 +25,7 @@
   let selectedProject: LoadedProject
   let lang: string
   let user: GoogleProfile|undefined
-  let loading = false
+  let loading = true
 
   $: if (!showConfig) showAddProject = false
 
@@ -35,6 +35,7 @@
     await handleSharedUrl()
     if (projects) localProjectStore.setProjects(projects)
     !projects.length ? setupNewProjectIfNotExists() : await loadLastProject()
+    loading = false
   })
 
   async function handleSharedUrl() {
@@ -56,8 +57,9 @@
 
   function setupNewProjectIfNotExists() {
     projects = []
+    loadedProjects = []
     selectedProject = new LoadedProject({url: '', token: '', title: '', indent: 2}, {})
-    showAddProject = true
+    setTimeout(() => showAddProject = true)
   }
 
   async function loadLastProject() {
@@ -66,13 +68,14 @@
   }
 
   function projectImported(e: CustomEvent) {
-    showConfig = false
+    loading = true
     const project = e.detail
     projects = projects.concat(project)
     localProjectStore.setProjects(projects)
     localProjectStore.setSelectedProject(project)
     loadProject(project)
-    showAddProject = false
+    showConfig = false
+    setTimeout(() => {showAddProject = false; loading = false})
   }
 
   async function updateProject(e: CustomEvent) {
@@ -83,10 +86,11 @@
   async function deleteProject() {
     loading = true
     showConfig = false
-    if (loadedProjects?.length) selectedProject = loadedProjects[0]
-    if (projects?.length) await loadProject(projects[0])
-    else setupNewProjectIfNotExists()
-    setTimeout(() => loading = false)
+    loadedProjects = loadedProjects.filter(lp => lp.title !== selectedProject.title)
+    if (projects?.length && loadedProjects?.length) selectedProject = loadedProjects[0]
+    else if (projects?.length) await loadProject(projects[0])
+    else await setupNewProjectIfNotExists()
+    loading = false
   }
 
   async function loadProject(project: Project) {
@@ -113,11 +117,11 @@
       localProjectStore.setSelectedProject(selectedProject.config)
     }
     else await loadProject(newProject)
-    setTimeout(() => loading = false) // setTimeout keeps loading the state in correct order in Svelte's lifecycle
+    await setTimeout(() => loading = false) // setTimeout keeps loading the state in correct order in Svelte's lifecycle
   }
 
-  async function switchProjectEvent(e: CustomEvent) {
-    await switchProject(e.detail)
+  function switchProjectEvent(e: CustomEvent) {
+    switchProject(e.detail)
   }
 </script>
 
@@ -144,8 +148,8 @@
     </div>
   {/if}
 
-  {#key selectedProject}
-    {#if loading || (!loadedProjects && !selectedProject)}
+  {#key (selectedProject && !loading)}
+    {#if loading || (!loadedProjects?.length && !selectedProject)}
       <LoadingSpinner class="my-5"/>
     {:else if showAddProject}
       <ProjectImportList on:imported={projectImported}/>
@@ -153,10 +157,12 @@
       <ProjectSettings selectedProject={selectedProject.config} bind:projects on:changed={updateProject} on:deleted={deleteProject}/>
     {:else if lang && Object.entries(selectedProject?.dicts)?.length}
       <DictEditor project={selectedProject} {lang} {user}/>
-    {:else}
+    {:else if selectedProject.title}
       <Error
         title={`Could not load project: ${selectedProject.title}`}
         text={`Ensure that the link is correct or the tool has the correct credentials to access the resource`}/>
+    {:else}
+      <LoadingSpinner class="my-5"/>
     {/if}
   {/key}
 

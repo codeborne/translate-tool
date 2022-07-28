@@ -24,8 +24,14 @@
 </script>
 
 {#if projectMeta && isVersionControlUrl(config)}
-  <div class="ms-3 w-100 branch text-secondary text-small">
+  <div class="ms-3 branch text-secondary text-small">
     <i class="fas fa-code-branch" title='Loaded from {projectMeta.branchLoadedFrom} branch'></i>
     Loaded from <b>{projectMeta.branchLoadedFrom}</b> branch
   </div>
 {/if}
+
+<style>
+  .branch {
+    white-space: nowrap;
+  }
+</style>

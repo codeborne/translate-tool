@@ -109,7 +109,7 @@
     {#if project.config.token}
       <ProjectSaver {user} {dict} {defaultDict} {lang} config={project.config} on:saved={onSaved}/>
     {/if}
-    <ProjectSourceButton project={project.config} {defaultBranch} {lang}/>
+    <ProjectSourceButton project={project.config} defaultBranch={project?.meta?.branchLoadedFrom ? project.meta.branchLoadedFrom : defaultBranch} {lang}/>
     <ChangesCounter {dict} {uneditedDict}/>
   </DictClipboardOutput>
 </div>

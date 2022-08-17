@@ -33,7 +33,7 @@ app.get('/auth', async function (req: Request, res: Response) {
   const profile: GoogleProfile = await fetchProfile(googleAuth, token)
   if (canLogin(profile)) {
     res.cookie('AUTH', {token, name: profile.name, email: profile.email}, {signed: true, httpOnly: true})
-    res.redirect('/')
+    res.redirect(req.query.state as string ?? '/')
   } else res.sendStatus(403)
 })
 
@@ -57,8 +57,7 @@ app.get('/proxy/**', (req, res) => {
 app.get('/*', async function (req: Request, res: Response) {
   const provider: typeof googleAuth = googleAuth
   if (isSecure && !req.signedCookies['AUTH'])
-    res.redirect(provider.authUrl + `?client_id=${provider.clientId}&scope=${provider.scope}` +
-      `&redirect_uri=${redirectUrl(req)}&response_type=code&prompt=select_account`)
+    res.redirect(`${provider.authUrl}?client_id=${provider.clientId}&scope=${provider.scope}&redirect_uri=${encodeURIComponent(redirectUrl(req))}&state=${encodeURIComponent(req.url)}&response_type=code&prompt=select_account`)
   else res.sendFile(__dirname, '/../build/index.html')
 })
 

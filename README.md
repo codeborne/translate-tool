@@ -20,7 +20,7 @@ Built with Svelte, TypeScript, Vite & Express
 
 ## Demo
 
-Here's a [demo project](https://translate.codeborne.com/?shared=eyJ0aXRsZSI6IkRlbW8iLCJ1cmwiOiJodHRwczovL3Jhdy5naXRodWJ1c2VyY29udGVudC5jb20vVXB0YWtlci9pMThuLXB1YmxpYy9tYWluL2kxOG4vIiwiaW5kZW50IjoyfQ==). Signing in with any Gmail account is required, so you may have to paste the link again after logging in.
+Here's a [demo project](https://translate.codeborne.com/?shared=eyJ0aXRsZSI6IkRlbW8iLCJ1cmwiOiJodHRwczovL3Jhdy5naXRodWJ1c2VyY29udGVudC5jb20vVXB0YWtlci9pMThuLXB1YmxpYy9tYWluL2kxOG4vIiwiaW5kZW50IjoyfQ==). Signing in with any Gmail account is required.
 
 The project is saved to your local storage, so you no longer require the shareable link to access it.
 

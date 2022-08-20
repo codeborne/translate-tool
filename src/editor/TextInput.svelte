@@ -3,7 +3,6 @@
   import type {Dict} from '../common/Project'
   import ContainsHTMLWarning from './ContainsHTMLWarning.svelte'
 
-
   export let key: string
   export let fullKey: string
   export let dict: Dict
@@ -14,7 +13,6 @@
 
   $: dict[key] = dict[key] ?? ''
   $: uneditedDict[key] = uneditedDict[key] ?? ''
-
 </script>
 
 {#if !isHtml(fullKey)}
@@ -86,6 +84,11 @@
     overflow: hidden;
     min-height: 36px;
     height: 100%;
+    white-space: pre-line;
+    border: 1px solid rgba(155, 155, 155, 0.35);
+    border-radius: 5px;
+    padding: 5px 5px;
+    background-color: white;
   }
 
   .text-input:focus {
@@ -105,12 +108,5 @@
 
   .changed {
     background-color: aliceblue !important;
-  }
-
-  .text-input {
-    border: 1px solid rgba(155, 155, 155, 0.35);
-    border-radius: 5px;
-    padding: 5px 5px;
-    background-color: white;
   }
 </style>

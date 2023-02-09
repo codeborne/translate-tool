@@ -128,7 +128,7 @@
 <svelte:window on:unhandledrejection={showUnhandledError}/>
 
 <Navbar>
-  {#if loadedProjects && loadedProjects.length}
+  {#if loadedProjects?.length}
     <ProjectSwitcher projects={projects} selectedProject={selectedProject?.config} on:selected={switchProjectEvent}/>
     <div class="nav-responsive">
       {#if !showConfig && !showAddProject && selectedProject?.langs?.length}

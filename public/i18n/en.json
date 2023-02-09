@@ -1,0 +1,1570 @@
+{
+  "SocialInfoCard": {
+    "socialMedia": "Social media"
+  },
+  "actionsButton": "Actions",
+  "adminAdministrators": {
+    "addButton": "Add administrator",
+    "notFound": "Administrators not found",
+    "registerTitle": "Registration of administrator",
+    "title": "Administrators of CVPRO"
+  },
+  "adminAdministratorsActionsMenu": {
+    "actions": "Actions",
+    "deleteAdmin": "Delete administrator"
+  },
+  "adminApplicants": {
+    "applicantDeleted": "Applicant {username} is deleted",
+    "deleteError": "Unable to delete {username} applicant",
+    "notFound": "Not found",
+    "representError": "Can't represent another user",
+    "representUser": "You are represented as a user \"{username}\"",
+    "search": "Find applicant",
+    "title": "Applicants"
+  },
+  "adminCompanyProductCard": {
+    "compPrice": "Price for company",
+    "discount": "Discount",
+    "discountPlaceholder": "Discount as float",
+    "prodPrice": "Usual price",
+    "saveProduct": "Save"
+  },
+  "adminEmployers": {
+    "deleteError": "Failed to delete company data",
+    "employerDeleted": "Company deleted successfully",
+    "notFound": "Not found",
+    "representError": "Can't represent another user",
+    "representUser": "You are represented as a user \"{username}\"",
+    "search": "Search employers",
+    "sortBy": "Sort by",
+    "sortByCompanyNameAsc": "Sort by name A -> Z",
+    "sortByCompanyNameDesc": "Sort by name Z -> A",
+    "title": "Employers"
+  },
+  "adminInvoices": {
+    "invoice": {
+      "headers": {
+        "date": "Date",
+        "expirationDate": "Due date",
+        "number": "Invoice No.",
+        "status": "Status",
+        "sum": "Sum"
+      },
+      "invoiceStatus": {
+        "cancelled": "Cancelled",
+        "paid": "Paid",
+        "unpaid": "Unpaid"
+      }
+    },
+    "notFound": "Not found",
+    "search": "Invoice search",
+    "sortByDate": "By date",
+    "sortByDateAsc": " From old to new",
+    "sortByDateDesc": "From new to old",
+    "sortByStatus": "By status",
+    "title": "Invoices"
+  },
+  "adminInvoicesActionsMenu": {
+    "delete": "Delete invoice",
+    "openPdf": "Open PDF",
+    "testPayment": "Imitate payment"
+  },
+  "adminPrices": {
+    "productReset": "\"{product}\" clean",
+    "productSaved": "\"{product}\" saved",
+    "title": "Prices"
+  },
+  "adminProductCard": {
+    "description": "Description",
+    "descriptionPlaceholder": "Enter product description",
+    "isActive": "Active product",
+    "label": "Label",
+    "labelPlaceholder": "Enter product label",
+    "price": "Price",
+    "pricePlaceholder": "Product price",
+    "saveProduct": "Save",
+    "vat": "VAT",
+    "vatPlaceholder": "VAT for this product"
+  },
+  "adminSidebar": {
+    "administratorMenu": "Administrator",
+    "administrators": "Administrators",
+    "applicants": "Applicants",
+    "employers": "Employers",
+    "invoices": "Invoices",
+    "prices": "Prices",
+    "profile": "My profile"
+  },
+  "appRoute": {
+    "messages": {
+      "permissionDeniedMessage": "Access denied. You does not have enough rights to access to this page."
+    }
+  },
+  "applicantActionsMenu": {
+    "actions": "Actions",
+    "cancelApplication": "Cancel application",
+    "cancelText": "Are you sure you want to cancel application?",
+    "cancelTitle": "Cancellation of application",
+    "chat": "Go to the chat",
+    "close": "Close",
+    "companyProfile": "Company profile"
+  },
+  "applicantApplications": {
+    "headers": {
+      "active": "Active",
+      "all": "All",
+      "archive": "Archive",
+      "cancelled": "Cancelled"
+    },
+    "notFound": "Applications not found",
+    "search": "Search applications",
+    "sortBy": "Sort by",
+    "title": "My applications"
+  },
+  "applicantEvents": {
+    "end": "End",
+    "name": "Label",
+    "notFound": "Events not found",
+    "start": "Start",
+    "status": "Status",
+    "title": "Calendar"
+  },
+  "applicantFavourites": {
+    "notFound": "Favourites not found"
+  },
+  "applicantInterviewCard": {
+    "accept": "Accept",
+    "acceptText": "Are you accepting an invitation for an interview? Please, select time of the interview.",
+    "acceptTitle": "Accept an invitation",
+    "cancel": "Cancel",
+    "company": "Company",
+    "concluding": {
+      "label": "Message to the employer",
+      "placeholder": "Message to the employer about the cancellation of the interview"
+    },
+    "conclusion": "Conclusion",
+    "date": "Interview date",
+    "dateNotSelected": "Data and time not selected",
+    "description": "Description",
+    "duration": "{dur} minutes",
+    "interviewDate": "Date",
+    "interviewTime": "Time",
+    "link": "Link",
+    "location": "Location",
+    "period": "Interview in period",
+    "reason": "Reason",
+    "reject": "Reject",
+    "rejectText": "You want reject invitation to interview?",
+    "rejectTitle": "Cancel the invitation",
+    "selectDate": "Select time",
+    "status": {
+      "accepted": "Accepted",
+      "acceptedExpired": "Recently completed",
+      "acceptedNow": "In process...",
+      "canceled": "Rejected",
+      "completed": "Completed",
+      "inviteExpired": "Event period has expired",
+      "invited": "Waiting for acceptance",
+      "label": "Status"
+    },
+    "vacancy": "Vacancy"
+  },
+  "applicantInterviews": {
+    "accepted": "Accepted",
+    "all": "All",
+    "canceled": "Canceled",
+    "completed": "Completed",
+    "invited": "Invited",
+    "notFound": "Interviews not found",
+    "title": "My interviews",
+    "waitAccept": "Not confirmed"
+  },
+  "applicantRegistrationForm": {
+    "continueButton": "Continue",
+    "firstname": {
+      "label": "Firstname",
+      "placeholder": "Enter your firstname"
+    },
+    "lastname": {
+      "label": "Lastname",
+      "placeholder": "Enter your lastname"
+    },
+    "phoneNumber": {
+      "label": "Phone Number",
+      "placeholder": "Enter your phone number"
+    }
+  },
+  "applicantRegistrationSuccessModal": {
+    "continueButton": "See vacancies",
+    "cvButton": "Create CV",
+    "message": "You can create CV or continue looking for vacancies.",
+    "title": "You have successfully registered!"
+  },
+  "applicantServices": {
+    "invoice": "Invoice",
+    "notFound": "You are currently no services",
+    "productLabel": "Service",
+    "title": "Current active services",
+    "validFrom": "From",
+    "validUntil": "Until"
+  },
+  "applicantSidebar": {
+    "addCvButton": "Add CV",
+    "applications": "Applications",
+    "calendar": "Calendar",
+    "cvs": "My CVs",
+    "favourites": "Favourites",
+    "interviews": "Interviews",
+    "profile": "Profile",
+    "services": "Services"
+  },
+  "applicantsActionsMenu": {
+    "actions": "Actions",
+    "conditions": "Conditions for company",
+    "delete": "Delete forever",
+    "findInvoices": "Find applicant invoices",
+    "represent": "Represent {username}"
+  },
+  "application": {
+    "answer": "Answer",
+    "answers": "Answers for questions",
+    "applicationsButton": "To my applications",
+    "applyButton": "Send CV",
+    "candidateDoesntMatch": "Doesn't match",
+    "candidateMatch": "Matches",
+    "candidateProbablyMatch": "Probably matches",
+    "candidateStatus": "Candidate's status",
+    "chooseCV": {
+      "label": "Choose CV for application",
+      "placeholder": "Choose CV"
+    },
+    "close": "Close",
+    "comments": {
+      "delete": "Delete",
+      "placeholder": "Remark",
+      "title": "Remarks"
+    },
+    "continueButton": "Continue",
+    "coverLetter": {
+      "label": "Cover letter",
+      "placeholder": "Write your cover letter"
+    },
+    "createCVButton": "Create CV",
+    "emptyCoverLetter": "Cover letter is empty",
+    "header": "Application",
+    "message": "Your application has been successfully submitted",
+    "question": "Question",
+    "questionText": "To apply for a vacancy, you must answer the questions of the employer.",
+    "questions": "Questions",
+    "returnToPreviousPage": "Return to applications list",
+    "returnToQuestions": "Return to questions",
+    "vacanciesButton": "To vacancies"
+  },
+  "avatarUploader": {
+    "invalidField": "Wrong file",
+    "label": "Drag & Drop your picture or",
+    "label1": "Browse",
+    "loadImage": "Image saved",
+    "removeImage": "Photo is deleted"
+  },
+  "calendar": {
+    "createEvent": "New event",
+    "day": "Day",
+    "deleteEvent": "Delete",
+    "deleteEventTitle": "Delete event",
+    "editEvent": "Edit",
+    "list": "By list",
+    "month": "By months",
+    "today": "Today",
+    "week": "Week"
+  },
+  "cardLabelTypes": {
+    "NEW": "New",
+    "UPDATED": "Updated"
+  },
+  "categories": {
+    "allCategories": "All categories"
+  },
+  "categoryCarousel": {
+    "ariaLabel": "Categories",
+    "first": "Go to first",
+    "last": "Go to last",
+    "next": "Next",
+    "prev": "Previous"
+  },
+  "certificatesInput": {
+    "format": {
+      "itemName": "file",
+      "label": "PDF or image file"
+    }
+  },
+  "close": "Close",
+  "company": {
+    "activeVacancies": "{vacanciesCount, plural, =0 {# active vacancies} one {# active vacancy} other {# active vacancies}}",
+    "address": "Адрес",
+    "companyVacancies": "Company's vacancies",
+    "profileButton": "Company's Profile",
+    "vacancies": "Vacancies in"
+  },
+  "companyCarousel": {
+    "ariaLabel": "Categories",
+    "first": "Go to first",
+    "last": "Go to last",
+    "next": "Next",
+    "prev": "Previous"
+  },
+  "companyProductsTooltip": {
+    "products": "Personal conditions: {num}",
+    "usualPrice": "Usual price: {price}"
+  },
+  "companyStaff": {
+    "addButton": "Add staff member",
+    "administratorTag": "Administrator",
+    "notFound": "Staff not found",
+    "registerTitle": "Registration of staff member",
+    "title": "My staff"
+  },
+  "completedCoursesInput": {
+    "format": {
+      "itemName": "file",
+      "label": "PDF or image file"
+    }
+  },
+  "conditionsCompanyModal": {
+    "isHasContract": "Contract",
+    "isHasContractLabel": "Company has a contract",
+    "title": "Conditions for company {name}"
+  },
+  "cookieConsentBanner": {
+    "acceptButton": "Accept cookies",
+    "analyticsCookies": "Cookies that measure website use",
+    "cancelButton": "Cancel",
+    "marketingCookies": "Cookies that help with our communications and marketing",
+    "message": "We and selected partners and related companies, use cookies and similar technologies as specified in our Cookies Policy. You agree to consent to the use of these technologies by clicking Accept, or by continuing to browse this website. You can learn more about how we use cookies and set cookie preferences in Settings.",
+    "necessaryCookies": "Strictly necessary cookies",
+    "necessaryReq": "These cookies are necessary for the operation of the system",
+    "settingTitle": "Cookie settings ",
+    "settingsButton": "Cookie settings"
+  },
+  "currentLang": "English",
+  "cv": {
+    "addButton": "Add",
+    "additional": {
+      "aboutMe": {
+        "label": "About me",
+        "placeholder": "Describe yourself and your activities"
+      },
+      "button": "Additionally",
+      "certificates": {
+        "addButton": "Add more certificate",
+        "file": "File",
+        "header": "Certificates",
+        "title": {
+          "label": "Title",
+          "placeholder": "Enter title of certificate"
+        },
+        "year": {
+          "label": "Year of certification",
+          "placeholder": "Entter year"
+        }
+      },
+      "completedCourses": {
+        "addButton": "Add more completed course",
+        "file": "File",
+        "header": "Completed courses",
+        "organizer": {
+          "label": "Course organizer",
+          "placeholder": "Who organized course?"
+        },
+        "title": {
+          "label": "Course title",
+          "placeholder": "Enter course title"
+        }
+      },
+      "header": "More about yourself",
+      "portfolio": {
+        "cancel": "Cancel",
+        "description": {
+          "label": "Description",
+          "placeholder": "Tell about your portfolio"
+        },
+        "files": {
+          "format": "Word, PowerPoint, PDF, ODT, video, audio, images",
+          "itemName": "file",
+          "label": "Portfolio file",
+          "list": "Files"
+        },
+        "header": "Portfolio",
+        "save": "Save",
+        "url": {
+          "label": "Link to portfolio",
+          "placeholder": "Enter link to your portfolio"
+        }
+      },
+      "references": {
+        "addButton": "Add more reference",
+        "company": {
+          "label": "Company",
+          "placeholder": "Enter company name"
+        },
+        "contact": {
+          "label": "Email or phone number",
+          "placeholder": "Enter referencer's contact"
+        },
+        "file": {
+          "label": "File"
+        },
+        "header": "References",
+        "jobTitle": {
+          "label": "Position",
+          "placeholder": "Enter position"
+        },
+        "name": {
+          "label": "Contact name",
+          "placeholder": "Enter contact name"
+        }
+      }
+    },
+    "backButton": "Back",
+    "cancelButton": "Cancel and delete draft",
+    "continueButton": "Continue",
+    "deleteButton": "Delete",
+    "editButton": "Edit",
+    "educations": {
+      "addButton": "Add education",
+      "button": "Education",
+      "educationLevel": {
+        "label": "Education level",
+        "placeholder": "Select level"
+      },
+      "emptyMessage": "A profile or education in a specialty will increase your chances of finding a job.",
+      "graduationYear": {
+        "label": "Year of graduation",
+        "placeholder": "Specify the year of graduation"
+      },
+      "header": "Education",
+      "institution": {
+        "label": "Institution",
+        "placeholder": "Write where you studied"
+      },
+      "isStudying": "Still studying",
+      "speciality": {
+        "label": "Speciality",
+        "placeholder": "Who did you study for"
+      }
+    },
+    "employmentHistory": {
+      "addButton": "Add workplace",
+      "and": " and ",
+      "button": "Experience",
+      "company": {
+        "label": "Company",
+        "placeholder": "Enter company name"
+      },
+      "date": {
+        "end": "End of work",
+        "start": "Start of work"
+      },
+      "description": {
+        "label": "What had been doing, achievements? (Not required)",
+        "placeholder": "Tell about your responsibilities"
+      },
+      "duration": "Duration",
+      "emptyMessage": "Employers first of all look at your work experience, tell more about it.",
+      "header": "Work Experience",
+      "months": "{monthsCount, plural, =0 {less then month} one {# month} other {# months}}",
+      "occupation": {
+        "label": "Occupation",
+        "placeholder": "Enter occupation"
+      },
+      "presentTime": "Present time",
+      "stillWorking": "Still working",
+      "years": "{yearsCount, plural, =0 {} one {# year} other {# years}}"
+    },
+    "error": {
+      "failedToSave": "Problems with saving of CV"
+    },
+    "errors": {
+      "certificates_title": "Certificates title",
+      "certificates_year": "Specify certificate year",
+      "cityOfResidence": "Please, enter your city of residence",
+      "completedCourses_organizer": "Specify, who is organizer of this course",
+      "completedCourses_title": "Specify title of cource",
+      "dateBeforeStart": "The end date cannot be less than the start date",
+      "dob": "Please, enter your date of birth",
+      "driverLicences_driverLicenceExperience": "Specify driving experience",
+      "driverLicences_driverLicenceType": "Select your category",
+      "educations_educationLevel": "Specify level of education",
+      "educations_graduationYear": "Specify year of graduation",
+      "educations_institution": "Specify institution",
+      "employment": "Specify type of employment",
+      "employmentHistories_company": "Please, enter company or organization business name",
+      "employmentHistories_endDate": "Please, enter final date of work in this organization",
+      "employmentHistories_occupation": "Please, enter your position",
+      "employmentHistories_startDate": "Please, enter date start of work in this organization",
+      "gender": "Please, choose your gender",
+      "languageSkills_language": "Specify language",
+      "languageSkills_languageProficiency": "Specify your language proficiency",
+      "name": "Please, enter your name",
+      "occupation": "Please, enter your occupation",
+      "skills_skill": "Specify your skill",
+      "skills_skillLevel": "Specify skill level",
+      "title": "Please, enter title CV",
+      "workLocation": "Please. enter location",
+      "wrongMaxDate": "Date should be equal or before than {date}",
+      "wrongMinDate": "Date should be equal or later than {date}",
+      "wrongYear": "Wrong year"
+    },
+    "info": {
+      "age": "Age",
+      "button": "Info",
+      "city": {
+        "label": "City of residence",
+        "placeholder": "Choose city of residence"
+      },
+      "cvSaved": "Cv saved",
+      "dateOfBirth": {
+        "label": "Date of birth",
+        "placeholder": "DD.MM.YYYY"
+      },
+      "firstname": {
+        "label": "Firstname",
+        "placeholder": "Enter your firstname"
+      },
+      "gender": {
+        "label": "Gender",
+        "placeholder": "Choose gender"
+      },
+      "header": "Personal information",
+      "lastname": {
+        "label": "Lastname",
+        "placeholder": "Enter your lastname"
+      },
+      "title": {
+        "label": "Title",
+        "note": "Only you can see this name",
+        "placeholder": "Enter a title for the CV",
+        "template": "My new CV"
+      },
+      "years": "{years, plural, =0 {# years} one {# year} other {# years}}"
+    },
+    "personalSkills": {
+      "button": "Skills",
+      "driverLicences": {
+        "category": "Category"
+      },
+      "driverLicencesHeader": "Driver licences",
+      "header": "Personal skills",
+      "languagesHeader": "Languages",
+      "skillsHeader": "Skills"
+    },
+    "preferredJob": {
+      "button": "Work",
+      "categories": "Categories",
+      "employment": {
+        "label": "Type of employment",
+        "placeholder": "Choose type of employment"
+      },
+      "header": "Preferred Job",
+      "occupation": {
+        "label": "Position",
+        "placeholder": "Enter your occupation"
+      },
+      "workLocations": {
+        "label": "Preferred work location",
+        "placeholder": "Choose location"
+      }
+    },
+    "saveButton": "Save",
+    "saveLaterButton": "Save and continue later",
+    "skipButton": "Skip",
+    "uploadFile": "File uploading"
+  },
+  "cvActionsMenu": {
+    "actions": "Actions",
+    "delete": "Delete"
+  },
+  "cvBase": {
+    "addToSaved": "Add to saved",
+    "anyCity": "Any place",
+    "button": "Get CVs",
+    "notFound": "Not found",
+    "savedCv": " Saved CV",
+    "savedInFavorites": "CV saved",
+    "search": "Search CV by occupation",
+    "searchCv": "Search CV",
+    "title": "CV Base"
+  },
+  "cvBaseActionsMenu": {
+    "actions": "Actions",
+    "addToVacancy": "Add CV to Vacancy",
+    "printCv": "Print CV",
+    "removeFromFavorites": "Remove from saved"
+  },
+  "cvBaseAddToVacancy": {
+    "coverLetter": "Added from CV Base",
+    "createNew": "Create new vacancy",
+    "createNewInfo": "Create new vacancy for CV Base",
+    "createNewLabel": "Create new vacancy and add CV",
+    "cvBaseType": "CV Base",
+    "defaultType": "Usual vacancy",
+    "draft": "CV Base",
+    "occupationLabel": "Enter occupation",
+    "selectExists": "Select exists vacancy",
+    "selected": "Selected",
+    "submit": "Submit",
+    "title": "Add CV",
+    "type": "Type",
+    "until": "Payed until",
+    "userAdded": "User added to the vacancy {vacancy}",
+    "userExists": "This user has already been added to {vacancy}",
+    "vacancyFieldLabel": "Select vacancy for this CV",
+    "vacancyFieldPlaceholder": "Enter occupation"
+  },
+  "cvBaseDirectBuy": {
+    "accessToCvBaseForPrefix": "Get acces for",
+    "accessToCvBaseForSuffix": "{days, plural, =0 {days} one {day} few {days} many {days} other {days}}",
+    "activate": "Activate",
+    "buyButton": "Buy full access",
+    "cancel": "Cancel",
+    "confirm": "Confirm",
+    "daysModalTitle": "CV base",
+    "invoice": "Invoice",
+    "invoiceCreatedContract": "Service is activated!",
+    "invoiceDescription": "Issuing an invoice for payment to email",
+    "message": "You have not purchased access to the CV database yet",
+    "payNow": "Buy",
+    "paymentMethod": "Method of payment",
+    "paymentMethodInstruction": "Please, select payment method",
+    "paymentServices": "Access to CV base",
+    "subscriptionDate": "Your subscription for CV base expired after {date}",
+    "sum": "Sum",
+    "title": "Service order",
+    "total": "Total",
+    "vat": "VAT {vat}"
+  },
+  "cvBaseFavourites": {
+    "notFound": "CV not found",
+    "saved": "Saved {date}",
+    "title": "CV Base"
+  },
+  "cvBaseSearchModal": {
+    "additional": "Additional",
+    "anyCity": "Any city",
+    "button": "Search vacancies",
+    "categories": {
+      "label": "Category",
+      "nullLabel": "All categories"
+    },
+    "clearFilters": "Clear filters",
+    "close": "Close",
+    "driverLicence": {
+      "label": "Drive license",
+      "nullLabel": "No driver's license or any"
+    },
+    "education": {
+      "label": "Education",
+      "nullLabel": "Any education level"
+    },
+    "employer": {
+      "label": "Employer",
+      "placeholder": "Enter company"
+    },
+    "extendedSearch": "Extended search",
+    "language": {
+      "label": "Language",
+      "nullLabel": "Any language"
+    },
+    "location": "Location",
+    "occupation": {
+      "label": "Job title",
+      "placeholder": "Enter job title"
+    },
+    "salaryByAgreement": "By agreement",
+    "typeOfEmployment": {
+      "label": "Type of employment",
+      "nullLabel": "Any type of employment"
+    },
+    "workExperience": {
+      "label": "Work experience",
+      "nullLabel": "Any experience"
+    }
+  },
+  "cvCard": {
+    "age": "{years, plural, =0 {# years} one {# year} other {# years}}",
+    "created": "Created {date}",
+    "views": "Views {count}"
+  },
+  "cvPage": {
+    "active": "Active",
+    "personalInfo": {
+      "age": "Age",
+      "cityOfResidence": "City of residence",
+      "gender": "Gender",
+      "header": "Personal Information",
+      "years": "{age, plural, =0 {# years} one {# year} other {# years}}"
+    }
+  },
+  "deleteApplicationModal": {
+    "cancel": "Cancel",
+    "delete": "Delete",
+    "errorRequired": "Enter applicant username to confirm deletion",
+    "info": "Deletion will erase all information associated with the applicant and its recovery will be impossible. To confirm, enter applicant username in the field below and click \"Delete\"",
+    "title": "Delete applicant",
+    "username": "Username for delete: {username}",
+    "wrongUsername": "Wrong username"
+  },
+  "deleteCompanyModal": {
+    "cancel": "Close window",
+    "delete": "Delete",
+    "errorRequired": "To delete a company, enter its registration number correctly",
+    "info": "All data of all users available with the company is irretrievably deleted. Enter the company registration number to confirm.",
+    "number": "Reg. company number to delete: {number}",
+    "title": "Delete company"
+  },
+  "deleteEventModal": {
+    "cancel": "Cancel",
+    "delete": "Delete",
+    "title": "Delete event"
+  },
+  "deleteVacancyModal": {
+    "cancel": "Cancel",
+    "delete": "Delete",
+    "info": "Are you sure you want to delete this vacancy?",
+    "title": "Delete vacancy"
+  },
+  "driverLicencesInput": {
+    "addButton": "Add driver licence",
+    "experienceLabel": "Driving experience",
+    "experiencePlaceholder": "Enter driving experience (years)",
+    "placeholder": "Choose categories"
+  },
+  "employerCalendar": {
+    "cancel": "Cancel",
+    "eventLabel": "Working hours: {day}",
+    "friday": "F",
+    "monday": "M",
+    "saturday": "S",
+    "saveButton": "Save",
+    "saveSuccess": "Calendar settings saved",
+    "settings": "Settings",
+    "settingsTitle": "Working hours",
+    "sunday": "U",
+    "thursday": "R",
+    "time": "Start",
+    "timeEnd": "Finish",
+    "tuesday": "T",
+    "wednesday": "W"
+  },
+  "employerCompany": {
+    "branding": {
+      "cover": {
+        "format": "PNG, JPG formats",
+        "itemName": "cover",
+        "label": "Company cover"
+      },
+      "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+      "gallery": {
+        "format": "PNG, JPG formats",
+        "itemName": "photo",
+        "label": "Photo gallery"
+      },
+      "preview": "Preview",
+      "saveButton": "Save",
+      "saveSuccess": "Saved company branding successfully",
+      "title": "Branding of company page",
+      "video": {
+        "label": "Video about company",
+        "placeholder": "Enter link to video"
+      }
+    },
+    "companyInfo": {
+      "address": {
+        "label": "Company address",
+        "placeholder": "Enter address"
+      },
+      "category": {
+        "addCategoryButton": "Add category",
+        "label": "Category",
+        "placeholder": "Choose category"
+      },
+      "companyName": {
+        "label": "Company name",
+        "placeholder": "Enter company name"
+      },
+      "companyType": {
+        "label": "Type of company",
+        "placeholder": "Choose type of company"
+      },
+      "contactPhoneNumber": {
+        "label": "Contact phone number",
+        "placeholder": "Enter phone number"
+      },
+      "description": {
+        "label": "Company description",
+        "placeholder": "Enter description of your company"
+      },
+      "email": {
+        "label": "Email",
+        "placeholder": "Enter email"
+      },
+      "employerType": {
+        "label": "Type of employer",
+        "placeholder": "Choose type of employer"
+      },
+      "invoicesEmail": {
+        "label": "Email for invoices",
+        "placeholder": "Enter email"
+      },
+      "logo": {
+        "format": "PNG, JPG formats",
+        "itemName": "logo",
+        "label": "Logo of company"
+      },
+      "registryCode": {
+        "label": "Registry code",
+        "placeholder": "Enter registry code"
+      },
+      "saveButton": "Save",
+      "saveSuccess": "Save profile successfully",
+      "size": {
+        "label": "Company size",
+        "placeholder": "Enter amount of workers"
+      },
+      "socialMedia": {
+        "label": "Social media",
+        "placeholder": "Profile link"
+      },
+      "title": "Company information",
+      "website": {
+        "label": "Company website",
+        "placeholder": "Enter website"
+      }
+    },
+    "headers": {
+      "branding": "Branding",
+      "main": "Main",
+      "staff": "Staff",
+      "workingHours": "Working hours"
+    },
+    "preview": {
+      "back": "Back to profile",
+      "buyButton": "Pay service"
+    },
+    "title": "Company profile",
+    "workingHours": {
+      "eventLabel": "Working hours: {day}",
+      "friday": "Friday",
+      "monday": " Monday",
+      "saturday": "Saturday",
+      "saveButton": "Save",
+      "saveSuccess": "Company working hours saved",
+      "sunday": "Sunday",
+      "thursday": "Thursday",
+      "time": "Working day started",
+      "timeEnd": "Working day finished",
+      "title": "Working hours",
+      "tuesday": "Tuesday",
+      "wednesday": "Wednesday"
+    }
+  },
+  "employerCompanyCard": {
+    "hasContract": "Has a contract"
+  },
+  "employerEvents": {
+    "end": "End",
+    "name": "Label",
+    "notFound": "Events not found",
+    "start": "Start",
+    "status": "Status",
+    "title": "Calendar"
+  },
+  "employerInterviewCard": {
+    "actions": "Actions",
+    "cancel": "Cancel",
+    "candidate": "Candidate",
+    "concludingReject": {
+      "label": "Message to the applicant",
+      "placeholder": "Message to the applicant about the cancellation of the interview"
+    },
+    "conclusion": "Conclusion",
+    "date": "Interview date",
+    "description": "Description",
+    "link": "Link",
+    "location": "Location",
+    "period": "Period",
+    "reason": "Reason",
+    "reject": "Reject",
+    "rejectText": "Do you want reject invitation to interview?",
+    "rejectTitle": "Reject the invitation",
+    "status": {
+      "accepted": "Accepted",
+      "acceptedExpired": "Recently completed",
+      "acceptedNow": "In process...",
+      "canceled": "Canceled",
+      "completed": "Completed",
+      "inviteExpired": "Event period has expired",
+      "invited": "Waiting for acceptance",
+      "label": "Status"
+    }
+  },
+  "employerInvoices": {
+    "invoice": {
+      "headers": {
+        "date": "Date",
+        "expirationDate": "Due date",
+        "number": "Invoice No.",
+        "status": "Status",
+        "sum": "Sum"
+      },
+      "invoiceStatus": {
+        "cancelled": "Cancelled",
+        "paid": "Paid",
+        "unpaid": "Unpaid"
+      }
+    },
+    "notFound": "You do not have any invoices yet",
+    "search": "Invoice search",
+    "sortByDate": "Sort by date",
+    "sortByDateAsc": "From old to new",
+    "sortByDateDesc": "From new to old",
+    "sortByStatus": "Sort by status",
+    "title": "Invoices"
+  },
+  "employerRegistrationForm": {
+    "company": {
+      "label": "Company Name or registry code",
+      "note": "Company with this name is not found",
+      "placeholder": "Enter your company name or reg. code",
+      "registryCode": "Reg. code"
+    },
+    "continueButton": "Continue",
+    "phoneNumber": {
+      "label": "Phone Number",
+      "placeholder": "Enter your phone number"
+    }
+  },
+  "employerRegistrationSuccessModal": {
+    "message": "You can add new vacancy or go to your profile.",
+    "profileButton": "Continue",
+    "title": "You have successfully registered!",
+    "vacancyButton": "Add vacancy"
+  },
+  "employerServices": {
+    "end": "End",
+    "labels": {
+      "company": "Company",
+      "cv": "CV",
+      "vacancy": "Vacancy"
+    },
+    "name": "Title",
+    "notFound": "Services not found",
+    "start": "Start",
+    "status": "Status",
+    "statuses": {
+      "active": "Active",
+      "cancelled": "Cancelled",
+      "finished": "Finished",
+      "unpaid": "Unpaid",
+      "waiting": "Waiting"
+    },
+    "title": "Services"
+  },
+  "employerSidebar": {
+    "addVacancyButton": "Add Vacancy",
+    "calendar": "Calendar",
+    "companyPage": "Company page",
+    "companyProfile": "Profile",
+    "courses": "My courses",
+    "cvDB": "CV Database",
+    "dialogs": "Dialogs",
+    "interviews": "Interviews",
+    "invoices": "Invoices",
+    "notifications": "Notifications",
+    "outsourceMarket": "My Outsource Market",
+    "premiumServices": "Premium Services",
+    "services": "Services",
+    "settings": "Settings",
+    "vacancies": "Vacancies"
+  },
+  "employerStaffActionsMenu": {
+    "delete": "Delete staff member",
+    "editProfile": "Edit profile"
+  },
+  "employersAdminActionsMenu": {
+    "companyProfile": "Company page",
+    "findInvoices": "Find company invoices",
+    "represent": "Represent {username}"
+  },
+  "eventModal": {
+    "cancel": "Cancel",
+    "date": "Date",
+    "delete": "Delete",
+    "end": "Event end",
+    "eventCreated": "Event created",
+    "eventUpdated": "Event updated",
+    "label": "Description",
+    "save": "Save",
+    "start": "Event start",
+    "time": "Time",
+    "title": "Create event"
+  },
+  "fileUploader": {
+    "delete": "Delete",
+    "maxSize": "max. file size {size}",
+    "maxSizeError": "File is too big",
+    "upload": "Upload"
+  },
+  "footer": {
+    "aboutCVPro": "About CVPro",
+    "aboutUs": "About us",
+    "advertiseVacancy": "Advertise a vacancy",
+    "categories": "Categories",
+    "companies": "Companies",
+    "contacts": "Contacts",
+    "createCv": "Create CV",
+    "cvBase": "CV base",
+    "dataProcessing": "Data processing",
+    "faq": "FAQ",
+    "forApplicants": "For applicants",
+    "forEmployers": "For employers",
+    "pricesAndServices": "Prices and services",
+    "privacy": "Privacy",
+    "staffRecruitment": "Staff recruitment",
+    "termsOfUse": "Terms of use",
+    "useOfCookies": "Use of cookies",
+    "vacancies": "Vacancies"
+  },
+  "fullscreenError": {
+    "message": "An error has occurred",
+    "returnToPreviousPage": "Return to previous page"
+  },
+  "header": {
+    "blog": "Blog",
+    "courses": "Courses",
+    "cvDB": "CV Database",
+    "dashboard": "Dashboard",
+    "faq": "FAQ",
+    "forApplicants": "For applicants",
+    "forEmployers": "For employers",
+    "home": "Home",
+    "loginButton": "Login",
+    "logoutButton": "Logout",
+    "openMobileMenu": "Open main menu",
+    "outsourceMarket": "Outsource Market",
+    "vacancies": "Vacancies"
+  },
+  "home": {
+    "allCategories": "All categories",
+    "allEmployers": "All employers",
+    "byEmployers": "Jobs in companies",
+    "categories": "Vacancies by category",
+    "title": "Vacancies for any taste",
+    "vacanciesSelections": {
+      "allCities": "All cities",
+      "categories": "Popular categories",
+      "cities": "Jobs by cities",
+      "conditions": "Conditions of work",
+      "remoteWork": "Remote work",
+      "title": "Selections of vacancies"
+    }
+  },
+  "imageUploader": {
+    "delete": "Delete",
+    "maxSize": "max. size {size}",
+    "maxSizeError": "File is too big",
+    "upload": "Upload"
+  },
+  "interviewModal": {
+    "cancel": "Cancel",
+    "date": "Date",
+    "description": {
+      "label": "Description",
+      "placeholder": "Enter additional information for applicant"
+    },
+    "duration": "Interview duration (in minutes)",
+    "end": "End",
+    "eventLabel": "Interview: {occupation}",
+    "interviewCreated": "Interview created successfully",
+    "interviewType": "Interview type",
+    "invite": "Invite",
+    "link": {
+      "label": "Link (Optional)",
+      "placeholder": "Enter link"
+    },
+    "liveInterview": "Live interview",
+    "location": {
+      "label": "Address (Optional)",
+      "placeholder": "Enter address"
+    },
+    "notifications": "Notify user",
+    "onlineInterview": "Online interview",
+    "otherInterview": "Another type of interview",
+    "sendMailInvitation": "Send an email to the applicant",
+    "start": "Start",
+    "time": "Time",
+    "title": "Interview"
+  },
+  "invoicesActionsMenu": {
+    "openPdf": "Open PDF"
+  },
+  "languageSkillsInput": {
+    "addLanguageButton": "Add language",
+    "langProfPlaceholder": "Choose language proficiency",
+    "placeholder": "Choose language"
+  },
+  "languages": {
+    "en": "English",
+    "et": "Estonian",
+    "ru": "Russian"
+  },
+  "lightbox": {
+    "next": "Next",
+    "prev": "Previously"
+  },
+  "loading": "Loading...",
+  "loginModal": {
+    "form": {
+      "cancel": "Cancel",
+      "code": {
+        "label": "Code",
+        "placeholder": "Enter your code from email"
+      },
+      "continue": "Continue",
+      "email": {
+        "label": "Email address",
+        "placeholder": "Enter your email"
+      },
+      "login": "Login"
+    },
+    "successEmail": "Code has been sent to this email!",
+    "title": "Sign In"
+  },
+  "logoutModal": {
+    "form": {
+      "cancel": "Cancel",
+      "logout": "Logout"
+    },
+    "messages": {
+      "apiError": "Failed to logout!",
+      "warningMessage": "Do you really want to logout?"
+    },
+    "title": "Logout"
+  },
+  "messages": {
+    "emptyMessageList": "Messages not found",
+    "input": {
+      "placeholder": "Type your message"
+    },
+    "messageSendInMinutes": "{n, plural, =0 {now} one {# minute ago} other {# minutes ago}}",
+    "needNewChatApplicant": "You don't have any dialogue at the moment. The dialogue will appear, if the employer writes to you.",
+    "needNewChatEmployer": "You don't have any dialogue. To start a dialogue, respond to the applicant's application.",
+    "send": "Send",
+    "title": "Dialogs"
+  },
+  "miniCard": {
+    "vacanciesCounter": "{vacanciesCounter} vacancies"
+  },
+  "moderatorsModal": {
+    "title": "Staff"
+  },
+  "myCvs": {
+    "addCVButton": "Add CV",
+    "notFound": "CV not found",
+    "title": "My CVs"
+  },
+  "myVacancies": {
+    "headers": {
+      "active": "Active",
+      "allVacancies": "All vacancies",
+      "archive": "Archive",
+      "cv_base": "CV Base",
+      "drafts": "Drafts",
+      "finished": "Finished",
+      "hidden": "Hidden",
+      "myVacancies": "My vacancies",
+      "waitingForPayment": "Waiting for payment"
+    },
+    "moderator": "Headhunter",
+    "notFound": "You don't have any vacancies",
+    "search": "Search vacancy",
+    "sortByDateAsc": "From old to new",
+    "sortByDateDesc": "From new to old",
+    "title": "My vacancies",
+    "vacancies": {
+      "headers": {
+        "actions": "Actions",
+        "applications": "Applications",
+        "expiration": "Expires",
+        "name": "Name",
+        "publishDate": "Start",
+        "status": "Status",
+        "views": "Views"
+      }
+    },
+    "you": "You"
+  },
+  "pageNotFound": "Page not found",
+  "pagination": {
+    "next": "Next",
+    "pagination": "Pagination",
+    "prev": "Previous"
+  },
+  "paymentMethod": {
+    "invoice": "Invoice",
+    "invoiceCreatedContract": "Services activated!",
+    "invoiceDescription": "Issuing an invoice for payment to email"
+  },
+  "paymentVacancy": {
+    "activate": "Activate",
+    "payNow": "Buy",
+    "paymentMethod": "Method of payment",
+    "paymentMethodInstruction": "Please, select payment method",
+    "paymentServices": "Payment for services",
+    "sum": "Sum",
+    "title": "Service order",
+    "total": "Total",
+    "vat": "VAT {vat}"
+  },
+  "portfolioInput": {
+    "format": {
+      "format": "PDF, image or video",
+      "itemName": "file"
+    }
+  },
+  "productCard": {
+    "applied": "Applied",
+    "buyFor": "Buy for {price}",
+    "buyForVAT": "(ext. VAT {vat}%)",
+    "discount": "discount {discount}%"
+  },
+  "profile": {
+    "age": {
+      "addButton": "Add date of birth",
+      "label": "Age"
+    },
+    "avatar": {
+      "format": "PNG or JPG formats",
+      "itemName": "avatar"
+    },
+    "cityOfResidence": {
+      "addButton": "Add city of residence",
+      "label": "City of residence",
+      "placeholder": "Choose city"
+    },
+    "confirmButton": "Register",
+    "email": {
+      "label": "E-mail",
+      "placeholder": "Enter email"
+    },
+    "firstname": {
+      "label": "Firstname",
+      "placeholder": "Enter firstname"
+    },
+    "gender": {
+      "addButton": "Add gender",
+      "label": "Gender",
+      "placeholder": "Choose gender"
+    },
+    "lastname": {
+      "label": "Lastname",
+      "placeholder": "Enter lastname"
+    },
+    "phoneNumber": {
+      "label": "Phone number",
+      "placeholder": "Enter phone number"
+    },
+    "title": "Profile",
+    "unknown": "Unknown"
+  },
+  "referencesInput": {
+    "format": {
+      "itemName": "file",
+      "label": "PDF or image file"
+    }
+  },
+  "registrationModal": {
+    "applicantButton": "Applicant",
+    "employerButton": "Employer",
+    "logoutButton": "Logout",
+    "title": "Registration"
+  },
+  "save": "Save",
+  "scrollbarList": {
+    "empty": "Not found"
+  },
+  "searchVacancies": {
+    "additional": "Additional",
+    "anyCity": "Any city",
+    "button": "Search vacancies",
+    "categories": {
+      "label": "Category",
+      "nullLabel": "All categories"
+    },
+    "clearFilters": "Clear filters",
+    "employer": {
+      "label": "Employer",
+      "placeholder": "Enter company"
+    },
+    "extendedSearch": "Extended search",
+    "language": {
+      "label": "Language",
+      "nullLabel": "Any language"
+    },
+    "location": "Location",
+    "occupation": {
+      "label": "Job title",
+      "placeholder": "Enter job title"
+    },
+    "salaryByAgreement": "By agreement",
+    "typeOfEmployment": {
+      "label": "Type of employment",
+      "nullLabel": "Any type of employment"
+    },
+    "workExperience": {
+      "label": "Work experience",
+      "nullLabel": "Any experience"
+    }
+  },
+  "selectDate": {
+    "month": "Month",
+    "year": "Year"
+  },
+  "serverNotResponse": "Server not response",
+  "skillsInput": {
+    "addButton": "Add skill",
+    "skill": {
+      "placeholder": "Enter skill"
+    },
+    "skillLevel": {
+      "placeholder": "Choose level"
+    }
+  },
+  "status": "Status",
+  "userMenu": {
+    "admin": "Administrator",
+    "logout": "Logout",
+    "profile": "Profile",
+    "represent": "You represent this user from {username}",
+    "returnToAdmin": "Return to {username}"
+  },
+  "userSettings": {
+    "personal": {
+      "title": "Personal information"
+    },
+    "userDetails": {
+      "title": "Contact information"
+    }
+  },
+  "vacancy": {
+    "active": "Active",
+    "alreadyApply": "This position has already been applied",
+    "applied": "Already applied",
+    "applyButton": "Apply",
+    "archived": "Archived",
+    "autoAnswer": {
+      "description": "Aplicant will receive this message after applying for vacancy",
+      "text": {
+        "label": "Text of auto-answer",
+        "placeholder": "Enter text of auto-answer to candidate"
+      },
+      "title": "Auto-answer to candidate"
+    },
+    "back": "Back",
+    "basicInfo": {
+      "category": {
+        "label": "Category",
+        "placeholder": "Choose variants"
+      },
+      "location": {
+        "label": "Location",
+        "placeholder": "Enter address"
+      },
+      "occupation": {
+        "label": "Position",
+        "placeholder": "Enter occupation"
+      },
+      "publishDate": "Publish date",
+      "publishDatePlaceholder": "DD/MM/YYYY",
+      "publishDateUnknown": "Data is not to specify",
+      "publishTime": "Publish time",
+      "remoteWork": "Possibility to work remotely",
+      "salary": "Salary",
+      "salaryByAgreement": "By agreement",
+      "salaryFrom": {
+        "placeholder": "From"
+      },
+      "salaryPeriod": {
+        "label": "Period",
+        "placeholder": "Choose period"
+      },
+      "salaryTo": {
+        "label": "To",
+        "placeholder": "To"
+      },
+      "shiftWork": "Shift work",
+      "title": "Basic Information",
+      "typeOfEmployment": {
+        "label": "Type of employment",
+        "placeholder": "Choose variants"
+      },
+      "vacancyTeaser": {
+        "label": "Vacancy teaser",
+        "placeholder": "Brief job description"
+      },
+      "vacancyText": {
+        "label": "Vacancy Text",
+        "placeholder": "..."
+      }
+    },
+    "branding": {
+      "cover": {
+        "format": "PNG, JPG formats",
+        "itemName": "cover",
+        "label": "Cover for vacancy"
+      },
+      "gallery": {
+        "format": "PNG, JPG formats",
+        "itemName": "photo",
+        "label": "Gallery"
+      },
+      "title": "Vacancy branding",
+      "video": {
+        "label": "Video",
+        "placeholder": "Enter link to video"
+      }
+    },
+    "candidateQuestions": {
+      "addButton": "Add language",
+      "label": "Question {weight}",
+      "placeholder": "Your query",
+      "title": "Questions for applicant"
+    },
+    "candidateRequirements": {
+      "additional": "Additional",
+      "age": {
+        "label": "Age",
+        "placeholder": "Enter age"
+      },
+      "city": {
+        "label": "City",
+        "placeholder": "Choose city"
+      },
+      "driverLicencesLabel": "Driver Licenses",
+      "education": {
+        "label": "Education",
+        "placeholder": "Choose degree"
+      },
+      "forDisabled": "For disabled",
+      "forForeigners": "For foreign citizens",
+      "forRetired": "For retired people",
+      "forStudents": "For students",
+      "forUnderage": "For underage",
+      "gender": {
+        "label": "Gender",
+        "placeholder": "Choose gender"
+      },
+      "languagesLabel": "Language",
+      "title": "Candidate requirements",
+      "workExperience": {
+        "label": "Work experience",
+        "placeholder": "Years"
+      }
+    },
+    "cvBase": "CV Base",
+    "dateIsReq": "Publication date is required",
+    "draft": "Draft",
+    "driverLicences": {
+      "category": "Category",
+      "experience": "Experience",
+      "years": "{years, plural, =0 {# years} one {# year} other {# years}}"
+    },
+    "edit": "Edit",
+    "errors": {
+      "categories": "Please enter at least one category",
+      "content": "Vacancy text is required",
+      "employment": "Employment is required",
+      "emptyAddress": "Address is required",
+      "occupation": "Position is required",
+      "publishDate": "Publication date is required",
+      "publishTime": "Publication time is required",
+      "salaryMax": "\"From\" can't be more than \"To\"",
+      "salaryMin": "\"To\" can't be less than \"From\"",
+      "salaryRequired": "Fill at least one salary field",
+      "salaryTypeRequired": "Select salary preiod",
+      "salaryZero": "Salary can't be less than zero",
+      "teaser": "Short description is required"
+    },
+    "expires": "Expires on",
+    "finished": "Finished",
+    "forDisabled": "For disabled people",
+    "forForeigners": "Foreigners",
+    "forRetired": "For retired people",
+    "forStudents": "For students",
+    "forUnderage": "For underage",
+    "from": "from",
+    "goToAddPayment": "Buy additional services",
+    "goToPayment": "Go to payment",
+    "hidden": "Hidden",
+    "languages": "Languages",
+    "needRegistration": "You must register to apply!",
+    "preview": "Preview",
+    "previewWithBranding": "With branding",
+    "previewWithoutBranding": "Without branding",
+    "published": "Vacancy published",
+    "questionAnswer": "Your answer",
+    "remoteWork": "Remote work possibility",
+    "salary": "Salary",
+    "save": "Save",
+    "saveDraft": "Save draft",
+    "saved": "Vacancy saved",
+    "title": "Create vacancy",
+    "to": "to",
+    "views": "{views, plural, =0 {# views} one {# view} few {# views} many {# views} other {# views}}",
+    "waitingForPayment": "Waiting for payment",
+    "waitingForPublication": "Waiting for publication",
+    "wrongMaxDate": "Date cannot be greater than {date}",
+    "wrongMinDate": "Date cannot be less than {date}"
+  },
+  "vacancyActionsMenu": {
+    "actions": "Actions",
+    "applications": "CV list",
+    "archive": "Cancel and archive",
+    "copy": "Clone vacancy",
+    "delete": "Delete",
+    "deleteDraft": "Delete draft",
+    "edit": "Edit vacancy",
+    "goToVacancy": "Go to vacancy",
+    "hide": "Hide vacancy",
+    "preview": "Preview",
+    "publishVacancy": "Publish vacancy",
+    "purchaseServices": "Purchase services",
+    "setModerator": "Assign staff member",
+    "show": "Show vacancy"
+  },
+  "vacancyApplications": {
+    "all": "All",
+    "applicationCard": {
+      "interviews": "Invited to {interview, plural, =0 {} one {# interview} few {# interview} many {# interviews} other {# interviews}}",
+      "years": "{age, plural, =0 {# years} one {# year} other {# years}}"
+    },
+    "filter": "Filter",
+    "match": "Match",
+    "notFound": "Applications not found",
+    "notMatch": "Doesn't match",
+    "probablyMatch": "Probably matches",
+    "searchCandidate": "Search for candidate",
+    "sort": "Sort",
+    "vacancyApplicationActionsMenu": {
+      "actions": "Actions",
+      "inviteToInterview": "Invite to interview",
+      "startConversation": "Send a message",
+      "view": "View vacancy"
+    }
+  },
+  "wizard": {
+    "step": {
+      "error": "Unable to render wizard step"
+    }
+  }
+}

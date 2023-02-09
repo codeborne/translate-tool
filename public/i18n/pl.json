@@ -1,0 +1,1570 @@
+{
+  "SocialInfoCard": {
+    "socialMedia": "Социальные профили"
+  },
+  "actionsButton": "Действия",
+  "adminAdministrators": {
+    "addButton": "Добавить администратора",
+    "notFound": "Администраторы не найдены",
+    "registerTitle": "Регистрация администратора",
+    "title": "Администраторы CVPRO"
+  },
+  "adminAdministratorsActionsMenu": {
+    "actions": "Действия",
+    "deleteAdmin": "Удалить администратора"
+  },
+  "adminApplicants": {
+    "applicantDeleted": "Соискатель {username} удален",
+    "deleteError": "Не удалось удалить соискателя {username}",
+    "notFound": "Не найдено",
+    "representError": "Не удается подключиться как другой пользователь",
+    "representUser": "Вы подключились как пользователь {username}",
+    "search": "Найти соискателя",
+    "title": "Соискатели"
+  },
+  "adminCompanyProductCard": {
+    "compPrice": "Цена для компании",
+    "discount": "Скидка",
+    "discountPlaceholder": "Скидка как дробь",
+    "prodPrice": "Обычная цена",
+    "saveProduct": "Сохранить"
+  },
+  "adminEmployers": {
+    "deleteError": "Не удалось удалить данные компании",
+    "employerDeleted": "Компания успешно удалена",
+    "notFound": "Не найдено",
+    "representError": "Не удается подключиться как другой пользователь",
+    "representUser": "Вы подключились как пользователь \"{username}\"",
+    "search": "Поиск компаний-работодателей",
+    "sortBy": "Сортировать по",
+    "sortByCompanyNameAsc": "Сортировать по названию A -> Z",
+    "sortByCompanyNameDesc": "Сортировать по названию Z -> A",
+    "title": "Работодатели"
+  },
+  "adminInvoices": {
+    "invoice": {
+      "headers": {
+        "date": "Дата",
+        "expirationDate": "Срок оплаты",
+        "number": "Номер счета",
+        "status": "Статус",
+        "sum": "Сумма"
+      },
+      "invoiceStatus": {
+        "cancelled": "Отменено",
+        "paid": "Оплачено",
+        "unpaid": "Не оплачено"
+      }
+    },
+    "notFound": "Не найдено",
+    "search": "Поиск счета",
+    "sortByDate": "По дате",
+    "sortByDateAsc": "От старых к новым",
+    "sortByDateDesc": "От новых к старым",
+    "sortByStatus": "По статусу",
+    "title": "Счета"
+  },
+  "adminInvoicesActionsMenu": {
+    "delete": "Удалить счет",
+    "openPdf": "Открыть PDF",
+    "testPayment": "Имитировать платеж"
+  },
+  "adminPrices": {
+    "productReset": "\"{product}\" очищен",
+    "productSaved": "\"{product}\" сохранен",
+    "title": "Цены"
+  },
+  "adminProductCard": {
+    "description": "Описание",
+    "descriptionPlaceholder": "Введите описание продукта",
+    "isActive": "Продукт активен",
+    "label": "Наименование",
+    "labelPlaceholder": "Введите название продукта",
+    "price": "Цена",
+    "pricePlaceholder": "Цена продукта",
+    "saveProduct": "Сохранить",
+    "vat": "VAT",
+    "vatPlaceholder": "VAT для этого продукта"
+  },
+  "adminSidebar": {
+    "administratorMenu": "Администратор",
+    "administrators": "Администраторы",
+    "applicants": "Соискатели",
+    "employers": "Работодатели",
+    "invoices": "Счета",
+    "prices": "Цены",
+    "profile": "Мой профиль"
+  },
+  "appRoute": {
+    "messages": {
+      "permissionDeniedMessage": "Доступ закрыт. У вас недостаточно прав чтобы посетить эту страницу."
+    }
+  },
+  "applicantActionsMenu": {
+    "actions": "Действия",
+    "cancelApplication": "Отменить заявку",
+    "cancelText": "Вы уверены, что хотите отменить заявку?",
+    "cancelTitle": "Отмена заявки",
+    "chat": "Перейти в чат",
+    "close": "Закрыть",
+    "companyProfile": "Профиль компании"
+  },
+  "applicantApplications": {
+    "headers": {
+      "active": "Активные",
+      "all": "Все",
+      "archive": "Архив",
+      "cancelled": "Отмененные"
+    },
+    "notFound": "CV не найдены",
+    "search": "Поиск заявки",
+    "sortBy": "Сортировать по",
+    "title": "Мои заявки"
+  },
+  "applicantEvents": {
+    "end": "Завершение",
+    "name": "Наименование",
+    "notFound": "События не найдены",
+    "start": "Начало",
+    "status": "Статус",
+    "title": "Календарь"
+  },
+  "applicantFavourites": {
+    "notFound": "Избранные не найдены"
+  },
+  "applicantInterviewCard": {
+    "accept": "Подтвердить",
+    "acceptText": "Вы принимаете приглашение на интервью? Пожалуйста, выберите время интервью.",
+    "acceptTitle": "Принять приглашение",
+    "cancel": "Отмена",
+    "company": "Компания",
+    "concluding": {
+      "label": "Сообщение работодателю",
+      "placeholder": "Сообщение работодателю"
+    },
+    "conclusion": "Заключение",
+    "date": "Дата интервью",
+    "dateNotSelected": "Не выбрана дата и время",
+    "description": "Описание",
+    "duration": "{dur} минут",
+    "interviewDate": "Дата",
+    "interviewTime": "Время",
+    "link": "Ссылка",
+    "location": "Место",
+    "period": "Период проведения",
+    "reason": "Причина",
+    "reject": "Отклонить",
+    "rejectText": "Вы хотите отменить интервью?",
+    "rejectTitle": "Отмена интервью",
+    "selectDate": "Выбрать время ",
+    "status": {
+      "accepted": "Подтверждено",
+      "acceptedExpired": "Недавно завершено",
+      "acceptedNow": "В процессе...",
+      "canceled": "Отменено",
+      "completed": "Завершено",
+      "inviteExpired": "Период проведения истек",
+      "invited": "Ожидает подтверждения",
+      "label": "Статус"
+    },
+    "vacancy": "Вакансия"
+  },
+  "applicantInterviews": {
+    "accepted": "Приглашения приняты",
+    "all": "Все",
+    "canceled": "Отклонённые",
+    "completed": "Завершенные",
+    "invited": "Приглашены",
+    "notFound": "Интервью не найдены",
+    "title": "Мои собеседования",
+    "waitAccept": "Неподтвержденные"
+  },
+  "applicantRegistrationForm": {
+    "continueButton": "Продолжить",
+    "firstname": {
+      "label": "Имя",
+      "placeholder": "Введите имя"
+    },
+    "lastname": {
+      "label": "Фамилия",
+      "placeholder": "Введите фамилию"
+    },
+    "phoneNumber": {
+      "label": "Телефон",
+      "placeholder": "Введите телефон"
+    }
+  },
+  "applicantRegistrationSuccessModal": {
+    "continueButton": "Обзор вакансий",
+    "cvButton": "Создать CV",
+    "message": "Вы можете перейти к созданию CV или продолжить поиск вакансий.",
+    "title": "Вы зарегистрировались!"
+  },
+  "applicantServices": {
+    "invoice": "Счет",
+    "notFound": "Сейчас действующих услуг нет",
+    "productLabel": "Услуга",
+    "title": "Текущие активные услуги",
+    "validFrom": "C",
+    "validUntil": "До"
+  },
+  "applicantSidebar": {
+    "addCvButton": "Создать CV",
+    "applications": "Заявки",
+    "calendar": "Календарь",
+    "cvs": "Мои CV",
+    "favourites": "Избранное",
+    "interviews": "Собеседования",
+    "profile": "Профиль",
+    "services": "Услуги"
+  },
+  "applicantsActionsMenu": {
+    "actions": "Действия",
+    "conditions": "Условия для компании",
+    "delete": "Удалить навсегда",
+    "findInvoices": "Найти счета соискателя",
+    "represent": "Войти как {username}"
+  },
+  "application": {
+    "answer": "Ответ",
+    "answers": "Ответы на вопросы",
+    "applicationsButton": "К моим заявкам",
+    "applyButton": "Отправить CV",
+    "candidateDoesntMatch": "Не подходит",
+    "candidateMatch": "Подходит",
+    "candidateProbablyMatch": "Возможно подходит",
+    "candidateStatus": "Статус кандидата",
+    "chooseCV": {
+      "label": "Выберите CV для отклика",
+      "placeholder": "Выбрать CV"
+    },
+    "close": "Закрыть",
+    "comments": {
+      "delete": "Удалить",
+      "placeholder": "Комментарий",
+      "title": "Комментарии"
+    },
+    "continueButton": "Продолжить",
+    "coverLetter": {
+      "label": "Сопроводительное письмо",
+      "placeholder": "Напишите своё сопроводительное письмо"
+    },
+    "createCVButton": "Создать CV",
+    "emptyCoverLetter": "Сопроводительное письмо отсуствует",
+    "header": "Отклик",
+    "message": "Вы успешно откликнулись на вакансию!",
+    "question": "Вопрос",
+    "questionText": "Чтобы откликнуться на вакансию, необходимо ответить на вопросы работодателя.",
+    "questions": "Вопросы",
+    "returnToPreviousPage": "Вернуться к списку заявок",
+    "returnToQuestions": "Вернутся к вопросам",
+    "vacanciesButton": "К вакансиям"
+  },
+  "avatarUploader": {
+    "invalidField": "Неправильный файл",
+    "label": "Перетащите изображение или ",
+    "label1": "выберите",
+    "loadImage": "Изображение сохранено",
+    "removeImage": "Изображение удалено"
+  },
+  "calendar": {
+    "createEvent": "Новое событие",
+    "day": "День",
+    "deleteEvent": "Удалить",
+    "deleteEventTitle": "Удалить событие",
+    "editEvent": "Редактировать",
+    "list": "Списком",
+    "month": "По месяцам",
+    "today": "Текущий день",
+    "week": "Неделя"
+  },
+  "cardLabelTypes": {
+    "NEW": "Новое",
+    "UPDATED": "Обновлено"
+  },
+  "categories": {
+    "allCategories": "Все категории"
+  },
+  "categoryCarousel": {
+    "ariaLabel": "Категории",
+    "first": "К началу",
+    "last": "К концу",
+    "next": "Следующие",
+    "prev": "Предыдущие"
+  },
+  "certificatesInput": {
+    "format": {
+      "itemName": "файл",
+      "label": "PDF или изображение"
+    }
+  },
+  "close": "Закрыть",
+  "company": {
+    "activeVacancies": "{vacanciesCount, plural, =0 {Нет активных вакансий} one {# активная вакансия} few {# активные вакансии} many {# активных вакансий} other {# активных вакансий}}",
+    "address": "Адрес",
+    "companyVacancies": "Вакансии  компании",
+    "profileButton": "Профиль компании",
+    "vacancies": "Вакансии"
+  },
+  "companyCarousel": {
+    "ariaLabel": "Категории",
+    "first": "К началу",
+    "last": "К концу",
+    "next": "Следующие",
+    "prev": "Предыдущие"
+  },
+  "companyProductsTooltip": {
+    "products": "Инд. условий: {num}",
+    "usualPrice": "Обычная цена: {price}"
+  },
+  "companyStaff": {
+    "addButton": "Добавить сотрудника",
+    "administratorTag": "Администратор",
+    "notFound": "Сотрудники не найдены",
+    "registerTitle": "Регистрация сотрудника",
+    "title": "Мои сотрудники"
+  },
+  "completedCoursesInput": {
+    "format": {
+      "itemName": "файл",
+      "label": "PDF или изображение"
+    }
+  },
+  "conditionsCompanyModal": {
+    "isHasContract": "Договор",
+    "isHasContractLabel": "С компанией заключен договор",
+    "title": "Условия для компании {name}"
+  },
+  "cookieConsentBanner": {
+    "acceptButton": "Принять cookies",
+    "analyticsCookies": "Файлы cookie для статистики использования веб-сайта",
+    "cancelButton": "Отмена",
+    "marketingCookies": "Файлы cookie, которые помогают в наших коммуникациях и маркетинге",
+    "message": "Мы и некоторые партнеры и связанные компании используем файлы cookie и аналогичные технологии, как указано в нашей Политике использования файлов cookie. Вы соглашаетесь дать согласие на использование этих технологий, нажав «Принять» или продолжая просматривать этот веб-сайт. Вы можете узнать больше о том, как мы используем файлы cookie, и настроить параметры файлов cookie в Настройках.",
+    "necessaryCookies": "Строго необходимые файлы cookie",
+    "necessaryReq": "Эти cookie необходимы для функционирования системы",
+    "settingTitle": "Настройки Cookie",
+    "settingsButton": "Настройки cookies"
+  },
+  "currentLang": "Русский",
+  "cv": {
+    "addButton": "Добавить",
+    "additional": {
+      "aboutMe": {
+        "label": "Дополнительно о себе",
+        "placeholder": "Опишите себя и свою деятельность"
+      },
+      "button": "Дополнительно",
+      "certificates": {
+        "addButton": "Добавить еще сертификат",
+        "file": "Файл",
+        "header": "Сертификаты",
+        "title": {
+          "label": "Название",
+          "placeholder": "Укажите название сертификата"
+        },
+        "year": {
+          "label": "Год получения",
+          "placeholder": "Введите год"
+        }
+      },
+      "completedCourses": {
+        "addButton": "Добавить еще пройденный курс",
+        "file": "Файл",
+        "header": "Пройденные курсы",
+        "organizer": {
+          "label": "Организатор курса",
+          "placeholder": "Кто организовал курс?"
+        },
+        "title": {
+          "label": "Название курса",
+          "placeholder": "Введите название курса"
+        }
+      },
+      "header": "Дополнительно о себе",
+      "portfolio": {
+        "cancel": "Отменить",
+        "description": {
+          "label": "Описание",
+          "placeholder": "Расскажите о своём портфолио"
+        },
+        "files": {
+          "format": "Word, PowerPoint, PDF, ODT, видео, аудио, изображение",
+          "itemName": "файл",
+          "label": "Файл портфолио",
+          "list": "Файлы"
+        },
+        "header": "Портфолио",
+        "save": "Сохранить изменения",
+        "url": {
+          "label": "Ссылка на портфолио",
+          "placeholder": "Укажите ссылку на портфолио"
+        }
+      },
+      "references": {
+        "addButton": "Добавить еще рекомендацию",
+        "company": {
+          "label": "Компания",
+          "placeholder": "Укажите название компании"
+        },
+        "contact": {
+          "label": "Почта или телефон",
+          "placeholder": "Укажите контакт рекомендателя"
+        },
+        "file": {
+          "label": "Файл"
+        },
+        "header": "Рекомендации",
+        "jobTitle": {
+          "label": "Должность",
+          "placeholder": "Укажите должность"
+        },
+        "name": {
+          "label": "Контактное лицо",
+          "placeholder": "Укажите контактное лицо"
+        }
+      }
+    },
+    "backButton": "Назад",
+    "cancelButton": "Отменить и удалить черновик",
+    "continueButton": "Продолжить",
+    "deleteButton": "Удалить",
+    "editButton": "Редактировать",
+    "educations": {
+      "addButton": "Добавить образование",
+      "button": "Образование",
+      "educationLevel": {
+        "label": "Уровень образования",
+        "placeholder": "Выберите уровень"
+      },
+      "emptyMessage": "Профильное или образование по специальности повысит шансы вашего трудоустройства.",
+      "graduationYear": {
+        "label": "Год выпуска",
+        "placeholder": "Укажите год выпуска"
+      },
+      "header": "Образование",
+      "institution": {
+        "label": "Учебное заведение",
+        "placeholder": "Укажите где учились"
+      },
+      "isStudying": "Еще учусь",
+      "speciality": {
+        "label": "Специальность",
+        "placeholder": "На кого учились"
+      }
+    },
+    "employmentHistory": {
+      "addButton": "Добавить место работы",
+      "and": " и ",
+      "button": "Опыт",
+      "company": {
+        "label": "Компания",
+        "placeholder": "Введите название компании"
+      },
+      "date": {
+        "end": "Окончание работы",
+        "start": "Начало работы"
+      },
+      "description": {
+        "label": "Чем занимались, достижения (Не обязательно)",
+        "placeholder": "Расскажите о своих обязанностях"
+      },
+      "duration": "Длительность",
+      "emptyMessage": "Работодатели в первую очередь смотрят на ваш опыт работы, расскажите о нём подробнее.",
+      "header": "Опыт работы",
+      "months": "{monthsCount, plural, =0 {} one {# месяц} few {# месяца} many {# месяцев} other {# месяцев}}",
+      "occupation": {
+        "label": "Должность",
+        "placeholder": "Введите должность"
+      },
+      "presentTime": "Настоящее время",
+      "stillWorking": "Работаю по настоящее время",
+      "years": "{yearsCount, plural, =0 {} one {# год} few {# года} many {# лет} other {# лет}}"
+    },
+    "error": {
+      "failedToSave": "Проблемы с сохранением CV"
+    },
+    "errors": {
+      "certificates_title": "Введите наименование сертификата",
+      "certificates_year": "Введите год получения",
+      "cityOfResidence": "Пожалуйста, укажите откуда Вы",
+      "completedCourses_organizer": "Укажите организатора курса",
+      "completedCourses_title": "Укажите название курса",
+      "dateBeforeStart": "Дата окончания не может быть меньше даты начала ",
+      "dob": "Пожалуйста, укажите дату рождения",
+      "driverLicences_driverLicenceExperience": "Укажите опыт вождения",
+      "driverLicences_driverLicenceType": "Выберите вашу категорию",
+      "educations_educationLevel": "Укажите уровень образования",
+      "educations_graduationYear": "Укажите год завершения",
+      "educations_institution": "Укажите учебное заведение",
+      "employment": "Укажите тип занятости",
+      "employmentHistories_company": "Пожалуйста, введите название компании или организации",
+      "employmentHistories_endDate": "Пожалуйста, введите дату завершения работы в организации",
+      "employmentHistories_occupation": "Пожалуйста, введите вашу должность",
+      "employmentHistories_startDate": "Пожалуйста, введите дату начала работы в организации",
+      "gender": "Пожалуйста, укажите свой пол",
+      "languageSkills_language": "Укажите язык",
+      "languageSkills_languageProficiency": "Укажите уровень владения языком",
+      "name": "Имя должно быть заполнено обязательно",
+      "occupation": "Пожалуйста, введите профессию",
+      "skills_skill": "Укажите навык",
+      "skills_skillLevel": "Укажите уровень владения",
+      "title": "Название CV надо добавить обязательно",
+      "workLocation": "Пожалуйста, введите место",
+      "wrongMaxDate": "Дата должна быть раньше чем {date}",
+      "wrongMinDate": "Дата должна быть позже чем {date}",
+      "wrongYear": "Неверный год"
+    },
+    "info": {
+      "age": "Возраст",
+      "button": "Инфо",
+      "city": {
+        "label": "Город проживания",
+        "placeholder": "Выберите город"
+      },
+      "cvSaved": "Cv сохранено",
+      "dateOfBirth": {
+        "label": "Дата рождения",
+        "placeholder": "ДД/ММ/ГГГГ"
+      },
+      "firstname": {
+        "label": "Имя",
+        "placeholder": "Введите ваше имя"
+      },
+      "gender": {
+        "label": "Пол",
+        "placeholder": "Выберите пол"
+      },
+      "header": "Личная информация",
+      "lastname": {
+        "label": "Фамилия",
+        "placeholder": "Введите вашу фамилию"
+      },
+      "title": {
+        "label": "Название",
+        "note": "Только вы можете видеть заголовок",
+        "placeholder": "Введите название",
+        "template": "Мое новое CV"
+      },
+      "years": "{years, plural, =0 {# лет} one {# год} few {# года} many {# лет} other {# лет}}"
+    },
+    "personalSkills": {
+      "button": "Умения",
+      "driverLicences": {
+        "category": "Категория"
+      },
+      "driverLicencesHeader": "Водительские права",
+      "header": "Умения",
+      "languagesHeader": "Языки",
+      "skillsHeader": "Навыки"
+    },
+    "preferredJob": {
+      "button": "Работа",
+      "categories": "Категории",
+      "employment": {
+        "label": "Тип занятости",
+        "placeholder": "Выберите тип занятости"
+      },
+      "header": "Желаемая работа",
+      "occupation": {
+        "label": "Должность",
+        "placeholder": "Введите профессию"
+      },
+      "workLocations": {
+        "label": "Желаемое место работы",
+        "placeholder": "Выберите местоположение"
+      }
+    },
+    "saveButton": "Сохранить",
+    "saveLaterButton": "Сохранить и продолжить позже",
+    "skipButton": "Пропустить",
+    "uploadFile": "Загрузка файла"
+  },
+  "cvActionsMenu": {
+    "actions": "Действия",
+    "delete": "Удалить"
+  },
+  "cvBase": {
+    "addToSaved": "Добавить в сохраненные",
+    "anyCity": "Любой город",
+    "button": "Показать CV",
+    "notFound": "Не найдено",
+    "savedCv": "Сохраненные CV",
+    "savedInFavorites": "CV сохранено",
+    "search": "Поиск CV по профессии",
+    "searchCv": "Поиск CV",
+    "title": "База CV"
+  },
+  "cvBaseActionsMenu": {
+    "actions": "Действия",
+    "addToVacancy": "Добавить CV к вакансии",
+    "printCv": "Распечатать CV",
+    "removeFromFavorites": "Убрать из сохраненных"
+  },
+  "cvBaseAddToVacancy": {
+    "coverLetter": "Добавлено через Базу CV",
+    "createNew": "Создать новую вакансию",
+    "createNewInfo": "Создать новую вакансию под базу CV",
+    "createNewLabel": "Создать новую вакансию и добавить CV",
+    "cvBaseType": "База CV",
+    "defaultType": "Обычная вакансия",
+    "draft": "База CV",
+    "occupationLabel": "Введите профессию",
+    "selectExists": "Выбрать существующую вакансию",
+    "selected": "Выбрана",
+    "submit": "Отправить",
+    "title": "Добавить CV",
+    "type": "Тип",
+    "until": "Оплачена до",
+    "userAdded": "Пользователь добавлен в вакансию {vacancy}",
+    "userExists": "Этот пользователь уже добавлен в вакансию {vacancy}",
+    "vacancyFieldLabel": "Выберите вакансию для этого CV",
+    "vacancyFieldPlaceholder": "Введите профессию"
+  },
+  "cvBaseDirectBuy": {
+    "accessToCvBaseForPrefix": "Приобрести доступ на",
+    "accessToCvBaseForSuffix": "{days, plural, =0 {дней} one {день} few {дня} many {дней} other {дней}}",
+    "activate": "Активировать",
+    "buyButton": "Приобрести полный доступ",
+    "cancel": "Отмена",
+    "confirm": "Подтвердить",
+    "daysModalTitle": "База CV",
+    "invoice": "Счет",
+    "invoiceCreatedContract": "Услуга активирована!",
+    "invoiceDescription": "Счет для оплаты на электронную почту",
+    "message": "Вы еще не приобрели доступ к базе CV",
+    "payNow": "Купить",
+    "paymentMethod": "Способ оплаты",
+    "paymentMethodInstruction": "Пожалуйста, выберите метод оплаты",
+    "paymentServices": "Доступ к базе CV",
+    "subscriptionDate": "Ваша подписка на базу  CV действует до {date}",
+    "sum": "Сумма",
+    "title": "Заказ услуг",
+    "total": "Итого",
+    "vat": "VAT {vat}"
+  },
+  "cvBaseFavourites": {
+    "notFound": "CV не найдены",
+    "saved": "Сохранено {date}",
+    "title": "База CV"
+  },
+  "cvBaseSearchModal": {
+    "additional": "Дополнительно",
+    "anyCity": "Любой город",
+    "button": "Найти вакансии",
+    "categories": {
+      "label": "Категория",
+      "nullLabel": "Все категории"
+    },
+    "clearFilters": "Сбросить фильтры",
+    "close": "Закрыть",
+    "driverLicence": {
+      "label": "Водительские права",
+      "nullLabel": "Любые или отсуствуют"
+    },
+    "education": {
+      "label": "Образование",
+      "nullLabel": "Любой уровень образования"
+    },
+    "employer": {
+      "label": "Работодатель",
+      "placeholder": "Введите компанию"
+    },
+    "extendedSearch": "Расширенный поиск",
+    "language": {
+      "label": "Язык",
+      "nullLabel": "Любой язык"
+    },
+    "location": "Местоположение",
+    "occupation": {
+      "label": "Должность",
+      "placeholder": "Введите должность"
+    },
+    "salaryByAgreement": "По договорённости",
+    "typeOfEmployment": {
+      "label": "Тип занятости",
+      "nullLabel": "Любая занятость"
+    },
+    "workExperience": {
+      "label": "Опыт работы",
+      "nullLabel": "Любой опыт"
+    }
+  },
+  "cvCard": {
+    "age": "{years, plural, =0 {# лет} one {# год} few {# года} many {# лет} other {# лет}}",
+    "created": "Создано {date}",
+    "views": "Просмотрено {count}"
+  },
+  "cvPage": {
+    "active": "Активное",
+    "personalInfo": {
+      "age": "Возраст",
+      "cityOfResidence": "Город проживания",
+      "gender": "Пол",
+      "header": "Личная информация",
+      "years": "{age, plural, =0 {# лет} one {# год} few {# года} many {# лет} other {# лет}}"
+    }
+  },
+  "deleteApplicationModal": {
+    "cancel": "Отмена",
+    "delete": "Удалить",
+    "errorRequired": "Введите имя пользователя соискателя для подтверждения удаления",
+    "info": "Удаление приведет к стиранию всей информации связанной с соискателем и ее восстановление будет невозможным. Для подтверждения введите имя пользователя в поле расположенное ниже и нажмите \"Удалить\"",
+    "title": "Удалить соискателя",
+    "username": "Имя пользователя для удаления: {username}",
+    "wrongUsername": "Неверное имя пользователя"
+  },
+  "deleteCompanyModal": {
+    "cancel": "Закрыть окно",
+    "delete": "Удалить",
+    "errorRequired": "Для удаления компании правильно введите ее регистрационный номер",
+    "info": "Все данные всех пользователей связанных с компанией будут безвозвратно удалены. Для подтверждения введите регистрационный номер компании.",
+    "number": "Рег. номер компании для удаления: {number}",
+    "title": "Удаление компании"
+  },
+  "deleteEventModal": {
+    "cancel": "Отмена",
+    "delete": "Удалить",
+    "title": "Удалить событие"
+  },
+  "deleteVacancyModal": {
+    "cancel": "Отмена",
+    "delete": "Удалить",
+    "info": "Вы уверены, что хотите удалить эту вакансию?",
+    "title": "Удалить вакансию"
+  },
+  "driverLicencesInput": {
+    "addButton": "Добавить водительскую категорию",
+    "experienceLabel": "Опыт вождения",
+    "experiencePlaceholder": "Укажите опыт вождения (лет)",
+    "placeholder": "Укажите категории"
+  },
+  "employerCalendar": {
+    "cancel": "Отмена",
+    "eventLabel": "Рабочие часы: {day}",
+    "friday": "Пт",
+    "monday": "Пн",
+    "saturday": "Сб",
+    "saveButton": "Сохранить",
+    "saveSuccess": "Настройки календаря сохранены",
+    "settings": "Настройки",
+    "settingsTitle": "Рабочие часы",
+    "sunday": "Вс",
+    "thursday": "Чт",
+    "time": "Начало ",
+    "timeEnd": "Завершение",
+    "tuesday": "Вт",
+    "wednesday": "Ср"
+  },
+  "employerCompany": {
+    "branding": {
+      "cover": {
+        "format": "Форматы PNG или JPG",
+        "itemName": "обложку",
+        "label": "Обложка компании"
+      },
+      "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+      "gallery": {
+        "format": "Форматы PNG или JPG",
+        "itemName": "фотографию",
+        "label": "Фотогалерея"
+      },
+      "preview": "Предпросмотр",
+      "saveButton": "Сохранить",
+      "saveSuccess": "Брендирование компании успешно сохранено",
+      "title": "Брендирование страницы компании",
+      "video": {
+        "label": "Видео о компании",
+        "placeholder": "Укажите ссылку на видео"
+      }
+    },
+    "companyInfo": {
+      "address": {
+        "label": "Адрес компании",
+        "placeholder": "Укажите адрес"
+      },
+      "category": {
+        "addCategoryButton": "Добавить категорию",
+        "label": "Категория",
+        "placeholder": "Выберите категорию"
+      },
+      "companyName": {
+        "label": "Название компании",
+        "placeholder": "Введите название компании"
+      },
+      "companyType": {
+        "label": "Тип компании",
+        "placeholder": "Укажите тип компании"
+      },
+      "contactPhoneNumber": {
+        "label": "Контактный номер телефона",
+        "placeholder": "Введите номер телефона"
+      },
+      "description": {
+        "label": "Описание компании",
+        "placeholder": "Введите описание компании"
+      },
+      "email": {
+        "label": "Эл. почта",
+        "placeholder": "Укажите эл. почту"
+      },
+      "employerType": {
+        "label": "Тип работодателя",
+        "placeholder": "Укажите тип работодателя"
+      },
+      "invoicesEmail": {
+        "label": "Эл. почта для счетов",
+        "placeholder": "Укажите эл. почту"
+      },
+      "logo": {
+        "format": "Форматы PNG или JPG",
+        "itemName": "лого",
+        "label": "Логотип компании"
+      },
+      "registryCode": {
+        "label": "Регистрационный номер",
+        "placeholder": "Введите рег. номер"
+      },
+      "saveButton": "Сохранить",
+      "saveSuccess": "Сохранение профиля успешно",
+      "size": {
+        "label": "Размер компании",
+        "placeholder": "Укажите кол-во работников"
+      },
+      "socialMedia": {
+        "label": "Социальные сети",
+        "placeholder": "Ссылка на профиль"
+      },
+      "title": "Информация о фирме",
+      "website": {
+        "label": "Сайт компании",
+        "placeholder": "Укажите сайт"
+      }
+    },
+    "headers": {
+      "branding": "Брендирование",
+      "main": "Основное",
+      "staff": "Сотрудники",
+      "workingHours": "Рабочие часы"
+    },
+    "preview": {
+      "back": "Вернуться в профиль",
+      "buyButton": "Купить услугу"
+    },
+    "title": "Профиль компании",
+    "workingHours": {
+      "eventLabel": "Рабочие часы: {day}",
+      "friday": "Пятница",
+      "monday": "Понедельник",
+      "saturday": "Суббота",
+      "saveButton": "Сохранить",
+      "saveSuccess": "Рабочие часы компании сохранены",
+      "sunday": "Воскресенье",
+      "thursday": "Четверг",
+      "time": "Начало рабочего дня",
+      "timeEnd": "Конец рабочего дня",
+      "title": "Рабочие часы",
+      "tuesday": "Вторник",
+      "wednesday": "Среда"
+    }
+  },
+  "employerCompanyCard": {
+    "hasContract": "Есть договор"
+  },
+  "employerEvents": {
+    "end": "Завершение",
+    "name": "Наименование",
+    "notFound": "События не найдены",
+    "start": "Старт",
+    "status": "Статус",
+    "title": "Календарь"
+  },
+  "employerInterviewCard": {
+    "actions": "Действия",
+    "cancel": "Отмена",
+    "candidate": "Кандидат",
+    "concludingReject": {
+      "label": "Сообщение соискателю",
+      "placeholder": "Сообщение соискателю об отмене интервью"
+    },
+    "conclusion": "Заключение",
+    "date": "Дата интервью",
+    "description": "Описание",
+    "link": "Ссылка",
+    "location": "Место",
+    "period": "Период",
+    "reason": "Причина",
+    "reject": "Отменить",
+    "rejectText": "Вы хотите отменить интервью?",
+    "rejectTitle": "Отменить интервью",
+    "status": {
+      "accepted": "Подтверждено",
+      "acceptedExpired": "Недавно завершено",
+      "acceptedNow": "В процессе...",
+      "canceled": "Отклонено",
+      "completed": "Завершено",
+      "inviteExpired": "Период проведения истек, соискатель не ответил",
+      "invited": "Ожидает подтверждения",
+      "label": "Статус"
+    }
+  },
+  "employerInvoices": {
+    "invoice": {
+      "headers": {
+        "date": "Дата",
+        "expirationDate": "Срок оплаты",
+        "number": "Номер счета",
+        "status": "Статус",
+        "sum": "Сумма"
+      },
+      "invoiceStatus": {
+        "cancelled": "Отменено",
+        "paid": "Оплачено",
+        "unpaid": "Не оплачено"
+      }
+    },
+    "notFound": "У вас еще нет счетов",
+    "search": "Поиск счета",
+    "sortByDate": "Сортировать по дате",
+    "sortByDateAsc": "От старых к новым",
+    "sortByDateDesc": "От новых к старым",
+    "sortByStatus": "Сортировать по статусу",
+    "title": "Счета"
+  },
+  "employerRegistrationForm": {
+    "company": {
+      "label": "Название компании или рег. номер",
+      "note": "Компания с таким названием не найдена",
+      "placeholder": "Введите название или рег. номер",
+      "registryCode": "Рег. номер"
+    },
+    "continueButton": "Продолжить",
+    "phoneNumber": {
+      "label": "Телефон",
+      "placeholder": "Введите телефон"
+    }
+  },
+  "employerRegistrationSuccessModal": {
+    "message": "Вы можете перейти к созданию вакансии или же начать знакомство с сервисом CVPro.",
+    "profileButton": "Продолжить",
+    "title": "Вы зарегистрировались!",
+    "vacancyButton": "Создать вакансию"
+  },
+  "employerServices": {
+    "end": "Завершение",
+    "labels": {
+      "company": "Компания",
+      "cv": "CV",
+      "vacancy": "Вакансия"
+    },
+    "name": "Название",
+    "notFound": "Услуги не найдены",
+    "start": "Начало",
+    "status": "Статус",
+    "statuses": {
+      "active": "Активно",
+      "cancelled": "Отменено",
+      "finished": "Завершено",
+      "unpaid": "Не оплачено",
+      "waiting": "Ожидание"
+    },
+    "title": "Услуги"
+  },
+  "employerSidebar": {
+    "addVacancyButton": "Добавить вакансию",
+    "calendar": "Календарь",
+    "companyPage": "Страница компании",
+    "companyProfile": "Профиль",
+    "courses": "Мои Курсы",
+    "cvDB": "База CV",
+    "dialogs": "Диалоги",
+    "interviews": "Собеседования",
+    "invoices": "Счета",
+    "notifications": "Уведомления",
+    "outsourceMarket": "Мой Outsource Market",
+    "premiumServices": "Премиум-Услуги",
+    "services": "Услуги",
+    "settings": "Настройки",
+    "vacancies": "Вакансии"
+  },
+  "employerStaffActionsMenu": {
+    "delete": "Удалить сотрудника",
+    "editProfile": "Редактировать профиль"
+  },
+  "employersAdminActionsMenu": {
+    "companyProfile": "Страница компании",
+    "findInvoices": "Найти счета компании",
+    "represent": "Войти как {username}"
+  },
+  "eventModal": {
+    "cancel": "Отменить",
+    "date": "Дата",
+    "delete": "Удалить",
+    "end": "Конец события",
+    "eventCreated": "Событие создано",
+    "eventUpdated": "Событие обновлено",
+    "label": "Описание",
+    "save": "Сохранить",
+    "start": "Начало события",
+    "time": "Время",
+    "title": "Создать событие"
+  },
+  "fileUploader": {
+    "delete": "Удалить",
+    "maxSize": "максимальный размер {size}",
+    "maxSizeError": "Файл слишком большого размера",
+    "upload": "Загрузить"
+  },
+  "footer": {
+    "aboutCVPro": "О сервисе CVPro",
+    "aboutUs": "О нас",
+    "advertiseVacancy": "Разместить вакансию",
+    "categories": "Категории",
+    "companies": "Компании",
+    "contacts": "Контакты",
+    "createCv": "Создать CV",
+    "cvBase": "База CV",
+    "dataProcessing": "Обработка данных",
+    "faq": "ЧаВо",
+    "forApplicants": "Соискателям",
+    "forEmployers": "Работодателям",
+    "pricesAndServices": "Цены и услуги",
+    "privacy": "Приватность",
+    "staffRecruitment": "Подбор персонала",
+    "termsOfUse": "Правила пользования",
+    "useOfCookies": "Использование cookies",
+    "vacancies": "Вакансии"
+  },
+  "fullscreenError": {
+    "message": "Произошла ошибка",
+    "returnToPreviousPage": "Вернутся на предыдущую страницу"
+  },
+  "header": {
+    "blog": "Блог",
+    "courses": "Курсы",
+    "cvDB": "База CV",
+    "dashboard": "Рабочий стол",
+    "faq": "FAQ",
+    "forApplicants": "Соискателям",
+    "forEmployers": "Работодателям",
+    "home": "Главная",
+    "loginButton": "Войти",
+    "logoutButton": "Выйти",
+    "openMobileMenu": "Открыть главное меню",
+    "outsourceMarket": "Outsource Market",
+    "vacancies": "Вакансии"
+  },
+  "home": {
+    "allCategories": "Все категории",
+    "allEmployers": "Все работодатели",
+    "byEmployers": "Работа в компаниях",
+    "categories": "Вакансии по категориям",
+    "title": "Вакансии на любой вкус",
+    "vacanciesSelections": {
+      "allCities": "Все города",
+      "categories": "Популярные категории",
+      "cities": "Работа по городам",
+      "conditions": "Условия работы",
+      "remoteWork": "Удалённая работа",
+      "title": "Подборки вакансий"
+    }
+  },
+  "imageUploader": {
+    "delete": "Удалить",
+    "maxSize": "макс. размер {size}",
+    "maxSizeError": "Файл слишком большого размера",
+    "upload": "Загрузить"
+  },
+  "interviewModal": {
+    "cancel": "Отменить",
+    "date": "Дата",
+    "description": {
+      "label": "Описание",
+      "placeholder": "Введите доп. информацию для кандидата"
+    },
+    "duration": "Продолжительность интервью (в минутах)",
+    "end": "Конец",
+    "eventLabel": "Собеседование: {occupation}",
+    "interviewCreated": "Интервью успешно создано",
+    "interviewType": "Тип собеседования",
+    "invite": "Пригласить",
+    "link": {
+      "label": "Ссылка (Необязательно)",
+      "placeholder": "Введите ссылку"
+    },
+    "liveInterview": "Собеседование вживую",
+    "location": {
+      "label": "Адрес (Необязательно)",
+      "placeholder": "Введите адрес"
+    },
+    "notifications": "Уведомить пользователя",
+    "onlineInterview": "Онлайн собеседование",
+    "otherInterview": "Другой тип собеседования",
+    "sendMailInvitation": "Отправить соискателю письмо",
+    "start": "Начало",
+    "time": "Время",
+    "title": "Собеседование"
+  },
+  "invoicesActionsMenu": {
+    "openPdf": "Открыть PDF"
+  },
+  "languageSkillsInput": {
+    "addLanguageButton": "Добавить язык",
+    "langProfPlaceholder": "Выберите уровень владения",
+    "placeholder": "Выберите язык"
+  },
+  "languages": {
+    "en": "Английский",
+    "et": "Эстонский",
+    "ru": "Русский"
+  },
+  "lightbox": {
+    "next": "Следующая",
+    "prev": "Предыдущая"
+  },
+  "loading": "Загрузка...",
+  "loginModal": {
+    "form": {
+      "cancel": "Отмена",
+      "code": {
+        "label": "Код",
+        "placeholder": "Введите код который пришел вам на почту"
+      },
+      "continue": "Продолжить",
+      "email": {
+        "label": "E-mail адрес",
+        "placeholder": "Введите адрес вашей электронной почты"
+      },
+      "login": "Войти"
+    },
+    "successEmail": "Код отослан на указанный адрес!",
+    "title": "Войти"
+  },
+  "logoutModal": {
+    "form": {
+      "cancel": "Отмена",
+      "logout": "Выйти"
+    },
+    "messages": {
+      "apiError": "Не удалось выполнить выход!",
+      "warningMessage": "Вы уверены, что хотите выйти?"
+    },
+    "title": "Выйти"
+  },
+  "messages": {
+    "emptyMessageList": "Сообщения не найдены",
+    "input": {
+      "placeholder": "Введите ваше сообщение"
+    },
+    "messageSendInMinutes": "{n, plural, =0 {только что} one {# минута назад} other {# минут назад}}",
+    "needNewChatApplicant": "В данный момент у вас нет ни одного диалога. Диалог появится, если работадалель вам напишет.",
+    "needNewChatEmployer": "У вас нет ни одного диалога. Чтобы начать диалог, отреагируйте на заявку соискателя.",
+    "send": "Отправить",
+    "title": "Диалоги"
+  },
+  "miniCard": {
+    "vacanciesCounter": "{vacanciesCounter} вакансий"
+  },
+  "moderatorsModal": {
+    "title": "Сотрудники"
+  },
+  "myCvs": {
+    "addCVButton": "Добавить CV",
+    "notFound": "CV не найдены",
+    "title": "Мои CV"
+  },
+  "myVacancies": {
+    "headers": {
+      "active": "Активные",
+      "allVacancies": "Все вакансии",
+      "archive": "Архив",
+      "cv_base": "База CV",
+      "drafts": "Черновики",
+      "finished": "Завершенные",
+      "hidden": "Скрытые",
+      "myVacancies": "Мои вакансии",
+      "waitingForPayment": "Ждут оплаты"
+    },
+    "moderator": "Агент",
+    "notFound": "У вас нет ни одной вакансии",
+    "search": "Поиск вакансии",
+    "sortByDateAsc": "От старых к новым",
+    "sortByDateDesc": "От новых к старым",
+    "title": "Мои вакансии",
+    "vacancies": {
+      "headers": {
+        "actions": "Действия",
+        "applications": "Заявки",
+        "expiration": "Истекает",
+        "name": "Название",
+        "publishDate": "Начало",
+        "status": "Статус",
+        "views": "Просмотры"
+      }
+    },
+    "you": "Вы"
+  },
+  "pageNotFound": "Страница не найдена",
+  "pagination": {
+    "next": "Следующие",
+    "pagination": "Страницы",
+    "prev": "Предыдущие"
+  },
+  "paymentMethod": {
+    "invoice": "Счет",
+    "invoiceCreatedContract": "Услуги активированы!",
+    "invoiceDescription": "Счет для оплаты на электронную почту"
+  },
+  "paymentVacancy": {
+    "activate": "Активировать",
+    "payNow": "Купить",
+    "paymentMethod": "Способ оплаты",
+    "paymentMethodInstruction": "Пожалуйста, выберите метод оплаты",
+    "paymentServices": "Оплата услуг",
+    "sum": "Сумма",
+    "title": "Заказ услуг",
+    "total": "Итого",
+    "vat": "VAT {vat}"
+  },
+  "portfolioInput": {
+    "format": {
+      "format": "PDF, изображение или видео",
+      "itemName": "файл"
+    }
+  },
+  "productCard": {
+    "applied": "Применено",
+    "buyFor": "Применить за {price}",
+    "buyForVAT": "(без учета VAT {vat}%)",
+    "discount": "скидка {discount}%"
+  },
+  "profile": {
+    "age": {
+      "addButton": "Добавить дату рождения",
+      "label": "Возраст"
+    },
+    "avatar": {
+      "format": "Форматы JPG или PNG",
+      "itemName": "аватар"
+    },
+    "cityOfResidence": {
+      "addButton": "Добавить город проживания",
+      "label": "Город проживания",
+      "placeholder": "Выберите город"
+    },
+    "confirmButton": "Зарегистрировать",
+    "email": {
+      "label": "Эл. почта",
+      "placeholder": "Введите эл. почту"
+    },
+    "firstname": {
+      "label": "Имя",
+      "placeholder": "Введите имя"
+    },
+    "gender": {
+      "addButton": "Добавить пол",
+      "label": "Пол",
+      "placeholder": "Выберите пол"
+    },
+    "lastname": {
+      "label": "Фамилия",
+      "placeholder": "Введите фамилию"
+    },
+    "phoneNumber": {
+      "label": "Тел. номер",
+      "placeholder": "Введите тел. номер"
+    },
+    "title": "Профиль",
+    "unknown": "Не указан"
+  },
+  "referencesInput": {
+    "format": {
+      "itemName": "файл",
+      "label": "PDF или изображение"
+    }
+  },
+  "registrationModal": {
+    "applicantButton": "Ищу работу",
+    "employerButton": "Ищу сотрудников",
+    "logoutButton": "Выйти",
+    "title": "Регистрация аккаунта"
+  },
+  "save": "Сохранить",
+  "scrollbarList": {
+    "empty": "Не найдено"
+  },
+  "searchVacancies": {
+    "additional": "Дополнительно",
+    "anyCity": "Любой город",
+    "button": "Найти вакансии",
+    "categories": {
+      "label": "Категория",
+      "nullLabel": "Все категории"
+    },
+    "clearFilters": "Сбросить фильтры",
+    "employer": {
+      "label": "Работодатель",
+      "placeholder": "Введите компанию"
+    },
+    "extendedSearch": "Расширенный поиск",
+    "language": {
+      "label": "Язык",
+      "nullLabel": "Любой язык"
+    },
+    "location": "Местоположение",
+    "occupation": {
+      "label": "Должность",
+      "placeholder": "Введите должность"
+    },
+    "salaryByAgreement": "По договорённости",
+    "typeOfEmployment": {
+      "label": "Тип занятости",
+      "nullLabel": "Любая занятость"
+    },
+    "workExperience": {
+      "label": "Опыт работы",
+      "nullLabel": "Любой опыт"
+    }
+  },
+  "selectDate": {
+    "month": "Месяц",
+    "year": "Год"
+  },
+  "serverNotResponse": "Сервер не отвечает",
+  "skillsInput": {
+    "addButton": "Добавить навык",
+    "skill": {
+      "placeholder": "Введите навык"
+    },
+    "skillLevel": {
+      "placeholder": "Выберите уровень"
+    }
+  },
+  "status": "Статус",
+  "userMenu": {
+    "admin": "Администратор",
+    "logout": "Выход",
+    "profile": "Профиль",
+    "represent": "Вы управляете этим пользователем из {username}",
+    "returnToAdmin": "Вернуться к {username}"
+  },
+  "userSettings": {
+    "personal": {
+      "title": "Личная информация"
+    },
+    "userDetails": {
+      "title": "Контактная информация"
+    }
+  },
+  "vacancy": {
+    "active": "Активно",
+    "alreadyApply": "Вы уже отправили CV на эту вакансию",
+    "applied": "CV подано",
+    "applyButton": "Подать CV",
+    "archived": "В архиве",
+    "autoAnswer": {
+      "description": "Данное сообщение кандидат получит после подачи заявки на ваканасию",
+      "text": {
+        "label": "Текст автоответа",
+        "placeholder": "Введите текст автоответа кандидату"
+      },
+      "title": "Автоответ кандидату"
+    },
+    "back": "Назад",
+    "basicInfo": {
+      "category": {
+        "label": "Категория",
+        "placeholder": "Выберите варианты"
+      },
+      "location": {
+        "label": "Местоположение",
+        "placeholder": "Укажите адрес"
+      },
+      "occupation": {
+        "label": "Должность",
+        "placeholder": "Укажите профессию"
+      },
+      "publishDate": "Дата публикации",
+      "publishDatePlaceholder": "ДД/ММ/ГГГГ",
+      "publishDateUnknown": "Дата не указана",
+      "publishTime": "Время публикации",
+      "remoteWork": "Возможность работать удалённо",
+      "salary": "Зарплата",
+      "salaryByAgreement": "По договорённости",
+      "salaryFrom": {
+        "placeholder": "От"
+      },
+      "salaryPeriod": {
+        "label": "Ставка",
+        "placeholder": "Укажите период"
+      },
+      "salaryTo": {
+        "label": "До",
+        "placeholder": "До"
+      },
+      "shiftWork": "Работа по сменам",
+      "title": "Основная информация",
+      "typeOfEmployment": {
+        "label": "Тип занятости",
+        "placeholder": "Выберите варианты"
+      },
+      "vacancyTeaser": {
+        "label": "Краткое описание",
+        "placeholder": "Краткое описание вакансии"
+      },
+      "vacancyText": {
+        "label": "Текст объявления",
+        "placeholder": "..."
+      }
+    },
+    "branding": {
+      "cover": {
+        "format": "Форматы PNG или JPG",
+        "itemName": "обложку",
+        "label": "Обложка вакансии"
+      },
+      "gallery": {
+        "format": "Форматы PNG или JPG",
+        "itemName": "фотографию",
+        "label": "Галерея"
+      },
+      "title": "Брендирование вакансии",
+      "video": {
+        "label": "Видео",
+        "placeholder": "Введите ссылку на видео"
+      }
+    },
+    "candidateQuestions": {
+      "addButton": "Добавить вопрос",
+      "label": "Вопрос {weight}",
+      "placeholder": "Ваш вопрос",
+      "title": "Вопросы к соискателям"
+    },
+    "candidateRequirements": {
+      "additional": "Дополнительно",
+      "age": {
+        "label": "Возраст",
+        "placeholder": "Укажите возраст"
+      },
+      "city": {
+        "label": "Город проживания",
+        "placeholder": "Выберите город"
+      },
+      "driverLicencesLabel": "Водительские права",
+      "education": {
+        "label": "Образование",
+        "placeholder": "Укажите уровень"
+      },
+      "forDisabled": "Подходит инвалидам",
+      "forForeigners": "Подходит иностранным гражданам",
+      "forRetired": "Подходит пенсионерам",
+      "forStudents": "Подходит студентам",
+      "forUnderage": "Подходит несовершеннолетним",
+      "gender": {
+        "label": "Пол",
+        "placeholder": "Укажите пол"
+      },
+      "languagesLabel": "Язык",
+      "title": "Требования к кандидату",
+      "workExperience": {
+        "label": "Опыт работы",
+        "placeholder": "Кол-во лет"
+      }
+    },
+    "cvBase": "База CV",
+    "dateIsReq": "Дата публикации обязательна",
+    "draft": "Черновик",
+    "driverLicences": {
+      "category": "Категория",
+      "experience": "Опыт вождения",
+      "years": "{years, plural, =0 {# лет} one {# год} few {# года} many {# лет} other {# лет}}"
+    },
+    "edit": "Редактировать",
+    "errors": {
+      "categories": "Укажите минимум одну категорию",
+      "content": "Заполните текст объявления",
+      "employment": "Выберите тип занятости",
+      "emptyAddress": "Укажите адрес",
+      "occupation": "Укажите должность",
+      "publishDate": "Дата публикации обязательна",
+      "publishTime": "Время публикации должно быть заполнено",
+      "salaryMax": "\"От\" не может быть больше \"До\"",
+      "salaryMin": "\"До\" не может быть меньше \"От\"",
+      "salaryRequired": "Заполните хотя бы одно поле зарплаты",
+      "salaryTypeRequired": "Укажите период",
+      "salaryZero": "Зарплата не может быть меньше нуля",
+      "teaser": "Заполните поле \"Краткое описание\""
+    },
+    "expires": "Истекает",
+    "finished": "Завершена",
+    "forDisabled": "Подходит инвалидам",
+    "forForeigners": "Подходит иностранным гражданам",
+    "forRetired": "Подходит пенсионерам",
+    "forStudents": "Подходит студентам",
+    "forUnderage": "Подходит несовершеннолетним",
+    "from": "от",
+    "goToAddPayment": "Докупить услуги",
+    "goToPayment": "Перейти к оплате",
+    "hidden": "Скрыта",
+    "languages": "Языки",
+    "needRegistration": "Вы должны зарегистрироваться, чтобы откликнутся на вакансию!",
+    "preview": "Предпросмотр",
+    "previewWithBranding": "С брендированием",
+    "previewWithoutBranding": "Без брендирования",
+    "published": "Вакансия опубликована",
+    "questionAnswer": "Ваш ответ",
+    "remoteWork": "Возможность удалённой работы",
+    "salary": "Зарплата",
+    "save": "Сохранить",
+    "saveDraft": "Сохранить черновик",
+    "saved": "Вакансия сохранена",
+    "title": "Размещение вакансии",
+    "to": "до",
+    "views": "{views, plural, =0 {# просмотров} one {# просмотр} few {# просмотра} many {# просмотров} other {# просмотров}}",
+    "waitingForPayment": "Ждёт оплаты",
+    "waitingForPublication": "Ждёт публикации",
+    "wrongMaxDate": "Дата не может быть больше {date}",
+    "wrongMinDate": "Дата не может быть меньше {date}"
+  },
+  "vacancyActionsMenu": {
+    "actions": "Действия",
+    "applications": "Список CV",
+    "archive": "Отменить в архив",
+    "copy": "Создать копию вакансии",
+    "delete": "Удалить",
+    "deleteDraft": "Удалить черновик",
+    "edit": "Редактировать вакансию",
+    "goToVacancy": "Перейти к вакансии",
+    "hide": "Скрыть вакансию",
+    "preview": "Предпросмотр",
+    "publishVacancy": "Опубликовать вакансию",
+    "purchaseServices": "Докупить услуги",
+    "setModerator": "Назначить сотрудника",
+    "show": "Показать вакансию"
+  },
+  "vacancyApplications": {
+    "all": "Все",
+    "applicationCard": {
+      "interviews": "Приглашен на {interview, plural, =0 {} one {# интервью} few {# интервью} many {# интервью} other {# интервью}}",
+      "years": "{age, plural, =0 {# лет} one {# год} few {# года} many {# лет} other {# лет}}"
+    },
+    "filter": "Фильтровать",
+    "match": "Подходит",
+    "notFound": "CV не найдены",
+    "notMatch": "Не подходит",
+    "probablyMatch": "Возможно подходит",
+    "searchCandidate": "Поиск кандидата",
+    "sort": "Сортировать",
+    "vacancyApplicationActionsMenu": {
+      "actions": "Действия",
+      "inviteToInterview": "Пригласить на собеседование",
+      "startConversation": "Отправить сообщение",
+      "view": "Просмотр вакансии"
+    }
+  },
+  "wizard": {
+    "step": {
+      "error": "Невозможен рендер текущего шага"
+    }
+  }
+}

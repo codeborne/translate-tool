@@ -71,7 +71,9 @@ class JsonLoader {
       }, {} as Record<string, Dict>)
       const excludedKeys = await excludedKeysLoader.fetch(project) ?? []
       return new LoadedProject(project, dicts, excludedKeys, {branchLoadedFrom: branch})
-    } catch (e) {
+    } catch (e: any) {
+      if ((e.message as string).includes('in JSON')) prompt('Possible broken JSON file - please validate them here:', 'https://codebeautify.org/jsonvalidator')
+      console.error('Failed to load: ' + e)
       return new LoadedProject(project, {})
     }
 }

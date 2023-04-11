@@ -2,6 +2,7 @@
   import {containsHTMLTags, getValue, isHtml} from '../common/utils'
   import type {Dict} from '../common/Project'
   import ContainsHTMLWarning from './ContainsHTMLWarning.svelte'
+  import EditableField from 'src/editor/EditableField.svelte'
 
   export let key: string
   export let fullKey: string
@@ -13,38 +14,23 @@
 
   $: dict[key] = dict[key] ?? ''
   $: uneditedDict[key] = uneditedDict[key] ?? ''
+  $: changed = dict[key] !== uneditedDict[key]
 </script>
 
 {#if !isHtml(fullKey)}
-  {#if isFirefox}
-    <div bind:textContent={dict[key]} class="text-input not-html"
-         contenteditable="true"
-         class:changed={(getValue(key, dict) ?? '') !== (getValue(key, uneditedDict) ?? '')}>
-    </div>
-  {:else}
-    <div bind:textContent={dict[key]} class="text-input not-html"
-         contenteditable="plaintext-only"
-         class:changed={(getValue(key, dict) ?? '') !== (getValue(key, uneditedDict) ?? '')}>
-    </div>
-  {/if}
+  <EditableField {isFirefox} bind:value={dict[key]} {changed}/>
   {#if containsHTMLTags(dict[key])}<ContainsHTMLWarning/>{/if}
 {:else}
   <div class="d-flex html-input">
     {#if !isPreviewing}
-      <div bind:innerHTML={dict[key]} class="text-input w-100 is-html"
-           contenteditable="true"
-           class:changed={(getValue(key, dict) ?? '') !== (getValue(key, uneditedDict) ?? '')}>
-      </div>
+      <div bind:innerHTML={dict[key]} class="text-input w-100 is-html" class:changed
+           contenteditable="true" on:paste={e => alert(1)}></div>
     {:else}
       <div class="preview">
         <div class="form-text bg-light ">
           <i class="fab fa-html5"></i> HTML
         </div>
-        <div class="text-input"
-             contenteditable="true"
-             bind:textContent={dict[key]}
-             class:changed={(getValue(key, dict) ?? '') !== (getValue(key, uneditedDict) ?? '')}>
-        </div>
+        <EditableField {isFirefox} bind:value={dict[key]} {changed}/>
       </div>
     {/if}
     <button class="btn btn-sm btn-light text-primary" title={isPreviewing ? 'Show styled text' : 'Show HTML'}
@@ -54,7 +40,7 @@
   </div>
 {/if}
 
-<style>
+<style global>
   .preview {
     width: 100%;
     display: flex;

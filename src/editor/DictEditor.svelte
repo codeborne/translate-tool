@@ -16,7 +16,6 @@
   import {onMount, tick} from 'svelte'
   import Card from '../components/Card.svelte'
 
-
   export let project: LoadedProject
   export let lang: string
   export let user: GoogleProfile

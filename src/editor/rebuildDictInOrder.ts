@@ -5,13 +5,13 @@ function isEmpty(value: object) {
 }
 
 export function rebuildDictInOrder(dict: Dict, defaultDict: Dict) {
-  const ordered: Dict = {}
+  const result: Dict = {}
   for (let key of Object.keys(defaultDict)) {
     const isObject = typeof dict[key] === 'object'
     if (isObject) {
-      if (!isEmpty(dict[key])) ordered[key] = rebuildDictInOrder(dict[key], defaultDict[key])
-    } else if (dict[key] && !isEmpty(dict[key])) ordered[key] = dict[key]
-    if (ordered[key] && isEmpty(ordered[key])) delete ordered[key]
+      if (!isEmpty(dict[key])) result[key] = rebuildDictInOrder(dict[key], defaultDict[key])
+    } else if (dict[key] && !isEmpty(dict[key])) result[key] = dict[key]
+    if (result[key] && isEmpty(result[key])) delete result[key]
   }
-  return ordered
+  return result
 }

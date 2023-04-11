@@ -9,7 +9,8 @@ export default defineConfig({
   resolve: {
     alias: {
       'src': path.resolve(__dirname, './src'),
-    }
+    },
+    conditions: isTest ? ['browser'] : []
   },
   plugins: [svelte()],
   server: {

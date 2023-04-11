@@ -13,7 +13,7 @@ export function encodeBase64Unicode(str: string) {
 }
 
 export function deepCopy(v: any) {
-  return JSON.parse(JSON.stringify(v))
+  return structuredClone(v)
 }
 
 export function deepEqual(a: Record<string, any>, b: Record<string, any>): boolean {

@@ -2,14 +2,12 @@
   import type {Dict} from '../common/Project'
   import {slide} from 'svelte/transition'
 
-
   export let uneditedDict: Dict
   export let defaultDict: Dict
 
   let missingKeys: string[]
 
   $: if (uneditedDict) missingKeys = compareDictKeys(defaultDict, uneditedDict)
-
 
   function compareDictKeys(target: Dict, source: Dict, fullKey?: string) {
     let missingKeys: string[] = []

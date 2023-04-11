@@ -12,9 +12,13 @@
 
   let isPreviewing: boolean = false
 
-  $: dict[key] = dict[key] ?? ''
-  $: uneditedDict[key] = uneditedDict[key] ?? ''
+  $: dict[key] ??= ''
+  $: uneditedDict[key] ??= ''
   $: changed = dict[key] !== uneditedDict[key]
+
+  function fixHtml() {
+    dict[key] = dict[key].replace(/ style=".*?"/g, '').replace('>&nbsp;', '> ').replace('&nbsp;<', ' <') ?? ''
+  }
 </script>
 
 {#if !isHtml(fullKey)}
@@ -24,7 +28,7 @@
   <div class="d-flex html-input">
     {#if !isPreviewing}
       <div bind:innerHTML={dict[key]} class="text-input w-100 is-html" class:changed
-           contenteditable="true" on:paste={e => alert(1)}></div>
+           contenteditable="true" on:blur={fixHtml}></div>
     {:else}
       <div class="preview">
         <div class="form-text bg-light ">

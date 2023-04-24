@@ -11,7 +11,7 @@
 
 <div>
   {#if !showHTML}
-    <div contenteditable="false" bind:innerHTML={defaultDict[key]} class="overflow-auto align-self-center defaultLangText"></div>
+    <div bind:innerHTML={defaultDict[key]} class="overflow-auto align-self-center defaultLangText" style="white-space: pre-line"></div>
   {:else}
     <div class="overflow-auto align-self-center defaultLangText">{defaultDict[key]}</div>
   {/if}

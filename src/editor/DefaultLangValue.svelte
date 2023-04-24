@@ -1,17 +1,18 @@
 <script lang="ts">
   import {containsHTMLTags, isHtml} from '../common/utils'
   import ContainsHTMLWarning from './ContainsHTMLWarning.svelte'
+  import type {Dict} from '../common/Project'
 
-  export let defaultDict
-  export let key
-  export let fullKey
-  let showHTML: boolean = false
+  export let defaultDict: Dict
+  export let key: string
+  export let fullKey: string
 
+  let showHTML = false
 </script>
 
 <div>
   {#if !showHTML}
-    <div bind:innerHTML={defaultDict[key]} class="overflow-auto align-self-center defaultLangText" style="white-space: pre-line"></div>
+    <div contenteditable="false" bind:innerHTML={defaultDict[key]} class="overflow-auto align-self-center defaultLangText"></div>
   {:else}
     <div class="overflow-auto align-self-center defaultLangText">{defaultDict[key]}</div>
   {/if}
@@ -36,5 +37,9 @@
 <style>
   button {
     padding: 0;
+  }
+
+  .defaultLangText {
+    white-space: pre-line;
   }
 </style>

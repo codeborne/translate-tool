@@ -16,6 +16,17 @@ export class BitBucketClient implements VersionControlClient {
     if (config.branch) this.branch = config.branch
   }
 
+  getSourceUrl(defaultBranch: string, lang: string): string {
+    const {url} = this.config
+    const suffix: string = url.slice(url.indexOf(`/src/`) + 5, url.length)
+    const branchFromUrl: string = suffix.slice(0, suffix.indexOf('/'))
+    const repoInfo: string[] = url
+      .slice(url.indexOf('/repositories/') + 14, url.indexOf('/src/'))
+      .split('/')
+    const path: string = url.slice(url.indexOf(`/${branchFromUrl}/`) + branchFromUrl.length + 2)
+    return `https://bitbucket.org/${repoInfo[0]}/${repoInfo[1]}/src/${defaultBranch}/${path}${lang}.json`
+  }
+
   setAuthor(author: Author) {
     this.author = author
   }
@@ -83,7 +94,7 @@ export class BitBucketClient implements VersionControlClient {
     return await this.fetchFile(url + file, token?.access_token)
   }
 
-  async fetchFile(url: string, token: string|undefined, init?: RequestInit) {
+  async fetchFile(url: string, token: string | undefined, init?: RequestInit) {
     return await this.request(url, {...init, headers: {...this.tokenHeader(token), ...init?.headers}})
   }
 
@@ -92,7 +103,7 @@ export class BitBucketClient implements VersionControlClient {
     await this.createBranchIfNotExists(token.access_token)
     await this.commit(lang, dict, defaultDict, commitMessage, token.access_token)
     const hasPullRequest: boolean = await this.checkIfPullRequestExists(token?.access_token)
-    if (!hasPullRequest) await this.createPullRequest("Updated translations", token?.access_token)
+    if (!hasPullRequest) await this.createPullRequest('Updated translations', token?.access_token)
   }
 
   async commit(lang: string, dict: Dict, defaultDict: Dict, commitMessage: string, token: string) {
@@ -111,7 +122,7 @@ export class BitBucketClient implements VersionControlClient {
     await this.request(`${this.getRootUrl()}/pullrequests`, {method: 'POST', body, headers})
   }
 
-  async checkIfPullRequestExists(token: string|undefined): Promise<boolean> {
+  async checkIfPullRequestExists(token: string | undefined): Promise<boolean> {
     if (this.config.branch === this.findDefaultBranch()) return true
     const values: BitBucketPullsResponseValue[] =
       (await this.request(this.getRootUrl() + '/pullrequests',

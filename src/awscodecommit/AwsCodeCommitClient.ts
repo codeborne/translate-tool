@@ -27,6 +27,11 @@ export class AwsCodeCommitClient implements VersionControlClient {
     this.client = new AWS.CodeCommit(credentials)
   }
 
+  getSourceUrl(defaultBranch: string, lang: string): string {
+    const {url, region, translationsPath} = this.config
+    return `https://${region}.console.aws.amazon.com/codesuite/codecommit/repositories/${url}/browse/refs/heads/${defaultBranch}/--${getBaseUrl(translationsPath)}/${lang}.json`
+  }
+
   findDefaultBranch(): string | Promise<string> {
     return this.config.branch
   }

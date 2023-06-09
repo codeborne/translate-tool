@@ -51,6 +51,13 @@ export class GitHubClient implements VersionControlClient {
     else response.content
   }
 
+  getSourceUrl(defaultBranch: string, lang: string): string {
+    const {url} = this.config
+    const repoInfo: string[] = url.slice(url.indexOf('/repos/') + 7, url.indexOf('/contents')).split('/')
+    const path: string = url.slice(url.indexOf('/contents/') + 9, url.length)
+    return `https://github.com/${repoInfo[0]}/${repoInfo[1]}/blob/${defaultBranch}${path}${lang}.json`
+  }
+
   async getFileContentNoCatch(file: string) {
     const response = await this.getFile(file, this.branch)
     if (response.encoding === 'base64') return JSON.parse(decodeBase64Unicode(response.content))

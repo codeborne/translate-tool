@@ -28,4 +28,8 @@ export class SimpleProjectClient implements VersionControlClient {
   findDefaultBranch(): Promise<string> {
     throw Error("Not implemented")
   }
+
+  getSourceUrl(defaultBranch: string, lang: string): string {
+    return `${this.config.url}${lang}.json`
+  }
 }

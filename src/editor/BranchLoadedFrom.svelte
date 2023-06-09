@@ -2,6 +2,7 @@
   import {GitHubClient} from '../github/GitHubClient'
   import {BitBucketClient} from '../bitbucket/BitBucketClient'
   import {fly} from 'svelte/transition'
+  import {clientFor} from '../common/VersionControlClient'
 
   export let config
   export let projectMeta
@@ -13,8 +14,7 @@
   }
 
   async function getDefaultBranch() {
-    if (config.url.includes(GitHubClient.host)) return await new GitHubClient(config).findDefaultBranch()
-    else if (config.url.includes(BitBucketClient.host)) return new BitBucketClient(config).findDefaultBranch()
+    return Promise.resolve(clientFor(config).findDefaultBranch())
   }
 
   function isVersionControlUrl(config) {

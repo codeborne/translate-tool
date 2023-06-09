@@ -1,9 +1,7 @@
 import type {Dict, Project} from './Project'
 import {LoadedProject} from './Project'
-import {getBaseUrl} from './utils'
-import {GitHubClient} from '../github/GitHubClient'
-import {BitBucketClient} from '../bitbucket/BitBucketClient'
 import {excludedKeysLoader} from './ExcludeKeysLoader'
+import {clientFor} from './VersionControlClient'
 
 interface GithubErrorResponse {
   message: string
@@ -27,7 +25,7 @@ class JsonLoader {
   request(url: string, init?: RequestInit) {
     return fetch(url, init).then(async (r) => {
       const defaultError = `Failed to load ${url}`
-      let error: string|undefined
+      let error: string | undefined
       if (!r.ok) {
         error = await r.json().then((msg: ErrorResponse) => {
           if (msg.message) return msg.message
@@ -49,9 +47,7 @@ class JsonLoader {
   }
 
   loadFor(project: Project, fileBaseName: string, branch: string): Promise<any> {
-    if (project.url.includes(GitHubClient.host)) return new GitHubClient(project).getFileContent(fileBaseName + '.json', branch)
-    else if (project.url.includes(BitBucketClient.host)) return new BitBucketClient(project).getFileContent(fileBaseName + '.json')
-    else return this.loadJson(getBaseUrl(project.url) + '/' + fileBaseName + '.json')
+    return clientFor(project).getFileContent(fileBaseName + '.json', branch)
   }
 
   async loadProject(project: Project): Promise<LoadedProject> {
@@ -66,7 +62,7 @@ class JsonLoader {
       }
       const loadedDicts = await Promise.all(langs!.map(lang => this.loadFor(project, lang, branch)))
       const dicts = loadedDicts.reduce((r, dict, i) => {
-        r[langs[i]] = dict;
+        r[langs[i]] = dict
         return r
       }, {} as Record<string, Dict>)
       const excludedKeys = await excludedKeysLoader.fetch(project) ?? []
@@ -76,7 +72,7 @@ class JsonLoader {
       console.error('Failed to load: ' + e)
       return new LoadedProject(project, {})
     }
-}
+  }
 
   loadProjects(projects: Project[]) {
     return Promise.all(projects.map(p => this.loadProject(p)))

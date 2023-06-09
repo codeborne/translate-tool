@@ -1,10 +1,11 @@
 <script lang="ts">
   import type {Project} from '../common/Project'
+  import {ProjectSource} from '../common/Project'
   import {createEventDispatcher} from 'svelte'
-  import jsonLoader from '../common/JsonLoader'
   import Icon from '../components/Icon.svelte'
   import SpinnerIcon from '../components/SpinnerIcon.svelte'
   import {ensureInputIsArray} from '../common/utils'
+  import {SimpleProjectClient} from '../simpleproject/SimpleProjectClient'
 
   let url: string = ''
   let title: string = ''
@@ -19,18 +20,15 @@
       loading = true
       warning = ''
       if (url) {
-        let dict = await jsonLoader.loadJson(url + 'langs.json')
-        if (ensureInputIsArray(dict)) save(url)
+        const project: Project = {title, url, indent, source: ProjectSource.SimpleProject}
+        const client = new SimpleProjectClient(project)
+        let dict = await client.getFileContent('langs.json')
+        if (ensureInputIsArray(dict)) dispatch('imported', project)
       } else throw Error('Input must not be empty')
     } catch (e: Error) {
       warning = 'Could not import: ' + e.message
       loading = false
     }
-  }
-
-  function save(dictUrl: string) {
-    const project: Project = {title, url: dictUrl, indent}
-    dispatch('imported', project)
   }
 </script>
 

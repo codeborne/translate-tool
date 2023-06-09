@@ -5,14 +5,15 @@ import {SinonStub, stub} from 'sinon'
 import {tick} from 'svelte'
 import jsonLoader from './common/JsonLoader'
 import type {Project} from './common/Project'
-import {LoadedProject} from './common/Project'
+import {LoadedProject, ProjectSource} from './common/Project'
 import localProjectStore from './common/LocalProjectStore'
 
-const project = {
+const project: Project = {
   title: 'TestTitle',
   url: 'TestUrl',
-  indent: 2
-} as Project
+  indent: 2,
+  source: ProjectSource.SimpleProject
+}
 
 const loadedProject = new LoadedProject(project, {en: {hello: 'world', world: 'hello'}})
 

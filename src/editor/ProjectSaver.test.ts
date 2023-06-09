@@ -1,6 +1,7 @@
 import {act, fireEvent, render} from '@testing-library/svelte'
 import {expect} from 'chai'
 import type {Dict, Project} from '../common/Project'
+import {ProjectSource} from '../common/Project'
 import {fake, stub} from 'sinon'
 import ProjectSaver from './ProjectSaver.svelte'
 import {GitHubClient} from '../github/GitHubClient'
@@ -10,7 +11,7 @@ describe('ProjectSaver', () => {
   const dict: Dict = {}
   const defaultDict: Dict = {}
   const lang = 'en'
-  let config: Project = {title: '', url: 'api.github.com', token: '', indent: 2}
+  let config: Project = {title: '', url: 'api.github.com', token: '', indent: 2, source: ProjectSource.Github}
   const user: GoogleProfile|undefined = undefined
 
   async function clickSaveButton(message: string) {

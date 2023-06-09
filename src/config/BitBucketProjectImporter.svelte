@@ -2,6 +2,7 @@
 <script lang="ts">
 
   import type {Project} from '../common/Project'
+  import {ProjectSource} from '../common/Project'
   import {createEventDispatcher} from 'svelte'
   import {BitBucketClient} from '../bitbucket/BitBucketClient'
   import Icon from '../components/Icon.svelte'
@@ -17,7 +18,7 @@
   let loading = false
 
 
-  export let project: Project = {url: '', title: '', token: '', indent: 2, branch}
+  export let project: Project = {url: '', title: '', token: '', indent: 2, branch, source: ProjectSource.BitBucket}
 
   const dispatch = createEventDispatcher()
 

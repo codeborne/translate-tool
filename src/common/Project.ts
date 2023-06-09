@@ -4,6 +4,13 @@ export interface Project {
   indent: number,
   token?: string,
   branch?: string
+  source: ProjectSource
+}
+
+export enum ProjectSource {
+  BitBucket = 'BitBucket',
+  Github = 'Github',
+  SimpleProject = 'SimpleProject'
 }
 
 export interface ProjectMeta {

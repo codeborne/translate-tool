@@ -2,6 +2,7 @@
 <script lang="ts">
 
   import type {Project} from '../common/Project'
+  import {ProjectSource} from '../common/Project'
   import {createEventDispatcher} from 'svelte'
   import {GitHubClient} from '../github/GitHubClient'
   import Icon from '../components/Icon.svelte'
@@ -15,7 +16,7 @@
   let branch = 'translations'
   let loading = false
 
-  export let project: Project = {url: '', title: '', token: '', indent: 2, branch}
+  export let project: Project = {url: '', title: '', token: '', indent: 2, branch, source: ProjectSource.Github}
 
   const dispatch = createEventDispatcher()
 

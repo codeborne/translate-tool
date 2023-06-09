@@ -1,6 +1,8 @@
 import type {Dict, Project} from './Project'
 import {GitHubClient} from '../github/GitHubClient'
 import {BitBucketClient} from '../bitbucket/BitBucketClient'
+import {ProjectSource} from './Project'
+import {SimpleProjectClient} from '../simpleproject/SimpleProjectClient'
 
 export interface Author {
   email: string
@@ -16,10 +18,14 @@ export interface VersionControlClient {
   getFileContent(file: string, branch: string): any
   saveFile(lang: string, dict: Dict, defaultDict: Dict, commitMessage: string): any
   setAuthor(author: Author): void
+  findDefaultBranch(): Promise<string> | string
 }
 
 export function clientFor(config: Project): VersionControlClient {
-  if (config.url.includes(GitHubClient.host)) return new GitHubClient(config)
-  else if (config.url.includes(BitBucketClient.host)) return new BitBucketClient(config)
-  else throw Error('Unsupported project')
+  switch(config.source) {
+    case ProjectSource.Github: return new GitHubClient(config)
+    case ProjectSource.BitBucket: return new BitBucketClient(config)
+    case ProjectSource.SimpleProject: return new SimpleProjectClient(config)
+    default: throw Error('Unsupported project')
+  }
 }

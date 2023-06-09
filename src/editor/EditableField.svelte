@@ -5,7 +5,7 @@
 </script>
 
 {#if isFirefox}
-  <div bind:textContent={value} class="text-input not-html" class:changed contenteditable></div>
+  <div bind:textContent={value} class="text-input not-html" class:changed contenteditable="true"></div>
 {:else}
   <div bind:textContent={value} class="text-input not-html" class:changed contenteditable="plaintext-only"></div>
 {/if}

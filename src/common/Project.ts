@@ -7,10 +7,20 @@ export interface Project {
   source: ProjectSource
 }
 
+export interface AwsProject extends Project {
+  region: string
+  branch: string
+  accessKeyId: string
+  secretAccessKey: string
+  sessionToken: string
+  translationsPath: string
+}
+
 export enum ProjectSource {
   BitBucket = 'BitBucket',
   Github = 'Github',
-  SimpleProject = 'SimpleProject'
+  SimpleProject = 'SimpleProject',
+  AwsCodeCommit = 'AwsCodeCommit'
 }
 
 export interface ProjectMeta {

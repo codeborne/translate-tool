@@ -8,6 +8,7 @@ describe('ProjectImportList', () => {
     expect(container.querySelector('.githubImport')!.textContent).to.contain('Via GitHub')
     expect(container.querySelector('.publicImport')!.textContent).to.contain('Via Public URL')
     expect(container.querySelector('.bitbucketImport')!.textContent).to.contain('Via BitBucket')
+    expect(container.querySelector('.awsCodeCommitImport')!.textContent).to.contain('Via AWS CodeCommit')
   })
 
   it('opens content on toggle event', async () => {

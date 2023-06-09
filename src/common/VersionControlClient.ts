@@ -1,8 +1,9 @@
-import type {Dict, Project} from './Project'
+import type {AwsProject, Dict, Project} from './Project'
+import {ProjectSource} from './Project'
 import {GitHubClient} from '../github/GitHubClient'
 import {BitBucketClient} from '../bitbucket/BitBucketClient'
-import {ProjectSource} from './Project'
 import {SimpleProjectClient} from '../simpleproject/SimpleProjectClient'
+import {AwsCodeCommitClient} from '../awscodecommit/AwsCodeCommitClient'
 
 export interface Author {
   email: string
@@ -16,7 +17,7 @@ export interface VersionControlClient {
   author: Author
 
   getFileContent(file: string, branch: string): any
-  saveFile(lang: string, dict: Dict, defaultDict: Dict, commitMessage: string): any
+  saveFile(lang: string, dict: Dict, defaultDict: Dict, commitMessage: string): Promise<any>
   setAuthor(author: Author): void
   findDefaultBranch(): Promise<string> | string
 }
@@ -26,6 +27,7 @@ export function clientFor(config: Project): VersionControlClient {
     case ProjectSource.Github: return new GitHubClient(config)
     case ProjectSource.BitBucket: return new BitBucketClient(config)
     case ProjectSource.SimpleProject: return new SimpleProjectClient(config)
+    case ProjectSource.AwsCodeCommit: return new AwsCodeCommitClient(config as AwsProject)
     default: throw Error('Unsupported project')
   }
 }

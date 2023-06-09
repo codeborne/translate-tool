@@ -2,13 +2,15 @@ import jsonLoader from './JsonLoader'
 import {expect} from 'chai'
 import {stub} from 'sinon'
 import type {Project} from './Project'
+import {ProjectSource} from './Project'
 
 describe('JsonLoader', () => {
   let project: Project = {
     title: 'some+project',
     url: 'some_project_url/langs.json',
     token: 'some_access_token',
-    indent: 2
+    indent: 2,
+    source: ProjectSource.SimpleProject
   }
   const response = ['test1', 'test2']
 

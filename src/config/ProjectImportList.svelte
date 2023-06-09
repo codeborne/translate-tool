@@ -6,6 +6,7 @@
   import {SvelteComponent} from 'svelte'
   import {fly} from 'svelte/transition'
   import Card from '../components/Card.svelte'
+  import AwsCodeCommitImporter from './AwsCodeCommitImporter.svelte'
 
   interface Accordion {
     heading: string,
@@ -18,6 +19,7 @@
     { heading: 'Via GitHub', className: 'githubImport', slot: GitHubProjectImporter },
     { heading: 'Via BitBucket', className: 'bitbucketImport', slot: BitBucketProjectImporter },
     { heading: 'Via Public URL', className: 'publicImport', isOpen: true, slot: SimpleProjectImporter },
+    { heading: 'Via AWS CodeCommit', className: 'awsCodeCommitImport', slot: AwsCodeCommitImporter },
   ] as Accordion[]
 
   function toggle(e) {

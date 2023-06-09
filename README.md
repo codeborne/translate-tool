@@ -163,6 +163,10 @@ Here's an example:
 https://raw.githubusercontent.com/<User>/<Repo>/main/translations/
 ```
 
+#### AWS CodeCommit repositories
+
+In AWS environment one possible scenario is to create IAM role, that would have access to required repository. Later, under "Security credentials" tab you can generate access and secret keys.
+
 ---
 ## Setup & Deployment
 

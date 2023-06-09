@@ -4,7 +4,7 @@ import ProjectSourceButton from './ProjectSourceButton.svelte'
 import type {Project} from '../common/Project'
 
 describe('ProjectSourceButton', () => {
-  let project: Project = {url: 'http://example.com/i18n/', title: 'title', indent: 2}
+  let project: Project = {url: 'http://example.com/i18n/', title: 'title', indent: 2} as Project
   const defaultBranch = 'translations'
   const lang = 'et'
   it('renders', async () => {

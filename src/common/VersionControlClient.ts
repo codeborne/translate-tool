@@ -29,6 +29,13 @@ export function clientFor(config: Project): VersionControlClient {
     case ProjectSource.BitBucket: return new BitBucketClient(config)
     case ProjectSource.SimpleProject: return new SimpleProjectClient(config)
     case ProjectSource.AwsCodeCommit: return new AwsCodeCommitClient(config as AwsProject)
-    default: throw Error('Unsupported project')
+    default: return legacyClientFor(config.source)
   }
 }
+
+function legacyClientFor(config: Project): VersionControlClient {
+  if (config.url.includes(GitHubClient.host)) return new GitHubClient(config)
+  else if (config.url.includes(BitBucketClient.host)) return new BitBucketClient(config)
+  else throw Error('Unsupported project')
+}
+

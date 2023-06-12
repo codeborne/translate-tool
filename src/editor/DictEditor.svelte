@@ -106,7 +106,7 @@
 
 <div id="output" class="mt-3 card shadow p-3 p-lg-4">
   <DictClipboardOutput {dict} {defaultDict} {lang} indent={project.config.indent} on:copied={onCopied}>
-    {#if project.config.token}
+    {#if project.config.source !== ProjectSource.SimpleProject}
       <ProjectSaver {user} {dict} {defaultDict} {lang} config={project.config} on:saved={onSaved}/>
     {/if}
     <ProjectSourceButton project={project.config} defaultBranch={project?.meta?.branchLoadedFrom ? project.meta.branchLoadedFrom : defaultBranch} {lang}/>

@@ -44,7 +44,7 @@ export class AwsCodeCommitClient implements VersionControlClient {
     const filePath = `${getBaseUrl(this.config.translationsPath)}/${fileName}`
     const repositoryName = this.config.url
     const branchName = this.config.sourceBranch
-    const {branch} = await this.client.getBranch({repositoryName, branchName,}).promise()
+    const {branch} = await this.client.getBranch({repositoryName, branchName}).promise()
     const fileData = await this.client.getFile({repositoryName, filePath, commitSpecifier: branch?.commitId}).promise()
     const data = await this.client.getBlob({repositoryName, blobId: fileData.blobId}).promise()
 
@@ -57,7 +57,7 @@ export class AwsCodeCommitClient implements VersionControlClient {
     const repositoryName = this.config.url
     const branchName = this.config.branch
 
-    const {branch} = await this.client.getBranch({repositoryName, branchName}).promise()
+    const commitId = await this.getOrCreateTargetBranchCommitId()
 
     return this.client.putFile({
       repositoryName,
@@ -65,9 +65,25 @@ export class AwsCodeCommitClient implements VersionControlClient {
       fileContent,
       filePath,
       commitMessage,
-      parentCommitId: branch?.commitId,
+      parentCommitId: commitId,
       name: this.author.name,
       email: this.author.email
     }).promise()
+  }
+
+  private async getOrCreateTargetBranchCommitId() {
+    if (this.config.sourceBranch === this.config.branch) return
+
+    const repositoryName = this.config.url
+    const branchName = this.config.branch
+
+    try {
+      const {branch} = await this.client.getBranch({repositoryName, branchName}).promise()
+      return branch?.commitId
+    } catch (e) {
+      const {branch} = await this.client.getBranch({repositoryName, branchName: this.config.sourceBranch}).promise()
+      await this.client.createBranch({repositoryName, branchName, commitId: branch?.commitId!}).promise()
+      return branch?.commitId
+    }
   }
 }

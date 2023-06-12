@@ -90,17 +90,21 @@ For most, it is much easier to generate it from the tool itself by using the pro
 Alternatively, you may follow this JSON structure:
 
 ```json
-{
-  "title": "Project1",
-  "url": "https://somelink.com/myproject/translations/",
-  "token": "some_access_token_mdasKn23nSDJDnNSm",
-  "indent": 2
-},
-{
-  "title": "Project2 Common",
-  "url": "https://somelink.com/myproject2/translations/common/",
-  "indent": 4
-}
+[
+  {
+    "title": "Project1",
+    "url": "https://somelink.com/myproject/translations/",
+    "token": "some_access_token_mdasKn23nSDJDnNSm",
+    "indent": 2,
+    "source": "Github"
+  },
+  {
+    "title": "Project2 Common",
+    "url": "https://somelink.com/myproject2/translations/common/",
+    "indent": 4,
+    "source": "BitBucket"
+  }
+]
 ```
 
 * `title` is the project name within the tool.

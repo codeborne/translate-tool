@@ -19,7 +19,7 @@ export interface VersionControlClient {
   getFileContent(file: string, branch: string): any
   saveFile(lang: string, dict: Dict, defaultDict: Dict, commitMessage: string): Promise<any>
   setAuthor(author: Author): void
-  findDefaultBranch(): Promise<string> | string
+  findSourceBranch(): Promise<string> | string
   getSourceUrl(defaultBranch: string, lang: string): string
 }
 

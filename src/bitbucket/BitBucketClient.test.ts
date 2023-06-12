@@ -65,10 +65,10 @@ describe('BitBucketClient', () => {
     expect(result3).to.equal('https://bitbucket.org/somename/somename/commits')
   })
 
-  it('returns default branch from the given url in config', async () => {
-    const result: string = client.findDefaultBranch()
-    const result2: string = sameNameClient.findDefaultBranch()
-    const result3: string = extraClient.findDefaultBranch()
+  it('returns source branch from the given url in config', async () => {
+    const result: string = client.findSourceBranch()
+    const result2: string = sameNameClient.findSourceBranch()
+    const result3: string = extraClient.findSourceBranch()
     expect(result).to.equal('main')
     expect(result2).to.equal('translations')
     expect(result3).to.equal('master')

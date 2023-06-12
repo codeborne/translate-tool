@@ -10,6 +10,7 @@ export interface Project {
 export interface AwsProject extends Project {
   region: string
   branch: string
+  sourceBranch: string
   accessKeyId: string
   secretAccessKey: string
   sessionToken: string

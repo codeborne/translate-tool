@@ -32,8 +32,8 @@ export class AwsCodeCommitClient implements VersionControlClient {
     return `https://${region}.console.aws.amazon.com/codesuite/codecommit/repositories/${url}/browse/refs/heads/${defaultBranch}/--${getBaseUrl(translationsPath)}/${lang}.json`
   }
 
-  findDefaultBranch(): string | Promise<string> {
-    return this.config.branch
+  findSourceBranch(): string | Promise<string> {
+    return this.config.sourceBranch
   }
 
   setAuthor(author: Author) {
@@ -43,7 +43,7 @@ export class AwsCodeCommitClient implements VersionControlClient {
   async getFileContent(fileName: string): Promise<string> {
     const filePath = `${getBaseUrl(this.config.translationsPath)}/${fileName}`
     const repositoryName = this.config.url
-    const branchName = this.config.branch
+    const branchName = this.config.sourceBranch
     const {branch} = await this.client.getBranch({repositoryName, branchName,}).promise()
     const fileData = await this.client.getFile({repositoryName, filePath, commitSpecifier: branch?.commitId}).promise()
     const data = await this.client.getBlob({repositoryName, blobId: fileData.blobId}).promise()

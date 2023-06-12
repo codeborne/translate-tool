@@ -15,6 +15,7 @@
   import ProjectSaver from './ProjectSaver.svelte'
   import {onMount, tick} from 'svelte'
   import Card from '../components/Card.svelte'
+  import {ProjectSource} from '../common/Project'
 
   export let project: LoadedProject
   export let lang: string

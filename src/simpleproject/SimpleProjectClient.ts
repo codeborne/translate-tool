@@ -25,7 +25,7 @@ export class SimpleProjectClient implements VersionControlClient {
     throw Error("Not implemented")
   }
 
-  findDefaultBranch(): Promise<string> {
+  findSourceBranch(): Promise<string> {
     throw Error("Not implemented")
   }
 

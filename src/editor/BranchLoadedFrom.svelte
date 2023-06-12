@@ -10,11 +10,11 @@
   $: if (config) handleBranchCheck()
 
   async function handleBranchCheck() {
-    if (isVersionControlUrl(config) && !projectMeta?.branchLoadedFrom) projectMeta.branchLoadedFrom = await getDefaultBranch() ?? 'base'
+    if (isVersionControlUrl(config) && !projectMeta?.branchLoadedFrom) projectMeta.branchLoadedFrom = await getSourceBranch() ?? 'base'
   }
 
-  async function getDefaultBranch() {
-    return Promise.resolve(clientFor(config).findDefaultBranch())
+  async function getSourceBranch() {
+    return Promise.resolve(clientFor(config).findSourceBranch())
   }
 
   function isVersionControlUrl(config) {

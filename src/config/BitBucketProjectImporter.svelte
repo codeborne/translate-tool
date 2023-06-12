@@ -14,11 +14,10 @@
   let repo = ''
   let path = ''
   let defaultBranch = ''
-  let branch = 'translations'
+  let targetBranch = 'translations'
   let loading = false
 
-
-  export let project: Project = {url: '', title: '', token: '', indent: 2, branch, source: ProjectSource.BitBucket}
+  export let project: Project = {url: '', title: '', token: '', indent: 2, branch: targetBranch, source: ProjectSource.BitBucket}
 
   const dispatch = createEventDispatcher()
 
@@ -26,7 +25,7 @@
     try {
       loading = true
       warning = ''
-      project.branch = branch ?? 'translations'
+      project.branch = targetBranch ?? 'translations'
       project.url = `https://api.bitbucket.org/2.0/repositories/${username}/${repo}/src/${defaultBranch}${path}`
       let bitbucketClient = new BitBucketClient(project)
       const langs: string[] = await bitbucketClient.getFileContent('langs.json') as string[]
@@ -71,7 +70,7 @@
     </div>
 
     <label class="form-label">Translations branch</label>
-    <input type="text" bind:value={branch} class="form-control" required>
+    <input type="text" bind:value={targetBranch} class="form-control" required>
     <div class="form-text mb-4">Where the tool will commit changes</div>
   <div>
     <button disabled={loading} class="btn btn-primary btn-icon w-auto px-lg-4 justify-content-center">

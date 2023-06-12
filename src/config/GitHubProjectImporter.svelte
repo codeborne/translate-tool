@@ -13,10 +13,10 @@
   let username = ''
   let repo = ''
   let path = '/i18n/'
-  let branch = 'translations'
+  let targetBranch = 'translations'
   let loading = false
 
-  export let project: Project = {url: '', title: '', token: '', indent: 2, branch, source: ProjectSource.Github}
+  export let project: Project = {url: '', title: '', token: '', indent: 2, branch: targetBranch, source: ProjectSource.Github}
 
   const dispatch = createEventDispatcher()
 
@@ -60,7 +60,7 @@
     <div class="form-text mb-4">This token will be used to access or create commits. Create one under the GitHub account which owns the repository.</div>
 
     <label class="form-label">Translations branch</label>
-    <input type="text" bind:value={branch} class="form-control" required>
+    <input type="text" bind:value={targetBranch} class="form-control" required>
     <div class="form-text mb-4">Where the tool will commit changes</div>
 
   <div>

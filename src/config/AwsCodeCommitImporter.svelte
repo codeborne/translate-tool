@@ -19,6 +19,7 @@
     accessKeyId: '',
     secretAccessKey: '',
     sessionToken: '',
+    sourceBranch: 'master',
     branch: 'translations',
     translationsPath: '/i18n/',
     source: ProjectSource.AwsCodeCommit

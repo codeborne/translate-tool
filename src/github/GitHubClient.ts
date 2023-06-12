@@ -65,12 +65,12 @@ export class GitHubClient implements VersionControlClient {
   }
 
   async createPullRequest(title: string) {
-    const base = await this.findDefaultBranch()
+    const base = await this.findSourceBranch()
     await this.send(this.getPullsUrl(), 'POST', {base, head: this.branch, title})
   }
 
   async checkIfPullRequestExists() {
-    if (this.config.branch === await this.findDefaultBranch()) return true
+    if (this.config.branch === await this.findSourceBranch()) return true
     const result = await this.request(this.getPullsUrl())
     return !!result.length
   }
@@ -95,13 +95,13 @@ export class GitHubClient implements VersionControlClient {
     return result
   }
 
-  async findDefaultBranch() {
+  async findSourceBranch() {
     return (await this.request(this.config.url
       .substring(0, this.config.url.lastIndexOf('/content'))) as GitHubRepoInfo).default_branch
   }
 
   private async createBranchIfNeeded() {
-    const defaultBranch = await this.findDefaultBranch()
+    const defaultBranch = await this.findSourceBranch()
     if (this.config.branch === defaultBranch ) return
     const refsUrl = this.config.url.replace(/contents\/.*$/, 'git/refs')
     const refs = await this.request(refsUrl) as GitHubRef[]

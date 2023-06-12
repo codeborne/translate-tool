@@ -7,7 +7,8 @@ describe('AwsCodeCommitClient', () => {
   const client = new AwsCodeCommitClient({
     title: 'Title',
     url: 'repo-name',
-    branch: 'main',
+    branch: 'translations',
+    sourceBranch: 'main',
     indent: 2,
     source: ProjectSource.AwsCodeCommit,
     region: 'region',
@@ -30,12 +31,12 @@ describe('AwsCodeCommitClient', () => {
 
       expect(client.client.getBranch).calledWith({
         repositoryName: 'repo-name',
-        branchName: 'main'
+        branchName: 'translations'
       })
 
       expect(client.client.putFile).calledWith({
         repositoryName: 'repo-name',
-        branchName: 'main',
+        branchName: 'translations',
         fileContent: '{\n  "key": "value"\n}',
         filePath: '/translationsPath/en.json',
         commitMessage,

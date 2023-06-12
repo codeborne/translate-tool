@@ -62,11 +62,11 @@ export class BitBucketClient implements VersionControlClient {
   }
 
   getDirectoryUrl() {
-    const identifier = `/src/${this.findDefaultBranch()}`
+    const identifier = `/src/${this.findSourceBranch()}`
     return this.config.url.slice(this.config.url.indexOf(identifier) + identifier.length + 1, this.config.url.length)
   }
 
-  findDefaultBranch() {
+  findSourceBranch() {
     const suffix = this.config.url.slice(this.config.url.indexOf(`/src/`) + 5, this.config.url.length)
     return suffix.slice(0, suffix.indexOf('/'))
   }
@@ -78,7 +78,7 @@ export class BitBucketClient implements VersionControlClient {
   }
 
   getUrlWithCustomBranch() {
-    return this.config.url.replace(`/src/${this.findDefaultBranch()}/`, `/src/${this.branch}/`)
+    return this.config.url.replace(`/src/${this.findSourceBranch()}/`, `/src/${this.branch}/`)
   }
 
   async getFileContent(file: string) {
@@ -89,7 +89,7 @@ export class BitBucketClient implements VersionControlClient {
   }
 
   async getFileContentNoCatch(file: string, branch?: string) {
-    const url = branch ? this.config.url.replace(`/${this.findDefaultBranch()}/`, `/${branch}/`) : this.config.url
+    const url = branch ? this.config.url.replace(`/${this.findSourceBranch()}/`, `/${branch}/`) : this.config.url
     const token = (this.config.token) ? await this.getAccessToken() : undefined
     return await this.fetchFile(url + file, token?.access_token)
   }
@@ -123,7 +123,7 @@ export class BitBucketClient implements VersionControlClient {
   }
 
   async checkIfPullRequestExists(token: string | undefined): Promise<boolean> {
-    if (this.config.branch === this.findDefaultBranch()) return true
+    if (this.config.branch === this.findSourceBranch()) return true
     const values: BitBucketPullsResponseValue[] =
       (await this.request(this.getRootUrl() + '/pullrequests',
         {headers: {...this.tokenHeader(token)}}) as BitBucketPullsResponse).values
@@ -137,14 +137,14 @@ export class BitBucketClient implements VersionControlClient {
   }
 
   async checkIfBranchExists(token: string): Promise<boolean> {
-    if (this.config.branch === this.findDefaultBranch()) return true
+    if (this.config.branch === this.findSourceBranch()) return true
     const branches = await this.request(`${this.getBranchListUrl()}`,
       {headers: {...this.tokenHeader(token)}}) as BitBucketBranchListResponse
     return !!(branches.values.find((branch) => branch.name === this.branch))
   }
 
   async createBranch(token: string) {
-    const body = JSON.stringify({name: this.branch, target: {hash: this.findDefaultBranch()}})
+    const body = JSON.stringify({name: this.branch, target: {hash: this.findSourceBranch()}})
     const headers = {...this.tokenHeader(token), ...{'Content-Type': 'application/json'}}
     await this.request(`${this.getBranchListUrl()}`, {method: 'POST', body, headers})
   }

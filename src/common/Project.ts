@@ -15,6 +15,7 @@ export interface AwsProject extends Project {
   secretAccessKey: string
   sessionToken: string
   translationsPath: string
+  source: ProjectSource.AwsCodeCommit
 }
 
 export enum ProjectSource {

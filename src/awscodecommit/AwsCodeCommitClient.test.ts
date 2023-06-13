@@ -23,8 +23,8 @@ describe('AwsCodeCommitClient', () => {
       const commitMessage = 'commit message'
       const parentCommitId = 'commitId'
 
-      stub(client.client, 'getBranch').returns({promise: stub().resolves({branch: {commitId: parentCommitId}})} as any)
-      stub(client.client, 'putFile').returns({promise: stub()} as any)
+      stub(client.client, 'getBranch').resolves({branch: {commitId: parentCommitId}})
+      stub(client.client, 'putFile')
 
       client.setAuthor({name: 'Bob', email: 'bob@email.com'})
       await client.saveFile('en', {key: 'value'}, {key: undefined}, commitMessage)
@@ -37,7 +37,7 @@ describe('AwsCodeCommitClient', () => {
       expect(client.client.putFile).calledWith({
         repositoryName: 'repo-name',
         branchName: 'translations',
-        fileContent: '{\n  "key": "value"\n}',
+        fileContent: new TextEncoder().encode('{\n  "key": "value"\n}'),
         filePath: '/translationsPath/en.json',
         commitMessage,
         parentCommitId: parentCommitId,
@@ -52,9 +52,9 @@ describe('AwsCodeCommitClient', () => {
       const blobId = 'blobId'
       const parentCommitId = 'commitId'
 
-      stub(client.client, 'getBranch').returns({promise: stub().resolves({branch: {commitId: parentCommitId}})} as any)
-      stub(client.client, 'getFile').returns({promise: stub().resolves({blobId})} as any)
-      stub(client.client, 'getBlob').returns({promise: stub().resolves({content: new TextEncoder().encode('{"key": "value"}')})} as any)
+      stub(client.client, 'getBranch').resolves({branch: {commitId: parentCommitId}})
+      stub(client.client, 'getFile').resolves({blobId})
+      stub(client.client, 'getBlob').resolves({content: new TextEncoder().encode('{"key": "value"}')})
 
       client.setAuthor({name: 'Bob', email: 'bob@email.com'})
       await client.getFileContent('en.json')

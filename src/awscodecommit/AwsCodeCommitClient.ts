@@ -3,14 +3,14 @@ import type {AwsProject, Dict} from '../common/Project'
 import {LoadedProject} from '../common/Project'
 import {rebuildDictInOrder} from '../editor/rebuildDictInOrder'
 import {getBaseUrl} from '../common/utils'
-import AWS from 'aws-sdk'
+import {CodeCommit} from '@aws-sdk/client-codecommit'
 
 export class AwsCodeCommitClient implements VersionControlClient {
   branch = 'translations'
   icon = 'fab fa-amazon'
   label = 'AWS CodeCommit'
   author: Author = {name: 'Translate Tool', email: 'translate@codeborne.com'}
-  client: AWS.CodeCommit
+  client: CodeCommit
 
   constructor(public config: AwsProject) {
     this.branch = config.branch
@@ -24,7 +24,7 @@ export class AwsCodeCommitClient implements VersionControlClient {
       }
     }
 
-    this.client = new AWS.CodeCommit(credentials)
+    this.client = new CodeCommit(credentials)
   }
 
   getSourceUrl(defaultBranch: string, lang: string): string {
@@ -44,9 +44,9 @@ export class AwsCodeCommitClient implements VersionControlClient {
     const filePath = `${getBaseUrl(this.config.translationsPath)}/${fileName}`
     const repositoryName = this.config.url
     const branchName = this.config.sourceBranch
-    const {branch} = await this.client.getBranch({repositoryName, branchName}).promise()
-    const fileData = await this.client.getFile({repositoryName, filePath, commitSpecifier: branch?.commitId}).promise()
-    const data = await this.client.getBlob({repositoryName, blobId: fileData.blobId}).promise()
+    const {branch} = await this.client.getBranch({repositoryName, branchName})
+    const fileData = await this.client.getFile({repositoryName, filePath, commitSpecifier: branch?.commitId})
+    const data = await this.client.getBlob({repositoryName, blobId: fileData.blobId})
 
     return JSON.parse(new TextDecoder().decode(data.content as Uint8Array))
   }
@@ -62,13 +62,13 @@ export class AwsCodeCommitClient implements VersionControlClient {
     return this.client.putFile({
       repositoryName,
       branchName,
-      fileContent,
+      fileContent: new TextEncoder().encode(fileContent),
       filePath,
       commitMessage,
       parentCommitId: commitId,
       name: this.author.name,
       email: this.author.email
-    }).promise()
+    })
   }
 
   private async getOrCreateTargetBranchCommitId() {
@@ -78,11 +78,11 @@ export class AwsCodeCommitClient implements VersionControlClient {
     const branchName = this.config.branch
 
     try {
-      const {branch} = await this.client.getBranch({repositoryName, branchName}).promise()
+      const {branch} = await this.client.getBranch({repositoryName, branchName})
       return branch?.commitId
     } catch (e) {
-      const {branch} = await this.client.getBranch({repositoryName, branchName: this.config.sourceBranch}).promise()
-      await this.client.createBranch({repositoryName, branchName, commitId: branch?.commitId!}).promise()
+      const {branch} = await this.client.getBranch({repositoryName, branchName: this.config.sourceBranch})
+      await this.client.createBranch({repositoryName, branchName, commitId: branch?.commitId!})
       return branch?.commitId
     }
   }

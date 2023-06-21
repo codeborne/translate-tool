@@ -29,7 +29,7 @@ export function clientFor(config: Project): VersionControlClient {
     case ProjectSource.BitBucket: return new BitBucketClient(config)
     case ProjectSource.SimpleProject: return new SimpleProjectClient(config)
     case ProjectSource.AwsCodeCommit: return new AwsCodeCommitClient(config as AwsProject)
-    default: return legacyClientFor(config.source)
+    default: return legacyClientFor(config)
   }
 }
 

@@ -55,11 +55,13 @@ class JsonLoader {
       let branch = project.branch ?? ''
       let langs: string[]
       try {
+        console.log(project)
         langs = await this.loadFor(project, 'langs', branch)
       } catch (e) {
         branch = ''
         langs = await this.loadFor(project, 'langs', branch)
       }
+
       const loadedDicts = await Promise.all(langs!.map(lang => this.loadFor(project, lang, branch)))
       const dicts = loadedDicts.reduce((r, dict, i) => {
         r[langs[i]] = dict
@@ -68,6 +70,7 @@ class JsonLoader {
       const excludedKeys = await excludedKeysLoader.fetch(project) ?? []
       return new LoadedProject(project, dicts, excludedKeys, {branchLoadedFrom: branch})
     } catch (e: any) {
+      console.log(project)
       if ((e.message as string).includes('in JSON')) prompt('Possible broken JSON file - please validate them here:', 'https://codebeautify.org/jsonvalidator')
       console.error('Failed to load: ' + e)
       return new LoadedProject(project, {})

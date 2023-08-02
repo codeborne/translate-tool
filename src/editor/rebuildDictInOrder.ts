@@ -7,10 +7,10 @@ function isEmpty(value: object) {
 export function rebuildDictInOrder(dict: Dict, defaultDict: Dict) {
   const result: Dict = {}
   for (let key of Object.keys(defaultDict)) {
-    const isObject = typeof dict[key] === 'object'
-    if (isObject) {
-      if (!isEmpty(dict[key])) result[key] = rebuildDictInOrder(dict[key], defaultDict[key])
-    } else if (dict == defaultDict || dict[key]) result[key] = dict[key]
+    const value = dict[key]
+    if (typeof value === 'object') {
+      if (!isEmpty(value)) result[key] = rebuildDictInOrder(value, defaultDict[key])
+    } else if (dict === defaultDict || value) result[key] = value
   }
   return result
 }

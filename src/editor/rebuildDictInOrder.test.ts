@@ -2,7 +2,7 @@ import {rebuildDictInOrder} from './rebuildDictInOrder'
 import {expect} from 'chai'
 
 describe('rebuildDictInOrder', () => {
-  const newObj = {
+  const newDict = {
     level1: '',
     nest1: {
       nest2: {
@@ -28,7 +28,7 @@ describe('rebuildDictInOrder', () => {
     }
   }
 
-  const defaultObj = {
+  const defaultDict = {
     level1: 'l1',
     nest1: {
       nest2: {
@@ -55,7 +55,7 @@ describe('rebuildDictInOrder', () => {
     }
   }
 
-  const expected = JSON.stringify({
+  const expectedResult = {
     nest1: {
       nest2: {
         level3: 'l3new',
@@ -76,10 +76,10 @@ describe('rebuildDictInOrder', () => {
         }
       }
     }
-  })
+  }
 
   it('creates dict with the same order as default dict with cleaned keys', () => {
-    const rebuiltDict = JSON.stringify(rebuildDictInOrder(newObj, defaultObj))
-    expect(rebuiltDict).to.deep.equal(expected)
+    const rebuiltDict = rebuildDictInOrder(newDict, defaultDict)
+    expect(JSON.stringify(rebuiltDict)).to.deep.equal(JSON.stringify(expectedResult))
   })
 })

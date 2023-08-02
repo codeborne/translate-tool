@@ -54,27 +54,29 @@ The default language, `en`, as defined by being the first language in `langs.jso
 
 Here's an example `en.json`
 
-```json5
-"general": {
-  "yes": "Yes",
-  "no": "No",
-  "edit": "Edit",
-  "remove": "Remove",
-  "save": "Save",
-  "filter": {
-    "today": "Today",
-    "yesterday": "Yesterday",
-    "thisWeek": "This week",
-    "thisMonth": "This month",
-    "thisYear": "This year",
+```json
+{
+  "general": {
+    "yes": "Yes",
+    "no": "No",
+    "edit": "Edit",
+    "remove": "Remove",
+    "save": "Save",
+    "filter": {
+      "today": "Today",
+      "yesterday": "Yesterday",
+      "thisWeek": "This week",
+      "thisMonth": "This month",
+      "thisYear": "This year"
+    }
+  },
+  "forbidden": {
+    "message": "Access denied!"
+  },
+  "notfound": {
+    "home": "Home page",
+    "message": "Page Not Found"
   }
-},
-"forbidden": {
-  "message": "Access denied!"
-},
-"notfound": {
-  "home": "Home page",
-  "message": "Page Not Found"
 }
 ```
 
@@ -144,7 +146,6 @@ project
 
 ---
 #### Private repositories
-
 
 Private repositories require a **private access token** to view a repository's contents. You can generate one for your GitHub account by accessing  your profile and navigating to
 ```

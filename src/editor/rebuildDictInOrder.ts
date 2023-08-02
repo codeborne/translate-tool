@@ -8,9 +8,8 @@ export function rebuildDictInOrder(dict: Dict, defaultDict: Dict) {
   const result: Dict = {}
   for (let key of Object.keys(defaultDict)) {
     const value = dict[key]
-    if (typeof value === 'object') {
-      if (!isEmpty(value)) result[key] = rebuildDictInOrder(value, defaultDict[key])
-    } else if (dict === defaultDict || value) result[key] = value
+    if (typeof value === 'object') result[key] = rebuildDictInOrder(value, defaultDict[key])
+    else if (value || dict === defaultDict) result[key] = value
   }
-  return result
+  return isEmpty(result) ? undefined : result
 }

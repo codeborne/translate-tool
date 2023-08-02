@@ -20,7 +20,10 @@ describe('rebuildDictInOrder', () => {
               level9: 'l9',
               level12: 'l12',
               level10: 'l10new',
-              nest6: {}
+              nest6: {
+                level13: ''
+              },
+              nest7: {}
             }
           }
         }
@@ -47,6 +50,9 @@ describe('rebuildDictInOrder', () => {
               level12: 'l12',
               nest6: {
                 level13: 'l13'
+              },
+              nest7: {
+                x: 'y'
               }
             }
           }

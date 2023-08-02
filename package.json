@@ -16,7 +16,7 @@
   },
   "devDependencies": {
     "@aws-sdk/client-codecommit": "^3.350.0",
-    "@sveltejs/vite-plugin-svelte": "^1.0.0-next.39",
+    "@sveltejs/vite-plugin-svelte": "^1.4.0",
     "@testing-library/svelte": "^3.0.3",
     "@tsconfig/svelte": "^1.0.10",
     "@types/chai": "^4.2.17",
@@ -33,7 +33,7 @@
     "svelte": "^3.59.2",
     "svelte-preprocess": "^4.7.2",
     "typescript": "^4.3.4",
-    "vite": "^2.9.16",
+    "vite": "^3.2.7",
     "vite-web-test-runner-plugin": "^0.1.0"
   }
 }

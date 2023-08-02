@@ -5,7 +5,7 @@ ENV TEST_CHROME_ARGS='--no-sandbox --disable-dev-shm-usage --disable-gpu --disab
 
 WORKDIR /app
 
-COPY package.json package-lock.json /app/
+COPY .npmrc package.json package-lock.json /app/
 RUN npm ci
 
 COPY . ./

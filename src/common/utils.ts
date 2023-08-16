@@ -29,7 +29,7 @@ export function insertKey(dict: Dict, key: string, afterPos: number, value: stri
   }, {}))
 }
 
-export function insertDeepKey(dict: Dict, deepKey: string, afterPos: number) {
+export function insertNestedKey(dict: Dict, deepKey: string, afterPos: number) {
   const keys = deepKey.split('.')
   let value: string|Dict = ''
   if (keys.length > 1) {

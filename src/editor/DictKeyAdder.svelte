@@ -1,6 +1,6 @@
 <script lang="ts">
   import type {Dict} from '../common/Project'
-  import {insertKey} from '../common/utils'
+  import {insertNestedKey} from '../common/utils'
   import Icon from '../components/Icon.svelte'
 
   export let dict: Dict
@@ -12,7 +12,7 @@
   function add() {
     const keySuffix = prompt('New key: ' + keyPrefix + '.')
     if (!keySuffix) return
-    insertKey(dict, keySuffix, Object.keys(dict).indexOf(key))
+    insertNestedKey(dict, keySuffix, Object.keys(dict).indexOf(key))
     button.dispatchEvent(new Event('focusout', {bubbles: true}))
   }
 </script>

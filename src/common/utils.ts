@@ -31,9 +31,12 @@ export function insertKey(dict: Dict, key: string, afterPos: number, value: stri
 
 export function insertDeepKey(dict: Dict, deepKey: string, afterPos: number) {
   const keys = deepKey.split('.')
-  let value: Dict = {}, target = value
-  for (let i = 1; i < keys.length - 1; i++) target = target[keys[i]] = {}
-  target[keys[keys.length - 1]] = ''
+  let value: string|Dict = ''
+  if (keys.length > 1) {
+    let target: Dict = value = {}
+    for (let i = 1; i < keys.length - 1; i++) target = target[keys[i]] = {}
+    target[keys[keys.length - 1]] = ''
+  }
   insertKey(dict, keys[0], afterPos, value)
 }
 

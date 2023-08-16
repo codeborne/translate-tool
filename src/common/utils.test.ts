@@ -41,7 +41,7 @@ describe('encode/decodeBase64Unicode', () => {
 describe('insertKey', () => {
   it('adds a new key in specified order to an object', () => {
     const dict = {x: '1', aa: '10', v: '3'}
-    insertKey(dict, 'z', 1)
+    insertDeepKey(dict, 'z', 1)
     expect(JSON.stringify(dict)).to.eq(`{"x":"1","aa":"10","z":"","v":"3"}`)
   })
 

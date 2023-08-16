@@ -20,13 +20,21 @@ export function deepEqual(a: Record<string, any>, b: Record<string, any>): boole
   return JSON.stringify(a) == JSON.stringify(b)
 }
 
-export function insertKey(dict: Dict, key: string, afterPos: number) {
+export function insertKey(dict: Dict, key: string, afterPos: number, value: string|object = '') {
   Object.assign(dict, Object.entries(dict).reduce((d: Dict, [k,v], i) => {
     delete dict[k]
     d[k] = v
-    if (i === afterPos) d[key] = ''
+    if (i === afterPos) d[key] = value
     return d
   }, {}))
+}
+
+export function insertDeepKey(dict: Dict, deepKey: string, afterPos: number) {
+  const keys = deepKey.split('.')
+  let value: Dict = {}, target = value
+  for (let i = 1; i < keys.length - 1; i++) target = target[keys[i]] = {}
+  target[keys[keys.length - 1]] = ''
+  insertKey(dict, keys[0], afterPos, value)
 }
 
 export function ensureInputIsArray(arr: unknown): boolean {

@@ -1,4 +1,4 @@
-import {containsHTMLTags, decodeBase64Unicode, deepEqual, encodeBase64Unicode, insertKey} from './utils'
+import {containsHTMLTags, decodeBase64Unicode, deepEqual, encodeBase64Unicode, insertDeepKey, insertKey} from './utils'
 import {expect} from 'chai'
 
 describe('areObjectsEqual', () => {
@@ -43,6 +43,12 @@ describe('insertKey', () => {
     const dict = {x: '1', aa: '10', v: '3'}
     insertKey(dict, 'z', 1)
     expect(JSON.stringify(dict)).to.eq(`{"x":"1","aa":"10","z":"","v":"3"}`)
+  })
+
+  it('adds a new deep key, separated by dots', () => {
+    const dict = {x: '1', aa: '10', v: '3'}
+    insertDeepKey(dict, 'hello.world.baz', 1)
+    expect(JSON.stringify(dict)).to.eq(`{"x":"1","aa":"10","hello":{"world":{"baz":""}},"v":"3"}`)
   })
 })
 

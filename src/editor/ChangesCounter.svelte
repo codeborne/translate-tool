@@ -1,5 +1,5 @@
 <script lang="ts">
-  import {totalDifferentValues} from './languageStats'
+  import {countChangedValues} from './languageStats'
   import type {Dict} from '../common/Project'
   import Icon from '../components/Icon.svelte'
   import {slide} from 'svelte/transition'
@@ -9,7 +9,7 @@
 
   let changes = 0
 
-  $: if (dict) changes = totalDifferentValues(dict, uneditedDict)
+  $: if (dict) changes = countChangedValues(dict, uneditedDict)
 </script>
 
 {#if changes}

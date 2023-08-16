@@ -5,7 +5,7 @@
   import DictClipboardOutput from './DictClipboardOutput.svelte'
   import Filter from './Filter'
   import FilterControls from './FilterControls.svelte'
-  import {totalDifferentValues, totalKeys} from './languageStats'
+  import {countChangedValues, totalKeys} from './languageStats'
   import ChangesCounter from './ChangesCounter.svelte'
   import BranchLoadedFrom from './BranchLoadedFrom.svelte'
   import ProjectSourceButton from './ProjectSourceButton.svelte'
@@ -52,7 +52,7 @@
   function inactivityReload() {
     const tenMinutes = 600000
     setInterval(() => {
-      if (totalDifferentValues(uneditedDict, dict) === 0) location.reload()
+      if (countChangedValues(uneditedDict, dict) === 0) location.reload()
     }, tenMinutes)
   }
 
@@ -72,7 +72,7 @@
   }
 
   window.onbeforeunload = () => {
-    if (totalDifferentValues(uneditedDict, dict) > 0) return ''
+    if (countChangedValues(uneditedDict, dict) > 0) return ''
   }
 
   let filter = new Filter()

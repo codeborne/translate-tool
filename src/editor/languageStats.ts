@@ -10,12 +10,12 @@ export function totalKeys(dict: Dict) {
   return total
 }
 
-export function totalDifferentValues(origDict: Dict, modifiedDict: Dict) {
+export function countChangedValues(modified: Dict, original: Dict) {
   let changes = 0
-  for (let [key, value] of Object.entries(origDict)) {
+  for (let [key, value] of Object.entries(modified)) {
     const isObject = typeof value === 'object'
-    if (isObject) changes += totalDifferentValues(value as Dict, modifiedDict[key] as Dict)
-    if (!isObject && value !== modifiedDict[key]) changes++
+    if (isObject) changes += original[key] ? countChangedValues(value as Dict, original[key] as Dict) : totalKeys(value)
+    if (!isObject && value !== original[key]) changes++
   }
   return changes
 }

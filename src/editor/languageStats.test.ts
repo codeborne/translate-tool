@@ -1,4 +1,4 @@
-import {totalDifferentValues, totalKeys} from './languageStats'
+import {countChangedValues, totalKeys} from './languageStats'
 import {expect} from 'chai'
 
 describe('totalKeys', () => {
@@ -13,7 +13,13 @@ describe('totalKeys', () => {
 describe('totalDifferentValues', () => {
   it('counts total different key values recursively', () => {
     const original = {t1: '1', t2: '2', t: {t3: '3', t4: '4', t: {t5: '5', t6: '6'}}}
-    const comparedWith = {t1: '1', t2: '2', t: {t3: '3', t4: '4', t: {t5: '', t6: 'new value'}}}
-    expect(totalDifferentValues(original, comparedWith)).to.equal(2)
+    const modified = {t1: '1', t2: '2', t: {t3: '3', t4: '4', t: {t5: '', t6: 'new value', t7: 'added'}}}
+    expect(countChangedValues(modified, original)).to.equal(3)
+  })
+
+  it('counts total different key values recursively with different depth', () => {
+    const original = {a: '1'}
+    const modified = {a: '1', b: '2', c: {d: '3', z: '4'}}
+    expect(countChangedValues(modified, original)).to.equal(3)
   })
 })

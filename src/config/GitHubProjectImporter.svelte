@@ -1,6 +1,5 @@
 <svelte:options accessors/>
 <script lang="ts">
-
   import type {Project} from '../common/Project'
   import {ProjectSource} from '../common/Project'
   import {createEventDispatcher} from 'svelte'

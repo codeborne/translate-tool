@@ -26,14 +26,15 @@ describe('<App>', () => {
     localProjectStore.clear()
   })
 
-  it('renders language importer with no config file or localstorage', async () => {
+  it('renders importer with no config file nor localstorage', async () => {
     stub(localProjectStore, 'getProjects').returns([])
     const {container} = render(App)
     expect(jsonLoader.loadJson).calledWith('projects.json')
     await act(jsonLoader.loadJson)
     expect(localProjectStore.getProjects).called
     await tick()
-    expect(container.querySelector('.addNew')).to.exist
+    await tick()
+    expect(container.querySelector('.import')).to.exist
   })
 
   it.skip('renders editor if localStorage exists, but no deployed projects', async () => {

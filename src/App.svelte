@@ -55,11 +55,12 @@
     }
   }
 
-  function setupNewProjectIfNotExists() {
+  async function setupNewProjectIfNotExists() {
     projects = []
     loadedProjects = []
     selectedProject = new LoadedProject({url: '', token: '', title: '', indent: 2}, {})
-    setTimeout(() => showAddProject = true)
+    await tick()
+    showAddProject = true
   }
 
   async function loadLastProject() {
@@ -67,15 +68,16 @@
     showAddProject = !selectedProject
   }
 
-  function projectImported(e: CustomEvent) {
+  async function projectImported(e: CustomEvent) {
     loading = true
     const project = e.detail
     projects = projects.concat(project)
     localProjectStore.setProjects(projects)
     localProjectStore.setSelectedProject(project)
-    loadProject(project)
     showConfig = false
-    setTimeout(() => {showAddProject = false; loading = false})
+    await loadProject(project)
+    showAddProject = false
+    loading = false
   }
 
   async function updateProject(e: CustomEvent) {
@@ -115,9 +117,8 @@
     if (existingLoadedProject) {
       selectedProject = existingLoadedProject
       localProjectStore.setSelectedProject(selectedProject.config)
-    }
-    else await loadProject(newProject)
-    await setTimeout(() => loading = false) // setTimeout keeps loading the state in correct order in Svelte's lifecycle
+    } else await loadProject(newProject)
+    setTimeout(() => loading = false) // display loading while synchronously parsing a big json
   }
 
   function switchProjectEvent(e: CustomEvent) {
@@ -144,7 +145,7 @@
 <main class="container mw-100 p-3">
   {#if showAddProject || showConfig}
     <div class="fix-width mx-auto">
-      <ToggleBackButton bind:showAddProject bind:showConfig showBack={loadedProjects && loadedProjects.length > 0}/>
+      <ToggleBackButton bind:showAddProject bind:showConfig showBack={!!loadedProjects?.length}/>
     </div>
   {/if}
 

@@ -29,7 +29,7 @@
     display: flex;
     left: -0.3em;
     background: transparent;
-    bottom: -0.5em;
+    bottom: -0.7em;
     font-size: 2em;
     line-height: 1;
     color: var(--primary);

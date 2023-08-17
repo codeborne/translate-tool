@@ -20,7 +20,7 @@ export function deepEqual(a: Record<string, any>, b: Record<string, any>): boole
   return JSON.stringify(a) == JSON.stringify(b)
 }
 
-export function insertKey(dict: Dict, key: string, afterPos: number, value: string|object = '') {
+function insertKey(dict: Dict, key: string, afterPos: number, value: string|object = '') {
   Object.assign(dict, Object.entries(dict).reduce((d: Dict, [k,v], i) => {
     delete dict[k]
     d[k] = v
@@ -31,6 +31,13 @@ export function insertKey(dict: Dict, key: string, afterPos: number, value: stri
 
 export function insertNestedKey(dict: Dict, deepKey: string, afterPos: number) {
   const keys = deepKey.split('.')
+  for (let key of [...keys]) {
+    if (dict[key]) {
+      dict = dict[key]
+      keys.shift()
+      afterPos = Object.keys(dict).length - 1
+    } else break
+  }
   let value: string|Dict = ''
   if (keys.length > 1) {
     let target: Dict = value = {}

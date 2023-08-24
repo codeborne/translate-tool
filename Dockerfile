@@ -1,4 +1,4 @@
-FROM mcr.microsoft.com/playwright:v1.34.0-jammy as build
+FROM node:18-alpine as build
 
 ENV DUMP_CHROME_OUT=true
 ENV TEST_CHROME_ARGS='--no-sandbox --disable-dev-shm-usage --disable-gpu --disable-gpu-compositing --disable-gpu-rasterization'
@@ -14,6 +14,11 @@ RUN npm run build:server
 
 ARG PROJECTS_FILE=''
 RUN [ -e "$PROJECTS_FILE" ] && cp -f "$PROJECTS_FILE" build/projects.json || true
+
+FROM mcr.microsoft.com/playwright:v1.37.0-jammy as e2e
+
+WORKDIR /app
+COPY --from=build /app /app
 
 FROM node:18-alpine
 

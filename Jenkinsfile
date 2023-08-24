@@ -6,6 +6,7 @@ pipeline {
     GOOGLE_CLIENT_ID = credentials('GOOGLE_CLIENT_ID')
     GOOGLE_CLIENT_SECRET = credentials('GOOGLE_CLIENT_SECRET')
     COOKIE_SECRET = credentials('COOKIE_SECRET')
+    PROJECT_GITHUB = credentials('PROJECT_GITHUB')
   }
 
   stages {
@@ -21,7 +22,8 @@ pipeline {
     }
     stage('E2E Test') {
       steps {
-        sh 'docker run ${REPO_NAME}_build e2e/run.sh'
+        sh 'docker build --target e2e -t ${REPO_NAME}_e2e .'
+        sh 'docker run ${REPO_NAME}_e2e e2e/run.sh'
       }
     }
     stage('Build final') {

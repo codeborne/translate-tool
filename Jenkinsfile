@@ -23,7 +23,7 @@ pipeline {
     stage('E2E Test') {
       steps {
         sh 'docker build --target e2e -t ${REPO_NAME}_e2e .'
-        sh 'docker run ${REPO_NAME}_e2e e2e/run.sh'
+        sh 'docker run ${REPO_NAME}_e2e -e PROJECT_GITHUB e2e/run.sh'
       }
     }
     stage('Build final') {

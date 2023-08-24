@@ -4,7 +4,7 @@
     "test": "playwright test *.test.js"
   },
   "devDependencies": {
-    "@playwright/test": "^1.17.2",
-    "playwright-webkit": "^1.17.2"
+    "@playwright/test": "^1.37.1",
+    "playwright-webkit": "^1.37.1"
   }
 }

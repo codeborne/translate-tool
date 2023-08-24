@@ -2,9 +2,10 @@ import {expect, test} from '@playwright/test'
 import {url} from './config.js'
 
 async function fillPublicImport(page) {
+  await page.locator('.publicImport .accordion-button').click()
   await page.locator('.publicImport input:nth-of-type(1)').fill('ConfigTest')
   await page.locator('.publicImport input:nth-of-type(2)').fill(url + '/i18n/')
-  await page.locator('.publicImport .btn').click()
+  await page.locator('.publicImport .btn-primary').click()
   await expect(page.locator('.publicImport')).not.toBeVisible()
 }
 
@@ -32,7 +33,8 @@ test('can edit project config', async ({page}) => {
   await page.locator('text=Save').click()
   await expect(page.locator('nav .nav-link:first-of-type')).toContainText('nameIsChanged')
   await page.once('dialog', dialog => dialog.dismiss())
-  await page.locator('text=Share').click()
+  await page.locator('#backToImporterBtn').click()
+  await page.locator('.shareBtn').click()
 
   await expect(page.locator('[title="Add a new project"]')).toBeVisible()
   await page.once('dialog', dialog => dialog.accept())

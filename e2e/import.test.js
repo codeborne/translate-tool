@@ -3,9 +3,10 @@ import {url} from './config.js'
 
 async function fillPublicImport(projectName, page) {
   await page.locator('.addNew').click()
+  await page.locator('.publicImport .accordion-button').click()
   await page.locator('.publicImport input:nth-of-type(1)').fill(projectName)
   await page.locator('.publicImport input:nth-of-type(2)').fill(url + '/i18n/')
-  await page.locator('.publicImport .btn').click()
+  await page.locator('.publicImport .btn-primary').click()
 }
 
 test('import public twice', async ({page}) => {

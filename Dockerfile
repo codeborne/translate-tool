@@ -1,4 +1,5 @@
 FROM node:18-alpine as build
+RUN apk add --no-cache chromium
 
 ENV DUMP_CHROME_OUT=true
 ENV TEST_CHROME_ARGS='--no-sandbox --disable-dev-shm-usage --disable-gpu --disable-gpu-compositing --disable-gpu-rasterization'

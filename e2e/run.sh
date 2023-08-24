@@ -2,7 +2,7 @@
 
 cd `dirname $0`
 
-# npx playwright install-deps
+npx playwright install-deps
 
 cp -r i18n ../build
 cd ../build

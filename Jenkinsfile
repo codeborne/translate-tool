@@ -19,6 +19,11 @@ pipeline {
         sh 'docker run ${REPO_NAME}_build npm test'
       }
     }
+    stage('E2E Test') {
+      steps {
+        sh 'docker run ${REPO_NAME}_build e2e/run.sh'
+      }
+    }
     stage('Build final') {
       steps {
         sh 'docker-compose -p $REPO_NAME build'

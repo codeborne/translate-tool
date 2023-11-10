@@ -11,11 +11,12 @@
   }
 
   $: if (lang) localProjectStore.setLang(lang)
-
 </script>
 
-<select bind:value={lang} class="form-select w-auto shadow-sm">
-  {#each project.langs as l}
-    <option>{l}</option>
-  {/each}
-</select>
+{#if project.langs.length > 1}
+  <select bind:value={lang} class="form-select w-auto shadow-sm">
+    {#each project.langs as l}
+      <option>{l}</option>
+    {/each}
+  </select>
+{/if}

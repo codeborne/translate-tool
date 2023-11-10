@@ -14,4 +14,11 @@ describe('<LangSwitcher>', () => {
     expect(select).to.exist
     expect(select.options).to.have.length(3)
   })
+
+  it('hides if only one language', () => {
+    const project = new LoadedProject({} as Project, {de: {}})
+    const {container} = render(LangSwitcher, {project, lang})
+    let select = container.querySelector('select')!
+    expect(select).to.not.exist
+  })
 })

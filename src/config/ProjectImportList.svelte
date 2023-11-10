@@ -34,7 +34,7 @@
     <div>
       <h5><i class="fa-solid fa-circle-info mb-3 me-2"></i>Quickstart</h5>
       <p>Make sure to acquaint yourself with the required <a target="_blank" href="https://github.com/codeborne/translate-tool#using-the-tool">file structure</a></p>
-      <p>A working example files can be found <a target="_blank" href="https://github.com/codeborne/translate-tool/tree/master/e2e/i18n">here</a></p>
+      <p>Working example files can be found <a target="_blank" href="https://github.com/codeborne/translate-tool/tree/master/e2e/i18n">here</a></p>
     </div>
   </Card>
 

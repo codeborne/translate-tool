@@ -26,7 +26,6 @@
   }
 
   function save() {
-    inProgress = true
     checkIfUserExistsAndSetAuthor()
     setBranchIfConfigured()
     tryCommit()
@@ -36,6 +35,7 @@
     const commitMessage = prompt('Commit message (what have you changed?)', `Updated ${lang} translations`)
     if (!commitMessage) return
     try {
+      inProgress = true
       await client.saveFile(lang, dict, defaultDict, commitMessage)
       dispatch('saved')
       alert(`Saved to ${client.label} successfully`)

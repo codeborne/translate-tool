@@ -21,6 +21,7 @@ export interface AwsProject extends Project {
 export enum ProjectSource {
   BitBucket = 'BitBucket',
   Github = 'Github',
+  Gitlab = 'Gitlab',
   SimpleProject = 'SimpleProject',
   AwsCodeCommit = 'AwsCodeCommit'
 }

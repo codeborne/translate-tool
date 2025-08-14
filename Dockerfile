@@ -1,4 +1,4 @@
-FROM node:18-alpine as build
+FROM node:24-alpine as build
 RUN apk add --no-cache chromium
 
 ENV DUMP_CHROME_OUT=true
@@ -21,7 +21,7 @@ FROM mcr.microsoft.com/playwright:v1.37.0-jammy as e2e
 WORKDIR /app
 COPY --from=build /app /app
 
-FROM node:18-alpine
+FROM node:24-alpine
 
 WORKDIR /app
 COPY --from=build /app/build build

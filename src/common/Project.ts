@@ -50,7 +50,7 @@ export class LoadedProject {
   }
 
   // TODO: should not be static
-  public static prettyFormat(dict: Dict, indent: number): string {
+  public static prettyFormat(dict: Dict | undefined, indent: number): string {
     return JSON.stringify(dict, null, indent)
   }
 

@@ -5,7 +5,7 @@
   "scripts": {
     "start": "vite",
     "build": "vite build",
-    "build:server": "tsc -m commonjs --target esnext --esModuleInterop true --outDir server/build server/*.ts",
+    "build:server": "tsc -p server/tsconfig.json",
     "run:server": "npm run build:server && node server/build/server",
     "test": "vitest",
     "test:run": "vitest run"

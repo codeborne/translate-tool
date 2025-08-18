@@ -49,9 +49,12 @@ app.get('/logout', function (req, res) {
   res.redirect('/')
 })
 
-app.get('/proxy/**', (req, res) => {
-  const url: string = req.url.slice(7, req.url.length)
-  request(url).pipe(res)
+app.get('/proxy/**', async (req, res) => {
+  const url = req.url.slice(7, req.url.length)
+  const r = await fetch(url)
+  const body = await r.text()
+  res.status(r.status)
+  res.send(body)
 })
 
 app.get('/*', async function (req: Request, res: Response) {

@@ -11,9 +11,8 @@
     "test:run": "vitest run"
   },
   "dependencies": {
-    "cookie-parser": "^1.4.6",
-    "express": "^4.21.2",
-    "request": "^2.88.2"
+    "cookie-parser": "^1.4.7",
+    "express": "^4.21.2"
   },
   "devDependencies": {
     "@aws-sdk/client-codecommit": "^3.350.0",

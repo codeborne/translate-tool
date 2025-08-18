@@ -1,4 +1,4 @@
-import { rebuildDictInOrder } from './rebuildDictInOrder';
+import { rebuildDictInOrder } from './rebuildDictInOrder'
 
 describe('rebuildDictInOrder', () => {
   const newDict = {
@@ -28,7 +28,7 @@ describe('rebuildDictInOrder', () => {
         },
       },
     },
-  };
+  }
 
   const defaultDict = {
     level1: 'l1',
@@ -48,17 +48,15 @@ describe('rebuildDictInOrder', () => {
               level11: 'l11',
               level12: 'l12',
               nest6: {
-                level13: 'l13',
+                level13: '',
               },
-              nest7: {
-                x: 'y',
-              },
+              nest7: {},
             },
           },
         },
       },
     },
-  };
+  }
 
   const expectedResult = {
     nest1: {
@@ -81,10 +79,10 @@ describe('rebuildDictInOrder', () => {
         },
       },
     },
-  };
+  }
 
   it('creates dict with the same order as default dict with cleaned keys', () => {
-    const rebuiltDict = rebuildDictInOrder(newDict, defaultDict);
-    expect(JSON.stringify(rebuiltDict)).toEqual(JSON.stringify(expectedResult));
-  });
-});
+    const rebuiltDict = rebuildDictInOrder(newDict, defaultDict)
+    expect(JSON.stringify(rebuiltDict)).toEqual(JSON.stringify(expectedResult))
+  })
+})

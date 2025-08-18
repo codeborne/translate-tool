@@ -1,5 +1,5 @@
-import { AwsCodeCommitClient } from './AwsCodeCommitClient';
-import { ProjectSource } from '../common/Project';
+import { AwsCodeCommitClient } from './AwsCodeCommitClient'
+import { ProjectSource } from '../common/Project'
 
 describe('AwsCodeCommitClient', () => {
   const client = new AwsCodeCommitClient({
@@ -29,7 +29,7 @@ describe('AwsCodeCommitClient', () => {
 
       expect(client.client.getBranch).toHaveBeenCalledWith({
         repositoryName: 'repo-name',
-        branchName: 'translations',
+        branchName: 'translations'
       })
 
       expect(client.client.putFile).toHaveBeenCalledWith({
@@ -42,7 +42,7 @@ describe('AwsCodeCommitClient', () => {
         commitMessage,
         parentCommitId: parentCommitId,
         name: 'Bob',
-        email: 'bob@email.com',
+        email: 'bob@email.com'
       })
     })
   })
@@ -56,23 +56,23 @@ describe('AwsCodeCommitClient', () => {
       vi.spyOn(client.client, 'getFile').mockResolvedValue({blobId})
       vi.spyOn(client.client, 'getBlob').mockResolvedValue({content: new TextEncoder().encode('{"key": "value"}')})
 
-      client.setAuthor({ name: 'Bob', email: 'bob@email.com' });
-      await client.getFileContent('en.json');
+      client.setAuthor({ name: 'Bob', email: 'bob@email.com' })
+      await client.getFileContent('en.json')
 
       expect(client.client.getBranch).toHaveBeenCalledWith({
         repositoryName: 'repo-name',
-        branchName: 'main',
+        branchName: 'main'
       })
 
       expect(client.client.getFile).toHaveBeenCalledWith({
         repositoryName: 'repo-name',
         filePath: '/translationsPath/en.json',
-        commitSpecifier: parentCommitId,
+        commitSpecifier: parentCommitId
       })
 
       expect(client.client.getBlob).toHaveBeenCalledWith({
         repositoryName: 'repo-name',
-        blobId,
+        blobId
       })
     })
   })

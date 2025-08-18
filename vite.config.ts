@@ -1,8 +1,6 @@
-import {defineConfig} from 'vite'
-import {svelte} from '@sveltejs/vite-plugin-svelte'
+import { defineConfig } from 'vite'
+import { svelte } from '@sveltejs/vite-plugin-svelte'
 import * as path from 'path'
-
-const isTest = process.env.NODE_ENV === 'test'
 
 // https://vitejs.dev/config/
 export default defineConfig({
@@ -10,16 +8,12 @@ export default defineConfig({
     alias: {
       'src': path.resolve(__dirname, './src'),
     },
-    conditions: isTest ? ['browser'] : []
   },
   plugins: [svelte()],
   server: {
-    port: isTest ? 8985 : 8080,
+    port: 8080,
   },
   build: {
     outDir: 'build'
-  },
-  optimizeDeps: {
-    include: isTest ? ['@testing-library/svelte', 'chai', 'sinon', 'sinon-chai'] : undefined
   }
 })

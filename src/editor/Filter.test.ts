@@ -1,21 +1,19 @@
-import {expect} from 'chai'
-import Filter from './Filter'
+import Filter from './Filter';
 
 describe('Filter', () => {
-
-  let filter: Filter = new Filter('test', false)
+  const filter: Filter = new Filter('test', false);
 
   it('filters searching string', async () => {
-    expect(filter.shouldShow('app.test', 'someValue')).to.be.true
-    expect(filter.shouldShow('mixedcaseTeSt', 'someValue')).to.be.true
-    expect(filter.shouldShow('app.nothing', 'nothing')).to.be.false
-  })
+    expect(filter.shouldShow('app.test', 'someValue')).toBeTruthy();
+    expect(filter.shouldShow('mixedcaseTeSt', 'someValue')).toBeTruthy();
+    expect(filter.shouldShow('app.nothing', 'nothing')).toBeFalsy();
+  });
 
   it('returns true on filtered empty values', async () => {
-    filter.showEmptyValuesOnly = true
-    expect(filter.shouldShow('app.test', 'someValue')).to.be.false
-    expect(filter.shouldShow('mixedcaseTeSt', 'someValue')).to.be.false
-    expect(filter.shouldShow('app.empty', '')).to.be.false
-    expect(filter.shouldShow('app.test', '')).to.be.true
-  })
-})
+    filter.showEmptyValuesOnly = true;
+    expect(filter.shouldShow('app.test', 'someValue')).toBeFalsy();
+    expect(filter.shouldShow('mixedcaseTeSt', 'someValue')).toBeFalsy();
+    expect(filter.shouldShow('app.empty', '')).toBeFalsy();
+    expect(filter.shouldShow('app.test', '')).toBeTruthy();
+  });
+});

@@ -1,7 +1,5 @@
-import {AwsCodeCommitClient} from './AwsCodeCommitClient'
-import {ProjectSource} from '../common/Project'
-import {stub} from 'sinon'
-import {expect} from 'chai'
+import { AwsCodeCommitClient } from './AwsCodeCommitClient';
+import { ProjectSource } from '../common/Project';
 
 describe('AwsCodeCommitClient', () => {
   const client = new AwsCodeCommitClient({
@@ -23,26 +21,28 @@ describe('AwsCodeCommitClient', () => {
       const commitMessage = 'commit message'
       const parentCommitId = 'commitId'
 
-      stub(client.client, 'getBranch').resolves({branch: {commitId: parentCommitId}})
-      stub(client.client, 'putFile')
+      vi.spyOn(client.client, 'getBranch').mockResolvedValue({ branch: { commitId: parentCommitId } })
+      vi.spyOn(client.client, 'putFile').mockResolvedValue(undefined)
 
       client.setAuthor({name: 'Bob', email: 'bob@email.com'})
       await client.saveFile('en', {key: 'value'}, {key: undefined}, commitMessage)
 
-      expect(client.client.getBranch).calledWith({
-        repositoryName: 'repo-name',
-        branchName: 'translations'
-      })
-
-      expect(client.client.putFile).calledWith({
+      expect(client.client.getBranch).toHaveBeenCalledWith({
         repositoryName: 'repo-name',
         branchName: 'translations',
-        fileContent: new TextEncoder().encode('{\n  "key": "value"\n}'),
+      })
+
+      expect(client.client.putFile).toHaveBeenCalledWith({
+        repositoryName: 'repo-name',
+        branchName: 'translations',
+        fileContent: new TextEncoder().encode(`{
+  "key": "value"
+}`),
         filePath: '/translationsPath/en.json',
         commitMessage,
         parentCommitId: parentCommitId,
         name: 'Bob',
-        email: 'bob@email.com'
+        email: 'bob@email.com',
       })
     })
   })
@@ -52,27 +52,27 @@ describe('AwsCodeCommitClient', () => {
       const blobId = 'blobId'
       const parentCommitId = 'commitId'
 
-      stub(client.client, 'getBranch').resolves({branch: {commitId: parentCommitId}})
-      stub(client.client, 'getFile').resolves({blobId})
-      stub(client.client, 'getBlob').resolves({content: new TextEncoder().encode('{"key": "value"}')})
+      vi.spyOn(client.client, 'getBranch').mockResolvedValue({branch: {commitId: parentCommitId}})
+      vi.spyOn(client.client, 'getFile').mockResolvedValue({blobId})
+      vi.spyOn(client.client, 'getBlob').mockResolvedValue({content: new TextEncoder().encode('{"key": "value"}')})
 
-      client.setAuthor({name: 'Bob', email: 'bob@email.com'})
-      await client.getFileContent('en.json')
+      client.setAuthor({ name: 'Bob', email: 'bob@email.com' });
+      await client.getFileContent('en.json');
 
-      expect(client.client.getBranch).calledWith({
+      expect(client.client.getBranch).toHaveBeenCalledWith({
         repositoryName: 'repo-name',
-        branchName: 'main'
+        branchName: 'main',
       })
 
-      expect(client.client.getFile).calledWith({
+      expect(client.client.getFile).toHaveBeenCalledWith({
         repositoryName: 'repo-name',
         filePath: '/translationsPath/en.json',
-        commitSpecifier: parentCommitId
+        commitSpecifier: parentCommitId,
       })
 
-      expect(client.client.getBlob).calledWith({
+      expect(client.client.getBlob).toHaveBeenCalledWith({
         repositoryName: 'repo-name',
-        blobId
+        blobId,
       })
     })
   })

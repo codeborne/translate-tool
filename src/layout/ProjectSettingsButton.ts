@@ -1,31 +1,29 @@
-import {render} from '@testing-library/svelte'
-import {expect} from 'chai'
-import ProjectSettingsButton from './ProjectSettingsButton.svelte'
+import { render } from '@testing-library/svelte';
+import ProjectSettingsButton from './ProjectSettingsButton.svelte';
 
 describe('ProjectSettingsButton', () => {
-
-  let showConfig: boolean = true
-  let showAddProject: boolean = false
-  let showBack: boolean = true
+  let showConfig = true;
+  let showAddProject = false;
+  let showBack = true;
 
   it('renders back button if config open', async () => {
-    const {container} = render(ProjectSettingsButton, {showConfig, showAddProject, showBack})
-    expect(container.querySelector('#backToEditorBtn')).to.exist
-  })
+    const { container } = render(ProjectSettingsButton, { showConfig, showAddProject, showBack });
+    expect(container.querySelector('#backToEditorBtn')).toBeInTheDocument();
+  });
 
   it('renders back button if project editor open', async () => {
-    showConfig = false
-    showAddProject = true
-    const {container} = render(ProjectSettingsButton, {showConfig, showAddProject, showBack})
-    expect(container.querySelector('#backToEditorBtn')).to.exist
-    expect(container.querySelector('#backToImporterBtn')).to.not.exist
-  })
+    showConfig = false;
+    showAddProject = true;
+    const { container } = render(ProjectSettingsButton, { showConfig, showAddProject, showBack });
+    expect(container.querySelector('#backToEditorBtn')).toBeInTheDocument();
+    expect(container.querySelector('#backToImporterBtn')).not.toBeInTheDocument();
+  });
 
   it('does not render back button if in dict editor', async () => {
-    showConfig = false
-    showAddProject = false
-    const {container} = render(ProjectSettingsButton, {showConfig, showAddProject, showBack})
-    expect(container.querySelector('#backToEditorBtn')).to.not.exist
-    expect(container.querySelector('#backToImporterBtn')).to.exist
-  })
-})
+    showConfig = false;
+    showAddProject = false;
+    const { container } = render(ProjectSettingsButton, { showConfig, showAddProject, showBack });
+    expect(container.querySelector('#backToEditorBtn')).not.toBeInTheDocument();
+    expect(container.querySelector('#backToImporterBtn')).toBeInTheDocument();
+  });
+});

@@ -2,7 +2,7 @@
   import {containsHTMLTags, getValue, isHtml} from '../common/utils'
   import type {Dict} from '../common/Project'
   import ContainsHTMLWarning from './ContainsHTMLWarning.svelte'
-  import EditableField from 'src/editor/EditableField.svelte'
+  import EditableField from './EditableField.svelte'
 
   export let key: string
   export let fullKey: string

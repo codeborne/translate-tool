@@ -1,5 +1,4 @@
-import {rebuildDictInOrder} from './rebuildDictInOrder'
-import {expect} from 'chai'
+import { rebuildDictInOrder } from './rebuildDictInOrder';
 
 describe('rebuildDictInOrder', () => {
   const newDict = {
@@ -21,15 +20,15 @@ describe('rebuildDictInOrder', () => {
               level12: 'l12',
               level10: 'l10new',
               nest6: {
-                level13: ''
+                level13: '',
               },
-              nest7: {}
-            }
-          }
-        }
-      }
-    }
-  }
+              nest7: {},
+            },
+          },
+        },
+      },
+    },
+  };
 
   const defaultDict = {
     level1: 'l1',
@@ -49,17 +48,17 @@ describe('rebuildDictInOrder', () => {
               level11: 'l11',
               level12: 'l12',
               nest6: {
-                level13: 'l13'
+                level13: 'l13',
               },
               nest7: {
-                x: 'y'
-              }
-            }
-          }
-        }
-      }
-    }
-  }
+                x: 'y',
+              },
+            },
+          },
+        },
+      },
+    },
+  };
 
   const expectedResult = {
     nest1: {
@@ -76,16 +75,16 @@ describe('rebuildDictInOrder', () => {
               level9: 'l9',
               level10: 'l10new',
               level11: 'l11new',
-              level12: 'l12'
-            }
-          }
-        }
-      }
-    }
-  }
+              level12: 'l12',
+            },
+          },
+        },
+      },
+    },
+  };
 
   it('creates dict with the same order as default dict with cleaned keys', () => {
-    const rebuiltDict = rebuildDictInOrder(newDict, defaultDict)
-    expect(JSON.stringify(rebuiltDict)).to.deep.equal(JSON.stringify(expectedResult))
-  })
-})
+    const rebuiltDict = rebuildDictInOrder(newDict, defaultDict);
+    expect(JSON.stringify(rebuiltDict)).toEqual(JSON.stringify(expectedResult));
+  });
+});

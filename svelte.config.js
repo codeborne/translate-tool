@@ -1,4 +1,4 @@
-const autoPreprocess = require('svelte-preprocess')
+import autoPreprocess from 'svelte-preprocess'
 
 const warningsToIgnore = [
   'a11y-autofocus',
@@ -7,7 +7,7 @@ const warningsToIgnore = [
   'a11y-label-has-associated-control'
 ]
 
-module.exports = {
+export default {
   preprocess: autoPreprocess(),
   onwarn: (warning, handler) => {
     if (warningsToIgnore.includes(warning.code)) return

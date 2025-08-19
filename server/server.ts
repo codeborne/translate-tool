@@ -1,9 +1,8 @@
 import express, {Request, Response} from 'express'
-import request from 'request'
 import cookieParser from 'cookie-parser'
 import config from './config'
 import {hasProjectsFile} from './FileChecker'
-import logger from './Logger'
+import logger from './Logger.js'
 
 const cookieSecret: string = process.env.COOKIE_SECRET ?? 'YourCookieValueHereToDetectTampering'
 const port = process.env.PORT ?? 8999
@@ -80,23 +79,17 @@ function redirectUrl(req: Request) {
   return (ownHost.includes('localhost') ? 'http://' : 'https://') + ownHost + '/auth'
 }
 
-function fetchToken(provider: typeof googleAuth, code: string, redirectUrl: string): Promise<string> {
-  return new Promise((resolve, reject) => {
-    request.post(provider.tokenUrl + `?grant_type=authorization_code&code=${code}&redirect_uri=` + redirectUrl +
-      `&client_id=${provider.clientId}&client_secret=${provider.clientSecret}`,(err, res) => {
-      if (err) reject(err)
-      else resolve(JSON.parse(res.body).access_token)
-    })
-  })
+async function fetchToken(provider: typeof googleAuth, code: string, redirectUrl: string): Promise<string> {
+  const res = await fetch(provider.tokenUrl + `?grant_type=authorization_code&code=${code}&redirect_uri=` + redirectUrl +
+    `&client_id=${provider.clientId}&client_secret=${provider.clientSecret}`, {method: 'POST'})
+    .then(r => r.json())
+  return res.access_token
 }
 
-function fetchProfile(provider: typeof googleAuth, token: string): Promise<GoogleProfile> {
-  return new Promise((resolve, reject) => {
-    request(provider.profileUrl, {headers: {'Authorization': 'Bearer ' + token}},(err, res) => {
-      if (err) reject(err)
-      else resolve(JSON.parse(res.body) as GoogleProfile)
-    })
-  })
+async function fetchProfile(provider: typeof googleAuth, token: string): Promise<GoogleProfile> {
+  const res = await fetch(provider.profileUrl, {headers: {'Authorization': 'Bearer ' + token}})
+    .then(r => r.json())
+  return res as GoogleProfile
 }
 
 function initVerbose() {

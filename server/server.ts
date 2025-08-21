@@ -3,11 +3,16 @@ import cookieParser from 'cookie-parser'
 import config from './config'
 import {hasProjectsFile} from './FileChecker'
 import logger from './Logger.js'
+import {fileURLToPath} from 'url'
+import {dirname} from 'path'
 
 const cookieSecret: string = process.env.COOKIE_SECRET ?? 'YourCookieValueHereToDetectTampering'
 const port = process.env.PORT ?? 8999
 const app = express()
 app.use(cookieParser(cookieSecret))
+
+const __filename = fileURLToPath(import.meta.url)
+const __dirname = dirname(__filename)
 
 const googleAuth = {
   authUrl: config.GOOGLE_OAUTH_URL,
